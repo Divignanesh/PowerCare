@@ -24,9 +24,9 @@ const PageHero = () => (
           <p className="text-sm text-white/50 leading-relaxed mb-6">
             We're not just another staffing agency. PowerCare is a training-first, quality-obsessed, relationship-driven healthcare staffing company built to meet Ontario's most demanding care environments.
           </p>
-          <div className="flex flex-wrap gap-3">
-            <Link to="/contact" className="btn-accent">Partner With Us <ArrowRight size={16} /></Link>
-            <Link to="/careers" className="btn-white">Find a Job <ArrowRight size={16} /></Link>
+          <div className="flex flex-col sm:flex-row flex-wrap gap-3">
+            <Link to="/contact" className="btn-accent flex-1 sm:flex-initial justify-center">Partner With Us <ArrowRight size={16} /></Link>
+            <Link to="/careers" className="btn-white flex-1 sm:flex-initial justify-center">Find a Job <ArrowRight size={16} /></Link>
           </div>
         </div>
         <div className="hidden lg:grid grid-cols-2 gap-4">
@@ -69,11 +69,11 @@ const InHouseTraining = () => (
           <p className="text-slate-500 text-sm leading-relaxed mb-6">
             Our training is developed and delivered by registered healthcare professionals with decades of frontline experience in Ontario's long-term care, home care, and acute care settings.
           </p>
-          <div className="flex flex-wrap gap-3">
-            <Link to="/contact" className="btn-primary">
+          <div className="flex flex-col sm:flex-row flex-wrap gap-3">
+            <Link to="/contact" className="btn-primary flex-1 sm:flex-initial justify-center">
               Hire Trained Staff <ArrowRight size={16} />
             </Link>
-            <Link to="/careers" className="btn-secondary">
+            <Link to="/careers" className="btn-secondary flex-1 sm:flex-initial justify-center">
               Join Our Training Program <ArrowRight size={16} />
             </Link>
           </div>
@@ -413,9 +413,9 @@ const WhyPowerCareCTA = () => (
       <p className="section-subtitle mx-auto mb-8">
         Partner with a staffing agency that invests in its people — so your facility always gets the best.
       </p>
-      <div className="flex flex-wrap gap-4 justify-center">
-        <Link to="/contact" className="btn-primary text-sm px-5 py-2.5">Get Staffing Support <ArrowRight size={16} /></Link>
-        <Link to="/services" className="btn-secondary text-sm px-5 py-2.5">Our Services <ChevronRight size={16} /></Link>
+      <div className="flex flex-col sm:flex-row flex-wrap gap-4 justify-center">
+        <Link to="/contact" className="btn-primary text-sm px-5 py-2.5 flex-1 sm:flex-initial justify-center">Get Staffing Support <ArrowRight size={16} /></Link>
+        <Link to="/services" className="btn-secondary text-sm px-5 py-2.5 flex-1 sm:flex-initial justify-center">Our Services <ChevronRight size={16} /></Link>
       </div>
     </div>
   </section>

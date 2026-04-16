@@ -242,7 +242,7 @@ const EmploymentTypes = () => (
         title="Work on Your Terms"
         subtitle="PowerCare offers multiple employment arrangements to match your lifestyle, goals, and availability."
       />
-      <div className="grid sm:grid-cols-2 lg:grid-cols-5 gap-4">
+      <div className="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-5 gap-4">
         {employmentTypes.map((type) => (
           <div key={type.id} className="bg-white rounded-xl p-4 border border-slate-200 text-center hover:border-accent-300 hover:shadow-card transition-all group">
             <div className="w-9 h-9 bg-primary-50 rounded-xl flex items-center justify-center mx-auto mb-3 group-hover:bg-accent-100 transition-colors">

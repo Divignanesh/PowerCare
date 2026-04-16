@@ -13,7 +13,7 @@ import SEO, { faqSchema } from '../components/seo/SEO';
 
 // ─────────────────────────── HERO ────────────────────────────
 const Hero = () => (
-  <section className="relative h-[calc(100vh-60px)] flex items-center bg-primary-900">
+  <section className="relative py-12 lg:py-0 lg:h-[calc(90vh)] flex flex-col lg:flex-row lg:items-center bg-primary-900">
     <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 lg:py-10">
       <div className="grid lg:grid-cols-2 gap-12 items-center">
         <div>
@@ -45,11 +45,11 @@ const Hero = () => (
             ))}
           </ul>
 
-          <div className="flex flex-wrap gap-3">
-            <Link to="/contact" className="btn-accent text-sm px-5 py-2.5">
+          <div className="flex gap-3">
+            <Link to="/contact" className="btn-accent text-sm px-5 py-2.5 flex-1 justify-center">
               Partner With Us <ArrowRight size={15} />
             </Link>
-            <Link to="/careers" className="btn-white text-sm px-5 py-2.5">
+            <Link to="/careers" className="btn-white text-sm px-5 py-2.5 flex-1 justify-center">
               Find a Job <ArrowRight size={15} />
             </Link>
           </div>
@@ -63,7 +63,7 @@ const Hero = () => (
             { value: '98%',    label: 'Fill Rate',           icon: TrendingUp  },
             { value: '24/7',   label: 'Available Support',   icon: Clock       },
           ].map(({ value, label, icon: Icon }) => (
-            <div key={label} className="bg-white/5 border border-white/10 rounded-xl p-5 text-white">
+            <div key={label} className="bg-white/5 border border-white/10 rounded-xl p-5 text-white flex flex-col items-center text-center">
               <Icon size={18} className="text-accent-500 mb-3" />
               <div className="text-2xl font-bold font-heading">{value}</div>
               <div className="text-white/50 text-xs mt-0.5">{label}</div>
@@ -154,19 +154,14 @@ const ServicesPreview = () => {
   return (
     <section className="section-padding bg-surface">
       <div className="container-custom">
-        <div className="flex flex-col md:flex-row md:items-end justify-between gap-4 mb-8">
-          <SectionHeader
-            badge="Our Services"
-            title="Healthcare Professionals We Place"
-            subtitle="From bedside nursing to facility support, PowerCare delivers qualified professionals across every care setting."
-            centered={false}
-          />
-          <Link to="/services" className="btn-primary text-sm whitespace-nowrap self-start md:self-auto">
-            All Services <ArrowRight size={14} />
-          </Link>
-        </div>
+        <SectionHeader
+          badge="Our Services"
+          title="Healthcare Professionals We Place"
+          subtitle="From bedside nursing to facility support, PowerCare delivers qualified professionals across every care setting."
+          centered={false}
+        />
 
-        <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
+        <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4 mb-8">
           {featured.map((s) => (
             <div key={s.id} className="card group cursor-pointer">
               <span className="inline-block text-accent-500 text-xs font-bold tracking-widest uppercase mb-2">
@@ -182,6 +177,12 @@ const ServicesPreview = () => {
             </div>
           ))}
         </div>
+
+        <div className="text-center">
+          <Link to="/services" className="btn-primary text-sm">
+            All Services <ArrowRight size={14} />
+          </Link>
+        </div>
       </div>
     </section>
   );
@@ -189,7 +190,7 @@ const ServicesPreview = () => {
 
 // ─────────────────────────── COVERAGE BAND ────────────────────────────
 const CoverageBand = () => (
-  <section className="bg-primary-900 h-[calc(100vh-80px)] flex items-center">
+  <section className="bg-primary-900 py-16 lg:py-20">
     <div className="container-custom w-full">
       <div className="grid lg:grid-cols-2 gap-10 items-center">
         <div className="text-white">
@@ -209,7 +210,7 @@ const CoverageBand = () => (
             ))}
           </ul>
         </div>
-        <div className="grid grid-cols-2 gap-4 h-[50vh]">
+        <div className="grid grid-cols-2 gap-4 h-[30vh] lg:h-[50vh]">
           {[
             { icon: Stethoscope, title: 'Clinical Staff',    desc: 'RNs, RPNs & allied health'   },
             { icon: UserCheck,   title: 'Care Workers',      desc: 'PSWs, DSWs & companions'      },
@@ -242,18 +243,13 @@ const IndustriesPreview = () => {
   return (
     <section className="section-padding bg-white">
       <div className="container-custom">
-        <div className="flex flex-col md:flex-row md:items-end justify-between gap-4 mb-8">
-          <SectionHeader
-            badge="Industries We Serve"
-            title="Built for Every Care Setting"
-            subtitle="We understand the staffing challenges unique to each healthcare sector."
-            centered={false}
-          />
-          <Link to="/industries" className="btn-secondary text-sm whitespace-nowrap self-start md:self-auto">
-            Explore Industries <ArrowRight size={14} />
-          </Link>
-        </div>
-        <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-3">
+        <SectionHeader
+          badge="Industries We Serve"
+          title="Built for Every Care Setting"
+          subtitle="We understand the staffing challenges unique to each healthcare sector."
+          centered={false}
+        />
+        <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-3 mb-8">
           {industries.map(({ title, icon: Icon, count }) => (
             <Link
               key={title}
@@ -270,6 +266,11 @@ const IndustriesPreview = () => {
               <ChevronRight size={14} className="text-slate-300 group-hover:text-accent-500 ml-auto transition-colors" />
             </Link>
           ))}
+        </div>
+        <div className="text-center">
+          <Link to="/industries" className="btn-secondary text-sm">
+            Explore Industries <ArrowRight size={14} />
+          </Link>
         </div>
       </div>
     </section>

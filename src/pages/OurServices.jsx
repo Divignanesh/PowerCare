@@ -189,9 +189,11 @@ const NursingSection = () => (
               </div>
             ))}
           </div>
-          <Link to="/contact" className="btn-primary">
-            Request Nursing Staff <ArrowRight size={16} />
-          </Link>
+          <div className="flex flex-col sm:flex-row gap-3">
+            <Link to="/contact" className="btn-primary flex-1 sm:flex-initial justify-center">
+              Request Nursing Staff <ArrowRight size={16} />
+            </Link>
+          </div>
         </div>
         <div className="bg-surface rounded-xl border border-slate-200 p-5">
           <h4 className="font-bold font-heading text-slate-900 mb-4 text-sm">Nursing Roles We Place</h4>
@@ -248,9 +250,11 @@ const PersonalCareSection = () => (
           <p className="text-slate-500 text-sm leading-relaxed mb-6">
             Every personal care worker completes our person-centred care training module, equipping them to provide culturally sensitive, emotionally intelligent, and physically safe support.
           </p>
-          <Link to="/contact" className="btn-primary">
-            Request Care Workers <ArrowRight size={16} />
-          </Link>
+          <div className="flex flex-col sm:flex-row gap-3">
+            <Link to="/contact" className="btn-primary flex-1 sm:flex-initial justify-center">
+              Request Care Workers <ArrowRight size={16} />
+            </Link>
+          </div>
         </div>
       </div>
     </div>
@@ -266,11 +270,11 @@ const ServicesCTA = () => (
       <p className="text-white/50 text-sm max-w-xl mx-auto mb-6">
         PowerCare places a wide range of healthcare professionals. Contact us to discuss your specific staffing needs.
       </p>
-      <div className="flex flex-wrap gap-4 justify-center">
-        <Link to="/contact" className="btn-accent text-sm px-5 py-2.5">
+      <div className="flex flex-col sm:flex-row flex-wrap gap-4 justify-center">
+        <Link to="/contact" className="btn-accent text-sm px-5 py-2.5 flex-1 sm:flex-initial justify-center">
           Discuss Your Needs <ArrowRight size={16} />
         </Link>
-        <Link to="/industries" className="btn-white text-sm px-5 py-2.5">
+        <Link to="/industries" className="btn-white text-sm px-5 py-2.5 flex-1 sm:flex-initial justify-center">
           Industries We Serve <ChevronRight size={16} />
         </Link>
       </div>

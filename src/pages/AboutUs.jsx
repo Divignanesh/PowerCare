@@ -9,9 +9,9 @@ import { aboutFAQs } from '../data/faqs';
 import SEO from '../components/seo/SEO';
 
 const PageHero = () => (
-  <section className="relative pt-16 pb-12 bg-primary-900 overflow-hidden">
-    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 text-center">
-      <span className="text-accent-500 text-xs font-bold tracking-widest uppercase mb-4 block">
+  <section className="relative py-12 lg:py-16 bg-primary-900 overflow-hidden flex items-center">
+    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 text-center w-full">
+      <span className="text-accent-500 text-xl font-bold tracking-widest uppercase mb-4 block">
         Our Story
       </span>
       <h1 className="text-4xl lg:text-5xl font-bold font-heading text-white mb-4">
@@ -42,11 +42,11 @@ const OurStory = () => (
           <p className="text-slate-500 text-sm leading-relaxed mb-6">
             Today, PowerCare serves hundreds of facilities across the Greater Toronto Area and Rural Ontario, connecting them with thousands of pre-trained healthcare professionals.
           </p>
-          <div className="flex flex-wrap gap-4">
-            <Link to="/why-powercare" className="btn-primary">
+          <div className="flex flex-col sm:flex-row flex-wrap gap-4">
+            <Link to="/why-powercare" className="btn-primary flex-1 sm:flex-initial justify-center">
               Why PowerCare <ArrowRight size={16} />
             </Link>
-            <Link to="/contact" className="btn-secondary">
+            <Link to="/contact" className="btn-secondary flex-1 sm:flex-initial justify-center">
               Get in Touch
             </Link>
           </div>

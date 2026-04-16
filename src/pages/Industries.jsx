@@ -85,9 +85,11 @@ const IndustrySection = ({ industry, index }) => {
               </span>
             </div>
           </div>
-          <Link to="/contact" className="btn-primary text-sm whitespace-nowrap self-start sm:self-auto">
-            Get Staff for This Sector <ArrowRight size={14} />
-          </Link>
+          <div className="flex flex-col sm:flex-row gap-3 w-full sm:w-auto">
+            <Link to="/contact" className="btn-primary text-sm flex-1 sm:flex-initial justify-center">
+              Get Staff for This Sector <ArrowRight size={14} />
+            </Link>
+          </div>
         </div>
 
         <div className={`grid lg:grid-cols-2 gap-8 items-start ${!isEven ? 'lg:grid-flow-dense' : ''}`}>
