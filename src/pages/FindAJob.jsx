@@ -6,7 +6,9 @@ import {
   Briefcase, Star
 } from 'lucide-react';
 import SectionHeader from '../components/ui/SectionHeader';
+import FAQ from '../components/ui/FAQ';
 import { jobCategories, employmentTypes, locations, hiringSteps, benefits } from '../data/jobs';
+import { findJobFAQs } from '../data/faqs';
 import SEO, { hiringHowToSchema } from '../components/seo/SEO';
 
 const iconMap = { Send, Search, ClipboardCheck, CheckCircle2, UserCheck, Zap, Clock, DollarSign, MapPin, Gift };
@@ -408,6 +410,7 @@ const FindAJob = () => (
     <EmploymentTypes />
     <CoverageMap />
     <Testimonials />
+    <FAQ faqs={findJobFAQs} badge="Find Your Role" title="Questions About Working with PowerCare" subtitle="Get answers about our hiring process, roles, training, and benefits." />
   </main>
 );
 

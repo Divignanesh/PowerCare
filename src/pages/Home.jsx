@@ -5,8 +5,10 @@ import {
   Phone, ChevronRight, Stethoscope, UserCheck, Zap
 } from 'lucide-react';
 import SectionHeader from '../components/ui/SectionHeader';
+import FAQ from '../components/ui/FAQ';
 import { services } from '../data/services';
-import SEO, { faqSchema, homeFAQs } from '../components/seo/SEO';
+import { homeFAQs } from '../data/faqs';
+import SEO, { faqSchema } from '../components/seo/SEO';
 
 
 // ─────────────────────────── HERO ────────────────────────────
@@ -364,6 +366,7 @@ const Home = () => (
     <CoverageBand />
     <IndustriesPreview />
     <Testimonials />
+    <FAQ faqs={homeFAQs} title="Frequently Asked Questions" subtitle="Everything you need to know about PowerCare's staffing solutions." />
     <HomeCTA />
   </main>
 );

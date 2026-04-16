@@ -5,7 +5,9 @@ import {
   Users, Activity, Brain, ChevronRight, Shield
 } from 'lucide-react';
 import SectionHeader from '../components/ui/SectionHeader';
+import FAQ from '../components/ui/FAQ';
 import { industries } from '../data/industries';
+import { industriesFAQs } from '../data/faqs';
 import SEO from '../components/seo/SEO';
 
 const iconMap = { Building2, Home, Hospital, Heart, Users, Activity, Brain };
@@ -173,6 +175,7 @@ const Industries = () => (
     {industries.map((ind, i) => (
       <IndustrySection key={ind.id} industry={ind} index={i} />
     ))}
+    <FAQ faqs={industriesFAQs} badge="Industries We Serve" title="Questions About Our Industry Expertise" subtitle="Learn how PowerCare staffs different care settings across Ontario." />
     <IndustriesCTA />
   </main>
 );

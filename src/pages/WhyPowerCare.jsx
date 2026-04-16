@@ -6,6 +6,8 @@ import {
   UserCheck, Zap, ChevronRight, Brain, Activity, FileCheck, ChevronLeft
 } from 'lucide-react';
 import SectionHeader from '../components/ui/SectionHeader';
+import FAQ from '../components/ui/FAQ';
+import { whyPowerCareFAQs } from '../data/faqs';
 import SEO from '../components/seo/SEO';
 
 const PageHero = () => (
@@ -428,6 +430,7 @@ const WhyPowerCare = () => (
     <VettingProcess />
     <KeyPillars />
     <FeaturedTestimonial />
+    <FAQ faqs={whyPowerCareFAQs} badge="Why PowerCare" title="Your Questions About PowerCare" subtitle="Discover what makes PowerCare the right choice for your facility or career." />
     <WhyPowerCareCTA />
   </main>
 );

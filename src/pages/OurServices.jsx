@@ -6,7 +6,9 @@ import {
   ChevronRight, Shield, Clock, Award, X
 } from 'lucide-react';
 import SectionHeader from '../components/ui/SectionHeader';
+import FAQ from '../components/ui/FAQ';
 import { services, serviceCategories } from '../data/services';
+import { servicesFAQs } from '../data/faqs';
 import SEO from '../components/seo/SEO';
 
 const iconMap = {
@@ -284,6 +286,7 @@ const OurServices = () => (
     <ServicesGrid />
     <NursingSection />
     <PersonalCareSection />
+    <FAQ faqs={servicesFAQs} badge="Our Services" title="Questions About Healthcare Staffing Services" subtitle="Learn more about the roles we place and how to request staff." />
     <ServicesCTA />
   </main>
 );

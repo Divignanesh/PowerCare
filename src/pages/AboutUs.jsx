@@ -4,6 +4,8 @@ import {
   Eye, Lightbulb, Shield, Star
 } from 'lucide-react';
 import SectionHeader from '../components/ui/SectionHeader';
+import FAQ from '../components/ui/FAQ';
+import { aboutFAQs } from '../data/faqs';
 import SEO from '../components/seo/SEO';
 
 const PageHero = () => (
@@ -203,6 +205,7 @@ const AboutUs = () => (
     <MissionVisionValues />
     <Leadership />
     <Accreditations />
+    <FAQ faqs={aboutFAQs} badge="About PowerCare" title="Questions About Our Company" subtitle="Learn more about PowerCare's mission, values, and commitment to healthcare staffing excellence." />
     <AboutCTA />
   </main>
 );

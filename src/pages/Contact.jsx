@@ -2,9 +2,11 @@ import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import {
   Phone, Mail, MapPin, Clock, ArrowRight, CheckCircle2,
-  Building2, User, MessageSquare, ChevronDown
+  Building2, User, MessageSquare
 } from 'lucide-react';
 import SectionHeader from '../components/ui/SectionHeader';
+import FAQ from '../components/ui/FAQ';
+import { contactFAQs } from '../data/faqs';
 import SEO from '../components/seo/SEO';
 
 // ── HERO ─────────────────────────────────────────────────────
@@ -304,66 +306,13 @@ const ContactForms = () => {
   );
 };
 
-// ── FAQ ───────────────────────────────────────────────────────
-const FAQ = () => {
-  const [open, setOpen] = useState(null);
-
-  const faqs = [
-    { q: 'How quickly can PowerCare fill a shift?',
-      a: 'For emergency coverage, our 24/7 dispatch team can typically confirm a placement within 1–2 hours. For planned staffing, we aim to confirm within 24 hours of your request.' },
-    { q: 'What credentials does PowerCare verify?',
-      a: 'We verify all relevant college registrations (CNO, COTO, etc.), conduct criminal background and vulnerable sector checks, confirm immunization records, and verify references.' },
-    { q: 'Does PowerCare cover WSIB and liability?',
-      a: 'Yes. All PowerCare staff are covered under WSIB and our corporate liability insurance. We provide this documentation to facilities upon request.' },
-    { q: 'What training do PowerCare staff complete before placement?',
-      a: "Every PowerCare professional completes our 80-hour in-house training program covering clinical foundations, person-centred care, role-specific skills, compliance readiness, and professional standards." },
-    { q: "What if I'm not satisfied with a placement?",
-      a: 'PowerCare offers a placement guarantee. If you are not satisfied with a placed worker, notify us within the shift and we will provide a replacement at no additional charge.' },
-    { q: 'Do you service rural and smaller Ontario communities?',
-      a: 'Yes — extending care to underserved rural communities is a core part of our mission. We service the GTA and a wide range of rural Ontario cities and communities.' },
-  ];
-
-  return (
-    <section className="section-padding bg-surface">
-      <div className="container-custom max-w-3xl">
-        <SectionHeader
-          badge="FAQs"
-          title="Frequently Asked Questions"
-          subtitle="Quick answers to the most common questions about PowerCare."
-        />
-        <div className="space-y-2">
-          {faqs.map(({ q, a }, i) => (
-            <div key={i} className="bg-white rounded-xl border border-slate-200 overflow-hidden">
-              <button
-                onClick={() => setOpen(open === i ? null : i)}
-                className="w-full flex items-center justify-between px-5 py-4 text-left hover:bg-accent-50 transition-colors"
-              >
-                <span className="font-semibold text-slate-900 text-sm pr-4">{q}</span>
-                <ChevronDown
-                  size={15}
-                  className={`text-slate-400 flex-shrink-0 transition-transform duration-200 ${open === i ? 'rotate-180' : ''}`}
-                />
-              </button>
-              {open === i && (
-                <div className="px-5 pb-4 text-slate-500 text-sm leading-relaxed border-t border-slate-100 pt-3">
-                  {a}
-                </div>
-              )}
-            </div>
-          ))}
-        </div>
-      </div>
-    </section>
-  );
-};
-
 const Contact = () => (
   <main>
     <SEO page="contact" />
     <PageHero />
     <ContactInfo />
     <ContactForms />
-    <FAQ />
+    <FAQ faqs={contactFAQs} badge="Get in Touch" title="Contact & Support Questions" subtitle="Have questions before reaching out? Find answers here." />
   </main>
 );
 
