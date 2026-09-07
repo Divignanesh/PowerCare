@@ -1,6 +1,7 @@
 export const services = [
   {
     id: 'rn',
+    requestLabel: 'Request an RN',
     title: 'Registered Nurse (RN)',
     category: 'Medical & Nursing',
     icon: 'Stethoscope',
@@ -17,6 +18,7 @@ export const services = [
   },
   {
     id: 'rpn',
+    requestLabel: 'Request an RPN',
     title: 'Registered Practical Nurse (RPN)',
     category: 'Medical & Nursing',
     icon: 'HeartPulse',
@@ -33,6 +35,7 @@ export const services = [
   },
   {
     id: 'psw',
+    requestLabel: 'Request a PSW',
     title: 'Personal Support Worker (PSW)',
     category: 'Care Support',
     icon: 'HandHeart',
@@ -49,6 +52,7 @@ export const services = [
   },
   {
     id: 'dsw',
+    requestLabel: 'Request a DSW',
     title: 'Developmental Support Worker (DSW)',
     category: 'Care Support',
     icon: 'Users',
@@ -65,6 +69,7 @@ export const services = [
   },
   {
     id: 'home-care-aide',
+    requestLabel: 'Request an Aide',
     title: 'Home Care Aide',
     category: 'Care Support',
     icon: 'Home',
@@ -81,6 +86,7 @@ export const services = [
   },
   {
     id: 'pta',
+    requestLabel: 'Request a PTA',
     title: 'Physiotherapy Assistant (PTA)',
     category: 'Therapeutic & Rehabilitation',
     icon: 'Activity',
@@ -97,6 +103,7 @@ export const services = [
   },
   {
     id: 'dietary-aide',
+    requestLabel: 'Request a Dietary Aide',
     title: 'Dietary Aide',
     category: 'Therapeutic & Rehabilitation',
     icon: 'UtensilsCrossed',
@@ -113,6 +120,7 @@ export const services = [
   },
   {
     id: 'housekeeping',
+    requestLabel: 'Request Support Staff',
     title: 'Housekeeping & Laundry Aide',
     category: 'Facility & Administrative',
     icon: 'Sparkles',
@@ -129,6 +137,7 @@ export const services = [
   },
   {
     id: 'front-desk',
+    requestLabel: 'Request a Screener',
     title: 'Front Desk Screener',
     category: 'Facility & Administrative',
     icon: 'ClipboardList',
@@ -145,6 +154,7 @@ export const services = [
   },
   {
     id: 'companion',
+    requestLabel: 'Request Companion Care',
     title: 'Companion Care',
     category: 'Care Support',
     icon: 'SmilePlus',
@@ -161,6 +171,7 @@ export const services = [
   },
   {
     id: 'dementia-care',
+    requestLabel: 'Request a Specialist',
     title: 'Dementia Care Specialist',
     category: 'Specialized Care',
     icon: 'Brain',

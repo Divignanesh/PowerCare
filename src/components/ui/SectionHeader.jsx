@@ -1,26 +1,62 @@
+/**
+ * Section header.
+ *
+ * Two arrangements, both built on the same parts:
+ *  - split (default when `centered` is false): eyebrow and title on the left,
+ *    the standfirst set in a second column, closed by a full-width rule. Reads
+ *    like a page in a report rather than a stack of centred marketing copy.
+ *  - centred: the eyebrow is flanked by rules, keeping the axis honest.
+ */
+/** Mono label prefixed with a rule; flanked on both sides when centred. */
+const Eyebrow = ({ badge, tone, ruleTone, flanked }) =>
+  badge ? (
+    <span className={`inline-flex items-center gap-2.5 font-mono text-[0.6875rem] font-medium tracking-widest uppercase ${tone}`}>
+      <span className={`block w-6 h-px ${ruleTone}`} aria-hidden="true" />
+      {badge}
+      {flanked && <span className={`block w-6 h-px ${ruleTone}`} aria-hidden="true" />}
+    </span>
+  ) : null;
+
+import Reveal from './Reveal';
+
 const SectionHeader = ({ badge, title, subtitle, centered = true, light = false }) => {
+  const eyebrowTone = light ? 'text-accent-300' : 'text-primary-700';
+  const ruleTone    = light ? 'bg-accent-300/60' : 'bg-primary-400';
+  const titleTone   = light ? 'text-white' : 'text-ink-900';
+  const subTone     = light ? 'text-white/65' : 'text-ink-600';
+
+  if (centered) {
+    return (
+      <Reveal className="mb-8 lg:mb-10 text-center">
+        <Eyebrow badge={badge} tone={eyebrowTone} ruleTone={ruleTone} flanked />
+        <h2 className={`text-display-sm font-heading font-semibold mt-5 max-w-3xl mx-auto text-balance ${titleTone}`}>
+          {title}
+        </h2>
+        {subtitle && (
+          <p className={`mt-5 text-base leading-relaxed max-w-2xl mx-auto text-pretty ${subTone}`}>
+            {subtitle}
+          </p>
+        )}
+      </Reveal>
+    );
+  }
+
   return (
-    <div className={`mb-10 ${centered ? 'text-center' : ''}`}>
-      {badge && (
-        <span className={`inline-flex items-center gap-1.5 text-xs font-bold tracking-widest uppercase mb-3 ${
-          light ? 'text-accent-400' : 'text-accent-600'
-        }`}>
-          {badge}
-        </span>
-      )}
-      <h2 className={`text-2xl lg:text-3xl font-bold font-heading leading-tight ${
-        light ? 'text-white' : 'text-slate-900'
-      }`}>
-        {title}
-      </h2>
-      {subtitle && (
-        <p className={`mt-3 text-sm max-w-2xl leading-relaxed ${centered ? 'mx-auto' : ''} ${
-          light ? 'text-white/60' : 'text-slate-500'
-        }`}>
-          {subtitle}
-        </p>
-      )}
-    </div>
+    <Reveal className="mb-8 lg:mb-10">
+      <div className="grid lg:grid-cols-12 gap-x-10 gap-y-5 items-end">
+        <div className="lg:col-span-7">
+          <Eyebrow badge={badge} tone={eyebrowTone} ruleTone={ruleTone} />
+          <h2 className={`text-display-sm font-heading font-semibold mt-5 text-balance ${titleTone}`}>
+            {title}
+          </h2>
+        </div>
+        {subtitle && (
+          <p className={`lg:col-span-5 text-base leading-relaxed text-pretty ${subTone}`}>
+            {subtitle}
+          </p>
+        )}
+      </div>
+    </Reveal>
   );
 };
 

@@ -5,38 +5,43 @@
  */
 
 export const COLORS = {
-  navy:         '#122849',   // primary-900 — hero, dark sections, header (brand blue)
-  navyDark:     '#0E2251',   // primary-800 — footer, very dark sections
-  navyMid:      '#122F65',   // primary-700 — CTA band, stats bar
-  navyLight:    '#163F80',   // primary-600 — interactive nav, links
-  navySubtle:   '#EAF0F7',   // primary-50  — very light tint for hover states
-  navyTint:     '#C5D6E9',   // primary-100 — icon containers on white
+  brand:        '#00836B',   // primary-600 — the teal from the logo mark
+  brandDeep:    '#036B58',   // primary-700 — buttons, small text
+  brandDark:    '#045246',   // primary-800 — deep accents
+  brandDeepest: '#03362E',   // primary-900 — footer
+  brandBright:  '#0E9C81',   // primary-500 — bright accent
+  brandWash:    '#ECFAF7',   // primary-50  — pale section ground
+  brandTint:    '#D3F2EB',   // primary-100 — tints and tags
 
-  gold:         '#CBA54D',   // accent-500  — primary CTA, badge text (brand gold)
-  goldHover:    '#D5A832',   // accent-400  — hover state for gold
-  goldLight:    '#F2E2B5',   // accent-100  — subtle gold bg
-  goldDim:      '#A6832A',   // accent-600  — muted gold text
+  mint:         '#6FE0B4',   // accent-300  — highlight tone on dark grounds
+  mintBright:   '#3DCF98',   // accent-400  — hover state for mint
+  mintDeep:     '#0E9366',   // accent-600  — accent text that passes on white
+  mintWash:     '#ECFDF5',   // accent-50   — faint accent fill
 
   white:        '#FFFFFF',
-  surface:      '#F8F7F4',   // warm off-white — alternating section bg
-  border:       '#E4E8ED',   // subtle dividers and card borders
-  textDark:     '#0F172A',   // headings
-  textBody:     '#475569',   // body text (slate-600)
-  textMuted:    '#94A3B8',   // placeholders, secondary text
+  surface:      '#F2F6F4',   // alternating section ground
+  border:       '#DBE2DF',   // ink-200 — dividers and card borders
+  hairline:     '#EBEFED',   // ink-100 — the finest rule
+  textDark:     '#151A19',   // ink-900 — headings
+  textBody:     '#4D5854',   // ink-600 — body copy
+  textMuted:    '#66736F',   // ink-500 — secondary text
 };
 
 export const RADIUS = {
-  sm:   '0.5rem',    // rounded-lg   — buttons, small tags
-  md:   '0.75rem',   // rounded-xl   — cards, inputs, modals
-  lg:   '1rem',      // rounded-2xl  — large cards only
+  sm:   '0.25rem',   // rounded      — tags, small marks
+  md:   '0.375rem',  // rounded-lg   — buttons, inputs
+  lg:   '0.5rem',    // rounded-xl   — cards, panels
+  xl:   '0.75rem',   // rounded-2xl  — large containers only
 };
 
 export const SHADOW = {
-  card:      '0 1px 4px rgba(0,0,0,0.07)',
-  cardHover: '0 4px 16px rgba(0,0,0,0.11)',
+  card:      '0 1px 2px rgba(12,44,39,0.05), 0 1px 1px rgba(12,44,39,0.04)',
+  cardHover: '0 10px 30px -12px rgba(12,44,39,0.22), 0 2px 6px rgba(12,44,39,0.06)',
+  panel:     '0 24px 60px -28px rgba(12,44,39,0.35)',
 };
 
 export const FONT = {
-  sans:    'Inter, system-ui, sans-serif',
-  heading: 'Poppins, system-ui, sans-serif',
+  sans:    '"Source Sans 3", system-ui, sans-serif',
+  heading: 'Archivo, system-ui, sans-serif',
+  mono:    '"IBM Plex Mono", ui-monospace, monospace',
 };

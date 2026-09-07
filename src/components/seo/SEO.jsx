@@ -71,7 +71,7 @@ const localBusinessSchema = {
 
 const PAGE_META = {
   home: {
-    title: 'PowerCare | #1 Healthcare Staffing Agency — GTA & Rural Ontario',
+    title: 'PowerCare | Healthcare Staffing Agency',
     description:
       'PowerCare connects long-term care homes, hospitals, and community agencies across the GTA and Rural Ontario with vetted, in-house trained RNs, RPNs, PSWs, and DSWs. 24/7 emergency staffing. 500+ facility partners.',
     path: '/',

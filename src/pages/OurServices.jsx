@@ -1,14 +1,18 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import {
-  ArrowRight, CheckCircle, Stethoscope, HeartPulse, Users, Home,
+  ArrowRight, Check, Stethoscope, HeartPulse, Users, Home,
   Activity, Sparkles, ClipboardList, Brain, SmilePlus, UtensilsCrossed,
-  ChevronRight, Shield, Clock, Award, X
+  ChevronRight, Shield, Clock, Award, X, CheckCircle
 } from 'lucide-react';
+import { AnimatePresence, motion, useReducedMotion } from 'framer-motion';
 import SectionHeader from '../components/ui/SectionHeader';
+import PageHero from '../components/ui/PageHero';
 import FAQ from '../components/ui/FAQ';
 import { services, serviceCategories } from '../data/services';
 import { servicesFAQs } from '../data/faqs';
+import { RevealGroup, RevealItem } from '../components/ui/Reveal';
+import CredentialBadges from '../components/ui/CredentialBadges';
 import SEO from '../components/seo/SEO';
 
 const iconMap = {
@@ -17,109 +21,148 @@ const iconMap = {
   HandHeart: HeartPulse,
 };
 
-const ServiceCard = ({ service, onClick }) => {
+const ServiceCard = ({ service, index, onClick }) => {
   const Icon = iconMap[service.icon] || CheckCircle;
   return (
-    <div className="card cursor-pointer group" onClick={() => onClick(service)}>
-      <span className="text-accent-500 text-xs font-bold tracking-widest uppercase mb-2 block">
-        {service.category}
-      </span>
-      <div className="w-9 h-9 bg-primary-100 rounded-lg flex items-center justify-center mb-3 group-hover:bg-accent-100 transition-colors">
-        <Icon size={15} className="text-primary-700 group-hover:text-accent-500" />
+    <div className="card group flex flex-col h-full !p-5">
+      <div className="flex items-baseline justify-between gap-4 mb-3">
+        <span className="font-mono text-[0.6875rem] uppercase tracking-widest text-primary-700">
+          {service.category}
+        </span>
+        <span className="font-mono text-[0.6875rem] text-ink-300 tabular-nums">
+          {String(index + 1).padStart(2, '0')}
+        </span>
       </div>
-      <h3 className="text-sm font-bold font-heading text-slate-900 mb-2 group-hover:text-primary-700 transition-colors">
-        {service.title}
-      </h3>
-      <p className="text-slate-500 text-xs leading-relaxed mb-3">{service.shortDesc}</p>
-      <button className="inline-flex items-center gap-1 text-accent-500 text-xs font-semibold group-hover:gap-2 transition-all">
-        View Details <ChevronRight size={12} />
-      </button>
+      <Icon size={20} strokeWidth={1.6} className="text-primary-600 mb-3" />
+      <h3 className="text-lg font-heading font-semibold text-ink-900 mb-2">{service.title}</h3>
+      <p className="text-ink-600 text-[0.9375rem] leading-relaxed text-pretty flex-1">{service.shortDesc}</p>
+
+      <div className="flex flex-wrap items-center gap-x-5 gap-y-3 mt-5 pt-5">
+        {/* The role travels with the request so the form arrives pre-filled. */}
+        <Link
+          to={`/contact?role=${encodeURIComponent(service.title)}`}
+          className="btn-primary !px-4 !py-2.5 !text-sm"
+        >
+          {service.requestLabel}
+        </Link>
+        <button type="button" onClick={() => onClick(service)} className="link-arrow">
+          Learn more <ChevronRight size={14} />
+        </button>
+      </div>
     </div>
   );
 };
 
 const ServiceModal = ({ service, onClose }) => {
-  if (!service) return null;
-  const Icon = iconMap[service.icon] || CheckCircle;
+  const reduceMotion = useReducedMotion();
+
+  // Escape closes the dialog and the page behind it must not scroll.
+  useEffect(() => {
+    if (!service) return;
+    const onKey = (e) => e.key === 'Escape' && onClose();
+    document.addEventListener('keydown', onKey);
+    const prev = document.body.style.overflow;
+    document.body.style.overflow = 'hidden';
+    return () => {
+      document.removeEventListener('keydown', onKey);
+      document.body.style.overflow = prev;
+    };
+  }, [service, onClose]);
+
+  const Icon = service ? (iconMap[service.icon] || CheckCircle) : null;
+
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center p-4" onClick={onClose}>
-      <div className="absolute inset-0 bg-primary-900/70 backdrop-blur-sm" />
-      <div
-        className="relative bg-white rounded-xl max-w-lg w-full p-6 max-h-[90vh] overflow-y-auto"
-        onClick={(e) => e.stopPropagation()}
-      >
-        <button
-          onClick={onClose}
-          className="absolute top-4 right-4 w-8 h-8 rounded-lg bg-slate-100 flex items-center justify-center text-slate-500 hover:bg-slate-200 transition-colors"
-        >
-          <X size={14} />
-        </button>
-        <span className="text-accent-500 text-xs font-bold tracking-widest uppercase mb-4 block">
-          {service.category}
-        </span>
-        <div className="w-9 h-9 bg-primary-100 rounded-lg flex items-center justify-center mb-4">
-          <Icon size={16} className="text-primary-700" />
+    <AnimatePresence>
+      {service && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 sm:p-6">
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.2 }}
+            onClick={onClose}
+            className="absolute inset-0 bg-primary-900/80 backdrop-blur-sm"
+          />
+          <motion.div
+            role="dialog"
+            aria-modal="true"
+            aria-label={service.title}
+            initial={reduceMotion ? { opacity: 0 } : { opacity: 0, y: 20, scale: 0.98 }}
+            animate={{ opacity: 1, y: 0, scale: 1 }}
+            exit={reduceMotion ? { opacity: 0 } : { opacity: 0, y: 10, scale: 0.98 }}
+            transition={{ duration: 0.26, ease: [0.22, 1, 0.36, 1] }}
+            className="relative bg-white rounded-2xl max-w-xl w-full p-7 sm:p-9 max-h-[88vh] overflow-y-auto shadow-panel"
+          >
+            <button
+              onClick={onClose}
+              aria-label="Close"
+              className="absolute top-5 right-5 w-9 h-9 rounded-lg border border-ink-200 flex items-center justify-center
+                         text-ink-500 hover:bg-ink-50 hover:text-ink-800 transition-colors"
+            >
+              <X size={16} />
+            </button>
+
+            <span className="font-mono text-[0.6875rem] uppercase tracking-widest text-primary-600">
+              {service.category}
+            </span>
+            <Icon size={24} strokeWidth={1.6} className="text-primary-600 mt-5" />
+            <h2 className="text-2xl font-heading font-semibold text-ink-900 mt-4 mb-4">{service.title}</h2>
+            <p className="text-ink-600 leading-relaxed mb-8 text-pretty">{service.fullDesc}</p>
+
+            <h3 className="font-mono text-[0.6875rem] uppercase tracking-widest text-ink-500 mb-4">
+              Key Responsibilities &amp; Highlights
+            </h3>
+            <ul className="mb-9 space-y-2">
+              {service.highlights.map((h) => (
+                <li key={h} className="flex items-start gap-3 py-1.5 text-[0.9375rem] text-ink-700">
+                  <Check size={15} strokeWidth={2.5} className="text-primary-500 mt-1 flex-shrink-0" />
+                  {h}
+                </li>
+              ))}
+            </ul>
+
+            <div className="flex flex-col sm:flex-row gap-3">
+              <Link to="/contact" className="btn-primary flex-1" onClick={onClose}>
+                Request This Role
+              </Link>
+              <Link to="/careers" className="btn-secondary flex-1" onClick={onClose}>
+                Apply for This Role
+              </Link>
+            </div>
+          </motion.div>
         </div>
-        <h2 className="text-lg font-bold font-heading text-slate-900 mb-3">{service.title}</h2>
-        <p className="text-slate-500 text-sm leading-relaxed mb-5">{service.fullDesc}</p>
-        <div>
-          <h4 className="font-semibold text-slate-900 text-sm mb-3">Key Responsibilities & Highlights</h4>
-          <ul className="space-y-2">
-            {service.highlights.map((h) => (
-              <li key={h} className="flex items-start gap-2 text-sm text-slate-600">
-                <CheckCircle size={13} className="text-accent-500 mt-0.5 flex-shrink-0" />
-                {h}
-              </li>
-            ))}
-          </ul>
-        </div>
-        <div className="flex gap-3 mt-7">
-          <Link to="/contact" className="btn-primary flex-1 justify-center text-sm" onClick={onClose}>
-            Request This Role
-          </Link>
-          <Link to="/careers" className="btn-secondary flex-1 justify-center text-sm" onClick={onClose}>
-            Apply for This Role
-          </Link>
-        </div>
-      </div>
-    </div>
+      )}
+    </AnimatePresence>
   );
 };
 
-const PageHero = () => (
-  <section className="relative pt-20 pb-20 bg-primary-900 overflow-hidden">
-    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 text-center">
-      <span className="text-accent-500 text-xl font-bold tracking-widest uppercase mb-2 block">
-        Our Services
-      </span>
-      <h1 className="text-3xl font-bold font-heading text-white mb-4">
-        Healthcare Professionals We Place
-      </h1>
-      <p className="text-sm text-white/50 max-w-2xl mx-auto">
-        PowerCare provides vetted, in-house trained professionals across nursing, personal care, therapy, and facility support — ready for any care setting.
-      </p>
-    </div>
-  </section>
+const Hero = () => (
+  <PageHero
+    eyebrow="Our Services"
+    title="Healthcare Professionals We Place"
+    subtitle="PowerCare provides vetted, in-house trained professionals across nursing, personal care, therapy, and facility support — ready for any care setting."
+    image="/images/nurse-portrait.jpg"
+    imageAlt="A registered nurse placed by PowerCare"
+  />
 );
 
 const ServicesIntro = () => (
-  <section className="bg-white py-10 border-b border-slate-100">
+  <section className="bg-white py-14">
     <div className="container-custom">
-      <div className="grid sm:grid-cols-3 gap-8 text-center">
+      <div className="grid sm:grid-cols-3 gap-x-10 gap-y-10">
         {[
-          { icon: Shield, title: 'Pre-Vetted & Trained',    desc: 'Every professional completes our 80-hour in-house training before placement.' },
-          { icon: Clock,  title: 'Available 24/7',          desc: 'Our staffing pool is available for same-day, overnight, and emergency coverage.' },
-          { icon: Award,  title: 'Quality Guaranteed',      desc: "Unsatisfied with a placement? We replace them — that is our commitment." },
+          { icon: Shield, title: 'Pre-Vetted & Trained', desc: 'Every professional completes our 80-hour in-house training before placement.' },
+          { icon: Clock,  title: 'Available 24/7',       desc: 'Our staffing pool is available for same-day, overnight, and emergency coverage.' },
+          { icon: Award,  title: 'Quality Guaranteed',   desc: "Unsatisfied with a placement? We replace them — that is our commitment." },
         ].map(({ icon: Icon, title, desc }) => (
-          <div key={title} className="flex flex-col items-center">
-            <div className="w-10 h-10 bg-primary-50 rounded-xl flex items-center justify-center mb-3">
-              <Icon size={17} className="text-primary-700" />
-            </div>
-            <h3 className="font-bold font-heading text-slate-900 text-sm mb-1">{title}</h3>
-            <p className="text-slate-500 text-xs leading-relaxed">{desc}</p>
+          <div key={title}>
+            <Icon size={20} strokeWidth={1.6} className="text-primary-600 mb-4" />
+            <h3 className="font-heading font-semibold text-ink-900 mb-2">{title}</h3>
+            <p className="text-ink-600 text-[0.9375rem] leading-relaxed text-pretty">{desc}</p>
           </div>
         ))}
       </div>
+      <CredentialBadges variant="inline" useFull className="mt-10 justify-center" />
     </div>
   </section>
 );
@@ -133,16 +176,16 @@ const ServicesGrid = () => {
   return (
     <section className="section-padding bg-surface">
       <div className="container-custom">
-        {/* Category filter */}
-        <div className="flex flex-wrap gap-2 justify-center mb-8">
+        <div className="flex flex-wrap gap-2 mb-8">
           {serviceCategories.map((cat) => (
             <button
               key={cat}
               onClick={() => setActive(cat)}
-              className={`px-4 py-1.5 rounded-lg text-xs font-semibold transition-all ${
+              aria-pressed={active === cat}
+              className={`px-4 py-2 rounded-lg font-mono text-[0.6875rem] uppercase tracking-widest transition-colors duration-200 ${
                 active === cat
-                  ? 'bg-primary-900 text-white'
-                  : 'bg-white text-slate-600 border border-slate-200 hover:border-primary-300 hover:text-primary-700'
+                  ? 'bg-primary-700 text-ink-900'
+                  : 'bg-white text-ink-600 border border-ink-200 hover:border-primary-400 hover:text-primary-700'
               }`}
             >
               {cat}
@@ -150,11 +193,13 @@ const ServicesGrid = () => {
           ))}
         </div>
 
-        <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
-          {filtered.map((service) => (
-            <ServiceCard key={service.id} service={service} onClick={setSelectedService} />
+        <RevealGroup className="grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 auto-rows-fr gap-5">
+          {filtered.map((service, i) => (
+            <RevealItem key={service.id} className="h-full">
+              <ServiceCard service={service} index={i} onClick={setSelectedService} />
+            </RevealItem>
           ))}
-        </div>
+        </RevealGroup>
       </div>
 
       <ServiceModal service={selectedService} onClose={() => setSelectedService(null)} />
@@ -165,17 +210,16 @@ const ServicesGrid = () => {
 const NursingSection = () => (
   <section className="section-padding bg-white">
     <div className="container-custom">
-      <div className="grid lg:grid-cols-2 gap-10 items-center">
-        <div>
-          <span className="section-badge">
-            <Stethoscope size={13} />
-            Nursing Services
-          </span>
-          <h2 className="section-title mb-4">Clinical Excellence at Every Level</h2>
-          <p className="text-slate-500 text-sm leading-relaxed mb-5">
+      <div className="grid lg:grid-cols-12 gap-x-12 gap-y-10 items-center">
+        <div className="lg:col-span-6">
+          <span className="section-badge">Nursing Services</span>
+          <h2 className="text-display-sm font-heading font-semibold text-ink-900 mb-6 text-balance">
+            Clinical Excellence at Every Level
+          </h2>
+          <p className="text-ink-600 leading-relaxed mb-8 text-pretty">
             PowerCare provides credentialed nursing professionals — from Registered Nurses and RPNs to Nurse Practitioners — who bring clinical excellence and compassionate patient care to every setting. All nursing staff are college-verified, background-cleared, and trained to our proprietary care standards.
           </p>
-          <div className="space-y-2.5 mb-6">
+          <ul className="mb-9 space-y-2">
             {[
               'Medication administration & IV therapy',
               'Wound care & post-surgical support',
@@ -183,31 +227,38 @@ const NursingSection = () => (
               'Acute and long-term care settings',
               'Infection prevention & control (IPAC)',
             ].map((item) => (
-              <div key={item} className="flex items-center gap-2.5 text-slate-600 text-sm">
-                <CheckCircle size={14} className="text-accent-500 flex-shrink-0" />
+              <li key={item} className="flex items-start gap-3 py-1.5 text-[0.9375rem] text-ink-700">
+                <Check size={15} strokeWidth={2.5} className="text-primary-500 mt-1 flex-shrink-0" />
                 {item}
-              </div>
+              </li>
             ))}
-          </div>
-          <div className="flex flex-col sm:flex-row gap-3">
-            <Link to="/contact" className="btn-primary flex-1 sm:flex-initial justify-center">
-              Request Nursing Staff <ArrowRight size={16} />
-            </Link>
-          </div>
+          </ul>
+          <Link to="/contact" className="btn-primary">
+            Request Nursing Staff <ArrowRight size={16} />
+          </Link>
         </div>
-        <div className="bg-surface rounded-xl border border-slate-200 p-5">
-          <h4 className="font-bold font-heading text-slate-900 mb-4 text-sm">Nursing Roles We Place</h4>
-          <div className="space-y-3">
+
+        <div className="lg:col-span-6">
+          <img
+            src="/images/theatre-team.jpg"
+            alt="A surgical nursing team at work"
+            loading="lazy"
+            className="w-full h-[260px] object-cover rounded-2xl mb-8"
+          />
+          <h3 className="font-mono text-[0.6875rem] uppercase tracking-widest text-primary-600 mb-5">
+            Nursing Roles We Place
+          </h3>
+          <div className="space-y-5">
             {[
-              { role: 'Registered Nurse (RN)',          desc: 'Full scope nursing practice across all care settings'    },
-              { role: 'Registered Practical Nurse (RPN)', desc: 'Primary care, medication management, care planning'    },
-              { role: 'Nurse Practitioner (NP)',         desc: 'Advanced assessment, diagnosis, and prescribing'        },
+              { role: 'Registered Nurse (RN)',            desc: 'Full scope nursing practice across all care settings' },
+              { role: 'Registered Practical Nurse (RPN)', desc: 'Primary care, medication management, care planning'   },
+              { role: 'Nurse Practitioner (NP)',          desc: 'Advanced assessment, diagnosis, and prescribing'      },
             ].map(({ role, desc }) => (
-              <div key={role} className="bg-white rounded-xl p-4 flex items-start gap-3 border border-slate-100">
-                <HeartPulse size={16} className="text-accent-500 mt-0.5 flex-shrink-0" />
+              <div key={role} className="flex items-start gap-4 py-4">
+                <HeartPulse size={17} className="text-primary-600 mt-1 flex-shrink-0" />
                 <div>
-                  <div className="font-semibold text-slate-900 text-sm">{role}</div>
-                  <div className="text-slate-400 text-xs mt-0.5">{desc}</div>
+                  <div className="font-heading font-semibold text-ink-900">{role}</div>
+                  <div className="text-ink-600 text-sm mt-1">{desc}</div>
                 </div>
               </div>
             ))}
@@ -221,40 +272,30 @@ const NursingSection = () => (
 const PersonalCareSection = () => (
   <section className="section-padding bg-surface">
     <div className="container-custom">
-      <div className="grid lg:grid-cols-2 gap-10 items-center">
-        <div className="order-2 lg:order-1">
-          <div className="grid grid-cols-2 gap-4">
-            {[
-              { title: 'Personal Support Workers', stat: '1,500+', sub: 'Active PSWs in network'  },
-              { title: 'Developmental Support',    stat: '300+',   sub: 'DSWs placed annually'    },
-              { title: 'Home Care Aides',          stat: '800+',   sub: 'Home care clients served' },
-              { title: 'Companions',               stat: '400+',   sub: 'Companion placements'    },
-            ].map(({ title, stat, sub }) => (
-              <div key={title} className="bg-white rounded-xl border border-slate-200 p-5 text-center">
-                <div className="text-xl font-bold font-heading text-accent-500">{stat}</div>
-                <div className="font-semibold text-slate-800 text-xs mt-1">{title}</div>
-                <div className="text-slate-400 text-xs mt-0.5">{sub}</div>
-              </div>
-            ))}
-          </div>
+      <div className="grid lg:grid-cols-12 gap-x-12 gap-y-10 items-center">
+        <div className="lg:col-span-6 order-2 lg:order-1">
+          <img
+            src="/images/elderly-hands.jpg"
+            alt="A support worker holding a client's hand"
+            loading="lazy"
+            className="w-full h-[380px] object-cover rounded-2xl"
+          />
         </div>
-        <div className="order-1 lg:order-2">
-          <span className="section-badge">
-            <Users size={13} />
-            Personal & Community Care
-          </span>
-          <h2 className="section-title mb-4">Compassionate Hands-On Care</h2>
-          <p className="text-slate-500 text-sm leading-relaxed mb-4">
+
+        <div className="lg:col-span-6 order-1 lg:order-2">
+          <span className="section-badge">Personal &amp; Community Care</span>
+          <h2 className="text-display-sm font-heading font-semibold text-ink-900 mb-6 text-balance">
+            Compassionate Hands-On Care
+          </h2>
+          <p className="text-ink-600 leading-relaxed mb-5 text-pretty">
             Our personal care workers — PSWs, DSWs, Home Care Aides, and Companions — are the backbone of quality daily living support. PowerCare's personal care professionals are trained to deliver not just physical assistance, but dignity, warmth, and genuine human connection.
           </p>
-          <p className="text-slate-500 text-sm leading-relaxed mb-6">
+          <p className="text-ink-600 leading-relaxed mb-9 text-pretty">
             Every personal care worker completes our person-centred care training module, equipping them to provide culturally sensitive, emotionally intelligent, and physically safe support.
           </p>
-          <div className="flex flex-col sm:flex-row gap-3">
-            <Link to="/contact" className="btn-primary flex-1 sm:flex-initial justify-center">
-              Request Care Workers <ArrowRight size={16} />
-            </Link>
-          </div>
+          <Link to="/contact" className="btn-primary">
+            Request Care Workers <ArrowRight size={16} />
+          </Link>
         </div>
       </div>
     </div>
@@ -262,19 +303,20 @@ const PersonalCareSection = () => (
 );
 
 const ServicesCTA = () => (
-  <section className="section-padding bg-primary-900">
-    <div className="container-custom text-center text-white">
-      <h2 className="text-xl lg:text-2xl font-bold font-heading mb-3">
+  <section className="relative section-padding bg-primary-50 overflow-hidden">
+      <div className="absolute inset-0 bg-grid pointer-events-none" aria-hidden="true" />
+    <div className="container-custom relative z-10 text-center text-ink-900">
+      <h2 className="text-display-sm font-heading font-semibold mb-5 text-balance">
         Can't Find What You're Looking For?
       </h2>
-      <p className="text-white/50 text-sm max-w-xl mx-auto mb-6">
+      <p className="text-ink-600 text-lg max-w-xl mx-auto mb-10 text-pretty">
         PowerCare places a wide range of healthcare professionals. Contact us to discuss your specific staffing needs.
       </p>
-      <div className="flex flex-col sm:flex-row flex-wrap gap-4 justify-center">
-        <Link to="/contact" className="btn-accent text-sm px-5 py-2.5 flex-1 sm:flex-initial justify-center">
+      <div className="flex flex-col sm:flex-row gap-3 justify-center">
+        <Link to="/contact" className="btn-primary">
           Discuss Your Needs <ArrowRight size={16} />
         </Link>
-        <Link to="/industries" className="btn-white text-sm px-5 py-2.5 flex-1 sm:flex-initial justify-center">
+        <Link to="/industries" className="btn-secondary">
           Industries We Serve <ChevronRight size={16} />
         </Link>
       </div>
@@ -285,7 +327,7 @@ const ServicesCTA = () => (
 const OurServices = () => (
   <main>
     <SEO page="services" />
-    <PageHero />
+    <Hero />
     <ServicesIntro />
     <ServicesGrid />
     <NursingSection />

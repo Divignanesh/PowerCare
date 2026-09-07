@@ -1,137 +1,96 @@
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import {
-  ArrowRight, CheckCircle, GraduationCap, Award, Shield, Users,
-  Clock, Star, HeartHandshake, TrendingUp, BookOpen, Layers,
-  UserCheck, Zap, ChevronRight, Brain, Activity, FileCheck, ChevronLeft
+  ArrowRight, Check, GraduationCap, Award, Shield, Users,
+  Clock, HeartHandshake, TrendingUp, BookOpen, Layers,
+  UserCheck, Zap, ChevronRight, Brain, Activity, FileCheck, ChevronLeft, Star, X
 } from 'lucide-react';
+import { AnimatePresence, motion, useReducedMotion } from 'framer-motion';
 import SectionHeader from '../components/ui/SectionHeader';
+import PageHero from '../components/ui/PageHero';
 import FAQ from '../components/ui/FAQ';
 import { whyPowerCareFAQs } from '../data/faqs';
+import { RevealGroup, RevealItem } from '../components/ui/Reveal';
+import VettingSteps from '../components/ui/VettingSteps';
 import SEO from '../components/seo/SEO';
 
-const PageHero = () => (
-  <section className="relative pt-20 pb-12 bg-primary-900 overflow-hidden">
-    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-      <div className="grid lg:grid-cols-2 gap-10 items-center">
-        <div className="text-white">
-          <span className="text-accent-500 text-xs font-bold tracking-widest uppercase mb-4 block">
-            The PowerCare Difference
-          </span>
-          <h1 className="text-3xl lg:text-3xl font-bold font-heading mb-5 leading-tight">
-            Why Choose <span className="text-accent-500">PowerCare</span>?
-          </h1>
-          <p className="text-sm text-white/50 leading-relaxed mb-6">
-            We're not just another staffing agency. PowerCare is a training-first, quality-obsessed, relationship-driven healthcare staffing company built to meet Ontario's most demanding care environments.
-          </p>
-          <div className="flex flex-col sm:flex-row flex-wrap gap-3">
-            <Link to="/contact" className="btn-accent flex-1 sm:flex-initial justify-center">Partner With Us <ArrowRight size={16} /></Link>
-            <Link to="/careers" className="btn-white flex-1 sm:flex-initial justify-center">Find a Job <ArrowRight size={16} /></Link>
-          </div>
-        </div>
-        <div className="hidden lg:grid grid-cols-2 gap-4">
-          {[
-            { icon: GraduationCap, label: 'In-House Training',    sub: 'Exclusive 80-hour program'      },
-            { icon: Shield,        label: 'Rigorous Vetting',     sub: '10-step screening process'       },
-            { icon: Clock,         label: '24/7 Availability',    sub: 'Emergency coverage'              },
-            { icon: Award,         label: 'Quality Guaranteed',   sub: 'Placement satisfaction policy'   },
-          ].map(({ icon: Icon, label, sub }) => (
-            <div key={label} className="bg-white/5 border border-white/10 rounded-xl p-4 text-white">
-              <Icon size={16} className="text-accent-500 mb-2" />
-              <div className="font-semibold text-sm">{label}</div>
-              <div className="text-white/40 text-xs mt-0.5">{sub}</div>
-            </div>
-          ))}
-        </div>
-      </div>
+const Hero = () => (
+  <PageHero
+    eyebrow="The PowerCare Difference"
+    title={<>Why Choose <span className="text-primary-500">PowerCare</span>?</>}
+    subtitle="Because our staff are trained before they ever reach your floor — and backed by a 10-step screen and a fit guarantee."
+    image="/images/why-lead.jpg"
+    imageAlt="A PowerCare clinical lead"
+  >
+    <ul className="flex flex-wrap gap-2 mt-8">
+      {['80-hour in-house training', '10-step vetting', '24/7 dispatch', 'Fit guarantee'].map((c) => (
+        <li key={c} className="rounded-lg border border-primary-200 bg-white px-3.5 py-2 font-mono text-[0.6875rem] uppercase tracking-widest text-primary-700">
+          {c}
+        </li>
+      ))}
+    </ul>
+    <div className="flex flex-col sm:flex-row gap-3 mt-8">
+      <Link to="/contact" className="btn-primary">Request Staff <ArrowRight size={16} /></Link>
+      <Link to="/careers" className="btn-secondary">Find Work <ArrowRight size={16} /></Link>
     </div>
-  </section>
+  </PageHero>
 );
+
+const MODULES = [
+  { title: 'Clinical Foundations & Safety',     hours: '20 hrs', desc: 'IPAC, medication safety, emergency response.' },
+  { title: 'Resident-Centred & Dementia Care',  hours: '20 hrs', desc: 'Person-centred care, responsive behaviours.' },
+  { title: 'Communication & Documentation',     hours: '15 hrs', desc: 'Charting, handover, family communication.' },
+  { title: 'Role-Specific Practical Skills',    hours: '25 hrs', desc: 'Hands-on competency for each role.' },
+];
 
 const InHouseTraining = () => (
   <section className="section-padding bg-white">
     <div className="container-custom">
-      <div className="grid lg:grid-cols-2 gap-10 items-start">
-        <div>
-          <span className="section-badge">
-            <GraduationCap size={13} />
-            Signature Training Program
-          </span>
-          <h2 className="section-title mb-5">
-            In-House Training That Sets Our Staff Apart
-          </h2>
-          <p className="text-slate-500 text-sm leading-relaxed mb-4">
-            The most significant differentiator at PowerCare is our <strong className="text-slate-800">proprietary in-house training program</strong>. While most staffing agencies place staff from day one with nothing more than credential verification, every PowerCare professional completes our comprehensive onboarding and skills program before their first placement.
+      <SectionHeader
+        badge="Signature Training Program"
+        title="In-House Training That Sets Our Staff Apart"
+        subtitle="Most agencies place staff on day one with nothing but a credential check. Every PowerCare professional completes our programme before their first placement."
+        centered={false}
+      />
+
+      <div className="grid lg:grid-cols-12 gap-x-12 gap-y-10 items-center">
+        <div className="lg:col-span-5">
+          <p className="text-ink-600 leading-relaxed mb-5 text-pretty">
+            They arrive prepared clinically, professionally and culturally — not learning on your floor.
           </p>
-          <p className="text-slate-500 text-sm leading-relaxed mb-4">
-            This means that when a PowerCare nurse or PSW walks through your doors, they are not learning on the job. They arrive prepared — clinically, professionally, and culturally — to deliver the standard of care your residents and clients deserve.
+          <p className="text-ink-600 leading-relaxed mb-8 text-pretty">
+            Our training is built and delivered by registered healthcare professionals with decades of frontline experience across Ontario&rsquo;s long-term care, home care and acute settings.
           </p>
-          <p className="text-slate-500 text-sm leading-relaxed mb-6">
-            Our training is developed and delivered by registered healthcare professionals with decades of frontline experience in Ontario's long-term care, home care, and acute care settings.
-          </p>
-          <div className="flex flex-col sm:flex-row flex-wrap gap-3">
-            <Link to="/contact" className="btn-primary flex-1 sm:flex-initial justify-center">
-              Hire Trained Staff <ArrowRight size={16} />
-            </Link>
-            <Link to="/careers" className="btn-secondary flex-1 sm:flex-initial justify-center">
-              Join Our Training Program <ArrowRight size={16} />
-            </Link>
+
+          <div className="inline-flex items-center gap-4 rounded-xl border border-primary-200 bg-primary-50 px-6 py-5 mb-8">
+            <span className="font-heading text-4xl font-semibold text-primary-700">80</span>
+            <span className="text-[0.9375rem] text-ink-700 leading-snug">
+              <span className="block font-semibold">hours of certification</span>
+              completed before any placement
+            </span>
+          </div>
+
+          <div className="flex flex-col sm:flex-row gap-3">
+            <Link to="/contact" className="btn-primary">Hire Trained Staff <ArrowRight size={16} /></Link>
+            <Link to="/careers" className="btn-secondary">Join Our Training Program</Link>
           </div>
         </div>
 
-        <div className="space-y-3">
-          {[
-            {
-              icon: Brain,        title: 'Clinical Foundations & Safety',    hours: '20 hrs',
-              topics: ['Infection prevention & control (IPAC)', 'Medication awareness & safety', 'Emergency response protocols', 'Documentation & reporting standards'],
-            },
-            {
-              icon: HeartHandshake, title: 'Person-Centred Care Practice',  hours: '16 hrs',
-              topics: ['Resident rights & dignity', 'Cultural humility & sensitivity', 'Dementia & cognitive care techniques', 'Communication & family engagement'],
-            },
-            {
-              icon: Activity,     title: 'Role-Specific Skills Training',   hours: '24 hrs',
-              topics: ['Hands-on simulation labs', 'Equipment and technology training', 'Facility workflow familiarization', 'Specialty area competencies'],
-            },
-            {
-              icon: FileCheck,    title: 'Compliance & Regulatory Readiness', hours: '12 hrs',
-              topics: ['Ontario LTC Act requirements', 'MOHLTC compliance standards', 'RNAO best practice guidelines', 'Privacy & PHIPA awareness'],
-            },
-            {
-              icon: Users,        title: 'Professional Standards & Ethics', hours: '8 hrs',
-              topics: ['Professional conduct & accountability', 'Workplace violence prevention', 'Trauma-informed care principles', 'Staff wellness & resilience'],
-            },
-          ].map(({ icon: Icon, title, hours, topics }) => (
-            <div key={title} className="bg-surface rounded-xl p-4 border border-slate-200 hover:border-accent-300 transition-colors group">
-              <div className="flex items-start gap-3">
-                <div className="w-9 h-9 bg-primary-100 rounded-lg flex items-center justify-center flex-shrink-0">
-                  <Icon size={16} className="text-primary-700" />
+        <RevealGroup className="lg:col-span-7 grid sm:grid-cols-2 auto-rows-fr gap-4">
+          {MODULES.map(({ title, hours, desc }) => (
+            <RevealItem key={title} className="h-full">
+              <div className="h-full rounded-xl border border-ink-200 bg-white p-6 shadow-card">
+                <div className="flex items-baseline justify-between gap-4 mb-3">
+                  <h3 className="font-heading font-semibold text-ink-900">{title}</h3>
+                  <span className="rounded-md bg-primary-700 px-2.5 py-1 font-mono text-xs text-white whitespace-nowrap">
+                    {hours}
+                  </span>
                 </div>
-                <div className="flex-1 min-w-0">
-                  <div className="flex items-center justify-between gap-2 mb-2">
-                    <h4 className="font-semibold text-slate-900 text-sm">{title}</h4>
-                    <span className="text-xs text-accent-500 font-semibold whitespace-nowrap">{hours}</span>
-                  </div>
-                  <ul className="space-y-1">
-                    {topics.map((t) => (
-                      <li key={t} className="flex items-start gap-2 text-xs text-slate-500">
-                        <CheckCircle size={10} className="text-accent-500 mt-0.5 flex-shrink-0" />
-                        {t}
-                      </li>
-                    ))}
-                  </ul>
-                </div>
+                <p className="text-ink-600 text-[0.9375rem] leading-relaxed text-pretty">{desc}</p>
               </div>
-            </div>
+            </RevealItem>
           ))}
-          <div className="bg-primary-900 rounded-xl p-4 text-white flex items-center justify-between">
-            <div>
-              <div className="font-bold text-base">80 Hours Total</div>
-              <div className="text-white/50 text-sm">Before first placement</div>
-            </div>
-            <GraduationCap size={32} className="text-accent-500" />
-          </div>
-        </div>
+        </RevealGroup>
       </div>
     </div>
   </section>
@@ -144,96 +103,74 @@ const TrainedProfessionals = () => (
         badge="Trained Professionals"
         title="What Makes a PowerCare Professional Different"
         subtitle="Beyond credentials and background checks, our staff complete role-specific training that makes them immediately effective in your environment."
+        centered={false}
       />
 
-      <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-5 mb-8">
+      <RevealGroup className="grid md:grid-cols-2 lg:grid-cols-3 auto-rows-fr gap-5">
         {[
-          {
-            icon: BookOpen,
-            title: 'Pre-Placement Certification',
-            desc: 'Every professional receives a PowerCare certification of completion before their first shift, documenting specific modules and competencies mastered.',
-          },
-          {
-            icon: Layers,
-            title: 'Specialty Track Options',
-            desc: 'Staff can complete advanced specialty tracks in dementia care, palliative support, behavioural intervention, and rehabilitation assistance.',
-          },
-          {
-            icon: TrendingUp,
-            title: 'Continuing Education',
-            desc: 'Active PowerCare staff have access to quarterly training updates, new regulation briefings, and skills workshops to keep their practice current.',
-          },
-          {
-            icon: UserCheck,
-            title: 'Competency Assessment',
-            desc: 'Written and practical competency assessments are conducted at the end of training. Only staff who meet our performance threshold are cleared for placement.',
-          },
-          {
-            icon: HeartHandshake,
-            title: 'Culture & Fit Orientation',
-            desc: "We train staff not just in skills, but in professional standards, facility etiquette, team integration, and the PowerCare commitment to excellence.",
-          },
-          {
-            icon: Shield,
-            title: 'Ongoing Performance Review',
-            desc: 'Placed staff are subject to regular quality reviews and client feedback collection. Performance issues are addressed swiftly through our accountability process.',
-          },
+          { icon: BookOpen,      title: 'Pre-Placement Certification', desc: 'Every professional receives a PowerCare certification of completion before their first shift, documenting specific modules and competencies mastered.' },
+          { icon: Layers,        title: 'Specialty Track Options',     desc: 'Staff can complete advanced specialty tracks in dementia care, palliative support, behavioural intervention, and rehabilitation assistance.' },
+          { icon: TrendingUp,    title: 'Continuing Education',        desc: 'Active PowerCare staff have access to quarterly training updates, new regulation briefings, and skills workshops to keep their practice current.' },
+          { icon: UserCheck,     title: 'Competency Assessment',       desc: 'Written and practical competency assessments are conducted at the end of training. Only staff who meet our performance threshold are cleared for placement.' },
+          { icon: HeartHandshake, title: 'Culture & Fit Orientation',  desc: "We train staff not just in skills, but in professional standards, facility etiquette, team integration, and the PowerCare commitment to excellence." },
+          { icon: Shield,        title: 'Ongoing Performance Review',  desc: 'Placed staff are subject to regular quality reviews and client feedback collection. Performance issues are addressed swiftly through our accountability process.' },
         ].map(({ icon: Icon, title, desc }) => (
-          <div key={title} className="card">
-            <div className="w-9 h-9 bg-primary-100 rounded-lg flex items-center justify-center mb-3">
-              <Icon size={15} className="text-primary-700" />
-            </div>
-            <h3 className="font-bold font-heading text-slate-900 text-sm mb-2">{title}</h3>
-            <p className="text-slate-500 text-xs leading-relaxed">{desc}</p>
-          </div>
+          <RevealItem key={title} className="card">
+            <Icon size={20} strokeWidth={1.6} className="text-primary-600 mb-5" />
+            <h3 className="font-heading font-semibold text-ink-900 text-lg mb-2">{title}</h3>
+            <p className="text-ink-600 text-[0.9375rem] leading-relaxed text-pretty">{desc}</p>
+          </RevealItem>
         ))}
-      </div>
+      </RevealGroup>
 
-      {/* Comparison table */}
-      <div className="bg-white rounded-xl border border-slate-200 overflow-hidden">
-        <div className="p-5 border-b border-slate-100">
-          <h3 className="text-sm font-bold font-heading text-slate-900">PowerCare vs. Typical Staffing Agency</h3>
-        </div>
+    </div>
+  </section>
+);
+
+const COMPARISON = [
+  ['Training before first shift', '80-hr in-house program',   'Credential check only'],
+  ['Availability',                '24/7 dispatch, same-day',  'Business hours, limited'],
+  ['Screening',                   '10-step + Vulnerable Sector', 'Basic / inconsistent'],
+  ['Account management',          'Dedicated manager',        'Call centre / rotating'],
+  ['Fit',                         'Culture & role matched',   "Whoever's available"],
+  ["If it's not the right fit",   'Free replacement guarantee', 'No guarantee'],
+];
+
+const AgencyComparison = () => (
+  <section className="section-padding bg-white">
+    <div className="container-custom">
+      <SectionHeader
+        badge="See the difference"
+        title="PowerCare vs. a Typical Staffing Agency"
+        centered={false}
+      />
+      <div className="rounded-2xl border border-ink-200 overflow-hidden">
         <div className="overflow-x-auto">
-          <table className="w-full text-sm">
+          <table className="w-full min-w-[640px]">
             <thead>
-              <tr className="bg-surface">
-                <th className="text-left px-5 py-3 font-semibold text-slate-600 text-xs">What Matters</th>
-                <th className="px-5 py-3 font-semibold text-accent-500 text-xs">PowerCare</th>
-                <th className="px-5 py-3 font-semibold text-slate-400 text-xs">Typical Agency</th>
+              <tr>
+                <th scope="col" className="w-2/5 text-left px-6 py-4 font-mono text-[0.6875rem] uppercase tracking-widest text-ink-500 bg-surface">
+                  What matters
+                </th>
+                <th scope="col" className="px-6 py-4 text-left font-mono text-[0.6875rem] uppercase tracking-widest text-white bg-primary-700">
+                  PowerCare
+                </th>
+                <th scope="col" className="px-6 py-4 text-left font-mono text-[0.6875rem] uppercase tracking-widest text-ink-500 bg-surface">
+                  Typical agency
+                </th>
               </tr>
             </thead>
-            <tbody className="divide-y divide-slate-100">
-              {[
-                ['In-house training program',           true,  false        ],
-                ['Pre-placement competency assessment', true,  false        ],
-                ['Role-specific specialty tracks',      true,  false        ],
-                ['Credential verification',             true,  'Sometimes'  ],
-                ['24/7 emergency dispatch',             true,  'Sometimes'  ],
-                ['Dedicated account manager',           true,  false        ],
-                ['Post-placement quality follow-up',    true,  false        ],
-                ['Ongoing continuing education',        true,  false        ],
-                ['Culture & fit orientation',           true,  false        ],
-                ['WSIB & liability coverage',           true,  true         ],
-              ].map(([feature, pc, typical]) => (
-                <tr key={feature} className="hover:bg-surface">
-                  <td className="px-5 py-3 font-medium text-slate-700 text-sm">{feature}</td>
-                  <td className="px-5 py-3 text-center">
-                    {pc === true ? (
-                      <CheckCircle size={16} className="text-accent-500 mx-auto" />
-                    ) : (
-                      <span className="text-slate-300 text-base">✗</span>
-                    )}
+            <tbody>
+              {COMPARISON.map(([label, ours, theirs], i) => (
+                <tr key={label} className={i % 2 ? 'bg-surface/60' : 'bg-white'}>
+                  <th scope="row" className="text-left px-6 py-4 font-semibold text-ink-900 text-[0.9375rem]">{label}</th>
+                  <td className="px-6 py-4 text-[0.9375rem] text-ink-900">
+                    <span className="flex items-start gap-2.5">
+                      <Check size={17} strokeWidth={2.6} className="text-primary-600 mt-0.5 flex-shrink-0" aria-hidden="true" />
+                      {ours}
+                    </span>
                   </td>
-                  <td className="px-5 py-3 text-center">
-                    {typical === true ? (
-                      <CheckCircle size={16} className="text-green-500 mx-auto" />
-                    ) : typical === false ? (
-                      <span className="text-red-300 text-base font-bold">✗</span>
-                    ) : (
-                      <span className="text-slate-400 text-xs">{typical}</span>
-                    )}
-                  </td>
+                  <td className="px-6 py-4 text-[0.9375rem] text-ink-500">{theirs}</td>
                 </tr>
               ))}
             </tbody>
@@ -252,67 +189,35 @@ const VettingProcess = () => (
         title="10-Step Candidate Vetting"
         subtitle="We leave no stone unturned. Our multi-step screening ensures only the most qualified, trustworthy professionals represent PowerCare."
       />
-      <div className="grid sm:grid-cols-2 lg:grid-cols-5 gap-4">
-        {[
-          { step: 1,  title: 'Application Review',       desc: 'Education, experience, and professional history evaluation.' },
-          { step: 2,  title: 'Initial Interview',        desc: 'Values, goals, and professional alignment assessment.' },
-          { step: 3,  title: 'Credential Verification',  desc: 'CNO, COTO, and relevant college registration confirmed.' },
-          { step: 4,  title: 'Reference Checks',         desc: 'Minimum 2 professional references from recent supervisors.' },
-          { step: 5,  title: 'Vulnerable Sector Screening', desc: 'Enhanced RCMP criminal record check required.' },
-          { step: 6,  title: 'Health & Immunization',    desc: 'Up-to-date immunization records and health clearances.' },
-          { step: 7,  title: 'Skills Assessment',        desc: 'Role-specific practical and theoretical competency testing.' },
-          { step: 8,  title: 'In-House Training',        desc: '80-hour PowerCare certification program completed.' },
-          { step: 9,  title: 'Supervised Trial',         desc: 'Supervised shift(s) to confirm readiness and professionalism.' },
-          { step: 10, title: 'Cleared for Placement',    desc: 'Final approval by our Quality & Compliance team.' },
-        ].map(({ step, title, desc }) => (
-          <div key={step} className="bg-surface rounded-xl p-4 border border-slate-200 hover:border-accent-300 transition-colors">
-            <div className="w-7 h-7 bg-primary-900 rounded-lg flex items-center justify-center text-white font-bold text-xs mb-3">
-              {step}
-            </div>
-            <div className="font-semibold text-slate-900 text-sm mb-1">{title}</div>
-            <p className="text-slate-500 text-xs leading-relaxed">{desc}</p>
-          </div>
-        ))}
-      </div>
+      <VettingSteps className="max-w-3xl mx-auto" />
     </div>
   </section>
 );
 
 const KeyPillars = () => (
-  <section className="section-padding bg-primary-900 text-white">
-    <div className="container-custom">
+  <section className="relative section-padding bg-primary-50 overflow-hidden">
+      <div className="absolute inset-0 bg-grid pointer-events-none" aria-hidden="true" />
+    <div className="container-custom relative z-10">
       <SectionHeader
         badge="Our Pillars"
         title="Four Reasons Facilities Choose PowerCare"
         subtitle="Beyond training, here is what defines the PowerCare experience."
-        light
+        centered={false}
       />
-      <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-5">
+      <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-x-10 gap-y-9">
         {[
-          {
-            icon: Zap,           number: '01', title: 'Rapid Response',
-            desc: 'Our 24/7 dispatch team can confirm and deploy qualified staff within hours of a call — including overnight and holiday emergencies.',
-          },
-          {
-            icon: Star,          number: '02', title: 'Quality Assurance',
-            desc: 'Every placement includes post-shift follow-up, regular performance reviews, and an open-door policy for facility feedback.',
-          },
-          {
-            icon: HeartHandshake, number: '03', title: 'Long-Term Partnerships',
-            desc: "We invest in understanding your facility's culture, workflows, and standards so that every placement feels like a seamless extension of your team.",
-          },
-          {
-            icon: TrendingUp,    number: '04', title: 'Scalable Solutions',
-            desc: 'From covering a single last-minute shift to managing a complete staffing strategy across multiple locations, PowerCare scales to your needs.',
-          },
+          { icon: Zap,            number: '01', title: 'Rapid Response',         desc: 'Our 24/7 dispatch team can confirm and deploy qualified staff within hours of a call — including overnight and holiday emergencies.' },
+          { icon: Star,           number: '02', title: 'Quality Assurance',      desc: 'Every placement includes post-shift follow-up, regular performance reviews, and an open-door policy for facility feedback.' },
+          { icon: HeartHandshake, number: '03', title: 'Long-Term Partnerships', desc: "We invest in understanding your facility's culture, workflows, and standards so that every placement feels like a seamless extension of your team." },
+          { icon: TrendingUp,     number: '04', title: 'Scalable Solutions',     desc: 'From covering a single last-minute shift to managing a complete staffing strategy across multiple locations, PowerCare scales to your needs.' },
         ].map(({ icon: Icon, number, title, desc }) => (
-          <div key={title} className="bg-white/5 border border-white/10 rounded-xl p-5">
-            <div className="flex items-center gap-3 mb-4">
-              <Icon size={16} className="text-accent-500" />
-              <span className="text-accent-500 font-bold text-lg font-heading">{number}</span>
+          <div key={title}>
+            <div className="flex items-center justify-between mb-6">
+              <Icon size={20} strokeWidth={1.6} className="text-primary-600" />
+              <span className="font-mono text-sm text-primary-600 tabular-nums">{number}</span>
             </div>
-            <h3 className="font-bold font-heading text-sm mb-2">{title}</h3>
-            <p className="text-white/50 text-xs leading-relaxed">{desc}</p>
+            <h3 className="font-heading font-semibold text-ink-900 text-lg mb-3">{title}</h3>
+            <p className="text-ink-600 text-[0.9375rem] leading-relaxed text-pretty">{desc}</p>
           </div>
         ))}
       </div>
@@ -322,6 +227,9 @@ const KeyPillars = () => (
 
 const FeaturedTestimonial = () => {
   const [currentIndex, setCurrentIndex] = useState(0);
+  const [direction, setDirection] = useState(1);
+  const reduceMotion = useReducedMotion();
+
   const testimonials = [
     {
       quote: "The difference with PowerCare is immediately obvious. Their staff arrive prepared, professional, and genuinely invested in our residents' well-being. You can tell they've been trained — and trained well. We've stopped using any other agency.",
@@ -346,60 +254,75 @@ const FeaturedTestimonial = () => {
     }
   ];
 
-  const nextTestimonial = () => {
-    setCurrentIndex((prev) => (prev + 1) % testimonials.length);
+  const go = (next) => {
+    setDirection(next > currentIndex || (currentIndex === testimonials.length - 1 && next === 0) ? 1 : -1);
+    setCurrentIndex(next);
   };
-
-  const prevTestimonial = () => {
-    setCurrentIndex((prev) => (prev - 1 + testimonials.length) % testimonials.length);
-  };
+  const nextTestimonial = () => go((currentIndex + 1) % testimonials.length);
+  const prevTestimonial = () => go((currentIndex - 1 + testimonials.length) % testimonials.length);
 
   const current = testimonials[currentIndex];
 
   return (
     <section className="section-padding bg-surface">
       <div className="container-custom max-w-3xl">
-        <div className="relative">
-          <blockquote className="text-center">
-            <div className="flex gap-0.5 justify-center mb-5">
-              {[...Array(5)].map((_, i) => (
-                <Star key={i} size={16} className="text-accent-500 fill-accent-500" />
-              ))}
-            </div>
-            <p className="text-base font-heading font-medium text-slate-800 leading-relaxed mb-5 italic">
-              "{current.quote}"
-            </p>
-            <div className="flex items-center justify-center gap-4">
-              <div className="w-10 h-10 bg-primary-100 rounded-full flex items-center justify-center">
-                <span className="font-bold text-primary-700 text-sm">{current.initials}</span>
-              </div>
-              <div className="text-left">
-                <div className="font-semibold text-slate-900 text-sm">{current.name}</div>
-                <div className="text-slate-400 text-xs">{current.title}, {current.facility}</div>
-              </div>
-            </div>
-          </blockquote>
+        <div className="overflow-hidden">
+          <AnimatePresence mode="wait" custom={direction}>
+            <motion.blockquote
+              key={currentIndex}
+              custom={direction}
+              initial={reduceMotion ? { opacity: 0 } : { opacity: 0, x: direction * 28 }}
+              animate={{ opacity: 1, x: 0 }}
+              exit={reduceMotion ? { opacity: 0 } : { opacity: 0, x: direction * -28 }}
+              transition={{ duration: 0.32, ease: [0.22, 1, 0.36, 1] }}
+              className="text-center"
+            >
+              <p className="font-heading text-xl sm:text-2xl font-medium text-ink-800 leading-relaxed mb-9 text-pretty">
+                &ldquo;{current.quote}&rdquo;
+              </p>
+              <footer className="flex items-center justify-center gap-4">
+                <span className="w-12 h-12 rounded-full bg-primary-50 border border-primary-200 flex items-center justify-center flex-shrink-0">
+                  <span className="font-heading font-semibold text-primary-700">{current.initials}</span>
+                </span>
+                <span className="text-left">
+                  <span className="block font-semibold text-ink-900">{current.name}</span>
+                  <span className="block font-mono text-[0.6875rem] uppercase tracking-widest text-primary-600 mt-1">
+                    {current.title}, {current.facility}
+                  </span>
+                </span>
+              </footer>
+            </motion.blockquote>
+          </AnimatePresence>
+        </div>
 
-          {/* Navigation */}
-          <div className="flex items-center justify-center gap-3 mt-8">
-            <button onClick={prevTestimonial} className="p-2 rounded-lg border border-slate-200 hover:border-accent-400 hover:bg-accent-50 transition-all">
-              <ChevronLeft size={18} className="text-slate-600" />
-            </button>
-            <div className="flex gap-1.5">
-              {testimonials.map((_, idx) => (
-                <button
-                  key={idx}
-                  onClick={() => setCurrentIndex(idx)}
-                  className={`w-2 h-2 rounded-full transition-all ${
-                    idx === currentIndex ? 'bg-accent-500 w-6' : 'bg-slate-300'
-                  }`}
-                />
-              ))}
-            </div>
-            <button onClick={nextTestimonial} className="p-2 rounded-lg border border-slate-200 hover:border-accent-400 hover:bg-accent-50 transition-all">
-              <ChevronRight size={18} className="text-slate-600" />
-            </button>
+        <div className="flex items-center justify-center gap-4 mt-10">
+          <button
+            onClick={prevTestimonial}
+            aria-label="Previous testimonial"
+            className="p-2.5 rounded-lg border border-ink-200 text-ink-600 hover:border-primary-500 hover:text-primary-700 transition-colors"
+          >
+            <ChevronLeft size={18} />
+          </button>
+          <div className="flex gap-2">
+            {testimonials.map((t, idx) => (
+              <button
+                key={t.name}
+                onClick={() => go(idx)}
+                aria-label={`Show testimonial from ${t.name}`}
+                aria-current={idx === currentIndex}
+                className={`h-2 rounded-full transition-all duration-300 ${
+                  idx === currentIndex ? 'bg-primary-600 w-7' : 'bg-ink-300 w-2 hover:bg-ink-400'
+                }`}
+              />
+            ))}
           </div>
+          <button
+            onClick={nextTestimonial}
+            aria-label="Next testimonial"
+            className="p-2.5 rounded-lg border border-ink-200 text-ink-600 hover:border-primary-500 hover:text-primary-700 transition-colors"
+          >
+            <ChevronRight size={18} />
+          </button>
         </div>
       </div>
     </section>
@@ -409,13 +332,15 @@ const FeaturedTestimonial = () => {
 const WhyPowerCareCTA = () => (
   <section className="section-padding bg-white">
     <div className="container-custom text-center">
-      <h2 className="section-title mb-4">Experience the PowerCare Difference</h2>
-      <p className="section-subtitle mx-auto mb-8">
+      <h2 className="text-display-sm font-heading font-semibold text-ink-900 mb-5 text-balance">
+        Experience the PowerCare Difference
+      </h2>
+      <p className="text-ink-600 text-lg max-w-xl mx-auto mb-10 text-pretty">
         Partner with a staffing agency that invests in its people — so your facility always gets the best.
       </p>
-      <div className="flex flex-col sm:flex-row flex-wrap gap-4 justify-center">
-        <Link to="/contact" className="btn-primary text-sm px-5 py-2.5 flex-1 sm:flex-initial justify-center">Get Staffing Support <ArrowRight size={16} /></Link>
-        <Link to="/services" className="btn-secondary text-sm px-5 py-2.5 flex-1 sm:flex-initial justify-center">Our Services <ChevronRight size={16} /></Link>
+      <div className="flex flex-col sm:flex-row gap-3 justify-center">
+        <Link to="/contact" className="btn-primary">Get Staffing Support <ArrowRight size={16} /></Link>
+        <Link to="/services" className="btn-secondary">Our Services <ChevronRight size={16} /></Link>
       </div>
     </div>
   </section>
@@ -424,9 +349,10 @@ const WhyPowerCareCTA = () => (
 const WhyPowerCare = () => (
   <main>
     <SEO page="whyPowerCare" />
-    <PageHero />
+    <Hero />
     <InHouseTraining />
     <TrainedProfessionals />
+    <AgencyComparison />
     <VettingProcess />
     <KeyPillars />
     <FeaturedTestimonial />

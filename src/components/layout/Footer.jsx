@@ -1,5 +1,6 @@
 import { Link } from 'react-router-dom';
-import { Phone, Mail, MapPin, ArrowRight } from 'lucide-react';
+import { Phone, Mail, MapPin, ShieldCheck } from 'lucide-react';
+import CredentialBadges from '../ui/CredentialBadges';
 
 const IconFacebook = () => (
   <svg viewBox="0 0 24 24" fill="currentColor" width="16" height="16"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg>
@@ -10,6 +11,12 @@ const IconLinkedin = () => (
 const IconInstagram = () => (
   <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" width="16" height="16"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
 );
+
+const socials = [
+  { Icon: IconFacebook,  label: 'PowerCare on Facebook'  },
+  { Icon: IconLinkedin,  label: 'PowerCare on LinkedIn'  },
+  { Icon: IconInstagram, label: 'PowerCare on Instagram' },
+];
 
 const footerLinks = {
   company: [
@@ -25,52 +32,83 @@ const footerLinks = {
     { label: 'All Services',             to: '/services' },
   ],
   industries: [
-    { label: 'Long-Term Care',       to: '/industries#ltc' },
-    { label: 'Hospitals & Acute Care', to: '/industries#hospitals' },
-    { label: 'Home & Community Care', to: '/industries#home-care' },
-    { label: 'All Industries',        to: '/industries' },
+    { label: 'Long-Term Care',         to: '/industries' },
+    { label: 'Hospitals & Acute Care', to: '/industries' },
+    { label: 'Home & Community Care',  to: '/industries' },
+    { label: 'All Industries',         to: '/industries' },
+  ],
+  locations: [
+    { label: 'Toronto',     to: '/contact' },
+    { label: 'Mississauga', to: '/contact' },
+    { label: 'Brampton',    to: '/contact' },
+    { label: 'Hamilton',    to: '/contact' },
+    { label: 'All Areas',   to: '/contact' },
   ],
 };
 
-const Footer = () => (
-  <footer className="bg-primary-900 text-white">
+const contactRows = [
+  { Icon: Phone,  text: '+1 (647) 400-0000',            href: 'tel:+16474000000' },
+  { Icon: Mail,   text: 'info@powercarestaffing.ca',    href: 'mailto:info@powercarestaffing.ca' },
+  { Icon: MapPin, text: 'Greater Toronto Area & Rural Ontario', href: null },
+];
 
-    {/* Main footer */}
-    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-10">
+const Footer = () => (
+  <footer className="relative bg-primary-900 text-white overflow-hidden">
+    <div className="absolute inset-0 bg-grid-invert pointer-events-none" aria-hidden="true" />
+
+    <div className="relative max-w-7xl mx-auto px-5 sm:px-6 lg:px-8 py-16 lg:py-20">
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-12 gap-x-8 gap-y-12">
 
         {/* Brand */}
-        <div className="lg:col-span-2">
-          <Link to="/" className="flex items-center gap-2.5 mb-4">
-            <img src="/logo.png" alt="PowerCare logo" className="h-9 w-auto object-contain" />
-            <div>
-              <span className="font-bold text-base font-heading block text-white">PowerCare</span>
-              <span className="text-accent-500 text-xs font-medium">Health Services</span>
-            </div>
+        <div className="lg:col-span-4 sm:col-span-2">
+          <Link to="/" className="inline-flex items-center gap-3 mb-6">
+            <img src="/logo.png" alt="PowerCare logo" className="h-10 w-auto object-contain rounded-lg" />
+            <span className="leading-none">
+              <span className="block font-heading font-bold text-lg text-white tracking-tight">PowerCare</span>
+              <span className="block font-mono text-[0.625rem] uppercase tracking-widest text-accent-300 mt-1">
+                Health Services
+              </span>
+            </span>
           </Link>
-          <p className="text-white/50 text-sm leading-relaxed max-w-sm mb-6">
+
+          <p className="text-white/65 text-[0.9375rem] leading-relaxed max-w-sm mb-8 text-pretty">
             PowerCare connects healthcare facilities across the GTA and Rural Ontario with vetted, in-house trained professionals who deliver dependable, compassionate care.
           </p>
-          <div className="space-y-2.5">
-            <a href="tel:+16474000000" className="flex items-center gap-2.5 text-white/50 hover:text-white transition-colors text-sm">
-              <Phone size={14} className="text-accent-500 flex-shrink-0" />
-              +1 (647) 400-0000
-            </a>
-            <a href="mailto:info@powercarestaffing.ca" className="flex items-center gap-2.5 text-white/50 hover:text-white transition-colors text-sm">
-              <Mail size={14} className="text-accent-500 flex-shrink-0" />
-              info@powercarestaffing.ca
-            </a>
-            <span className="flex items-center gap-2.5 text-white/50 text-sm">
-              <MapPin size={14} className="text-accent-500 flex-shrink-0" />
-              Greater Toronto Area &amp; Rural Ontario
-            </span>
+
+          <div className="space-y-1">
+            {contactRows.map(({ Icon, text, href }) => {
+              const inner = (
+                <>
+                  <Icon size={15} className="text-accent-300 flex-shrink-0" />
+                  <span>{text}</span>
+                </>
+              );
+              return (
+                <div key={text}>
+                  {href ? (
+                    <a
+                      href={href}
+                      className="flex items-center gap-3 py-1.5 text-[0.9375rem] text-white/70 hover:text-accent-300 transition-colors"
+                    >
+                      {inner}
+                    </a>
+                  ) : (
+                    <span className="flex items-center gap-3 py-1.5 text-[0.9375rem] text-white/70">{inner}</span>
+                  )}
+                </div>
+              );
+            })}
           </div>
-          <div className="flex gap-3 mt-5">
-            {[IconFacebook, IconLinkedin, IconInstagram].map((Icon, i) => (
+
+          <div className="flex gap-2.5 mt-7">
+            {socials.map(({ Icon, label }) => (
               <a
-                key={i}
+                key={label}
                 href="#"
-                className="w-8 h-8 rounded-lg bg-white/5 border border-white/10 flex items-center justify-center hover:bg-accent-500 hover:border-accent-500 hover:text-primary-900 transition-colors"
+                aria-label={label}
+                className="w-9 h-9 rounded-lg border border-white/20 flex items-center justify-center
+                           text-white/70 hover:bg-accent-300 hover:border-accent-300 hover:text-primary-900
+                           transition-colors duration-200"
               >
                 <Icon />
               </a>
@@ -83,13 +121,21 @@ const Footer = () => (
           { heading: 'Company',    links: footerLinks.company    },
           { heading: 'Services',   links: footerLinks.services   },
           { heading: 'Industries', links: footerLinks.industries },
+          { heading: 'Locations',  links: footerLinks.locations  },
         ].map(({ heading, links }) => (
-          <div key={heading}>
-            <h4 className="font-semibold text-white text-xs uppercase tracking-widest mb-4">{heading}</h4>
-            <ul className="space-y-2.5">
+          <div key={heading} className="lg:col-span-2 lg:col-start-auto">
+            <h4 className="font-mono text-[0.625rem] uppercase tracking-widest text-accent-300 mb-5">
+              {heading}
+            </h4>
+            <ul className="space-y-3">
+              {/* Several service links point at the same page, so the label
+                  is what makes each row unique. */}
               {links.map((l) => (
-                <li key={l.to}>
-                  <Link to={l.to} className="text-white/50 text-sm hover:text-white transition-colors">
+                <li key={l.label}>
+                  <Link
+                    to={l.to}
+                    className="text-[0.9375rem] text-white/65 hover:text-white transition-colors"
+                  >
                     {l.label}
                   </Link>
                 </li>
@@ -100,13 +146,32 @@ const Footer = () => (
       </div>
     </div>
 
+    {/* Credentials */}
+    <div className="relative max-w-7xl mx-auto px-5 sm:px-6 lg:px-8 pb-12">
+      <h4 className="font-mono text-[0.625rem] uppercase tracking-widest text-accent-300 mb-5">
+        Credentials &amp; Coverage
+      </h4>
+      <CredentialBadges variant="footer" useFull />
+      <ul className="flex flex-wrap gap-x-5 gap-y-3 mt-3">
+        {['AODA Accessible', 'PIPEDA Compliant'].map((c) => (
+          <li key={c} className="flex items-center gap-2 text-white/70 text-sm">
+            <ShieldCheck size={15} strokeWidth={1.8} className="text-accent-300 flex-shrink-0" />
+            {c}
+          </li>
+        ))}
+      </ul>
+    </div>
+
     {/* Bottom bar */}
-    <div className="border-t border-white/5">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-5 flex flex-col sm:flex-row justify-between items-center gap-3 text-xs text-white/30">
-        <p>&copy; {new Date().getFullYear()} PowerCare Health Staffing Solutions. All rights reserved.</p>
-        <div className="flex gap-5">
-          <Link to="/privacy" className="hover:text-white/60 transition-colors">Privacy Policy</Link>
-          <Link to="/terms" className="hover:text-white/60 transition-colors">Terms of Service</Link>
+    <div className="relative">
+      <div className="max-w-7xl mx-auto px-5 sm:px-6 lg:px-8 py-6 flex flex-col sm:flex-row justify-between items-center gap-4">
+        <p className="font-mono text-xs text-white/45 text-center sm:text-left">
+          &copy; {new Date().getFullYear()} PowerCare Health Staffing Solutions. All rights reserved.
+        </p>
+        <div className="flex gap-6">
+          <Link to="/privacy" className="font-mono text-xs text-white/45 hover:text-white transition-colors">Privacy Policy</Link>
+          <Link to="/terms"   className="font-mono text-xs text-white/45 hover:text-white transition-colors">Terms of Service</Link>
+          <Link to="/accessibility" className="font-mono text-xs text-white/45 hover:text-white transition-colors">Accessibility (AODA)</Link>
         </div>
       </div>
     </div>

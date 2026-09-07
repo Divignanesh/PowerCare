@@ -1,6 +1,9 @@
 export const industries = [
   {
     id: 'ltc',
+    value: 'Consistent coverage for full units — planned lines and same-day call-ins that keep ratios safe.',
+    tags: ['RN', 'RPN', 'PSW'],
+    cta: 'Staff an LTC home',
     title: 'Long-Term Care Homes',
     icon: 'Building2',
     heroStat: '1,000+',
@@ -26,6 +29,9 @@ export const industries = [
   },
   {
     id: 'retirement',
+    value: 'Warm, dependable care staff residents and families trust day to day.',
+    tags: ['PSW', 'Home Care Aide', 'Companion'],
+    cta: 'Staff a residence',
     title: 'Retirement Residences',
     icon: 'Home',
     heroStat: '500+',
@@ -51,6 +57,9 @@ export const industries = [
   },
   {
     id: 'hospitals',
+    value: 'Credentialed clinical staff ready for high-acuity, fast-moving environments.',
+    tags: ['RN', 'RPN', 'PTA'],
+    cta: 'Staff a hospital unit',
     title: 'Hospitals & Acute Care',
     icon: 'Hospital',
     heroStat: '200+',
@@ -76,6 +85,9 @@ export const industries = [
   },
   {
     id: 'home-care',
+    value: 'PSWs, aides & nurses for in-home and community programs, scheduled around clients.',
+    tags: ['PSW', 'Home Care Aide', 'RPN'],
+    cta: 'Staff home care',
     title: 'Home & Community Care',
     icon: 'Heart',
     heroStat: '3,000+',
@@ -101,6 +113,9 @@ export const industries = [
   },
   {
     id: 'group-homes',
+    value: 'DSWs & support staff trained for developmental and behavioural settings.',
+    tags: ['DSW', 'Support Worker'],
+    cta: 'Staff a group home',
     title: 'Group Homes & Developmental Services',
     icon: 'Users',
     heroStat: '150+',
@@ -126,6 +141,9 @@ export const industries = [
   },
   {
     id: 'rehabilitation',
+    value: 'PTAs & support staff to keep therapy programs running on schedule.',
+    tags: ['PTA', 'PSW'],
+    cta: 'Staff a rehab centre',
     title: 'Rehabilitation & Therapy Centres',
     icon: 'Activity',
     heroStat: '100+',
@@ -151,6 +169,9 @@ export const industries = [
   },
   {
     id: 'mental-health',
+    value: 'Compassionate, appropriately trained staff for sensitive care environments.',
+    tags: ['RPN', 'DSW', 'Support Worker'],
+    cta: 'Staff a program',
     title: 'Mental Health & Addictions',
     icon: 'Brain',
     heroStat: '80+',

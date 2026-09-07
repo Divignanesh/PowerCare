@@ -1,10 +1,12 @@
-import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import {
-  ArrowRight, CheckCircle, Building2, Home, Hospital, Heart,
-  Users, Activity, Brain, ChevronRight, Shield
+  ArrowRight, Building2, Home, Hospital, Heart,
+  Users, Activity, Brain, ChevronRight, Shield, Plus
 } from 'lucide-react';
 import SectionHeader from '../components/ui/SectionHeader';
+import PageHero from '../components/ui/PageHero';
+import CredentialBadges from '../components/ui/CredentialBadges';
+import { RevealGroup, RevealItem } from '../components/ui/Reveal';
 import FAQ from '../components/ui/FAQ';
 import { industries } from '../data/industries';
 import { industriesFAQs } from '../data/faqs';
@@ -12,158 +14,99 @@ import SEO from '../components/seo/SEO';
 
 const iconMap = { Building2, Home, Hospital, Heart, Users, Activity, Brain };
 
-const PageHero = () => (
-  <section className="relative pt-20 pb-20 bg-primary-900 overflow-hidden">
-    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 text-center">
-      <span className="text-accent-500 text-xl font-bold tracking-widest uppercase mb-2 block">
-        Industries We Serve
-      </span>
-      <h1 className="text-3xl font-bold font-heading text-white mb-4">
-        Built for Every Care Setting
-      </h1>
-      <p className="text-sm text-white/50 max-w-2xl mx-auto mb-6">
-        PowerCare understands that staffing needs differ across care sectors. We bring specialized expertise and pre-trained professionals to every industry we serve.
-      </p>
-      <div className="flex flex-wrap gap-2 justify-center">
-        {industries.map((ind) => {
-          const Icon = iconMap[ind.icon] || Shield;
-          return (
-            <a
-              key={ind.id}
-              href={`#${ind.id}`}
-              className="flex items-center gap-2 px-3 py-1.5 bg-white/5 border border-white/10 text-white/60 text-xs rounded-lg hover:bg-white/10 hover:text-white transition-colors"
-            >
-              <Icon size={12} />
-              {ind.title}
-            </a>
-          );
-        })}
-      </div>
-    </div>
-  </section>
+const Hero = () => (
+  <PageHero
+    variant="center"
+    eyebrow="Industries We Serve"
+    title="Built for Every Care Setting"
+    subtitle="The staffing challenges differ by setting — we staff for the realities of each one."
+    image="/images/facility-exterior.jpg"
+  >
+    <ul className="flex flex-wrap gap-2 justify-center mt-8">
+      {['Sector-specific training', 'Same-day & 24/7', 'Credentialed & insured'].map((t) => (
+        <li key={t} className="rounded-lg border border-primary-200 bg-white px-3.5 py-2 font-mono text-[0.6875rem] uppercase tracking-widest text-primary-700">
+          {t}
+        </li>
+      ))}
+    </ul>
+  </PageHero>
 );
 
-const IndustriesOverview = () => (
-  <section className="bg-white py-8 border-b border-slate-100">
+/**
+ * Every setting on one screen.
+ *
+ * This replaced seven full-length sections: each sector now carries a single
+ * value line, the roles we place there, and one action — which is all a
+ * facility manager needs to recognise themselves and get in touch.
+ */
+const SectorGrid = () => (
+  <section className="section-padding bg-white">
     <div className="container-custom">
-      <div className="grid grid-cols-3 sm:grid-cols-4 lg:grid-cols-7 gap-4">
+      <SectionHeader
+        badge="Where we staff"
+        title="Every Setting We Serve"
+        subtitle="Pick your setting — we'll match staff who already understand it."
+        centered={false}
+      />
+
+      <RevealGroup className="grid sm:grid-cols-2 lg:grid-cols-3 auto-rows-fr gap-5">
         {industries.map((ind) => {
           const Icon = iconMap[ind.icon] || Shield;
           return (
-            <a key={ind.id} href={`#${ind.id}`} className="flex flex-col items-center gap-2 text-center group">
-              <div className="w-10 h-10 bg-primary-50 rounded-xl flex items-center justify-center group-hover:bg-accent-100 transition-colors">
-                <Icon size={17} className="text-primary-700 group-hover:text-accent-500" />
+            <RevealItem key={ind.id} className="h-full">
+              <div className="card group flex flex-col h-full">
+                <Icon size={22} strokeWidth={1.6} className="text-primary-600 mb-5" />
+                <h3 className="text-lg font-heading font-semibold text-ink-900 mb-2">{ind.title}</h3>
+                <p className="text-ink-600 text-[0.9375rem] leading-relaxed text-pretty">{ind.value}</p>
+
+                <ul className="flex flex-wrap gap-1.5 mt-5">
+                  {ind.tags.map((tag) => (
+                    <li key={tag} className="rounded-md bg-primary-50 px-2.5 py-1 text-xs font-semibold text-primary-700">
+                      {tag}
+                    </li>
+                  ))}
+                </ul>
+
+                <Link to="/contact" className="link-arrow mt-auto pt-6">
+                  {ind.cta} <ChevronRight size={14} />
+                </Link>
               </div>
-              <span className="text-xs text-slate-500 font-medium leading-tight group-hover:text-primary-700 transition-colors">
-                {ind.title}
-              </span>
-            </a>
+            </RevealItem>
           );
         })}
-      </div>
-    </div>
-  </section>
-);
 
-const IndustrySection = ({ industry, index }) => {
-  const Icon = iconMap[industry.icon] || Shield;
-  const isEven = index % 2 === 0;
-
-  return (
-    <section id={industry.id} className={`section-padding ${isEven ? 'bg-white' : 'bg-surface'}`}>
-      <div className="container-custom">
-        {/* Header */}
-        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-6 pb-6 border-b border-slate-200">
-          <div className="flex items-center gap-4">
-            <div className="w-10 h-10 bg-primary-100 rounded-xl flex items-center justify-center">
-              <Icon size={17} className="text-primary-700" />
-            </div>
-            <div>
-              <h2 className="text-xl font-bold font-heading text-slate-900">{industry.title}</h2>
-              <span className="text-accent-500 text-xs font-bold tracking-widest uppercase mt-0.5 block">
-                {industry.heroStat} {industry.heroStatLabel}
-              </span>
-            </div>
-          </div>
-          <div className="flex flex-col sm:flex-row gap-3 w-full sm:w-auto">
-            <Link to="/contact" className="btn-primary text-sm flex-1 sm:flex-initial justify-center">
-              Get Staff for This Sector <ArrowRight size={14} />
+        {/* An eighth cell so the grid closes cleanly and nobody self-excludes. */}
+        <RevealItem className="h-full">
+          <div className="flex flex-col h-full rounded-xl border border-primary-200 bg-primary-50 p-6">
+            <Plus size={22} strokeWidth={1.6} className="text-primary-600 mb-5" />
+            <h3 className="text-lg font-heading font-semibold text-ink-900 mb-2">Another setting?</h3>
+            <p className="text-ink-600 text-[0.9375rem] leading-relaxed text-pretty">
+              If it's a care environment in Ontario, we can likely staff it.
+            </p>
+            <Link to="/contact" className="link-arrow mt-auto pt-6">
+              Talk to us <ChevronRight size={14} />
             </Link>
           </div>
-        </div>
+        </RevealItem>
+      </RevealGroup>
 
-        <div className={`grid lg:grid-cols-2 gap-8 items-start ${!isEven ? 'lg:grid-flow-dense' : ''}`}>
-          {/* Description */}
-          <div className={!isEven ? 'lg:col-start-2' : ''}>
-            <p className="text-slate-500 text-sm leading-relaxed mb-4">{industry.description}</p>
-            <div className="mb-4">
-              <h4 className="font-semibold text-slate-900 text-sm mb-3">Roles We Place in This Sector</h4>
-              <div className="flex flex-wrap gap-2">
-                {industry.roles.map((role) => (
-                  <span key={role} className="px-3 py-1 bg-primary-50 text-primary-700 text-xs font-medium rounded-lg border border-primary-100">
-                    {role}
-                  </span>
-                ))}
-              </div>
-            </div>
-          </div>
-
-          {/* Challenges & Solutions */}
-          <div className={!isEven ? 'lg:col-start-1 lg:row-start-1' : ''}>
-            <div className="grid sm:grid-cols-2 gap-4">
-              <div className="bg-white rounded-xl p-5 border border-red-100">
-                <h4 className="font-semibold text-slate-900 mb-3 flex items-center gap-2 text-xs">
-                  <span className="w-4 h-4 bg-red-100 rounded flex items-center justify-center text-red-500 text-[10px] font-bold">!</span>
-                  Common Challenges
-                </h4>
-                <ul className="space-y-2">
-                  {industry.challenges.map((c) => (
-                    <li key={c} className="text-slate-500 text-xs leading-relaxed flex items-start gap-2">
-                      <span className="text-red-300 mt-0.5 flex-shrink-0">›</span>
-                      {c}
-                    </li>
-                  ))}
-                </ul>
-              </div>
-
-              <div className="bg-white rounded-xl p-5 border border-accent-200">
-                <h4 className="font-semibold text-slate-900 mb-3 flex items-center gap-2 text-xs">
-                  <CheckCircle size={13} className="text-accent-500" />
-                  PowerCare Solutions
-                </h4>
-                <ul className="space-y-2">
-                  {industry.ourSolutions.map((s) => (
-                    <li key={s} className="text-slate-500 text-xs leading-relaxed flex items-start gap-2">
-                      <CheckCircle size={10} className="text-accent-500 mt-0.5 flex-shrink-0" />
-                      {s}
-                    </li>
-                  ))}
-                </ul>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-  );
-};
+      <CredentialBadges variant="inline" useFull className="mt-12" />
+    </div>
+  </section>
+);
 
 const IndustriesCTA = () => (
-  <section className="section-padding bg-primary-900">
-    <div className="container-custom text-center text-white">
-      <SectionHeader
-        badge="Get Started"
-        title="Staff Your Facility Today"
-        subtitle="Tell us about your sector and staffing needs. We'll respond within 2 hours."
-        light
-      />
-      <div className="flex flex-wrap gap-4 justify-center">
-        <Link to="/contact" className="btn-accent text-sm px-5 py-2.5">
-          Request Staff <ArrowRight size={16} />
-        </Link>
-        <Link to="/services" className="btn-white text-sm px-5 py-2.5">
-          Browse Services <ChevronRight size={16} />
-        </Link>
+  <section className="section-padding bg-surface">
+    <div className="container-custom text-center">
+      <h2 className="text-display-sm font-heading font-semibold text-ink-900 mb-5 text-balance">
+        Staff Your Facility Today
+      </h2>
+      <p className="text-ink-600 text-lg max-w-xl mx-auto mb-10 text-pretty">
+        Tell us your setting and your need — we'll match the right people, fast.
+      </p>
+      <div className="flex flex-col sm:flex-row gap-3 justify-center">
+        <Link to="/contact" className="btn-primary">Request Staff <ArrowRight size={16} /></Link>
+        <Link to="/services" className="btn-secondary">Browse Services <ChevronRight size={16} /></Link>
       </div>
     </div>
   </section>
@@ -172,11 +115,8 @@ const IndustriesCTA = () => (
 const Industries = () => (
   <main>
     <SEO page="industries" />
-    <PageHero />
-    <IndustriesOverview />
-    {industries.map((ind, i) => (
-      <IndustrySection key={ind.id} industry={ind} index={i} />
-    ))}
+    <Hero />
+    <SectorGrid />
     <FAQ faqs={industriesFAQs} badge="Industries We Serve" title="Questions About Our Industry Expertise" subtitle="Learn how PowerCare staffs different care settings across Ontario." />
     <IndustriesCTA />
   </main>

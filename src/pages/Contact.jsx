@@ -1,56 +1,54 @@
 import { useState } from 'react';
+import { useSearchParams } from 'react-router-dom';
 import { Link } from 'react-router-dom';
 import {
   Phone, Mail, MapPin, Clock, ArrowRight, CheckCircle2,
   Building2, User, MessageSquare
 } from 'lucide-react';
-import SectionHeader from '../components/ui/SectionHeader';
+import { AnimatePresence, motion, useReducedMotion } from 'framer-motion';
+import PageHero from '../components/ui/PageHero';
 import FAQ from '../components/ui/FAQ';
 import { contactFAQs } from '../data/faqs';
+import CredentialBadges from '../components/ui/CredentialBadges';
+import { PRIMARY_CREDENTIALS } from '../data/credentials';
 import SEO from '../components/seo/SEO';
 
 // ── HERO ─────────────────────────────────────────────────────
-const PageHero = () => (
-  <section className="relative pt-16 pb-12 bg-primary-900 overflow-hidden">
-    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 text-center">
-      <span className="text-accent-500 text-xs font-bold tracking-widest uppercase mb-4 block">
-        Contact Us
-      </span>
-      <h1 className="text-4xl lg:text-5xl font-bold font-heading text-white mb-4">
-        Contact Us
-      </h1>
-      <p className="text-sm text-white/50 max-w-xl mx-auto">
-        Whether you need staffing support or are looking for your next healthcare role — we're here and ready to help.
-      </p>
-    </div>
-  </section>
+const Hero = () => (
+  <PageHero
+    variant="center"
+    eyebrow="Contact Us"
+    title="Contact Us"
+    subtitle="Whether you need staffing support or are looking for your next healthcare role — we're here and ready to help."
+    image="/images/reception.jpg"
+  />
 );
 
 // ── CONTACT INFO BAR ─────────────────────────────────────────
 const ContactInfo = () => (
-  <section className="bg-primary-800 py-8">
-    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
+  <section className="bg-primary-50 py-12">
+    <div className="max-w-7xl mx-auto px-5 sm:px-6 lg:px-8">
+      <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-x-10 gap-y-10">
         {[
-          { icon: Phone,  title: 'Call Us',           lines: ['+1 (647) 400-0000', 'Mon–Fri: 8am–8pm ET'],       href: 'tel:+16474000000' },
+          { icon: Phone,  title: 'Call Us',            lines: ['+1 (647) 400-0000', 'Mon–Fri: 8am–8pm ET'],             href: 'tel:+16474000000' },
           { icon: Mail,   title: 'Email Us',           lines: ['info@powercarestaffing.ca', 'Response within 4 hours'], href: 'mailto:info@powercarestaffing.ca' },
-          { icon: MapPin, title: 'Service Area',       lines: ['Greater Toronto Area', 'Rural Ontario Communities'], href: null },
-          { icon: Clock,  title: 'Emergency Staffing', lines: ['24/7 Dispatch Available', 'Same-day coverage'],   href: 'tel:+16474000000' },
+          { icon: MapPin, title: 'Service Area',       lines: ['Greater Toronto Area', 'Rural Ontario Communities'],    href: null },
+          { icon: Clock,  title: 'Emergency Staffing', lines: ['24/7 Dispatch Available', 'Same-day coverage'],         href: 'tel:+16474000000' },
         ].map(({ icon: Icon, title, lines, href }) => (
-          <div key={title} className="flex items-start gap-3 text-white">
-            <div className="w-9 h-9 bg-white/5 border border-white/10 rounded-xl flex items-center justify-center flex-shrink-0">
-              <Icon size={15} className="text-accent-500" />
+          <div key={title} className="text-ink-900 pt-5">
+            <div className="flex items-center gap-2.5 mb-4">
+              <Icon size={16} strokeWidth={1.8} className="text-primary-600 flex-shrink-0" />
+              <span className="font-mono text-[0.6875rem] uppercase tracking-widest text-primary-600">{title}</span>
             </div>
-            <div>
-              <div className="font-semibold text-xs mb-1 text-white/60 uppercase tracking-wider">{title}</div>
-              {lines.map((line, i) => (
-                href && i === 0 ? (
-                  <a key={line} href={href} className="block text-white text-sm hover:text-accent-500 transition-colors">{line}</a>
-                ) : (
-                  <div key={line} className="text-white/40 text-xs">{line}</div>
-                )
-              ))}
-            </div>
+            {lines.map((line, i) => (
+              href && i === 0 ? (
+                <a key={line} href={href} className="block text-ink-900 text-[0.9375rem] font-medium hover:text-primary-600 transition-colors">
+                  {line}
+                </a>
+              ) : (
+                <div key={line} className="text-ink-600 text-sm mt-1">{line}</div>
+              )
+            ))}
           </div>
         ))}
       </div>
@@ -58,16 +56,12 @@ const ContactInfo = () => (
   </section>
 );
 
-// ── SHARED FORM STYLES ────────────────────────────────────────
-const inputCls = "w-full px-4 py-3 text-sm bg-white border border-slate-200 rounded-xl text-slate-900 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-accent-500 focus:border-transparent transition-colors";
-const labelCls = "block text-xs font-semibold text-slate-700 mb-1.5";
-
 // ── SUCCESS MESSAGE ───────────────────────────────────────────
 const SuccessMessage = () => (
-  <div className="text-center py-6">
-    <CheckCircle2 size={40} className="text-accent-500 mx-auto mb-3" />
-    <h4 className="text-base font-bold font-heading text-slate-900 mb-2">Message Sent!</h4>
-    <p className="text-slate-500 text-sm max-w-xs mx-auto">
+  <div className="text-center py-10" role="status">
+    <CheckCircle2 size={40} strokeWidth={1.5} className="text-primary-600 mx-auto mb-4" />
+    <h4 className="text-xl font-heading font-semibold text-ink-900 mb-3">Message Sent!</h4>
+    <p className="text-ink-600 max-w-xs mx-auto text-pretty">
       Thank you for reaching out. A member of our team will contact you within 4 business hours.
     </p>
   </div>
@@ -75,43 +69,49 @@ const SuccessMessage = () => (
 
 // ── FACILITY FORM ─────────────────────────────────────────────
 const FacilityForm = () => {
-  const [form, setForm] = useState({ name: '', email: '', phone: '', facility: '', role: '', urgency: '', message: '' });
+  // A request that arrives from a role card carries that role with it.
+  const [params] = useSearchParams();
+  const [form, setForm] = useState({
+    name: '', email: '', phone: '', facility: '',
+    role: params.get('role') ?? '', urgency: '', message: '',
+  });
+  const [consent, setConsent] = useState(false);
   const [submitted, setSubmitted] = useState(false);
   if (submitted) return <SuccessMessage />;
 
   return (
     <form onSubmit={(e) => { e.preventDefault(); setSubmitted(true); }} className="space-y-4">
-      <div className="grid grid-cols-2 gap-4">
+      <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
         <div>
-          <label className={labelCls}>Your Name *</label>
-          <input type="text" required placeholder="Full name" value={form.name}
-            onChange={(e) => setForm({ ...form, name: e.target.value })} className={inputCls} />
+          <label htmlFor="f-name" className="field-label">Your Name *</label>
+          <input id="f-name" type="text" required placeholder="Full name" value={form.name}
+            onChange={(e) => setForm({ ...form, name: e.target.value })} className="input" />
         </div>
         <div>
-          <label className={labelCls}>Phone *</label>
-          <input type="tel" required placeholder="(647) 000-0000" value={form.phone}
-            onChange={(e) => setForm({ ...form, phone: e.target.value })} className={inputCls} />
+          <label htmlFor="f-phone" className="field-label">Phone *</label>
+          <input id="f-phone" type="tel" required placeholder="(647) 000-0000" value={form.phone}
+            onChange={(e) => setForm({ ...form, phone: e.target.value })} className="input" />
         </div>
       </div>
       <div>
-        <label className={labelCls}>Email Address *</label>
-        <input type="email" required placeholder="your@facility.ca" value={form.email}
-          onChange={(e) => setForm({ ...form, email: e.target.value })} className={inputCls} />
+        <label htmlFor="f-email" className="field-label">Email Address *</label>
+        <input id="f-email" type="email" required placeholder="your@facility.ca" value={form.email}
+          onChange={(e) => setForm({ ...form, email: e.target.value })} className="input" />
       </div>
       <div>
-        <label className={labelCls}>Facility Name *</label>
-        <input type="text" required placeholder="Name of your healthcare facility" value={form.facility}
-          onChange={(e) => setForm({ ...form, facility: e.target.value })} className={inputCls} />
+        <label htmlFor="f-facility" className="field-label">Facility Name *</label>
+        <input id="f-facility" type="text" required placeholder="Name of your healthcare facility" value={form.facility}
+          onChange={(e) => setForm({ ...form, facility: e.target.value })} className="input" />
       </div>
-      <div className="grid grid-cols-2 gap-4">
+      <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
         <div>
-          <label className={labelCls}>Role(s) Needed *</label>
-          <input type="text" required placeholder="e.g. RN, PSW, DSW" value={form.role}
-            onChange={(e) => setForm({ ...form, role: e.target.value })} className={inputCls} />
+          <label htmlFor="f-role" className="field-label">Role(s) Needed *</label>
+          <input id="f-role" type="text" required placeholder="e.g. RN, PSW, DSW" value={form.role}
+            onChange={(e) => setForm({ ...form, role: e.target.value })} className="input" />
         </div>
         <div>
-          <label className={labelCls}>Urgency</label>
-          <select value={form.urgency} onChange={(e) => setForm({ ...form, urgency: e.target.value })} className={inputCls + ' bg-white'}>
+          <label htmlFor="f-urgency" className="field-label">Urgency</label>
+          <select id="f-urgency" value={form.urgency} onChange={(e) => setForm({ ...form, urgency: e.target.value })} className="input">
             <option value="">Select urgency</option>
             <option value="emergency">Emergency (same day)</option>
             <option value="asap">ASAP (within 24 hrs)</option>
@@ -121,13 +121,26 @@ const FacilityForm = () => {
         </div>
       </div>
       <div>
-        <label className={labelCls}>Additional Details</label>
-        <textarea rows={3} placeholder="Shift details, special requirements, preferred dates..." value={form.message}
-          onChange={(e) => setForm({ ...form, message: e.target.value })}
-          className={inputCls + ' resize-none'} />
+        <label htmlFor="f-message" className="field-label">Additional Details</label>
+        <textarea id="f-message" rows={3} placeholder="Shift details, special requirements, preferred dates..." value={form.message}
+          onChange={(e) => setForm({ ...form, message: e.target.value })} className="input resize-none" />
       </div>
-      <button type="submit" className="btn-primary w-full justify-center py-3 text-sm">
-        Submit Staffing Request <ArrowRight size={15} />
+      <label className="flex items-start gap-3 text-sm text-ink-600 leading-relaxed">
+        <input
+          type="checkbox"
+          required
+          checked={consent}
+          onChange={(e) => setConsent(e.target.checked)}
+          className="mt-0.5 h-4 w-4 flex-shrink-0 rounded border-ink-300 text-primary-700 focus:ring-primary-500"
+        />
+        <span>
+          I agree to PowerCare&rsquo;s{' '}
+          <Link to="/privacy" className="text-primary-700 font-medium underline underline-offset-2">Privacy Policy</Link>
+          ; my details are used only to respond to this request. <span className="font-semibold">(PIPEDA)</span>
+        </span>
+      </label>
+      <button type="submit" className="btn-primary w-full">
+        Submit Staffing Request <ArrowRight size={16} />
       </button>
     </form>
   );
@@ -141,46 +154,49 @@ const ProfessionalForm = () => {
 
   return (
     <form onSubmit={(e) => { e.preventDefault(); setSubmitted(true); }} className="space-y-4">
-      <div className="grid grid-cols-2 gap-4">
+      <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
         <div>
-          <label className={labelCls}>Full Name *</label>
-          <input type="text" required placeholder="Your name" value={form.name}
-            onChange={(e) => setForm({ ...form, name: e.target.value })} className={inputCls} />
+          <label htmlFor="p-name" className="field-label">Full Name *</label>
+          <input id="p-name" type="text" required placeholder="Your name" value={form.name}
+            onChange={(e) => setForm({ ...form, name: e.target.value })} className="input" />
         </div>
         <div>
-          <label className={labelCls}>Phone *</label>
-          <input type="tel" required placeholder="(647) 000-0000" value={form.phone}
-            onChange={(e) => setForm({ ...form, phone: e.target.value })} className={inputCls} />
-        </div>
-      </div>
-      <div>
-        <label className={labelCls}>Email *</label>
-        <input type="email" required placeholder="your@email.com" value={form.email}
-          onChange={(e) => setForm({ ...form, email: e.target.value })} className={inputCls} />
-      </div>
-      <div className="grid grid-cols-2 gap-4">
-        <div>
-          <label className={labelCls}>Current Role / Credential</label>
-          <input type="text" placeholder="e.g. PSW, RN, DSW" value={form.role}
-            onChange={(e) => setForm({ ...form, role: e.target.value })} className={inputCls} />
-        </div>
-        <div>
-          <label className={labelCls}>Preferred Location</label>
-          <input type="text" placeholder="City or region" value={form.location}
-            onChange={(e) => setForm({ ...form, location: e.target.value })} className={inputCls} />
+          <label htmlFor="p-phone" className="field-label">Phone *</label>
+          <input id="p-phone" type="tel" required placeholder="(647) 000-0000" value={form.phone}
+            onChange={(e) => setForm({ ...form, phone: e.target.value })} className="input" />
         </div>
       </div>
       <div>
-        <label className={labelCls}>Tell Us About Yourself</label>
-        <textarea rows={4} placeholder="Experience, availability, what you're looking for..." value={form.message}
-          onChange={(e) => setForm({ ...form, message: e.target.value })}
-          className={inputCls + ' resize-none'} />
+        <label htmlFor="p-email" className="field-label">Email *</label>
+        <input id="p-email" type="email" required placeholder="your@email.com" value={form.email}
+          onChange={(e) => setForm({ ...form, email: e.target.value })} className="input" />
       </div>
-      <button type="submit" className="btn-primary w-full justify-center py-3 text-sm">
-        Connect With a Recruiter <ArrowRight size={15} />
+      <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
+        <div>
+          <label htmlFor="p-role" className="field-label">Current Role / Credential</label>
+          <input id="p-role" type="text" placeholder="e.g. PSW, RN, DSW" value={form.role}
+            onChange={(e) => setForm({ ...form, role: e.target.value })} className="input" />
+        </div>
+        <div>
+          <label htmlFor="p-loc" className="field-label">Preferred Location</label>
+          <input id="p-loc" type="text" placeholder="City or region" value={form.location}
+            onChange={(e) => setForm({ ...form, location: e.target.value })} className="input" />
+        </div>
+      </div>
+      <div>
+        <label htmlFor="p-message" className="field-label">Tell Us About Yourself</label>
+        <textarea id="p-message" rows={4} placeholder="Experience, availability, what you're looking for..." value={form.message}
+          onChange={(e) => setForm({ ...form, message: e.target.value })} className="input resize-none" />
+      </div>
+      <button type="submit" className="btn-primary w-full">
+        Connect With a Recruiter <ArrowRight size={16} />
       </button>
-      <p className="text-xs text-slate-400 text-center">
-        Or visit our full <Link to="/careers" className="text-accent-500 underline">Find a Job</Link> page to apply.
+      <p className="text-sm text-ink-500 text-center">
+        Or visit our full{' '}
+        <Link to="/careers" className="text-primary-700 font-medium underline underline-offset-2 hover:text-primary-800">
+          Find a Job
+        </Link>{' '}
+        page to apply.
       </p>
     </form>
   );
@@ -194,31 +210,30 @@ const GeneralForm = () => {
 
   return (
     <form onSubmit={(e) => { e.preventDefault(); setSubmitted(true); }} className="space-y-4">
-      <div className="grid grid-cols-2 gap-4">
+      <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
         <div>
-          <label className={labelCls}>Your Name *</label>
-          <input type="text" required placeholder="Full name" value={form.name}
-            onChange={(e) => setForm({ ...form, name: e.target.value })} className={inputCls} />
+          <label htmlFor="g-name" className="field-label">Your Name *</label>
+          <input id="g-name" type="text" required placeholder="Full name" value={form.name}
+            onChange={(e) => setForm({ ...form, name: e.target.value })} className="input" />
         </div>
         <div>
-          <label className={labelCls}>Email *</label>
-          <input type="email" required placeholder="your@email.com" value={form.email}
-            onChange={(e) => setForm({ ...form, email: e.target.value })} className={inputCls} />
+          <label htmlFor="g-email" className="field-label">Email *</label>
+          <input id="g-email" type="email" required placeholder="your@email.com" value={form.email}
+            onChange={(e) => setForm({ ...form, email: e.target.value })} className="input" />
         </div>
       </div>
       <div>
-        <label className={labelCls}>Subject *</label>
-        <input type="text" required placeholder="What is this about?" value={form.subject}
-          onChange={(e) => setForm({ ...form, subject: e.target.value })} className={inputCls} />
+        <label htmlFor="g-subject" className="field-label">Subject *</label>
+        <input id="g-subject" type="text" required placeholder="What is this about?" value={form.subject}
+          onChange={(e) => setForm({ ...form, subject: e.target.value })} className="input" />
       </div>
       <div>
-        <label className={labelCls}>Message *</label>
-        <textarea rows={6} required placeholder="Tell us more..." value={form.message}
-          onChange={(e) => setForm({ ...form, message: e.target.value })}
-          className={inputCls + ' resize-none'} />
+        <label htmlFor="g-message" className="field-label">Message *</label>
+        <textarea id="g-message" rows={6} required placeholder="Tell us more..." value={form.message}
+          onChange={(e) => setForm({ ...form, message: e.target.value })} className="input resize-none" />
       </div>
-      <button type="submit" className="btn-primary w-full justify-center py-3 text-sm">
-        Send Message <ArrowRight size={15} />
+      <button type="submit" className="btn-primary w-full">
+        Send Message <ArrowRight size={16} />
       </button>
     </form>
   );
@@ -227,66 +242,73 @@ const GeneralForm = () => {
 // ── CONTACT FORMS SECTION ─────────────────────────────────────
 const ContactForms = () => {
   const [tab, setTab] = useState('facility');
+  const reduceMotion = useReducedMotion();
+
+  const tabs = [
+    { id: 'facility',     label: 'I Need Staff'         },
+    { id: 'professional', label: "I'm Looking for Work" },
+    { id: 'general',      label: 'General Enquiry'      },
+  ];
 
   return (
     <section className="section-padding bg-white">
       <div className="container-custom">
-        <div className="grid lg:grid-cols-2 gap-10 items-start">
+        <div className="grid lg:grid-cols-12 gap-x-12 gap-y-10 items-start">
 
           {/* Left info */}
-          <div>
+          <div className="lg:col-span-5">
             <span className="section-badge">Get in Touch</span>
-            <h2 className="section-title mb-4">How Can We Help You?</h2>
-            <p className="text-slate-500 text-sm leading-relaxed mb-7">
+            <h2 className="text-display-sm font-heading font-semibold text-ink-900 mb-6 text-balance">
+              How Can We Help You?
+            </h2>
+            <p className="text-ink-600 leading-relaxed mb-7 text-pretty">
               Select your enquiry type below. Whether you're a healthcare facility looking for staffing support or a professional seeking career opportunities, we have the right team ready to assist.
             </p>
 
-            <div className="space-y-3">
+            <div className="space-y-5">
               {[
-                { icon: Building2,    title: 'For Healthcare Facilities',   desc: 'Request staff, discuss a staffing strategy, or enquire about partnership opportunities.' },
-                { icon: User,         title: 'For Healthcare Professionals', desc: 'Apply for roles, enquire about current openings, or connect with a recruiter.' },
-                { icon: MessageSquare, title: 'General Enquiries',          desc: 'Any other question about PowerCare, our training programs, or our services.' },
+                { icon: Building2,     title: 'For Healthcare Facilities',    desc: 'Request staff, discuss a staffing strategy, or enquire about partnership opportunities.' },
+                { icon: User,          title: 'For Healthcare Professionals', desc: 'Apply for roles, enquire about current openings, or connect with a recruiter.' },
+                { icon: MessageSquare, title: 'General Enquiries',            desc: 'Any other question about PowerCare, our training programs, or our services.' },
               ].map(({ icon: Icon, title, desc }) => (
-                <div key={title} className="flex gap-4 p-4 rounded-xl border border-slate-200 hover:border-accent-300 hover:bg-accent-50 transition-all">
-                  <div className="w-9 h-9 bg-primary-100 rounded-lg flex items-center justify-center flex-shrink-0">
-                    <Icon size={16} className="text-primary-700" />
-                  </div>
+                <div key={title} className="flex gap-4 py-5">
+                  <Icon size={19} strokeWidth={1.6} className="text-primary-600 flex-shrink-0 mt-0.5" />
                   <div>
-                    <div className="font-semibold text-slate-900 text-sm">{title}</div>
-                    <div className="text-slate-400 text-xs mt-0.5 leading-relaxed">{desc}</div>
+                    <div className="font-heading font-semibold text-ink-900">{title}</div>
+                    <div className="text-ink-600 text-[0.9375rem] mt-1 leading-relaxed text-pretty">{desc}</div>
                   </div>
                 </div>
               ))}
             </div>
 
-            <div className="mt-7 bg-primary-900 rounded-xl p-5">
-              <h4 className="font-semibold text-white text-sm mb-2">Need Immediate Staffing?</h4>
-              <p className="text-white/50 text-xs mb-4">
+            <div className="mt-10 bg-primary-50 rounded-2xl p-7">
+              <h3 className="font-heading font-semibold text-ink-900 text-lg mb-2">Need Immediate Staffing?</h3>
+              <p className="text-ink-600 text-[0.9375rem] mb-6 text-pretty">
                 For urgent, same-day staffing needs, call our 24/7 dispatch line directly.
               </p>
-              <a href="tel:+16474000000" className="btn-accent text-sm w-full justify-center">
-                <Phone size={14} />
+              <a href="tel:+16474000000" className="btn-primary w-full">
+                <Phone size={15} />
                 Call 24/7 Dispatch: +1 (647) 400-0000
               </a>
             </div>
           </div>
 
-          {/* Right form — blends as a clean panel */}
-          <div className="bg-surface rounded-xl border border-slate-200 overflow-hidden">
-            {/* Tab switcher */}
-            <div className="flex border-b border-slate-200 bg-white">
-              {[
-                { id: 'facility',     label: 'I Need Staff'         },
-                { id: 'professional', label: "I'm Looking for Work" },
-                { id: 'general',      label: 'General Enquiry'      },
-              ].map((t) => (
+          {/* Right form */}
+          <div className="lg:col-span-7 bg-surface rounded-2xl border border-ink-200 overflow-hidden">
+            <div role="tablist" aria-label="Enquiry type" className="flex bg-white">
+              {tabs.map((t) => (
                 <button
                   key={t.id}
+                  role="tab"
+                  id={`tab-${t.id}`}
+                  aria-selected={tab === t.id}
+                  aria-controls={`panel-${t.id}`}
                   onClick={() => setTab(t.id)}
-                  className={`flex-1 px-3 py-3 text-xs font-semibold transition-all border-b-2 ${
+                  className={`flex-1 px-3 py-4 font-mono text-[0.6875rem] uppercase tracking-widest
+                              transition-colors duration-200 border-b-2 -mb-px ${
                     tab === t.id
-                      ? 'border-accent-500 text-accent-500 bg-accent-50'
-                      : 'border-transparent text-slate-500 hover:text-slate-800'
+                      ? 'border-primary-600 text-primary-700'
+                      : 'border-transparent text-ink-500 hover:text-ink-800'
                   }`}
                 >
                   {t.label}
@@ -294,10 +316,30 @@ const ContactForms = () => {
               ))}
             </div>
 
-            <div className="p-6">
-              {tab === 'facility'     && <FacilityForm />}
-              {tab === 'professional' && <ProfessionalForm />}
-              {tab === 'general'      && <GeneralForm />}
+            <div className="p-6 sm:p-7">
+              <AnimatePresence mode="wait">
+                <motion.div
+                  key={tab}
+                  role="tabpanel"
+                  id={`panel-${tab}`}
+                  aria-labelledby={`tab-${tab}`}
+                  initial={reduceMotion ? { opacity: 0 } : { opacity: 0, y: 8 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  exit={{ opacity: 0 }}
+                  transition={{ duration: 0.22, ease: [0.22, 1, 0.36, 1] }}
+                >
+                  {tab === 'facility'     && <FacilityForm />}
+                  {tab === 'professional' && <ProfessionalForm />}
+                  {tab === 'general'      && <GeneralForm />}
+                </motion.div>
+              </AnimatePresence>
+
+              {/* Reassurance at the point of conversion. */}
+              <CredentialBadges
+                variant="form"
+                only={PRIMARY_CREDENTIALS.slice(0, 3)}
+                className="mt-7 pt-6"
+              />
             </div>
           </div>
         </div>
@@ -309,7 +351,7 @@ const ContactForms = () => {
 const Contact = () => (
   <main>
     <SEO page="contact" />
-    <PageHero />
+    <Hero />
     <ContactInfo />
     <ContactForms />
     <FAQ faqs={contactFAQs} badge="Get in Touch" title="Contact & Support Questions" subtitle="Have questions before reaching out? Find answers here." />
