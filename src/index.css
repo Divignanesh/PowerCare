@@ -20,7 +20,7 @@
     /* Loosened from the browser default: long paragraphs of 15–17px sans need
        the extra leading far more than they need the vertical space back. */
     line-height: 1.65;
-    color: #26332F;
+    color: #242E38;
     background: #ffffff;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
@@ -57,12 +57,12 @@
   }
 
   ::selection {
-    background: #CFF1EA;
-    color: #132320;
+    background: #CFE6FA;
+    color: #0F1822;
   }
 
   :focus-visible {
-    outline: 2px solid #0F7D6E;
+    outline: 2px solid #1160A9;
     outline-offset: 2px;
     border-radius: 2px;
   }
@@ -81,7 +81,7 @@
            focus-visible:ring-2 focus-visible:ring-accent-500 focus-visible:ring-offset-2;
   }
 
-  /* Solid green — the main call to action on light grounds */
+  /* Solid blue — the main call to action on light grounds */
   .btn-primary {
     @apply btn-base bg-primary-700 text-white
            hover:bg-primary-800 active:translate-y-px;
@@ -94,14 +94,14 @@
            hover:bg-primary-50 hover:border-primary-500 active:translate-y-px;
   }
 
-  /* Luminous mint — the call to action on dark green grounds */
+  /* Luminous sky — the call to action on deep blue grounds */
   .btn-accent {
     @apply btn-base bg-accent-300 text-primary-900
            hover:bg-accent-200 active:translate-y-px
            focus-visible:ring-offset-primary-900;
   }
 
-  /* White — the quieter partner on dark green grounds */
+  /* White — the quieter partner on deep blue grounds */
   .btn-white {
     @apply btn-base bg-transparent text-white border border-white/25
            hover:bg-white/10 hover:border-white/50 active:translate-y-px
@@ -261,8 +261,8 @@
   /* A very faint ruled field — just enough to catch the light. */
   .bg-grid {
     background-image:
-      linear-gradient(to right,  rgba(19,35,32,0.016) 1px, transparent 1px),
-      linear-gradient(to bottom, rgba(19,35,32,0.016) 1px, transparent 1px);
+      linear-gradient(to right,  rgba(15,24,34,0.016) 1px, transparent 1px),
+      linear-gradient(to bottom, rgba(15,24,34,0.016) 1px, transparent 1px);
     background-size: 88px 88px;
   }
 
@@ -291,18 +291,18 @@
   .scrim {
     background:
       linear-gradient(100deg,
-        rgba(3, 54, 46, 0.93) 0%,
-        rgba(3, 54, 46, 0.84) 30%,
-        rgba(3, 54, 46, 0.58) 54%,
-        rgba(4, 82, 70, 0.30) 100%);
+        rgba(7, 39, 66, 0.93) 0%,
+        rgba(7, 39, 66, 0.84) 30%,
+        rgba(7, 39, 66, 0.58) 54%,
+        rgba(11, 61, 107, 0.30) 100%);
   }
 
   .scrim-soft {
     background:
       linear-gradient(180deg,
-        rgba(3, 54, 46, 0.82) 0%,
-        rgba(3, 54, 46, 0.66) 45%,
-        rgba(3, 54, 46, 0.86) 100%);
+        rgba(7, 39, 66, 0.82) 0%,
+        rgba(7, 39, 66, 0.66) 45%,
+        rgba(7, 39, 66, 0.86) 100%);
   }
 
   /* A hairline of brand colour under a photograph, so images sit on the

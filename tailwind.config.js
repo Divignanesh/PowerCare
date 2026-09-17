@@ -8,49 +8,49 @@ export default {
   theme: {
     extend: {
       colors: {
-        // Eucalyptus — a blue-green midtone carries the brand on near-white
+        // Harbour blue — a deep, slightly desaturated azure carries the brand
         // grounds. Healthcare reads as unwelcoming when large fields go dark,
         // so the deep end of this ramp is reserved for the footer and type.
         primary: {
-          50:  '#ECFAF7',  // pale wash — alternating section grounds
-          100: '#D3F2EB',  // tints, tags, icon fills
-          200: '#A8E5D8',  // rules and hover borders
-          300: '#6FD2BC',  // light marks
-          400: '#35B79A',  // secondary marks
-          500: '#0E9C81',  // bright accent
-          600: '#00836B',  // the brand teal, sampled from the logo mark
-          700: '#036B58',  // solid buttons and small text (white on this passes AA)
-          800: '#045246',  // deep accents
-          900: '#03362E',  // footer only
+          50:  '#EFF6FD',  // pale wash — alternating section grounds
+          100: '#D9E9F9',  // tints, tags, icon fills
+          200: '#B4D2F1',  // rules and hover borders
+          300: '#80B4E5',  // light marks
+          400: '#4B92D4',  // secondary marks
+          500: '#2474C0',  // bright accent
+          600: '#1160A9',  // the brand blue
+          700: '#0E4F8A',  // solid buttons and small text (white on this passes AA)
+          800: '#0B3D6B',  // deep accents
+          900: '#072742',  // footer only
         },
         // Reserved for the few deep grounds that remain.
         accent: {
-          50:  '#EDFCF7',
-          100: '#D2F7EB',
-          200: '#A6EFD8',
-          300: '#6FE0C6',  // highlight on deep ground
-          400: '#3DCFAC',
-          500: '#17B68F',
-          600: '#0E9374',
-          700: '#0C735C',
-          800: '#0B5B4A',
-          900: '#093F35',
+          50:  '#ECFAFF',
+          100: '#D2F2FE',
+          200: '#A6E5FC',
+          300: '#5EC8F2',  // highlight on deep ground
+          400: '#2FAFE4',
+          500: '#1494CC',
+          600: '#0E77A6',
+          700: '#0C5F85',
+          800: '#0B4C6B',
+          900: '#093549',
         },
-        // Soft black-green rather than grey — type sits in the same family
+        // Blue-slate rather than neutral grey — type sits in the same family
         // as the brand instead of reading as stock neutral.
         ink: {
-          50:  '#F6F9F8',
-          100: '#EDF2F1',
-          200: '#DDE5E3',
-          300: '#BCC8C5',
-          400: '#8E9C98',
-          500: '#6A7975',
-          600: '#4F5F5A',  // body copy
-          700: '#3B4A46',
-          800: '#26332F',
-          900: '#132320',  // headings — soft black-green
+          50:  '#F6F8FB',
+          100: '#EDF1F6',
+          200: '#DCE3EC',
+          300: '#BAC5D2',
+          400: '#8B99A9',
+          500: '#677585',
+          600: '#4C5A6A',  // body copy
+          700: '#39454F',
+          800: '#242E38',
+          900: '#0F1822',  // headings — soft blue-black
         },
-        surface: '#F2F8F6',  // pale eucalyptus wash
+        surface: '#F2F7FC',  // pale blue wash
       },
       fontFamily: {
         // A formal pairing that stays comfortable to read: Lora is a warm,
@@ -73,9 +73,9 @@ export default {
         'display-lg': ['clamp(2.125rem, 1.45rem + 3.1vw, 3.375rem)', { lineHeight: '1.16', letterSpacing: '-0.01em'  }],
       },
       boxShadow: {
-        'card':       '0 1px 2px rgba(19,35,32,0.04), 0 1px 1px rgba(19,35,32,0.03)',
-        'card-hover': '0 10px 30px -12px rgba(19,35,32,0.16), 0 2px 6px rgba(19,35,32,0.05)',
-        'panel':      '0 24px 60px -28px rgba(19,35,32,0.22)',
+        'card':       '0 1px 2px rgba(15,24,34,0.04), 0 1px 1px rgba(15,24,34,0.03)',
+        'card-hover': '0 10px 30px -12px rgba(15,24,34,0.16), 0 2px 6px rgba(15,24,34,0.05)',
+        'panel':      '0 24px 60px -28px rgba(15,24,34,0.22)',
       },
       borderRadius: {
         // Tighter than the default scale — the mark of drawn stationery

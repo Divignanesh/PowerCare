@@ -5,26 +5,26 @@
  */
 
 export const COLORS = {
-  brand:        '#00836B',   // primary-600 — the teal from the logo mark
-  brandDeep:    '#036B58',   // primary-700 — buttons, small text
-  brandDark:    '#045246',   // primary-800 — deep accents
-  brandDeepest: '#03362E',   // primary-900 — footer
-  brandBright:  '#0E9C81',   // primary-500 — bright accent
-  brandWash:    '#ECFAF7',   // primary-50  — pale section ground
-  brandTint:    '#D3F2EB',   // primary-100 — tints and tags
+  brand:        '#1160A9',   // primary-600 — the brand blue
+  brandDeep:    '#0E4F8A',   // primary-700 — buttons, small text
+  brandDark:    '#0B3D6B',   // primary-800 — deep accents
+  brandDeepest: '#072742',   // primary-900 — footer
+  brandBright:  '#2474C0',   // primary-500 — bright accent
+  brandWash:    '#EFF6FD',   // primary-50  — pale section ground
+  brandTint:    '#D9E9F9',   // primary-100 — tints and tags
 
-  mint:         '#6FE0B4',   // accent-300  — highlight tone on dark grounds
-  mintBright:   '#3DCF98',   // accent-400  — hover state for mint
-  mintDeep:     '#0E9366',   // accent-600  — accent text that passes on white
-  mintWash:     '#ECFDF5',   // accent-50   — faint accent fill
+  sky:         '#5EC8F2',   // accent-300  — highlight tone on deep grounds
+  skyBright:   '#2FAFE4',   // accent-400  — hover state for mint
+  skyDeep:     '#0E77A6',   // accent-600  — accent text that passes on white
+  skyWash:     '#ECFAFF',   // accent-50   — faint accent fill
 
   white:        '#FFFFFF',
-  surface:      '#F2F6F4',   // alternating section ground
-  border:       '#DBE2DF',   // ink-200 — dividers and card borders
-  hairline:     '#EBEFED',   // ink-100 — the finest rule
-  textDark:     '#151A19',   // ink-900 — headings
-  textBody:     '#4D5854',   // ink-600 — body copy
-  textMuted:    '#66736F',   // ink-500 — secondary text
+  surface:      '#F2F7FC',   // alternating section ground
+  border:       '#DCE3EC',   // ink-200 — dividers and card borders
+  hairline:     '#EDF1F6',   // ink-100 — the finest rule
+  textDark:     '#0F1822',   // ink-900 — headings
+  textBody:     '#4C5A6A',   // ink-600 — body copy
+  textMuted:    '#677585',   // ink-500 — secondary text
 };
 
 export const RADIUS = {
@@ -35,9 +35,9 @@ export const RADIUS = {
 };
 
 export const SHADOW = {
-  card:      '0 1px 2px rgba(12,44,39,0.05), 0 1px 1px rgba(12,44,39,0.04)',
-  cardHover: '0 10px 30px -12px rgba(12,44,39,0.22), 0 2px 6px rgba(12,44,39,0.06)',
-  panel:     '0 24px 60px -28px rgba(12,44,39,0.35)',
+  card:      '0 1px 2px rgba(15,24,34,0.05), 0 1px 1px rgba(15,24,34,0.04)',
+  cardHover: '0 10px 30px -12px rgba(15,24,34,0.22), 0 2px 6px rgba(15,24,34,0.06)',
+  panel:     '0 24px 60px -28px rgba(15,24,34,0.35)',
 };
 
 export const FONT = {
