@@ -14,7 +14,7 @@ export const COLORS = {
   brandTint:    '#D5E5F2',   // primary-100 — tints and tags
 
   sky:         '#5EC8F2',   // accent-300  — highlight tone on deep grounds
-  skyBright:   '#2FAFE4',   // accent-400  — hover state for mint
+  skyBright:   '#2FAFE4',   // accent-400  — hover state for the sky accent
   skyDeep:     '#0E77A6',   // accent-600  — accent text that passes on white
   skyWash:     '#ECFAFF',   // accent-50   — faint accent fill
 
@@ -41,7 +41,9 @@ export const SHADOW = {
 };
 
 export const FONT = {
-  sans:    '"Source Sans 3", system-ui, sans-serif',
-  heading: 'Archivo, system-ui, sans-serif',
-  mono:    '"IBM Plex Mono", ui-monospace, monospace',
+  sans:    '"Source Sans 3", "Helvetica Neue", Arial, sans-serif',
+  heading: 'Lora, Georgia, "Times New Roman", serif',
+  // `mono` resolves to the sans: it is used for tracked, uppercase labels
+  // rather than for typewriter text.
+  mono:    '"Source Sans 3", "Helvetica Neue", Arial, sans-serif',
 };
