@@ -293,7 +293,9 @@ const NursingSection = () => (
               src="/images/theatre-team.jpg"
               alt="A surgical nursing team at work"
               loading="lazy"
-              className="w-full h-[280px] object-cover object-top"
+              /* Near-square source: a top crop lands on the theatre lights and
+                 cuts the team out entirely, so this one holds at 45%. */
+              className="w-full h-[320px] object-cover object-[center_45%]"
             />
           </figure>
           <h3 className="font-mono text-[0.6875rem] font-semibold uppercase tracking-widest text-primary-700 mb-5">
