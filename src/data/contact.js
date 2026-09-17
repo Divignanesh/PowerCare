@@ -19,6 +19,23 @@ export const EMAIL_HREF = `mailto:${EMAIL}`;
 
 export const SERVICE_AREA = 'Greater Toronto Area & Rural Ontario';
 
+/** Registered business address. */
+export const ADDRESS = {
+  street: '10 Kingsbridge Garden Cir',
+  locality: 'Mississauga',
+  region: 'ON',
+  postalCode: 'L5R 3K6',
+  country: 'CA',
+};
+
+/** One line, for footer rows and contact cards. */
+export const ADDRESS_LINE =
+  `${ADDRESS.street}, ${ADDRESS.locality}, ${ADDRESS.region} ${ADDRESS.postalCode}`;
+
+/** Opens the address in whichever map app the visitor uses. */
+export const MAP_HREF =
+  `https://maps.google.com/?q=${encodeURIComponent(ADDRESS_LINE)}`;
+
 /**
  * Social profiles.
  *

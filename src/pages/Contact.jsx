@@ -12,7 +12,7 @@ import { contactFAQs } from '../data/faqs';
 import CredentialBadges from '../components/ui/CredentialBadges';
 import { PRIMARY_CREDENTIALS } from '../data/credentials';
 import SEO, { faqSchema } from '../components/seo/SEO';
-import { PHONE, PHONE_HREF, EMAIL, EMAIL_HREF } from '../data/contact';
+import { PHONE, PHONE_HREF, EMAIL, EMAIL_HREF, ADDRESS, MAP_HREF } from '../data/contact';
 
 // ── HERO ─────────────────────────────────────────────────────
 const Hero = () => (
@@ -43,7 +43,7 @@ const ContactInfo = () => (
         {[
           { icon: Phone,  title: 'Call Us',            lines: [PHONE, 'Mon–Fri: 8am–8pm ET'],                          href: PHONE_HREF },
           { icon: Mail,   title: 'Email Us',           lines: [EMAIL, 'Response within 4 hours'],                      href: EMAIL_HREF },
-          { icon: MapPin, title: 'Service Area',       lines: ['Greater Toronto Area', 'Rural Ontario Communities'],    href: null },
+          { icon: MapPin, title: 'Visit Us',           lines: [ADDRESS.street, `${ADDRESS.locality}, ${ADDRESS.region} ${ADDRESS.postalCode}`], href: MAP_HREF },
           { icon: Clock,  title: 'Emergency Staffing', lines: ['24/7 Dispatch Available', 'Same-day coverage'],         href: PHONE_HREF },
         ].map(({ icon: Icon, title, lines, href }) => (
           <div key={title} className="text-ink-900 border-r border-b sm:border-b-0 border-primary-200 px-6 py-7">

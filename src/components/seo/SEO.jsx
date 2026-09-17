@@ -1,6 +1,6 @@
 import { Helmet } from 'react-helmet-async'
 import { services } from '../../data/services'
-import { PHONE_E164, EMAIL, SOCIAL_PROFILES } from '../../data/contact'
+import { PHONE_E164, EMAIL, SOCIAL_PROFILES, ADDRESS } from '../../data/contact'
 
 const BASE_URL = 'https://www.powercarestaffing.ca'
 const OG_IMAGE = `${BASE_URL}/og-image.jpg`
@@ -82,14 +82,18 @@ const localBusinessSchema = {
   ],
   address: {
     '@type': 'PostalAddress',
-    addressLocality: 'Toronto',
-    addressRegion: 'ON',
-    addressCountry: 'CA',
+    streetAddress: ADDRESS.street,
+    addressLocality: ADDRESS.locality,
+    addressRegion: ADDRESS.region,
+    postalCode: ADDRESS.postalCode,
+    addressCountry: ADDRESS.country,
   },
+  // Approximate centroid for the L5R postal area — worth replacing with the
+  // exact pin from the Google Business Profile once that listing is claimed.
   geo: {
     '@type': 'GeoCoordinates',
-    latitude: 43.6532,
-    longitude: -79.3832,
+    latitude: 43.6089,
+    longitude: -79.6441,
   },
   openingHoursSpecification: [
     {

@@ -14,7 +14,6 @@ import { industries } from '../data/industries';
 import { homeFAQs } from '../data/faqs';
 import Reveal, { RevealGroup, RevealItem } from '../components/ui/Reveal';
 import CredentialBadges from '../components/ui/CredentialBadges';
-import VettingSteps from '../components/ui/VettingSteps';
 import SEO, { faqSchema } from '../components/seo/SEO';
 import { PHONE, EMAIL, EMAIL_HREF } from '../data/contact';
 
@@ -70,17 +69,9 @@ const Hero = () => {
         <div className="grid lg:grid-cols-12 gap-x-12 gap-y-10 items-center">
 
           <div className="lg:col-span-7">
-            <motion.span
-              variants={item}
-              className="inline-flex items-center gap-2.5 font-mono text-[0.6875rem] font-semibold uppercase tracking-widest text-accent-300"
-            >
-              <MapPin size={13} />
-              Serving GTA &amp; Rural Ontario
-            </motion.span>
-
             <motion.h1
               variants={item}
-              className="text-display-lg font-heading font-semibold text-white mt-5 text-balance wdth-wide"
+              className="text-display-lg font-heading font-semibold text-white text-balance wdth-wide"
             >
               Trusted Healthcare{' '}
               <span className="text-accent-300">Staffing</span>{' '}
@@ -410,53 +401,6 @@ const ProfessionsPreview = () => {
     </section>
   );
 };
-
-// ─────────────────────────── VETTING PROCESS ────────────────────────────
-const VettingProcess = () => (
-  <section className="section-padding bg-white">
-    <div className="container-custom">
-      <SectionHeader
-        badge="Our screening process"
-        title="10-Step Candidate Vetting"
-        subtitle="Every professional clears all ten steps before they ever set foot in your facility."
-        centered={false}
-      />
-
-      <div className="grid lg:grid-cols-12 gap-x-12 gap-y-10 items-start">
-        <div className="lg:col-span-7">
-          <VettingSteps />
-        </div>
-
-        <div className="lg:col-span-5 lg:sticky lg:top-28">
-          <figure className="fig-frame">
-            <img
-              src="/images/training-lab.jpg"
-              alt="PowerCare candidates in a supervised clinical skills session"
-              loading="lazy"
-              className="w-full h-[300px] object-cover object-top"
-            />
-          </figure>
-
-          <div className="mt-6 rounded-xl border border-ink-200 bg-surface p-7">
-            <span className="font-mono text-[0.6875rem] font-semibold uppercase tracking-widest text-primary-700">
-              Before a first placement
-            </span>
-            <div className="flex items-baseline gap-3 mt-4">
-              <span className="figure-lg text-5xl leading-none">80</span>
-              <span className="text-[0.9375rem] text-ink-700 leading-snug">
-                <span className="block font-semibold text-ink-900">hours of certification</span>
-                clinical safety, dementia care, documentation and role-specific skills
-              </span>
-            </div>
-            <Link to="/why-powercare" className="btn-secondary w-full mt-7">
-              How We Train Our Staff <ArrowRight size={16} />
-            </Link>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-);
 
 // ─────────────────────────── INDUSTRIES PREVIEW ────────────────────────────
 // Read from the shared industries list so the sector names — including the
@@ -963,7 +907,6 @@ const Home = () => (
     <ProblemsWeSolve />
     <WhyFacilitiesTrustUs />
     <ProfessionsPreview />
-    <VettingProcess />
     <IndustriesPreview />
     <JobSeekerValue />
     <CoverageBand />
