@@ -20,8 +20,8 @@ const Hero = () => (
     subtitle="Because our staff are trained before they ever reach your floor — and backed by a 10-step screen and a fit guarantee."
     image="/images/training-room.jpg"
     imageAlt="PowerCare candidates in a supervised clinical skills session"
-    detailImage="/images/why-lead.jpg"
-    detailImageAlt="A PowerCare clinical lead"
+    detailImage="/images/team-scan.jpg"
+    detailImageAlt="A PowerCare clinical team reviewing a case together"
   >
     <ul className="flex flex-wrap gap-2 mt-8">
       {['80-hour in-house training', '10-step vetting', '24/7 dispatch', 'Fit guarantee'].map((c) => (

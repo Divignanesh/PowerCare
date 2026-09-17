@@ -568,18 +568,18 @@ const JobSeekerValue = () => (
       />
 
       <div className="grid lg:grid-cols-12 gap-x-12 gap-y-10 items-start">
-        <Reveal className="lg:col-span-4">
+        <Reveal className="lg:col-span-5">
           <figure className="fig-frame">
             <img
-              src="/images/nurse-lead.jpg"
-              alt="A registered practical nurse placed by PowerCare"
+              src="/images/team-lineup.jpg"
+              alt="PowerCare nurses and physicians on shift together"
               loading="lazy"
-              className="w-full h-[360px] lg:h-[420px] object-cover object-top"
+              className="w-full aspect-[16/10] object-cover object-top"
             />
           </figure>
         </Reveal>
 
-        <RevealGroup className="lg:col-span-8 grid sm:grid-cols-3 auto-rows-fr gap-x-8 gap-y-9">
+        <RevealGroup className="lg:col-span-7 grid sm:grid-cols-3 auto-rows-fr gap-x-8 gap-y-9">
           {SEEKER.map(({ icon: Icon, title, proof, points }) => (
             <RevealItem key={title} className="flex flex-col h-full border-t-2 border-primary-600 pt-6">
               <Icon size={22} strokeWidth={1.6} className="text-primary-600" />

@@ -169,8 +169,8 @@ const Hero = () => (
     subtitle="Vetted, in-house trained professionals across nursing, personal and developmental support, regulated allied health, and facility services — ready for any care setting."
     image="/images/cta-working.jpg"
     imageAlt="A PowerCare clinical team on a hospital floor"
-    detailImage="/images/scrubs-portrait.jpg"
-    detailImageAlt="A PowerCare professional cleared for placement"
+    detailImage="/images/team-station.jpg"
+    detailImageAlt="PowerCare nurses handing over at a ward station"
   >
     <ul className="flex flex-wrap gap-2 mt-8">
       {['Nursing', 'Personal & developmental support', 'Allied health', 'Facility services'].map((t) => (

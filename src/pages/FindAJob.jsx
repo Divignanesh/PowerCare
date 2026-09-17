@@ -228,10 +228,10 @@ const Benefits = () => (
       <div className="grid lg:grid-cols-12 gap-x-12 gap-y-10 items-start">
         <div className="lg:col-span-5">
           <img
-            src="/images/nurse-confident.jpg"
-            alt="A healthcare professional placed by PowerCare"
+            src="/images/team-laptop.jpg"
+            alt="A PowerCare recruiter going through openings with a placed professional"
             loading="lazy"
-            className="w-full h-[420px] object-cover object-top rounded-2xl"
+            className="w-full aspect-[16/10] object-cover object-top rounded-2xl"
           />
         </div>
         <div className="lg:col-span-7 grid sm:grid-cols-2 gap-x-10 gap-y-10">
