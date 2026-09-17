@@ -1,6 +1,6 @@
 import { Helmet } from 'react-helmet-async'
 import { services } from '../../data/services'
-import { PHONE_E164, EMAIL, SOCIAL_PROFILES, ADDRESS } from '../../data/contact'
+import { PHONE_ENABLED, PHONE_E164, EMAIL, SOCIAL_PROFILES, ADDRESS } from '../../data/contact'
 
 const BASE_URL = 'https://www.powercarestaffing.ca'
 const OG_IMAGE = `${BASE_URL}/og-image.jpg`
@@ -23,7 +23,7 @@ const localBusinessSchema = {
   description:
     'PowerCare is a trusted healthcare staffing agency serving the Greater Toronto Area and Rural Ontario. We place vetted, in-house trained RNs, RPNs, PSWs, DSWs, OTs, SLPs, Psychotherapists, Dietitians and support staff 24/7.',
   url: BASE_URL,
-  telephone: PHONE_E164,
+  ...(PHONE_ENABLED ? { telephone: PHONE_E164 } : {}),
   email: EMAIL,
   priceRange: '$$',
   currenciesAccepted: 'CAD',
@@ -38,7 +38,8 @@ const localBusinessSchema = {
   contactPoint: [
     {
       '@type': 'ContactPoint',
-      telephone: PHONE_E164,
+      ...(PHONE_ENABLED ? { telephone: PHONE_E164 } : {}),
+      email: EMAIL,
       contactType: 'emergency staffing dispatch',
       areaServed: 'CA-ON',
       availableLanguage: ['English'],
@@ -51,7 +52,7 @@ const localBusinessSchema = {
     },
     {
       '@type': 'ContactPoint',
-      telephone: PHONE_E164,
+      ...(PHONE_ENABLED ? { telephone: PHONE_E164 } : {}),
       email: EMAIL,
       contactType: 'customer service',
       areaServed: 'CA-ON',

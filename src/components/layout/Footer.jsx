@@ -1,7 +1,7 @@
 import { Link } from 'react-router-dom';
 import { Phone, Mail, MapPin, Building, ShieldCheck } from 'lucide-react';
 import CredentialBadges from '../ui/CredentialBadges';
-import { PHONE, PHONE_HREF, EMAIL, EMAIL_HREF, SERVICE_AREA, ADDRESS_LINE, MAP_HREF, SOCIAL_PROFILES } from '../../data/contact';
+import { PHONE_ENABLED, PHONE, PHONE_HREF, EMAIL, EMAIL_HREF, SERVICE_AREA, ADDRESS_LINE, MAP_HREF, SOCIAL_PROFILES } from '../../data/contact';
 
 const IconFacebook = () => (
   <svg viewBox="0 0 24 24" fill="currentColor" width="16" height="16"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg>
@@ -52,7 +52,7 @@ const footerLinks = {
 };
 
 const contactRows = [
-  { Icon: Phone,    text: PHONE,        href: PHONE_HREF },
+  ...(PHONE_ENABLED ? [{ Icon: Phone, text: PHONE, href: PHONE_HREF }] : []),
   { Icon: Mail,     text: EMAIL,        href: EMAIL_HREF },
   { Icon: Building, text: ADDRESS_LINE, href: MAP_HREF   },
   { Icon: MapPin,   text: SERVICE_AREA, href: null       },

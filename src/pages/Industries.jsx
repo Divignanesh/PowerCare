@@ -11,7 +11,7 @@ import FAQ from '../components/ui/FAQ';
 import { industries } from '../data/industries';
 import { industriesFAQs } from '../data/faqs';
 import SEO, { faqSchema } from '../components/seo/SEO';
-import { PHONE_HREF } from '../data/contact';
+import { PHONE_ENABLED, PHONE_HREF, EMAIL_HREF } from '../data/contact';
 
 const iconMap = { Building2, Home, Hospital, Heart, Users, Activity, Brain };
 
@@ -168,7 +168,11 @@ const HowItWorks = () => (
             <p className="text-ink-600 text-[0.9375rem] mb-6 text-pretty">
               Emergency bookings are confirmed in 1–2 hours through the 24/7 dispatch desk.
             </p>
-            <a href={PHONE_HREF} className="btn-primary w-full">Call 24/7 Dispatch</a>
+            {PHONE_ENABLED ? (
+              <a href={PHONE_HREF} className="btn-primary w-full">Call 24/7 Dispatch</a>
+            ) : (
+              <a href={EMAIL_HREF} className="btn-primary w-full">Email 24/7 Dispatch</a>
+            )}
           </div>
         </Reveal>
       </div>

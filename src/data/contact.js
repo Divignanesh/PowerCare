@@ -1,15 +1,19 @@
 /**
  * Contact details — one source of truth.
  *
- * ── PLACEHOLDER ──────────────────────────────────────────────────────────
- * The phone number below is a dummy. Replace the two constants with the real
- * dispatch line and every phone link, button, footer row and schema entry on
- * the site picks it up; nothing else needs touching.
+ * ── PHONE IS OFF ─────────────────────────────────────────────────────────
+ * No number is published while the dispatch line is unconfirmed. Every phone
+ * row, button and schema field reads PHONE_ENABLED, and each one either
+ * hides itself or falls back to email.
+ *
+ * To turn it back on: set PHONE_ENABLED to true and put the real number in
+ * the two constants below. Nothing else needs touching.
  *
  *   PHONE       what a visitor reads
  *   PHONE_E164  the same number in E.164, for tel: links and JSON-LD
  * ─────────────────────────────────────────────────────────────────────────
  */
+export const PHONE_ENABLED = false;
 export const PHONE = '+1 (647) 400-0000';
 export const PHONE_E164 = '+16474000000';
 export const PHONE_HREF = `tel:${PHONE_E164}`;

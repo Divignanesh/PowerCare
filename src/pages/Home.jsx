@@ -15,7 +15,7 @@ import { homeFAQs } from '../data/faqs';
 import Reveal, { RevealGroup, RevealItem } from '../components/ui/Reveal';
 import CredentialBadges from '../components/ui/CredentialBadges';
 import SEO, { faqSchema } from '../components/seo/SEO';
-import { PHONE, EMAIL, EMAIL_HREF } from '../data/contact';
+import { PHONE_ENABLED, PHONE, EMAIL, EMAIL_HREF } from '../data/contact';
 
 const sectorIcons = { Building2, Home: HomeIcon, Hospital, Heart, Users, Activity, Brain };
 
@@ -884,7 +884,7 @@ const HomeCTA = () => (
       </div>
       <div className="flex flex-wrap justify-center gap-x-10 gap-y-4 pt-7 border-t border-white/15 max-w-2xl mx-auto">
         {[
-          { icon: Phone,  text: PHONE                    },
+          ...(PHONE_ENABLED ? [{ icon: Phone, text: PHONE }] : []),
           { icon: Mail,   text: EMAIL                    },
           { icon: Clock,  text: '24/7 Emergency Staffing' },
           { icon: MapPin, text: 'GTA & Rural Ontario'    },

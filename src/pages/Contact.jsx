@@ -12,7 +12,7 @@ import { contactFAQs } from '../data/faqs';
 import CredentialBadges from '../components/ui/CredentialBadges';
 import { PRIMARY_CREDENTIALS } from '../data/credentials';
 import SEO, { faqSchema } from '../components/seo/SEO';
-import { PHONE, PHONE_HREF, EMAIL, EMAIL_HREF, ADDRESS, MAP_HREF } from '../data/contact';
+import { PHONE_ENABLED, PHONE, PHONE_HREF, EMAIL, EMAIL_HREF, ADDRESS, MAP_HREF } from '../data/contact';
 
 // ── HERO ─────────────────────────────────────────────────────
 const Hero = () => (
@@ -25,10 +25,12 @@ const Hero = () => (
     imageAlt="A PowerCare coordinator with staff at a facility reception desk"
   >
     <div className="flex flex-col sm:flex-row gap-3 justify-center mt-8">
-      <a href={PHONE_HREF} className="btn-accent">
-        <Phone size={15} /> Call 24/7 Dispatch
-      </a>
-      <a href={EMAIL_HREF} className="btn-white">
+      {PHONE_ENABLED && (
+        <a href={PHONE_HREF} className="btn-accent">
+          <Phone size={15} /> Call 24/7 Dispatch
+        </a>
+      )}
+      <a href={EMAIL_HREF} className={PHONE_ENABLED ? 'btn-white' : 'btn-accent'}>
         <Mail size={15} /> Email Us
       </a>
     </div>
@@ -36,16 +38,22 @@ const Hero = () => (
 );
 
 // ── CONTACT INFO BAR ─────────────────────────────────────────
+const CONTACT_CELLS = [
+  ...(PHONE_ENABLED
+    ? [{ icon: Phone, title: 'Call Us', lines: [PHONE, 'Mon–Fri: 8am–8pm ET'], href: PHONE_HREF }]
+    : []),
+  { icon: Mail,   title: 'Email Us',           lines: [EMAIL, 'Response within 4 hours'], href: EMAIL_HREF },
+  { icon: MapPin, title: 'Visit Us',           lines: [ADDRESS.street, `${ADDRESS.locality}, ${ADDRESS.region} ${ADDRESS.postalCode}`], href: MAP_HREF },
+  { icon: Clock,  title: 'Emergency Staffing', lines: ['24/7 Dispatch Available', 'Same-day coverage'], href: PHONE_ENABLED ? PHONE_HREF : EMAIL_HREF },
+];
+
 const ContactInfo = () => (
   <section className="bg-primary-50 py-12">
     <div className="max-w-7xl mx-auto px-5 sm:px-6 lg:px-8">
-      <div className="grid sm:grid-cols-2 lg:grid-cols-4 border-l border-primary-200">
-        {[
-          { icon: Phone,  title: 'Call Us',            lines: [PHONE, 'Mon–Fri: 8am–8pm ET'],                          href: PHONE_HREF },
-          { icon: Mail,   title: 'Email Us',           lines: [EMAIL, 'Response within 4 hours'],                      href: EMAIL_HREF },
-          { icon: MapPin, title: 'Visit Us',           lines: [ADDRESS.street, `${ADDRESS.locality}, ${ADDRESS.region} ${ADDRESS.postalCode}`], href: MAP_HREF },
-          { icon: Clock,  title: 'Emergency Staffing', lines: ['24/7 Dispatch Available', 'Same-day coverage'],         href: PHONE_HREF },
-        ].map(({ icon: Icon, title, lines, href }) => (
+      <div className={`grid sm:grid-cols-2 border-l border-primary-200 ${
+        CONTACT_CELLS.length === 4 ? 'lg:grid-cols-4' : 'lg:grid-cols-3'
+      }`}>
+        {CONTACT_CELLS.map(({ icon: Icon, title, lines, href }) => (
           <div key={title} className="text-ink-900 border-r border-b sm:border-b-0 border-primary-200 px-6 py-7">
             <div className="flex items-center gap-2.5 mb-4">
               <Icon size={16} strokeWidth={1.8} className="text-primary-600 flex-shrink-0" />
@@ -295,12 +303,21 @@ const ContactForms = () => {
             <div className="mt-10 bg-primary-50 rounded-2xl p-7">
               <h3 className="font-heading font-semibold text-ink-900 text-lg mb-2">Need Immediate Staffing?</h3>
               <p className="text-ink-600 text-[0.9375rem] mb-6 text-pretty">
-                For urgent, same-day staffing needs, call our 24/7 dispatch line directly.
+                {PHONE_ENABLED
+                  ? 'For urgent, same-day staffing needs, call our 24/7 dispatch line directly.'
+                  : 'For urgent, same-day staffing needs, email the 24/7 dispatch desk — it is monitored around the clock.'}
               </p>
-              <a href={PHONE_HREF} className="btn-primary w-full">
-                <Phone size={15} />
-                Call 24/7 Dispatch: {PHONE}
-              </a>
+              {PHONE_ENABLED ? (
+                <a href={PHONE_HREF} className="btn-primary w-full">
+                  <Phone size={15} />
+                  Call 24/7 Dispatch: {PHONE}
+                </a>
+              ) : (
+                <a href={EMAIL_HREF} className="btn-primary w-full">
+                  <Mail size={15} />
+                  {EMAIL}
+                </a>
+              )}
             </div>
           </div>
 
