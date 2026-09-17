@@ -5,13 +5,13 @@
  */
 
 export const COLORS = {
-  brand:        '#1160A9',   // primary-600 — the brand blue
-  brandDeep:    '#0E4F8A',   // primary-700 — buttons, small text
-  brandDark:    '#0B3D6B',   // primary-800 — deep accents
-  brandDeepest: '#072742',   // primary-900 — footer
-  brandBright:  '#2474C0',   // primary-500 — bright accent
-  brandWash:    '#EFF6FD',   // primary-50  — pale section ground
-  brandTint:    '#D9E9F9',   // primary-100 — tints and tags
+  brand:        '#00558F',   // primary-600 — the brand blue
+  brandDeep:    '#003E6F',   // primary-700 — buttons, small text
+  brandDark:    '#002F55',   // primary-800 — deep accents
+  brandDeepest: '#001E38',   // primary-900 — footer
+  brandBright:  '#1A679E',   // primary-500 — bright accent
+  brandWash:    '#EDF4FA',   // primary-50  — pale section ground
+  brandTint:    '#D5E5F2',   // primary-100 — tints and tags
 
   sky:         '#5EC8F2',   // accent-300  — highlight tone on deep grounds
   skyBright:   '#2FAFE4',   // accent-400  — hover state for mint

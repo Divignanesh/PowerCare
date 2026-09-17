@@ -12,16 +12,16 @@ export default {
         // grounds. Healthcare reads as unwelcoming when large fields go dark,
         // so the deep end of this ramp is reserved for the footer and type.
         primary: {
-          50:  '#EFF6FD',  // pale wash — alternating section grounds
-          100: '#D9E9F9',  // tints, tags, icon fills
-          200: '#B4D2F1',  // rules and hover borders
-          300: '#80B4E5',  // light marks
-          400: '#4B92D4',  // secondary marks
-          500: '#2474C0',  // bright accent
-          600: '#1160A9',  // the brand blue
-          700: '#0E4F8A',  // solid buttons and small text (white on this passes AA)
-          800: '#0B3D6B',  // deep accents
-          900: '#072742',  // footer only
+          50:  '#EDF4FA',  // pale wash — alternating section grounds
+          100: '#D5E5F2',  // tints, tags, icon fills
+          200: '#AECCE4',  // rules and hover borders
+          300: '#78A9CF',  // light marks
+          400: '#4285B7',  // secondary marks
+          500: '#1A679E',  // bright accent
+          600: '#00558F',  // brand mid — icons and eyebrows
+          700: '#003E6F',  // the navy sampled from the logo mark — solid buttons
+          800: '#002F55',  // deep accents
+          900: '#001E38',  // footer only
         },
         // Reserved for the few deep grounds that remain.
         accent: {
