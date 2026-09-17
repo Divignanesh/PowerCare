@@ -14,7 +14,7 @@ export const PHONE = '+1 (647) 400-0000';
 export const PHONE_E164 = '+16474000000';
 export const PHONE_HREF = `tel:${PHONE_E164}`;
 
-export const EMAIL = 'info@powercarestaffing.ca';
+export const EMAIL = 'connect@powercare.ca';
 export const EMAIL_HREF = `mailto:${EMAIL}`;
 
 export const SERVICE_AREA = 'Greater Toronto Area & Rural Ontario';

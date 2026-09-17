@@ -4,8 +4,8 @@ import { AnimatePresence, motion, useReducedMotion } from 'framer-motion';
 import {
   ArrowRight, Check, Shield, Clock, Users,
   Award, HeartHandshake, MapPin, Wallet, GraduationCap,
-  Phone, ChevronRight, ChevronLeft, Building2, Hospital, Home as HomeIcon,
-  Heart, Activity, Brain, PhoneCall, CalendarX2, UserX, Wallet2,
+  Phone, Mail, ChevronRight, ChevronLeft, Building2, Hospital, Home as HomeIcon,
+  Heart, Activity, Brain, CalendarX2, UserX, Wallet2,
 } from 'lucide-react';
 import SectionHeader from '../components/ui/SectionHeader';
 import FAQ from '../components/ui/FAQ';
@@ -16,7 +16,7 @@ import Reveal, { RevealGroup, RevealItem } from '../components/ui/Reveal';
 import CredentialBadges from '../components/ui/CredentialBadges';
 import VettingSteps from '../components/ui/VettingSteps';
 import SEO, { faqSchema } from '../components/seo/SEO';
-import { PHONE, PHONE_HREF } from '../data/contact';
+import { PHONE, EMAIL, EMAIL_HREF } from '../data/contact';
 
 const sectorIcons = { Building2, Home: HomeIcon, Hospital, Heart, Users, Activity, Brain };
 
@@ -142,9 +142,9 @@ const Hero = () => {
               ))}
             </dl>
 
-            <a href={PHONE_HREF} className="btn-accent w-full mt-7">
-              <PhoneCall size={15} />
-              {PHONE}
+            <a href={EMAIL_HREF} className="btn-accent w-full mt-7">
+              <Mail size={15} />
+              {EMAIL}
             </a>
           </motion.aside>
         </div>
@@ -941,6 +941,7 @@ const HomeCTA = () => (
       <div className="flex flex-wrap justify-center gap-x-10 gap-y-4 pt-7 border-t border-white/15 max-w-2xl mx-auto">
         {[
           { icon: Phone,  text: PHONE                    },
+          { icon: Mail,   text: EMAIL                    },
           { icon: Clock,  text: '24/7 Emergency Staffing' },
           { icon: MapPin, text: 'GTA & Rural Ontario'    },
         ].map(({ icon: Icon, text }) => (
