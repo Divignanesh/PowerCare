@@ -26,16 +26,20 @@ const footerLinks = {
     { label: 'Contact Us',     to: '/contact' },
   ],
   services: [
-    { label: 'Registered Nurses (RN)',   to: '/services' },
-    { label: 'Personal Support Workers', to: '/services' },
-    { label: 'Developmental Support',    to: '/services' },
-    { label: 'All Services',             to: '/services' },
+    { label: 'Registered Nurses (RN)',      to: '/services' },
+    { label: 'Personal Support Workers',    to: '/services' },
+    { label: 'Occupational Therapists (OT)', to: '/services' },
+    { label: 'Speech-Language Pathologists', to: '/services' },
+    { label: 'Psychotherapists',            to: '/services' },
+    { label: 'All Professions',             to: '/services' },
   ],
   industries: [
-    { label: 'Long-Term Care',         to: '/industries' },
-    { label: 'Hospitals & Acute Care', to: '/industries' },
-    { label: 'Home & Community Care',  to: '/industries' },
-    { label: 'All Industries',         to: '/industries' },
+    { label: 'Long-Term Care',                  to: '/industries' },
+    { label: 'Hospitals & Acute Care',          to: '/industries' },
+    { label: 'Home & Community Care / Respite', to: '/industries' },
+    { label: 'Group Homes & Developmental Services / Respite', to: '/industries' },
+    { label: 'Mental Health & Addictions',      to: '/industries' },
+    { label: 'All Industries',                  to: '/industries' },
   ],
   locations: [
     { label: 'Toronto',     to: '/contact' },
@@ -65,8 +69,8 @@ const Footer = () => (
             <img src="/logo.png" alt="PowerCare logo" className="h-10 w-auto object-contain rounded-lg" />
             <span className="leading-none">
               <span className="block font-heading font-bold text-lg text-white tracking-tight">PowerCare</span>
-              <span className="block font-mono text-[0.625rem] uppercase tracking-widest text-accent-300 mt-1">
-                Health Services
+              <span className="block font-mono text-[0.625rem] font-semibold uppercase tracking-widest text-accent-300 mt-1">
+                Health Staffing Solutions
               </span>
             </span>
           </Link>
@@ -124,7 +128,7 @@ const Footer = () => (
           { heading: 'Locations',  links: footerLinks.locations  },
         ].map(({ heading, links }) => (
           <div key={heading} className="lg:col-span-2 lg:col-start-auto">
-            <h4 className="font-mono text-[0.625rem] uppercase tracking-widest text-accent-300 mb-5">
+            <h4 className="font-mono text-[0.625rem] font-semibold uppercase tracking-widest text-accent-300 mb-5">
               {heading}
             </h4>
             <ul className="space-y-3">
@@ -148,7 +152,7 @@ const Footer = () => (
 
     {/* Credentials */}
     <div className="relative max-w-7xl mx-auto px-5 sm:px-6 lg:px-8 pb-12">
-      <h4 className="font-mono text-[0.625rem] uppercase tracking-widest text-accent-300 mb-5">
+      <h4 className="font-mono text-[0.625rem] font-semibold uppercase tracking-widest text-accent-300 mb-5">
         Credentials &amp; Coverage
       </h4>
       <CredentialBadges variant="footer" useFull />

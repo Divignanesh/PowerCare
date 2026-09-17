@@ -53,16 +53,24 @@ export default {
         surface: '#F2F8F6',  // pale eucalyptus wash
       },
       fontFamily: {
-        sans:    ['"Source Sans 3"', 'system-ui', 'sans-serif'],
-        heading: ['Archivo', 'system-ui', 'sans-serif'],
-        mono:    ['"IBM Plex Mono"', 'ui-monospace', 'monospace'],
+        // A formal pairing that stays comfortable to read: Lora is a warm,
+        // low-contrast serif with open counters and a generous x-height —
+        // the same institutional register as a sharper transitional face,
+        // without the glare of thin hairlines against thick stems.
+        sans:    ['"Source Sans 3"', 'Helvetica Neue', 'Arial', 'sans-serif'],
+        heading: ['Lora', 'Georgia', 'Times New Roman', 'serif'],
+        // `font-mono` is used site-wide for eyebrows, labels and figures.
+        // It now resolves to the sans at a tracked, uppercase setting rather
+        // than a typewriter face — the tech-startup note the client heard.
+        mono:    ['"Source Sans 3"', 'Helvetica Neue', 'Arial', 'sans-serif'],
       },
       fontSize: {
         // Display sizes scale with the viewport so headings stay in
-        // proportion instead of stepping at breakpoints.
-        'display-sm': ['clamp(1.5rem, 1.2rem + 1.4vw, 2rem)',    { lineHeight: '1.15', letterSpacing: '-0.015em' }],
-        'display':    ['clamp(1.875rem, 1.4rem + 2.2vw, 2.75rem)', { lineHeight: '1.08', letterSpacing: '-0.02em'  }],
-        'display-lg': ['clamp(2.25rem, 1.5rem + 3.4vw, 3.75rem)',  { lineHeight: '1.03', letterSpacing: '-0.025em' }],
+        // proportion instead of stepping at breakpoints. A serif needs a
+        // touch more line height and almost no negative tracking.
+        'display-sm': ['clamp(1.5rem, 1.2rem + 1.4vw, 1.9375rem)',   { lineHeight: '1.28', letterSpacing: '-0.004em' }],
+        'display':    ['clamp(1.875rem, 1.4rem + 2.1vw, 2.625rem)',  { lineHeight: '1.22', letterSpacing: '-0.006em' }],
+        'display-lg': ['clamp(2.125rem, 1.45rem + 3.1vw, 3.375rem)', { lineHeight: '1.16', letterSpacing: '-0.01em'  }],
       },
       boxShadow: {
         'card':       '0 1px 2px rgba(19,35,32,0.04), 0 1px 1px rgba(19,35,32,0.03)',
@@ -77,7 +85,9 @@ export default {
         '2xl': '0.75rem',
       },
       letterSpacing: {
-        widest: '0.18em',
+        // Uppercase labels are set in the sans, so they need real tracking
+        // to read as small caps rather than as shouting.
+        widest: '0.14em',
       },
       transitionTimingFunction: {
         'out-soft': 'cubic-bezier(0.22, 1, 0.36, 1)',

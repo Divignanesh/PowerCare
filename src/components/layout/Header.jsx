@@ -73,8 +73,8 @@ const Header = () => {
 
   return (
     <header
-      className={`fixed top-0 left-0 right-0 z-50 bg-white transition-shadow duration-300 ${
-        scrolled ? 'shadow-[0_1px_20px_-8px_rgba(12,44,39,0.25)] border-b border-ink-100' : 'border-b border-ink-100'
+      className={`fixed top-0 left-0 right-0 z-50 bg-white transition-shadow duration-300 border-b border-ink-200 ${
+        scrolled ? 'shadow-[0_1px_20px_-8px_rgba(12,44,39,0.25)]' : ''
       }`}
     >
       <div className="max-w-7xl mx-auto px-5 sm:px-6 lg:px-8">
@@ -87,8 +87,8 @@ const Header = () => {
               <span className="block font-heading font-bold text-lg text-ink-900 tracking-tight">
                 PowerCare
               </span>
-              <span className="block font-mono text-[0.625rem] uppercase tracking-widest text-primary-600 mt-1">
-                Health Services
+              <span className="block font-mono text-[0.625rem] font-semibold uppercase tracking-widest text-primary-700 mt-1">
+                Health Staffing Solutions
               </span>
             </div>
           </Link>

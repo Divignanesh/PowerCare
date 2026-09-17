@@ -1,3 +1,11 @@
+/**
+ * The roles PowerCare places, in the order they are presented everywhere —
+ * the home page preview and the /services grid read from this one array, so
+ * the sequence can never drift between the two.
+ *
+ * `image` is the photograph that stands for the role; it is used by the
+ * /services grid and by the home page preview.
+ */
 export const services = [
   {
     id: 'rn',
@@ -5,6 +13,7 @@ export const services = [
     title: 'Registered Nurse (RN)',
     category: 'Medical & Nursing',
     icon: 'Stethoscope',
+    image: '/images/rn-care.jpg',
     shortDesc: 'Provides direct nursing care to patients and extends health education programs.',
     fullDesc:
       'Our Registered Nurses deliver comprehensive, evidence-based patient care across acute, long-term, and community settings. They conduct patient assessments, administer medications, manage complex care plans, and collaborate with interdisciplinary teams to ensure optimal health outcomes.',
@@ -22,6 +31,7 @@ export const services = [
     title: 'Registered Practical Nurse (RPN)',
     category: 'Medical & Nursing',
     icon: 'HeartPulse',
+    image: '/images/rpn-care.jpg',
     shortDesc: 'Delivers primary care and participates in service planning and evaluation.',
     fullDesc:
       'PowerCare RPNs are skilled practitioners who deliver high-quality nursing care in collaboration with RNs and other healthcare professionals. They assess patient health, administer treatments, and contribute to care plans across long-term care, home care, and community health settings.',
@@ -39,6 +49,7 @@ export const services = [
     title: 'Personal Support Worker (PSW)',
     category: 'Care Support',
     icon: 'HandHeart',
+    image: '/images/psw-care.jpg',
     shortDesc: 'Providing patients with attentive, practical and emotional support.',
     fullDesc:
       "PowerCare's Personal Support Workers provide compassionate, hands-on care to clients in their homes, retirement homes, and long-term care facilities. They assist with daily living activities, personal hygiene, mobility, and emotional well-being, allowing clients to maintain dignity and independence.",
@@ -56,6 +67,7 @@ export const services = [
     title: 'Developmental Support Worker (DSW)',
     category: 'Care Support',
     icon: 'Users',
+    image: '/images/group-home.jpg',
     shortDesc: 'Assists individuals with disabilities throughout life stages, promoting community participation.',
     fullDesc:
       "Our Developmental Support Workers help individuals with intellectual and developmental disabilities live fulfilling, independent lives. They create personalized support plans, facilitate community inclusion, develop life skills, and provide behavioural support tailored to each person's goals.",
@@ -68,54 +80,111 @@ export const services = [
     ],
   },
   {
-    id: 'home-care-aide',
-    requestLabel: 'Request an Aide',
-    title: 'Home Care Aide',
-    category: 'Care Support',
-    icon: 'Home',
-    shortDesc: 'Enables independent living at home for aging individuals and those recovering from illness.',
-    fullDesc:
-      'Home Care Aides provide essential support to individuals who wish to remain in the comfort of their own homes. From personal care to light housekeeping and companionship, our aides ensure a safe, clean, and nurturing environment for those managing chronic conditions, recovering from surgery, or aging in place.',
-    highlights: [
-      'Personal hygiene support',
-      'Light housekeeping & laundry',
-      'Grocery shopping & errands',
-      'Appointment coordination',
-      'Safety monitoring & fall prevention',
-    ],
-  },
-  {
-    id: 'pta',
-    requestLabel: 'Request a PTA',
-    title: 'Physiotherapy Assistant (PTA)',
-    category: 'Therapeutic & Rehabilitation',
-    icon: 'Activity',
-    shortDesc: 'Works with physiotherapists on patient-centered care and treatment plan implementation.',
-    fullDesc:
-      'PowerCare Physiotherapy Assistants work under the supervision of registered physiotherapists to implement individualized rehabilitation programs. They assist patients in regaining strength, mobility, and function following injury, surgery, or illness.',
-    highlights: [
-      'Exercise program implementation',
-      'Mobility & gait training',
-      'Equipment setup & education',
-      'Progress monitoring & documentation',
-      'Therapeutic modality application',
-    ],
-  },
-  {
-    id: 'dietary-aide',
+    id: 'dietary',
     requestLabel: 'Request a Dietary Aide',
-    title: 'Dietary Aide',
-    category: 'Therapeutic & Rehabilitation',
+    title: 'Dietary Aide / Dietitian',
+    category: 'Allied Health & Therapy',
     icon: 'UtensilsCrossed',
-    shortDesc: 'Prepares nutritious meals considering dietary restrictions, allergies, and special needs.',
+    image: '/images/dietitian.jpg',
+    shortDesc: 'Plans and prepares nutrition that accounts for therapeutic diets, allergies and special needs.',
     fullDesc:
-      'Our Dietary Aides prepare and serve nutritious, personalized meals in long-term care homes, hospitals, and retirement residences. They work with Registered Dietitians to ensure dietary restrictions, allergies, and therapeutic diet requirements are consistently met.',
+      'PowerCare places both Registered Dietitians and Dietary Aides. Dietitians assess nutritional risk, build therapeutic diet plans and advise clinical teams; Dietary Aides prepare and serve those meals accurately and safely in long-term care homes, hospitals and retirement residences.',
     highlights: [
-      'Meal preparation & service',
-      'Therapeutic diet adherence',
-      'Allergy & restriction awareness',
-      'Kitchen sanitation & safety',
-      'Resident nutrition monitoring',
+      'Nutritional assessment & care planning',
+      'Therapeutic and texture-modified diets',
+      'Allergy & restriction management',
+      'Meal preparation, service and monitoring',
+      'Kitchen sanitation & food safety compliance',
+    ],
+  },
+  {
+    id: 'ot',
+    requestLabel: 'Request an OT',
+    title: 'Occupational Therapist (OT)',
+    category: 'Allied Health & Therapy',
+    icon: 'Accessibility',
+    image: '/images/ot-hand.jpg',
+    shortDesc: 'Restores day-to-day function — mobility, self-care and safe independent living.',
+    fullDesc:
+      'Our Occupational Therapists help clients regain and maintain the activities of daily living after injury, surgery, stroke or as function declines with age. They assess the person and the environment, prescribe equipment and modifications, and build graded programmes that return people to safe independence at home and in the community.',
+    highlights: [
+      'Functional & home safety assessments',
+      'Activities of daily living retraining',
+      'Seating, mobility & assistive equipment prescription',
+      'Cognitive and perceptual rehabilitation',
+      'Falls prevention & caregiver education',
+    ],
+  },
+  {
+    id: 'slp',
+    requestLabel: 'Request an SLP',
+    title: 'Speech-Language Pathologist (SLP)',
+    category: 'Allied Health & Therapy',
+    icon: 'Speech',
+    image: '/images/slp-session.jpg',
+    shortDesc: 'Assesses and treats communication, language and swallowing difficulties.',
+    fullDesc:
+      'PowerCare Speech-Language Pathologists assess and treat speech, language, voice, cognitive-communication and swallowing disorders across the lifespan — from paediatric language development to post-stroke aphasia and dysphagia management in long-term care.',
+    highlights: [
+      'Speech, language & communication assessment',
+      'Dysphagia (swallowing) assessment & management',
+      'Aphasia and post-stroke communication therapy',
+      'Augmentative & alternative communication (AAC)',
+      'Staff and family communication training',
+    ],
+  },
+  {
+    id: 'psychotherapist',
+    requestLabel: 'Request a Psychotherapist',
+    title: 'Psychotherapist',
+    category: 'Allied Health & Therapy',
+    icon: 'Brain',
+    image: '/images/psychotherapy.jpg',
+    shortDesc: 'Structured, evidence-based talk therapy for mental health and behavioural needs.',
+    fullDesc:
+      'Our Registered Psychotherapists deliver evidence-based individual and group therapy in mental health programmes, addictions services, developmental services and community agencies. They work within the circle of care, contribute to treatment planning, and are trained in trauma-informed practice.',
+    highlights: [
+      'Individual & group psychotherapy',
+      'Trauma-informed and CBT-based practice',
+      'Mental health and addictions programmes',
+      'Crisis support & safety planning',
+      'Treatment planning and clinical documentation',
+    ],
+  },
+  {
+    id: 'dementia-care',
+    requestLabel: 'Request a Specialist',
+    title: 'Dementia Care Specialist',
+    category: 'Specialized Care',
+    icon: 'HeartHandshake',
+    image: '/images/dementia-care.jpg',
+    shortDesc: "Specialized support for individuals living with Alzheimer's and dementia-related conditions.",
+    fullDesc:
+      "PowerCare's Dementia Care Specialists are trained in person-centered dementia care approaches. They provide structured routines, cognitive engagement, safety monitoring, and compassionate support to individuals living with Alzheimer's disease and other forms of dementia.",
+    highlights: [
+      'Structured daily routines',
+      'Cognitive stimulation activities',
+      'Responsive behaviour support',
+      'Safety checks & fall prevention',
+      'Family caregiver support & education',
+    ],
+  },
+  {
+    id: 'companion',
+    requestLabel: 'Request Companion Care',
+    title: 'Companion Care',
+    category: 'Care Support',
+    icon: 'SmilePlus',
+    image: '/images/elderly-hands.jpg',
+    shortDesc: 'Emotional support, social engagement, and light assistance for isolated or aging individuals.',
+    fullDesc:
+      'Companionship is a vital component of holistic care. PowerCare Companions provide meaningful social interaction, emotional support, and light assistance to seniors and those experiencing loneliness or isolation. They accompany clients to appointments, engage in activities, and provide peace of mind to families.',
+    highlights: [
+      'Social engagement & conversation',
+      'Accompaniment to appointments',
+      'Recreational activity support',
+      'Light meal preparation',
+      'Emotional & mental well-being support',
     ],
   },
   {
@@ -124,6 +193,7 @@ export const services = [
     title: 'Housekeeping & Laundry Aide',
     category: 'Facility & Administrative',
     icon: 'Sparkles',
+    image: '/images/housekeeping.jpg',
     shortDesc: 'Maintains hygiene standards across healthcare facilities with thorough cleaning protocols.',
     fullDesc:
       'Maintaining a clean, infection-controlled environment is critical in healthcare settings. PowerCare Housekeeping and Laundry Aides are trained in healthcare-grade sanitation protocols, ensuring facilities remain safe and comfortable for residents, patients, and staff.',
@@ -141,6 +211,7 @@ export const services = [
     title: 'Front Desk Screener',
     category: 'Facility & Administrative',
     icon: 'ClipboardList',
+    image: '/images/reception.jpg',
     shortDesc: 'Handles client interactions, visitor management, and facility communications.',
     fullDesc:
       'Our Front Desk Screeners are the first point of contact in healthcare facilities, managing visitor access, conducting health screenings, and coordinating communications. They ensure smooth operations while upholding safety protocols and delivering professional, welcoming service.',
@@ -152,47 +223,13 @@ export const services = [
       'Infection control compliance',
     ],
   },
-  {
-    id: 'companion',
-    requestLabel: 'Request Companion Care',
-    title: 'Companion Care',
-    category: 'Care Support',
-    icon: 'SmilePlus',
-    shortDesc: 'Emotional support, social engagement, and light assistance for isolated or aging individuals.',
-    fullDesc:
-      'Companionship is a vital component of holistic care. PowerCare Companions provide meaningful social interaction, emotional support, and light assistance to seniors and those experiencing loneliness or isolation. They accompany clients to appointments, engage in activities, and provide peace of mind to families.',
-    highlights: [
-      'Social engagement & conversation',
-      'Accompaniment to appointments',
-      'Recreational activity support',
-      'Light meal preparation',
-      'Emotional & mental well-being support',
-    ],
-  },
-  {
-    id: 'dementia-care',
-    requestLabel: 'Request a Specialist',
-    title: 'Dementia Care Specialist',
-    category: 'Specialized Care',
-    icon: 'Brain',
-    shortDesc: "Specialized support for individuals living with Alzheimer's and dementia-related conditions.",
-    fullDesc:
-      "PowerCare's Dementia Care Specialists are trained in person-centered dementia care approaches. They provide structured routines, cognitive engagement, safety monitoring, and compassionate support to individuals living with Alzheimer's disease and other forms of dementia.",
-    highlights: [
-      'Structured daily routines',
-      'Cognitive stimulation activities',
-      'Safety checks & fall prevention',
-      'Medication reminders',
-      'Family caregiver support & education',
-    ],
-  },
 ];
 
 export const serviceCategories = [
   'All',
   'Medical & Nursing',
   'Care Support',
-  'Therapeutic & Rehabilitation',
-  'Facility & Administrative',
+  'Allied Health & Therapy',
   'Specialized Care',
+  'Facility & Administrative',
 ];

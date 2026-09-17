@@ -1,15 +1,15 @@
 import { Link } from 'react-router-dom';
 import {
-  ArrowRight, Users, Award, Heart, Target,
-  Eye, Lightbulb, Shield, Star, CheckCircle,
-  GraduationCap, HeartHandshake, Umbrella
+  ArrowRight, Award, Target, ChevronRight,
+  Eye, Lightbulb, Shield, CheckCircle,
+  GraduationCap, HeartHandshake,
 } from 'lucide-react';
 import SectionHeader from '../components/ui/SectionHeader';
 import PageHero from '../components/ui/PageHero';
 import FAQ from '../components/ui/FAQ';
 import { aboutFAQs } from '../data/faqs';
-import { RevealGroup, RevealItem } from '../components/ui/Reveal';
-import SEO from '../components/seo/SEO';
+import Reveal, { RevealGroup, RevealItem } from '../components/ui/Reveal';
+import SEO, { faqSchema } from '../components/seo/SEO';
 
 const Hero = () => (
   <PageHero
@@ -17,8 +17,38 @@ const Hero = () => (
     eyebrow="Our Story"
     title="About PowerCare"
     subtitle="Founded on the belief that quality healthcare staffing can transform lives — for caregivers, clients, and the communities we serve."
-    image="/images/ward.jpg"
-  />
+    image="/images/team-diverse.jpg"
+    imageAlt="The PowerCare clinical team"
+  >
+    <div className="flex flex-col sm:flex-row gap-3 justify-center mt-8">
+      <Link to="/contact" className="btn-accent">Partner With Us <ArrowRight size={16} /></Link>
+      <Link to="/why-powercare" className="btn-white">Why PowerCare <ChevronRight size={16} /></Link>
+    </div>
+  </PageHero>
+);
+
+// A ruled row of figures directly under the hero — the page had nothing
+// between the headline and a wall of prose, which is what read as empty.
+const RecordBand = () => (
+  <section className="bg-white border-b border-ink-200">
+    <div className="container-custom">
+      <Reveal>
+        <dl className="grid grid-cols-2 lg:grid-cols-4 border-l border-ink-200">
+          {[
+            { value: '500+',   label: 'Facility partners across Ontario' },
+            { value: '5,000+', label: 'Shifts successfully filled'       },
+            { value: '80 hrs', label: 'Training before a first placement' },
+            { value: '24/7',   label: 'Live dispatch, every day of the year' },
+          ].map(({ value, label }) => (
+            <div key={label} className="border-r border-b lg:border-b-0 border-ink-200 px-6 py-9 lg:py-11">
+              <dd className="figure-lg text-3xl lg:text-[2.5rem] leading-none">{value}</dd>
+              <dt className="text-ink-600 text-sm mt-3 leading-snug">{label}</dt>
+            </div>
+          ))}
+        </dl>
+      </Reveal>
+    </div>
+  </section>
 );
 
 const OurStory = () => (
@@ -44,9 +74,17 @@ const OurStory = () => (
           </div>
         </div>
 
-        {/* Standing in for a photograph: the three things that actually
-            differentiate the agency, stated plainly. */}
+        {/* The three things that actually differentiate the agency, stated
+            plainly, over a photograph of the work itself. */}
         <div className="lg:col-span-5">
+          <figure className="fig-frame mb-5">
+            <img
+              src="/images/therapy-pets.jpg"
+              alt="PowerCare staff and residents during an afternoon activity"
+              loading="lazy"
+              className="w-full h-[220px] object-cover"
+            />
+          </figure>
           <div className="rounded-2xl bg-primary-50 border border-primary-100 p-8">
             <h3 className="font-mono text-[0.6875rem] uppercase tracking-widest text-primary-700 mb-6">
               How we do it differently
@@ -122,8 +160,8 @@ const Accreditations = () => (
         {[
           { icon: Shield,      title: 'WSIB Compliant',      desc: 'All placed workers are WSIB covered for your protection.' },
           { icon: CheckCircle, title: 'Background Checked',  desc: 'Criminal record + vulnerable sector screening on every hire.' },
-          { icon: Award,       title: 'CNO & COTO Verified', desc: 'Nurses and therapy staff verified against their Ontario colleges.' },
-          { icon: Umbrella,    title: '$2M Insured',         desc: 'Full liability coverage on every placement.' },
+          { icon: Award,       title: 'College Verified',    desc: 'Nurses, OTs, SLPs and psychotherapists verified against their Ontario colleges.' },
+          { icon: GraduationCap, title: 'In-House Trained',  desc: '80 hours of certification completed before a first placement.' },
         ].map(({ icon: Icon, title, desc }) => (
           <div
             key={title}
@@ -141,17 +179,25 @@ const Accreditations = () => (
 );
 
 const AboutCTA = () => (
-  <section className="section-padding bg-surface">
-    <div className="container-custom text-center">
-      <h2 className="text-display-sm font-heading font-semibold text-ink-900 mb-5 text-balance">
+  <section className="relative bg-primary-900 overflow-hidden">
+    <img
+      src="/images/cta-corridor.jpg"
+      alt=""
+      aria-hidden="true"
+      loading="lazy"
+      className="absolute inset-0 w-full h-full object-cover"
+    />
+    <div className="absolute inset-0 scrim-soft" aria-hidden="true" />
+    <div className="container-custom relative z-10 section-padding text-center">
+      <h2 className="text-display-sm font-heading font-semibold text-white mb-5 text-balance">
         Ready to Work with PowerCare?
       </h2>
-      <p className="text-ink-600 text-lg max-w-xl mx-auto mb-10 text-pretty">
-        Whether you need to fill a shift today or build a long-term staffing strategy, we're here.
+      <p className="text-white/80 text-lg max-w-xl mx-auto mb-10 text-pretty">
+        Whether you need to fill a shift today or build a long-term staffing strategy, we&rsquo;re here.
       </p>
       <div className="flex flex-col sm:flex-row gap-3 justify-center">
-        <Link to="/contact" className="btn-primary">Partner With Us <ArrowRight size={16} /></Link>
-        <Link to="/careers" className="btn-secondary">Find a Job <ArrowRight size={16} /></Link>
+        <Link to="/contact" className="btn-accent">Partner With Us <ArrowRight size={16} /></Link>
+        <Link to="/careers" className="btn-white">Find a Job <ArrowRight size={16} /></Link>
       </div>
     </div>
   </section>
@@ -159,8 +205,9 @@ const AboutCTA = () => (
 
 const AboutUs = () => (
   <main>
-    <SEO page="about" />
+    <SEO page="about" extraSchemas={[faqSchema(aboutFAQs)]} />
     <Hero />
+    <RecordBand />
     <OurStory />
     <MissionVisionValues />
     <Accreditations />

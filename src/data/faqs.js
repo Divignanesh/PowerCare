@@ -1,7 +1,7 @@
 export const homeFAQs = [
   {
     q: 'What healthcare staffing services does PowerCare provide in the GTA?',
-    a: 'PowerCare provides Registered Nurse (RN), Registered Practical Nurse (RPN), Personal Support Worker (PSW), Developmental Support Worker (DSW), Home Care Aide, Physiotherapy Assistant, Dietary Aide, Housekeeping Aide, and Front Desk Screener staffing across the Greater Toronto Area and Rural Ontario.',
+    a: 'PowerCare provides Registered Nurse (RN), Registered Practical Nurse (RPN), Personal Support Worker (PSW), Developmental Support Worker (DSW), Dietary Aide / Dietitian, Occupational Therapist (OT), Speech-Language Pathologist (SLP), Psychotherapist, Housekeeping Aide, and Front Desk Screener staffing across the Greater Toronto Area and Rural Ontario.',
   },
   {
     q: 'How quickly can PowerCare fill a healthcare staffing shift in Ontario?',
@@ -9,7 +9,7 @@ export const homeFAQs = [
   },
   {
     q: 'Does PowerCare provide healthcare staffing for long-term care homes in Ontario?',
-    a: 'Yes. PowerCare is a specialized provider of staffing solutions for long-term care homes across the GTA and Rural Ontario, including RNs, RPNs, PSWs, Dietary Aides, and Housekeeping staff.',
+    a: 'Yes. PowerCare is a specialized provider of staffing solutions for long-term care homes across the GTA and Rural Ontario, including RNs, RPNs, PSWs, Dietary Aides and Dietitians, Speech-Language Pathologists and Housekeeping staff.',
   },
   {
     q: 'What makes PowerCare different from other healthcare staffing agencies in Toronto?',
@@ -22,10 +22,6 @@ export const homeFAQs = [
 ];
 
 export const aboutFAQs = [
-  {
-    q: 'When was PowerCare founded?',
-    a: 'PowerCare was founded by healthcare professionals with direct experience in the staffing crisis. We launched to solve real problems in healthcare worker placement and facility staffing challenges.',
-  },
   {
     q: 'What is PowerCare\'s mission?',
     a: 'Our mission is to connect quality healthcare professionals with the facilities that need them most — building stronger care teams while creating meaningful employment opportunities in healthcare.',
@@ -51,7 +47,7 @@ export const whyPowerCareFAQs = [
   },
   {
     q: 'How does PowerCare\'s 10-step vetting process work?',
-    a: 'Our vetting includes: credential verification, background checks, reference checks, clinical assessments, communication evaluations, cultural fit interviews, mock scenarios, WSIB coverage verification, insurance validation, and facility-specific orientation.',
+    a: 'Our vetting includes: credential verification, background checks, reference checks, clinical assessments, communication evaluations, cultural fit interviews, mock scenarios, WSIB coverage verification, health and immunization clearance, and facility-specific orientation.',
   },
   {
     q: 'What does "placement satisfaction guarantee" mean?',
@@ -69,12 +65,12 @@ export const whyPowerCareFAQs = [
 
 export const servicesFAQs = [
   {
-    q: 'What is the difference between RN, RPN, and PSW roles?',
-    a: 'RNs (Registered Nurses) require 4-year degrees and manage complex patient care. RPNs (Registered Practical Nurses) have 2-year diplomas and support clinical nursing. PSWs (Personal Support Workers) provide personal care and daily living assistance under nurse supervision.',
+    q: 'Can PowerCare source a role that is not listed on this page?',
+    a: 'Yes. The roles on this page are the ones we place most often — they are not a closed list. Tell us the role, the setting and the college registration or certification you need, and we will either match someone from our existing pool or recruit and screen for it. New roles go through the same ten-step vetting and in-house training as every other placement.',
   },
   {
-    q: 'Can PowerCare place staff for specialized roles like Physiotherapy Assistants?',
-    a: 'Yes. Beyond core nursing and care roles, PowerCare places Physiotherapy Assistants, Occupational Therapy Assistants, Dietary Aides, Housekeeping Aides, Front Desk Screeners, and other specialized healthcare roles.',
+    q: 'Can PowerCare place regulated allied health professionals?',
+    a: 'Yes. Beyond core nursing and care roles, PowerCare places Occupational Therapists (OTs), Speech-Language Pathologists (SLPs), Psychotherapists, Dietitians and Dietary Aides, Housekeeping Aides, Front Desk Screeners, and other specialized healthcare roles.',
   },
   {
     q: 'How long does it take to request and receive a staff placement?',
@@ -85,15 +81,15 @@ export const servicesFAQs = [
     a: 'PowerCare excels at both. We provide emergency same-day coverage, shift-by-shift staffing, and long-term contract placements for extended absences or seasonal capacity needs.',
   },
   {
-    q: 'Are all PowerCare staff fully credentialed and insured?',
-    a: 'Yes. Every PowerCare staff member is fully credentialed, background checked, WSIB-covered, and carries comprehensive liability insurance. We verify all credentials before placement.',
+    q: 'Are all PowerCare staff fully credentialed and screened?',
+    a: 'Yes. Every PowerCare staff member is fully credentialed, police background checked, cleared through Vulnerable Sector Screening, and WSIB-covered. We verify all college registrations and credentials before placement.',
   },
 ];
 
 export const industriesFAQs = [
   {
     q: 'Does PowerCare have experience with multiple care settings?',
-    a: 'Yes. PowerCare staffs long-term care homes, hospitals, retirement residences, group homes, rehabilitation centres, mental health facilities, home care agencies, and community support services.',
+    a: 'Yes. PowerCare staffs long-term care homes, hospitals, retirement residences, group homes and developmental services, rehabilitation and therapy centres, mental health and addictions facilities, and home, community and respite care programs.',
   },
   {
     q: 'Can PowerCare handle staffing for multiple facilities at the same time?',
@@ -139,11 +135,11 @@ export const contactFAQs = [
 export const findJobFAQs = [
   {
     q: 'What roles does PowerCare hire for?',
-    a: 'PowerCare hires Registered Nurses (RNs), Registered Practical Nurses (RPNs), Personal Support Workers (PSWs), Developmental Support Workers (DSWs), Physiotherapy Assistants, Dietary Aides, Housekeeping Aides, and other healthcare support roles.',
+    a: 'PowerCare hires Registered Nurses (RNs), Registered Practical Nurses (RPNs), Personal Support Workers (PSWs), Developmental Support Workers (DSWs), Occupational Therapists (OTs), Speech-Language Pathologists (SLPs), Psychotherapists, Dietitians and Dietary Aides, Housekeeping Aides, and other healthcare support roles.',
   },
   {
     q: 'Do I need to be credentialed to apply to PowerCare?',
-    a: 'It depends on the role. RNs and RPNs must have current provincial licenses. PSWs and support roles may require certifications (some may be obtained through our training program). Contact our recruitment team for role-specific requirements.',
+    a: 'It depends on the role. RNs, RPNs, OTs, SLPs and Psychotherapists must hold current registration with their Ontario college. PSWs and support roles may require certifications (some may be obtained through our training program). Contact our recruitment team for role-specific requirements.',
   },
   {
     q: 'Does PowerCare offer training to new hires?',
@@ -155,7 +151,7 @@ export const findJobFAQs = [
   },
   {
     q: 'What is the pay rate and benefits with PowerCare?',
-    a: 'Competitive pay depends on your role, experience, and credentials. We offer WSIB coverage, liability insurance, flexible scheduling, and advancement opportunities. Contact our recruitment team for specific rate information.',
+    a: 'Competitive pay depends on your role, experience, and credentials. We offer WSIB coverage, free in-house training, flexible scheduling, and advancement opportunities. Contact our recruitment team for specific rate information.',
   },
   {
     q: 'Can I choose my own shifts at PowerCare?',

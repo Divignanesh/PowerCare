@@ -1,10 +1,10 @@
 export const jobCategories = [
-  { id: 'nursing', label: 'Nursing', roles: ['Registered Nurse (RN)', 'Registered Practical Nurse (RPN)', 'Nurse Practitioner (NP)'] },
-  { id: 'personal-care', label: 'Personal Care', roles: ['Personal Support Worker (PSW)', 'Home Care Aide', 'Developmental Support Worker (DSW)'] },
-  { id: 'therapy', label: 'Therapy & Rehab', roles: ['Physiotherapy Assistant (PTA)', 'Occupational Therapy Assistant (OTA)', 'Behavioural Therapist'] },
-  { id: 'community', label: 'Community & Social Services', roles: ['Community Service Worker (CSW)', 'Child and Youth Worker (CYW)'] },
-  { id: 'support', label: 'Facility & Support', roles: ['Dietary Aide', 'Housekeeping & Laundry Aide', 'Front Desk Screener'] },
-  { id: 'specialized', label: 'Specialized Care', roles: ['Dementia Care Specialist', 'Palliative Care Worker', 'Companion'] },
+  { id: 'nursing',       label: 'Nursing',                      roles: ['Registered Nurse (RN)', 'Registered Practical Nurse (RPN)', 'Nurse Practitioner (NP)'] },
+  { id: 'personal-care', label: 'Personal & Developmental Care', roles: ['Personal Support Worker (PSW)', 'Developmental Support Worker (DSW)', 'Companion'] },
+  { id: 'allied',        label: 'Allied Health & Therapy',      roles: ['Occupational Therapist (OT)', 'Speech-Language Pathologist (SLP)', 'Psychotherapist', 'Dietary Aide / Dietitian'] },
+  { id: 'community',     label: 'Community & Social Services',  roles: ['Community Service Worker (CSW)', 'Child and Youth Worker (CYW)', 'Respite Support Worker'] },
+  { id: 'support',       label: 'Facility & Support',           roles: ['Housekeeping & Laundry Aide', 'Front Desk Screener'] },
+  { id: 'specialized',   label: 'Specialized Care',             roles: ['Dementia Care Specialist', 'Palliative Care Worker', 'Behavioural Support Worker'] },
 ];
 
 export const employmentTypes = [

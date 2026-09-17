@@ -11,28 +11,37 @@ import { jobCategories, employmentTypes, locations, hiringSteps, benefits } from
 import { findJobFAQs } from '../data/faqs';
 import { RevealGroup, RevealItem } from '../components/ui/Reveal';
 import CredentialBadges from '../components/ui/CredentialBadges';
-import { PRIMARY_CREDENTIALS } from '../data/credentials';
-import SEO, { hiringHowToSchema } from '../components/seo/SEO';
+import SEO, { hiringHowToSchema, faqSchema } from '../components/seo/SEO';
 
 const iconMap = { Send, Search, ClipboardCheck, CheckCircle2, UserCheck, Zap, Clock, DollarSign, MapPin, Gift };
 
 // ── HERO ─────────────────────────────────────────────────────
 const PageHero = () => (
-  <section className="relative bg-primary-50 overflow-hidden">
-      <div className="absolute inset-0 bg-grid pointer-events-none" aria-hidden="true" />
+  <section className="relative bg-primary-900 overflow-hidden">
+    <img
+      src="/images/careers-corridor.jpg"
+      alt="A PowerCare nurse on shift in a hospital corridor"
+      fetchPriority="high"
+      className="absolute inset-0 w-full h-full object-cover object-[center_38%]"
+    />
+    <div className="absolute inset-0 scrim" aria-hidden="true" />
+    <div className="absolute inset-0 bg-grid-invert pointer-events-none" aria-hidden="true" />
+
     <div className="relative z-10 max-w-7xl mx-auto px-5 sm:px-6 lg:px-8 py-16 lg:py-24">
       <div className="grid lg:grid-cols-12 gap-x-12 gap-y-10 items-center">
-        <div className="lg:col-span-6 text-ink-900">
-          <span className="inline-flex items-center gap-2.5 font-mono text-[0.6875rem] uppercase tracking-widest text-primary-600">
-            <span className="block w-6 h-px bg-primary-400" aria-hidden="true" />
+        <div className="lg:col-span-6">
+          <span className="inline-flex items-center gap-2.5 font-mono text-[0.6875rem] font-semibold uppercase tracking-widest text-accent-300">
+            <span className="block w-6 h-px bg-accent-300/70" aria-hidden="true" />
             Healthcare Careers
           </span>
-          <h1 className="text-display font-heading font-semibold mt-6 text-balance wdth-wide">
-            Find Your Next<br />
-            <span className="text-primary-600">Healthcare Role</span>
+          <h1 className="text-display font-heading font-semibold text-white mt-6 text-balance wdth-wide">
+            Find Your Next{' '}
+            <span className="text-accent-300 lg:block">Healthcare Role</span>
           </h1>
-          <p className="text-lg text-ink-600 leading-relaxed mt-6 max-w-xl text-pretty">
-            Whether you're a seasoned RN, a new PSW graduate, or a DSW looking for meaningful work — PowerCare has opportunities across the GTA and Rural Ontario. Apply once, work everywhere.
+          <p className="text-lg text-white/80 leading-relaxed mt-6 max-w-xl text-pretty">
+            Whether you&rsquo;re a seasoned RN, a newly registered OT or SLP, a PSW graduate or a DSW
+            looking for meaningful work — PowerCare has opportunities across the GTA and Rural
+            Ontario. Apply once, work everywhere.
           </p>
           <div className="grid sm:grid-cols-2 gap-x-10 mt-10">
             {[
@@ -42,10 +51,10 @@ const PageHero = () => (
               { label: 'Dedicated Recruiter',   sub: 'Your own advocate'   },
             ].map(({ label, sub }) => (
               <div key={label} className="flex items-start gap-3 py-4">
-                <Check size={16} strokeWidth={2.5} className="text-primary-600 mt-0.5 flex-shrink-0" />
+                <Check size={16} strokeWidth={2.5} className="text-accent-300 mt-0.5 flex-shrink-0" />
                 <div>
-                  <div className="font-semibold text-[0.9375rem]">{label}</div>
-                  <div className="text-ink-500 text-sm mt-0.5">{sub}</div>
+                  <div className="font-semibold text-[0.9375rem] text-white">{label}</div>
+                  <div className="text-white/65 text-sm mt-0.5">{sub}</div>
                 </div>
               </div>
             ))}
@@ -58,6 +67,12 @@ const PageHero = () => (
           <p className="text-ink-600 text-[0.9375rem] mb-7">Start your application — a recruiter will call you within 24 hours.</p>
           <QuickApplyForm />
         </div>
+      </div>
+    </div>
+
+    <div className="relative z-10 border-t border-white/15 bg-primary-900/70 backdrop-blur-sm">
+      <div className="max-w-7xl mx-auto px-5 sm:px-6 lg:px-8 py-4">
+        <CredentialBadges variant="hero" />
       </div>
     </div>
   </section>
@@ -143,20 +158,24 @@ const RoleCategories = () => (
         subtitle="PowerCare places professionals across a wide range of clinical, care, and support roles throughout Ontario."
         centered={false}
       />
-      <RevealGroup className="grid sm:grid-cols-2 lg:grid-cols-3 gap-x-10 gap-y-9">
+      <RevealGroup className="grid sm:grid-cols-2 lg:grid-cols-3 auto-rows-fr gap-5">
         {jobCategories.map((cat) => (
-          <RevealItem key={cat.id} className="border-t-2 border-primary-600 pt-6">
-            <h3 className="flex items-center gap-3 font-heading font-semibold text-ink-900 text-lg mb-5">
-              <Briefcase size={18} strokeWidth={1.7} className="text-primary-600 flex-shrink-0" />
-              {cat.label}
-            </h3>
-            <ul className="space-y-2">
-              {cat.roles.map((role) => (
-                <li key={role} className="py-1.5 text-[0.9375rem] text-ink-700">
-                  {role}
-                </li>
-              ))}
-            </ul>
+          <RevealItem key={cat.id} className="h-full">
+            <div className="flex flex-col h-full rounded-xl border border-ink-200 bg-white p-7 shadow-card
+                            border-t-2 border-t-primary-600">
+              <h3 className="flex items-center gap-3 font-heading font-semibold text-ink-900 text-lg mb-5">
+                <Briefcase size={18} strokeWidth={1.7} className="text-primary-600 flex-shrink-0" />
+                {cat.label}
+              </h3>
+              <ul className="space-y-2 border-t border-ink-100 pt-4">
+                {cat.roles.map((role) => (
+                  <li key={role} className="flex items-start gap-2.5 py-1.5 text-[0.9375rem] text-ink-700">
+                    <Check size={14} strokeWidth={2.6} className="text-primary-500 mt-1.5 flex-shrink-0" />
+                    {role}
+                  </li>
+                ))}
+              </ul>
+            </div>
           </RevealItem>
         ))}
       </RevealGroup>
@@ -209,7 +228,7 @@ const Benefits = () => (
       <div className="grid lg:grid-cols-12 gap-x-12 gap-y-10 items-start">
         <div className="lg:col-span-5">
           <img
-            src="/images/scrubs-portrait.jpg"
+            src="/images/nurse-confident.jpg"
             alt="A healthcare professional placed by PowerCare"
             loading="lazy"
             className="w-full h-[420px] object-cover rounded-2xl"
@@ -384,21 +403,22 @@ const FullApplicationForm = () => {
       <button type="submit" className="btn-primary w-full">
         Submit Application <ArrowRight size={16} />
       </button>
-      <CredentialBadges variant="form" only={['wsib', 'insured', 'dispatch']} className="pt-2" />
+      <CredentialBadges variant="form" only={['wsib', 'trained', 'dispatch']} className="pt-2" />
     </form>
   );
 };
 
 // ── TESTIMONIALS ─────────────────────────────────────────────
 const Testimonials = () => (
-  <section className="relative section-padding bg-primary-50 overflow-hidden">
-      <div className="absolute inset-0 bg-grid pointer-events-none" aria-hidden="true" />
+  <section className="relative section-padding bg-primary-900 overflow-hidden">
+    <div className="absolute inset-0 bg-grid-invert pointer-events-none" aria-hidden="true" />
     <div className="container-custom relative z-10">
       <SectionHeader
-        badge="Staff Stories"
+        badge="Staff stories"
         title="What Our Caregivers Say"
         subtitle="Real experiences from healthcare professionals who found their next role through PowerCare."
         centered={false}
+        light
       />
       <div className="grid md:grid-cols-3 gap-x-10 gap-y-9">
         {[
@@ -415,16 +435,16 @@ const Testimonials = () => (
             name: 'Maria S.', role: 'Developmental Support Worker', location: 'Barrie, ON',
           },
         ].map(({ quote, name, role, location }) => (
-          <figure key={name} className="flex flex-col">
+          <figure key={name} className="flex flex-col rounded-xl border border-white/15 bg-white/5 p-7">
             <blockquote className="flex-1">
-              <p className="font-heading text-lg text-ink-700 leading-relaxed text-pretty">
+              <p className="font-heading text-lg text-white/85 leading-relaxed text-pretty">
                 &ldquo;{quote}&rdquo;
               </p>
             </blockquote>
-            <figcaption className="mt-7 pt-5">
-              <div className="font-semibold text-ink-900">{name}</div>
-              <div className="text-ink-600 text-sm mt-0.5">{role}</div>
-              <div className="font-mono text-[0.6875rem] uppercase tracking-widest text-primary-600 mt-2 flex items-center gap-1.5">
+            <figcaption className="mt-7 pt-5 border-t border-white/15">
+              <div className="font-semibold text-white">{name}</div>
+              <div className="text-white/65 text-sm mt-0.5">{role}</div>
+              <div className="font-mono text-[0.6875rem] font-semibold uppercase tracking-widest text-accent-300 mt-2 flex items-center gap-1.5">
                 <MapPin size={11} />
                 {location}
               </div>
@@ -438,7 +458,7 @@ const Testimonials = () => (
 
 const FindAJob = () => (
   <main>
-    <SEO page="careers" extraSchemas={[hiringHowToSchema]} />
+    <SEO page="careers" extraSchemas={[hiringHowToSchema, faqSchema(findJobFAQs)]} />
     <PageHero />
     <RoleCategories />
     <HiringProcess />

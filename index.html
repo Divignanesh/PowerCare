@@ -4,28 +4,44 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-    <!-- Primary SEO -->
-    <title>PowerCare | Healthcare Staffing Agency</title>
-    <meta name="description" content="PowerCare provides vetted, in-house trained healthcare staffing across the Greater Toronto Area and Rural Ontario. RNs, RPNs, PSWs, DSWs and more — available 24/7." />
-    <meta name="keywords" content="healthcare staffing GTA, PSW staffing Toronto, RN agency Ontario, healthcare staffing agency Mississauga, LTC staffing Ontario, nursing agency GTA, PSW agency Brampton, healthcare workers rural Ontario, PowerCare staffing" />
+    <!--
+      Primary SEO.
+      description, robots and canonical are deliberately NOT set here: they are
+      per-page and react-helmet-async owns them. A static copy would sit in the
+      DOM alongside Helmet's, and a second canonical pointing at "/" would tell
+      Google every inner page is a duplicate of the home page.
+
+      The og:* and twitter:* tags below stay static because social crawlers do
+      not execute JavaScript and would otherwise see nothing at all.
+    -->
+    <title>PowerCare | Trusted Healthcare Staffing Agency</title>
+    <meta name="keywords" content="healthcare staffing agency Toronto, trusted staffing agency Ontario, PSW staffing Toronto, RN agency Ontario, RPN agency GTA, occupational therapist staffing Ontario, speech language pathologist staffing Ontario, psychotherapist staffing Ontario, dietitian staffing Ontario, LTC staffing Ontario, respite staffing Ontario, nursing agency GTA, PowerCare staffing" />
     <meta name="author" content="PowerCare Health Staffing Solutions" />
-    <meta name="robots" content="index, follow" />
-    <link rel="canonical" href="https://www.powercarestaffing.ca/" />
 
     <!-- Open Graph / Facebook -->
     <meta property="og:type" content="website" />
     <meta property="og:url" content="https://www.powercarestaffing.ca/" />
-    <meta property="og:title" content="PowerCare | Healthcare Staffing Solutions — GTA & Rural Ontario" />
-    <meta property="og:description" content="Vetted, in-house trained RNs, RPNs, PSWs, and DSWs available 24/7 across the GTA and Rural Ontario. Trusted by 500+ facilities." />
+    <meta property="og:title" content="PowerCare | Trusted Healthcare Staffing Agency — GTA &amp; Rural Ontario" />
+    <meta property="og:description" content="Vetted, in-house trained RNs, RPNs, PSWs, DSWs, OTs, SLPs and Psychotherapists — available 24/7 across the GTA and Rural Ontario. Trusted by 500+ facilities." />
+    <meta property="og:image:secure_url" content="https://www.powercarestaffing.ca/og-image.jpg" />
+    <meta property="og:image:type" content="image/jpeg" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content="PowerCare — trusted healthcare staffing solutions across the GTA and Rural Ontario" />
     <meta property="og:image" content="https://www.powercarestaffing.ca/og-image.jpg" />
     <meta property="og:locale" content="en_CA" />
     <meta property="og:site_name" content="PowerCare Health Staffing Solutions" />
 
     <!-- Twitter Card -->
     <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:title" content="PowerCare | Healthcare Staffing Solutions — GTA & Rural Ontario" />
-    <meta name="twitter:description" content="Vetted, in-house trained RNs, RPNs, PSWs, and DSWs available 24/7 across the GTA and Rural Ontario." />
+    <meta name="twitter:title" content="PowerCare | Trusted Healthcare Staffing Agency — GTA &amp; Rural Ontario" />
+    <meta name="twitter:description" content="Vetted, in-house trained RNs, RPNs, PSWs, DSWs, OTs, SLPs and Psychotherapists — available 24/7 across the GTA and Rural Ontario." />
+    <meta name="twitter:image:alt" content="PowerCare — trusted healthcare staffing solutions across the GTA and Rural Ontario" />
     <meta name="twitter:image" content="https://www.powercarestaffing.ca/og-image.jpg" />
+
+    <!-- Browser chrome -->
+    <meta name="theme-color" content="#03362E" />
+    <meta name="format-detection" content="telephone=yes" />
 
     <!-- Favicon -->
     <link rel="icon" type="image/png" href="/logo.png" />
@@ -34,7 +50,9 @@
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@100..125,400..800&family=IBM+Plex+Mono:wght@400;500;600&family=Source+Sans+3:ital,wght@0,300..700;1,400&display=swap" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400..700;1,400..600&family=Source+Sans+3:ital,wght@0,300..700;1,400..600&display=swap" rel="stylesheet" />
+
+    <link rel="preload" as="image" href="/images/hero-elder-care.jpg" fetchpriority="high" />
 
     <!-- Geo targeting -->
     <meta name="geo.region" content="CA-ON" />

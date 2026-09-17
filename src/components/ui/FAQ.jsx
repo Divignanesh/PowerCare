@@ -1,12 +1,15 @@
 import { useState, useId } from 'react';
-import { Plus } from 'lucide-react';
+import { Link } from 'react-router-dom';
+import { Plus, ArrowRight } from 'lucide-react';
 import { AnimatePresence, motion, useReducedMotion } from 'framer-motion';
-import SectionHeader from './SectionHeader';
 
 /**
  * Questions read as a ruled list rather than a stack of boxes — a hairline
- * between each row, the number in mono at the margin, and one row open at a
- * time. The mark rotates from + to x so the control states its own action.
+ * between each row, the number at the margin, and one row open at a time.
+ * The mark rotates from + to x so the control states its own action.
+ *
+ * The heading sits in a left rail with a route out to a real person, so the
+ * column beside the questions carries something rather than sitting empty.
  */
 const FAQ = ({ faqs, badge = 'Frequently Asked Questions', title = 'Common Questions', subtitle = '' }) => {
   const [openId, setOpenId] = useState(null);
@@ -16,18 +19,37 @@ const FAQ = ({ faqs, badge = 'Frequently Asked Questions', title = 'Common Quest
   return (
     <section className="section-padding bg-white">
       <div className="container-custom">
-        <SectionHeader badge={badge} title={title} subtitle={subtitle} centered={false} />
+        <div className="grid lg:grid-cols-12 gap-x-12 gap-y-10 items-start">
 
-        <div className="lg:grid lg:grid-cols-12 lg:gap-10">
-          <div className="lg:col-start-3 lg:col-span-8">
-            <div className="space-y-1">
+          <div className="lg:col-span-4 lg:sticky lg:top-28">
+            <span className="section-badge">{badge}</span>
+            <h2 className="text-display-sm font-heading font-semibold text-ink-900 mt-1 text-balance">
+              {title}
+            </h2>
+            {subtitle && (
+              <p className="mt-5 text-ink-600 leading-relaxed text-pretty">{subtitle}</p>
+            )}
+
+            <div className="mt-8 rounded-xl border border-ink-200 bg-surface p-6">
+              <h3 className="font-heading font-semibold text-ink-900 mb-2">Still have a question?</h3>
+              <p className="text-ink-600 text-[0.9375rem] leading-relaxed mb-5 text-pretty">
+                A coordinator will talk it through with you — no call centre, no script.
+              </p>
+              <Link to="/contact" className="btn-primary w-full">
+                Talk to a Coordinator <ArrowRight size={16} />
+              </Link>
+            </div>
+          </div>
+
+          <div className="lg:col-span-8">
+            <div className="space-y-1 border-t border-ink-200">
               {faqs.map((faq, index) => {
                 const isOpen = openId === index;
                 const panelId = `${baseId}-panel-${index}`;
                 const buttonId = `${baseId}-button-${index}`;
 
                 return (
-                  <div key={index} className="rounded-xl transition-colors duration-200 hover:bg-primary-50/60">
+                  <div key={index} className="border-b border-ink-200 transition-colors duration-200 hover:bg-primary-50/50">
                     <h3>
                       <button
                         id={buttonId}
@@ -37,7 +59,7 @@ const FAQ = ({ faqs, badge = 'Frequently Asked Questions', title = 'Common Quest
                         className="group w-full flex items-start gap-4 sm:gap-6 py-5 px-4 text-left
                                    transition-colors duration-200 hover:text-primary-700"
                       >
-                        <span className="font-mono text-xs font-medium text-primary-500 tabular-nums pt-1 w-6 shrink-0">
+                        <span className="font-mono text-xs font-semibold text-primary-600 tabular-nums pt-1.5 w-6 shrink-0">
                           {String(index + 1).padStart(2, '0')}
                         </span>
                         <span className="flex-1 font-heading font-semibold text-ink-900 text-base sm:text-lg leading-snug

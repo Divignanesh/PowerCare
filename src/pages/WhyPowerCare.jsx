@@ -1,9 +1,8 @@
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import {
-  ArrowRight, Check, GraduationCap, Award, Shield, Users,
-  Clock, HeartHandshake, TrendingUp, BookOpen, Layers,
-  UserCheck, Zap, ChevronRight, Brain, Activity, FileCheck, ChevronLeft, Star, X
+  ArrowRight, Check, Shield, HeartHandshake, TrendingUp, BookOpen,
+  Layers, UserCheck, Zap, ChevronRight, ChevronLeft, Star,
 } from 'lucide-react';
 import { AnimatePresence, motion, useReducedMotion } from 'framer-motion';
 import SectionHeader from '../components/ui/SectionHeader';
@@ -12,26 +11,28 @@ import FAQ from '../components/ui/FAQ';
 import { whyPowerCareFAQs } from '../data/faqs';
 import { RevealGroup, RevealItem } from '../components/ui/Reveal';
 import VettingSteps from '../components/ui/VettingSteps';
-import SEO from '../components/seo/SEO';
+import SEO, { faqSchema } from '../components/seo/SEO';
 
 const Hero = () => (
   <PageHero
     eyebrow="The PowerCare Difference"
-    title={<>Why Choose <span className="text-primary-500">PowerCare</span>?</>}
+    title={<>Why Choose <span className="text-accent-300">PowerCare</span>?</>}
     subtitle="Because our staff are trained before they ever reach your floor — and backed by a 10-step screen and a fit guarantee."
-    image="/images/why-lead.jpg"
-    imageAlt="A PowerCare clinical lead"
+    image="/images/training-room.jpg"
+    imageAlt="PowerCare candidates in a supervised clinical skills session"
+    detailImage="/images/why-lead.jpg"
+    detailImageAlt="A PowerCare clinical lead"
   >
     <ul className="flex flex-wrap gap-2 mt-8">
       {['80-hour in-house training', '10-step vetting', '24/7 dispatch', 'Fit guarantee'].map((c) => (
-        <li key={c} className="rounded-lg border border-primary-200 bg-white px-3.5 py-2 font-mono text-[0.6875rem] uppercase tracking-widest text-primary-700">
+        <li key={c} className="rounded-lg border border-white/25 bg-white/10 px-3.5 py-2 font-mono text-[0.6875rem] font-semibold uppercase tracking-widest text-white">
           {c}
         </li>
       ))}
     </ul>
     <div className="flex flex-col sm:flex-row gap-3 mt-8">
-      <Link to="/contact" className="btn-primary">Request Staff <ArrowRight size={16} /></Link>
-      <Link to="/careers" className="btn-secondary">Find Work <ArrowRight size={16} /></Link>
+      <Link to="/contact" className="btn-accent">Request Staff <ArrowRight size={16} /></Link>
+      <Link to="/careers" className="btn-white">Find Work <ArrowRight size={16} /></Link>
     </div>
   </PageHero>
 );
@@ -109,7 +110,7 @@ const TrainedProfessionals = () => (
       <RevealGroup className="grid md:grid-cols-2 lg:grid-cols-3 auto-rows-fr gap-5">
         {[
           { icon: BookOpen,      title: 'Pre-Placement Certification', desc: 'Every professional receives a PowerCare certification of completion before their first shift, documenting specific modules and competencies mastered.' },
-          { icon: Layers,        title: 'Specialty Track Options',     desc: 'Staff can complete advanced specialty tracks in dementia care, palliative support, behavioural intervention, and rehabilitation assistance.' },
+          { icon: Layers,        title: 'Specialty Track Options',     desc: 'Staff can complete advanced specialty tracks in dementia care, palliative support, behavioural intervention, and respite care.' },
           { icon: TrendingUp,    title: 'Continuing Education',        desc: 'Active PowerCare staff have access to quarterly training updates, new regulation briefings, and skills workshops to keep their practice current.' },
           { icon: UserCheck,     title: 'Competency Assessment',       desc: 'Written and practical competency assessments are conducted at the end of training. Only staff who meet our performance threshold are cleared for placement.' },
           { icon: HeartHandshake, title: 'Culture & Fit Orientation',  desc: "We train staff not just in skills, but in professional standards, facility etiquette, team integration, and the PowerCare commitment to excellence." },
@@ -144,7 +145,7 @@ const AgencyComparison = () => (
         title="PowerCare vs. a Typical Staffing Agency"
         centered={false}
       />
-      <div className="rounded-2xl border border-ink-200 overflow-hidden">
+      <div className="rounded-2xl border border-ink-200 overflow-hidden shadow-card">
         <div className="overflow-x-auto">
           <table className="w-full min-w-[640px]">
             <thead>
@@ -185,11 +186,34 @@ const VettingProcess = () => (
   <section className="section-padding bg-white">
     <div className="container-custom">
       <SectionHeader
-        badge="Our Screening Process"
+        badge="Our screening process"
         title="10-Step Candidate Vetting"
         subtitle="We leave no stone unturned. Our multi-step screening ensures only the most qualified, trustworthy professionals represent PowerCare."
+        centered={false}
       />
-      <VettingSteps className="max-w-3xl mx-auto" />
+      <div className="grid lg:grid-cols-12 gap-x-12 gap-y-10 items-start">
+        <div className="lg:col-span-7">
+          <VettingSteps />
+        </div>
+        <div className="lg:col-span-5 lg:sticky lg:top-28 space-y-5">
+          <figure className="fig-frame">
+            <img
+              src="/images/team-review.jpg"
+              alt="A PowerCare clinical reviewer going through a candidate file"
+              loading="lazy"
+              className="w-full h-[260px] object-cover"
+            />
+          </figure>
+          <figure className="fig-frame">
+            <img
+              src="/images/credential-review.jpg"
+              alt="A PowerCare compliance reviewer checking a candidate's college registration"
+              loading="lazy"
+              className="w-full h-[260px] object-cover"
+            />
+          </figure>
+        </div>
+      </div>
     </div>
   </section>
 );
@@ -330,17 +354,25 @@ const FeaturedTestimonial = () => {
 };
 
 const WhyPowerCareCTA = () => (
-  <section className="section-padding bg-white">
-    <div className="container-custom text-center">
-      <h2 className="text-display-sm font-heading font-semibold text-ink-900 mb-5 text-balance">
+  <section className="relative bg-primary-900 overflow-hidden">
+    <img
+      src="/images/cta-records.jpg"
+      alt=""
+      aria-hidden="true"
+      loading="lazy"
+      className="absolute inset-0 w-full h-full object-cover"
+    />
+    <div className="absolute inset-0 scrim-soft" aria-hidden="true" />
+    <div className="container-custom relative z-10 section-padding text-center">
+      <h2 className="text-display-sm font-heading font-semibold text-white mb-5 text-balance">
         Experience the PowerCare Difference
       </h2>
-      <p className="text-ink-600 text-lg max-w-xl mx-auto mb-10 text-pretty">
+      <p className="text-white/80 text-lg max-w-xl mx-auto mb-10 text-pretty">
         Partner with a staffing agency that invests in its people — so your facility always gets the best.
       </p>
       <div className="flex flex-col sm:flex-row gap-3 justify-center">
-        <Link to="/contact" className="btn-primary">Get Staffing Support <ArrowRight size={16} /></Link>
-        <Link to="/services" className="btn-secondary">Our Services <ChevronRight size={16} /></Link>
+        <Link to="/contact" className="btn-accent">Get Staffing Support <ArrowRight size={16} /></Link>
+        <Link to="/services" className="btn-white">Our Services <ChevronRight size={16} /></Link>
       </div>
     </div>
   </section>
@@ -348,7 +380,7 @@ const WhyPowerCareCTA = () => (
 
 const WhyPowerCare = () => (
   <main>
-    <SEO page="whyPowerCare" />
+    <SEO page="whyPowerCare" extraSchemas={[faqSchema(whyPowerCareFAQs)]} />
     <Hero />
     <InHouseTraining />
     <TrainedProfessionals />

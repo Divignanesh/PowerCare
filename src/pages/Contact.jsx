@@ -11,34 +11,44 @@ import FAQ from '../components/ui/FAQ';
 import { contactFAQs } from '../data/faqs';
 import CredentialBadges from '../components/ui/CredentialBadges';
 import { PRIMARY_CREDENTIALS } from '../data/credentials';
-import SEO from '../components/seo/SEO';
+import SEO, { faqSchema } from '../components/seo/SEO';
 
 // ── HERO ─────────────────────────────────────────────────────
 const Hero = () => (
   <PageHero
     variant="center"
     eyebrow="Contact Us"
-    title="Contact Us"
-    subtitle="Whether you need staffing support or are looking for your next healthcare role — we're here and ready to help."
-    image="/images/reception.jpg"
-  />
+    title="Talk to a Coordinator"
+    subtitle="Whether you need staffing support or are looking for your next healthcare role — we're here and ready to help, 24 hours a day."
+    image="/images/reception-desk.jpg"
+    imageAlt="A PowerCare coordinator with staff at a facility reception desk"
+  >
+    <div className="flex flex-col sm:flex-row gap-3 justify-center mt-8">
+      <a href="tel:+16474000000" className="btn-accent">
+        <Phone size={15} /> Call 24/7 Dispatch
+      </a>
+      <a href="mailto:info@powercarestaffing.ca" className="btn-white">
+        <Mail size={15} /> Email Us
+      </a>
+    </div>
+  </PageHero>
 );
 
 // ── CONTACT INFO BAR ─────────────────────────────────────────
 const ContactInfo = () => (
   <section className="bg-primary-50 py-12">
     <div className="max-w-7xl mx-auto px-5 sm:px-6 lg:px-8">
-      <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-x-10 gap-y-10">
+      <div className="grid sm:grid-cols-2 lg:grid-cols-4 border-l border-primary-200">
         {[
           { icon: Phone,  title: 'Call Us',            lines: ['+1 (647) 400-0000', 'Mon–Fri: 8am–8pm ET'],             href: 'tel:+16474000000' },
           { icon: Mail,   title: 'Email Us',           lines: ['info@powercarestaffing.ca', 'Response within 4 hours'], href: 'mailto:info@powercarestaffing.ca' },
           { icon: MapPin, title: 'Service Area',       lines: ['Greater Toronto Area', 'Rural Ontario Communities'],    href: null },
           { icon: Clock,  title: 'Emergency Staffing', lines: ['24/7 Dispatch Available', 'Same-day coverage'],         href: 'tel:+16474000000' },
         ].map(({ icon: Icon, title, lines, href }) => (
-          <div key={title} className="text-ink-900 pt-5">
+          <div key={title} className="text-ink-900 border-r border-b sm:border-b-0 border-primary-200 px-6 py-7">
             <div className="flex items-center gap-2.5 mb-4">
               <Icon size={16} strokeWidth={1.8} className="text-primary-600 flex-shrink-0" />
-              <span className="font-mono text-[0.6875rem] uppercase tracking-widest text-primary-600">{title}</span>
+              <span className="font-mono text-[0.6875rem] font-semibold uppercase tracking-widest text-primary-700">{title}</span>
             </div>
             {lines.map((line, i) => (
               href && i === 0 ? (
@@ -304,7 +314,7 @@ const ContactForms = () => {
                   aria-selected={tab === t.id}
                   aria-controls={`panel-${t.id}`}
                   onClick={() => setTab(t.id)}
-                  className={`flex-1 px-3 py-4 font-mono text-[0.6875rem] uppercase tracking-widest
+                  className={`flex-1 px-3 py-4 font-mono text-[0.6875rem] font-semibold uppercase tracking-widest
                               transition-colors duration-200 border-b-2 -mb-px ${
                     tab === t.id
                       ? 'border-primary-600 text-primary-700'
@@ -350,7 +360,7 @@ const ContactForms = () => {
 
 const Contact = () => (
   <main>
-    <SEO page="contact" />
+    <SEO page="contact" extraSchemas={[faqSchema(contactFAQs)]} />
     <Hero />
     <ContactInfo />
     <ContactForms />
