@@ -68,7 +68,7 @@ const PageHero = ({
       <section className="relative bg-primary-900 overflow-hidden">
         <Background image={image} imageAlt={imageAlt} variant={variant} />
 
-        <div className="relative z-10 max-w-7xl mx-auto px-5 sm:px-6 lg:px-8 pt-20 pb-16 lg:pt-28 lg:pb-24 text-center">
+        <div className="relative z-10 max-w-7xl mx-auto px-5 sm:px-6 lg:px-8 pt-16 pb-12 lg:pt-24 lg:pb-20 text-center">
           <Eyebrow label={eyebrow} flanked />
           <h1 className="text-display font-heading font-semibold text-white mt-6 max-w-3xl mx-auto text-balance wdth-wide">
             {title}
@@ -90,7 +90,7 @@ const PageHero = ({
     <section className="relative bg-primary-900 overflow-hidden">
       <Background image={image} imageAlt={imageAlt} variant={variant} />
 
-      <div className="relative z-10 max-w-7xl mx-auto px-5 sm:px-6 lg:px-8 py-16 lg:py-24">
+      <div className="relative z-10 max-w-7xl mx-auto px-5 sm:px-6 lg:px-8 py-14 lg:py-20">
         <div className="grid lg:grid-cols-12 gap-x-12 gap-y-10 items-center">
           <div className="lg:col-span-7">
             <Eyebrow label={eyebrow} />

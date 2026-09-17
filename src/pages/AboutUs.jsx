@@ -120,7 +120,7 @@ const MissionVisionValues = () => (
         subtitle="The principles behind every hire, every placement, and every interaction."
         centered={false}
       />
-      <RevealGroup className="grid md:grid-cols-3 auto-rows-fr gap-x-10 gap-y-9 mb-12">
+      <RevealGroup className="grid md:grid-cols-3 auto-rows-fr gap-x-10 gap-y-9 mb-9">
         {[
           { icon: Target,    title: 'Our Mission',  content: 'To make dependable, well-trained care staff available to every facility that needs them — so no shift goes uncovered and no resident goes without care.' },
           { icon: Eye,       title: 'Our Vision',   content: 'A healthcare system where staffing is never the reason care falls short — in cities and rural communities alike.' },
@@ -192,7 +192,7 @@ const AboutCTA = () => (
       <h2 className="text-display-sm font-heading font-semibold text-white mb-5 text-balance">
         Ready to Work with PowerCare?
       </h2>
-      <p className="text-white/80 text-lg max-w-xl mx-auto mb-10 text-pretty">
+      <p className="text-white/80 text-lg max-w-xl mx-auto mb-8 text-pretty">
         Whether you need to fill a shift today or build a long-term staffing strategy, we&rsquo;re here.
       </p>
       <div className="flex flex-col sm:flex-row gap-3 justify-center">

@@ -203,7 +203,7 @@ const IndustriesCTA = () => (
       <h2 className="text-display-sm font-heading font-semibold text-white mb-5 text-balance">
         Staff Your Facility Today
       </h2>
-      <p className="text-white/80 text-lg max-w-xl mx-auto mb-10 text-pretty">
+      <p className="text-white/80 text-lg max-w-xl mx-auto mb-8 text-pretty">
         Tell us your setting and your need — we&rsquo;ll match the right people, fast.
       </p>
       <div className="flex flex-col sm:flex-row gap-3 justify-center">

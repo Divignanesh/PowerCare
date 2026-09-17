@@ -27,7 +27,7 @@ const PageHero = () => (
     <div className="absolute inset-0 scrim" aria-hidden="true" />
     <div className="absolute inset-0 bg-grid-invert pointer-events-none" aria-hidden="true" />
 
-    <div className="relative z-10 max-w-7xl mx-auto px-5 sm:px-6 lg:px-8 py-16 lg:py-24">
+    <div className="relative z-10 max-w-7xl mx-auto px-5 sm:px-6 lg:px-8 py-14 lg:py-20">
       <div className="grid lg:grid-cols-12 gap-x-12 gap-y-10 items-center">
         <div className="lg:col-span-6">
           <span className="inline-flex items-center gap-2.5 font-mono text-[0.6875rem] font-semibold uppercase tracking-widest text-accent-300">

@@ -111,12 +111,12 @@
   /* ── Layout ────────────────────────────────────────────────── */
 
   .section-padding {
-    @apply py-16 lg:py-24;
+    @apply py-12 lg:py-16;
   }
 
   /* For bands that carry a single row — proof strips, figure rows. */
   .section-padding-tight {
-    @apply py-10 lg:py-14;
+    @apply py-8 lg:py-11;
   }
 
   .container-custom {

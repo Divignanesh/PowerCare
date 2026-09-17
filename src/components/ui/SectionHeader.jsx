@@ -27,7 +27,7 @@ const SectionHeader = ({ badge, title, subtitle, centered = true, light = false 
 
   if (centered) {
     return (
-      <Reveal className="mb-8 lg:mb-10 text-center">
+      <Reveal className="mb-7 lg:mb-8 text-center">
         <Eyebrow badge={badge} tone={eyebrowTone} ruleTone={ruleTone} flanked />
         <h2 className={`text-display-sm font-heading font-semibold mt-5 max-w-3xl mx-auto text-balance ${titleTone}`}>
           {title}
@@ -42,7 +42,7 @@ const SectionHeader = ({ badge, title, subtitle, centered = true, light = false 
   }
 
   return (
-    <Reveal className="mb-8 lg:mb-10">
+    <Reveal className="mb-7 lg:mb-8">
       <div className="grid lg:grid-cols-12 gap-x-10 gap-y-5 items-end">
         <div className="lg:col-span-7">
           <Eyebrow badge={badge} tone={eyebrowTone} ruleTone={ruleTone} />

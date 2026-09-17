@@ -65,9 +65,9 @@ const Hero = () => {
         variants={container}
         initial="hidden"
         animate="show"
-        className="relative z-10 w-full max-w-7xl mx-auto px-5 sm:px-6 lg:px-8 py-16 lg:py-24"
+        className="relative z-10 w-full max-w-7xl mx-auto px-5 sm:px-6 lg:px-8 py-14 lg:py-20"
       >
-        <div className="grid lg:grid-cols-12 gap-x-12 gap-y-12 items-center">
+        <div className="grid lg:grid-cols-12 gap-x-12 gap-y-10 items-center">
 
           <div className="lg:col-span-7">
             <motion.span
@@ -339,7 +339,7 @@ const WhyFacilitiesTrustUs = () => (
         ))}
       </RevealGroup>
 
-      <div className="flex flex-col sm:flex-row gap-3 mt-12">
+      <div className="flex flex-col sm:flex-row gap-3 mt-9">
         <Link to="/contact" className="btn-primary">Request Staff <ArrowRight size={16} /></Link>
         <Link to="/why-powercare" className="btn-secondary">See How We Screen</Link>
       </div>
@@ -363,7 +363,7 @@ const ProfessionsPreview = () => {
           centered={false}
         />
 
-        <RevealGroup className="grid sm:grid-cols-2 lg:grid-cols-4 auto-rows-fr gap-5 mb-12">
+        <RevealGroup className="grid sm:grid-cols-2 lg:grid-cols-4 auto-rows-fr gap-5 mb-9">
           {featured.map((s, i) => (
             <RevealItem key={s.id} className="h-full">
               <Link
@@ -473,7 +473,7 @@ const IndustriesPreview = () => (
         light
       />
 
-      <RevealGroup className="grid sm:grid-cols-2 lg:grid-cols-3 auto-rows-fr gap-5 mb-12">
+      <RevealGroup className="grid sm:grid-cols-2 lg:grid-cols-3 auto-rows-fr gap-5 mb-9">
         {industries.slice(0, 6).map((ind) => {
           const Icon = sectorIcons[ind.icon] || Shield;
           return (
@@ -600,7 +600,7 @@ const JobSeekerValue = () => (
         </RevealGroup>
       </div>
 
-      <div className="flex flex-col sm:flex-row gap-3 mt-12">
+      <div className="flex flex-col sm:flex-row gap-3 mt-9">
         <Link to="/careers" className="btn-primary">Find a Job <ArrowRight size={16} /></Link>
         <Link to="/careers" className="btn-secondary">Join Our Talent Pool</Link>
       </div>
@@ -926,11 +926,11 @@ const HomeCTA = () => (
         Let&rsquo;s Build Stronger Care Teams{' '}
         <span className="text-accent-300">Together</span>
       </h2>
-      <p className="text-white/80 text-lg max-w-2xl mx-auto mb-10 text-pretty">
+      <p className="text-white/80 text-lg max-w-2xl mx-auto mb-8 text-pretty">
         Whether you&rsquo;re a facility in need of reliable staffing or a healthcare professional
         seeking your next opportunity, PowerCare is your trusted partner.
       </p>
-      <div className="flex flex-col sm:flex-row gap-3 justify-center mb-14">
+      <div className="flex flex-col sm:flex-row gap-3 justify-center mb-10">
         <Link to="/contact" className="btn-accent">
           I Need Staff <ArrowRight size={16} />
         </Link>
@@ -938,7 +938,7 @@ const HomeCTA = () => (
           I&rsquo;m Looking for Work <ArrowRight size={16} />
         </Link>
       </div>
-      <div className="flex flex-wrap justify-center gap-x-10 gap-y-4 pt-8 border-t border-white/15 max-w-2xl mx-auto">
+      <div className="flex flex-wrap justify-center gap-x-10 gap-y-4 pt-7 border-t border-white/15 max-w-2xl mx-auto">
         {[
           { icon: Phone,  text: PHONE                    },
           { icon: Clock,  text: '24/7 Emergency Staffing' },

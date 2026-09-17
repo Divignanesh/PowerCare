@@ -390,7 +390,7 @@ const AlliedHealthSection = () => (
         ))}
       </RevealGroup>
 
-      <div className="flex flex-col sm:flex-row gap-3 mt-12">
+      <div className="flex flex-col sm:flex-row gap-3 mt-9">
         <Link to="/contact" className="btn-accent">Request an Allied Health Professional <ArrowRight size={16} /></Link>
         <Link to="/industries" className="btn-white">Where We Place Them <ChevronRight size={16} /></Link>
       </div>
@@ -452,7 +452,7 @@ const ServicesCTA = () => (
       <h2 className="text-display-sm font-heading font-semibold text-white mb-5 text-balance">
         Can&rsquo;t Find What You&rsquo;re Looking For?
       </h2>
-      <p className="text-white/80 text-lg max-w-xl mx-auto mb-10 text-pretty">
+      <p className="text-white/80 text-lg max-w-xl mx-auto mb-8 text-pretty">
         PowerCare places a wide range of healthcare professionals. Contact us to discuss your
         specific staffing needs.
       </p>

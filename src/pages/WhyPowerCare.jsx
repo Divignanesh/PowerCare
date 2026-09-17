@@ -367,7 +367,7 @@ const WhyPowerCareCTA = () => (
       <h2 className="text-display-sm font-heading font-semibold text-white mb-5 text-balance">
         Experience the PowerCare Difference
       </h2>
-      <p className="text-white/80 text-lg max-w-xl mx-auto mb-10 text-pretty">
+      <p className="text-white/80 text-lg max-w-xl mx-auto mb-8 text-pretty">
         Partner with a staffing agency that invests in its people — so your facility always gets the best.
       </p>
       <div className="flex flex-col sm:flex-row gap-3 justify-center">
