@@ -16,6 +16,7 @@ import Reveal, { RevealGroup, RevealItem } from '../components/ui/Reveal';
 import CredentialBadges from '../components/ui/CredentialBadges';
 import VettingSteps from '../components/ui/VettingSteps';
 import SEO, { faqSchema } from '../components/seo/SEO';
+import { PHONE, PHONE_HREF } from '../data/contact';
 
 const sectorIcons = { Building2, Home: HomeIcon, Hospital, Heart, Users, Activity, Brain };
 
@@ -141,9 +142,9 @@ const Hero = () => {
               ))}
             </dl>
 
-            <a href="tel:+16474000000" className="btn-accent w-full mt-7">
+            <a href={PHONE_HREF} className="btn-accent w-full mt-7">
               <PhoneCall size={15} />
-              +1 (647) 400-0000
+              {PHONE}
             </a>
           </motion.aside>
         </div>
@@ -939,7 +940,7 @@ const HomeCTA = () => (
       </div>
       <div className="flex flex-wrap justify-center gap-x-10 gap-y-4 pt-8 border-t border-white/15 max-w-2xl mx-auto">
         {[
-          { icon: Phone,  text: '+1 (647) 400-0000'      },
+          { icon: Phone,  text: PHONE                    },
           { icon: Clock,  text: '24/7 Emergency Staffing' },
           { icon: MapPin, text: 'GTA & Rural Ontario'    },
         ].map(({ icon: Icon, text }) => (

@@ -1,6 +1,7 @@
 import { Link } from 'react-router-dom';
 import { Phone, Mail, MapPin, ShieldCheck } from 'lucide-react';
 import CredentialBadges from '../ui/CredentialBadges';
+import { PHONE, PHONE_HREF, EMAIL, EMAIL_HREF, SERVICE_AREA, SOCIAL_PROFILES } from '../../data/contact';
 
 const IconFacebook = () => (
   <svg viewBox="0 0 24 24" fill="currentColor" width="16" height="16"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg>
@@ -13,9 +14,9 @@ const IconInstagram = () => (
 );
 
 const socials = [
-  { Icon: IconFacebook,  label: 'PowerCare on Facebook'  },
-  { Icon: IconLinkedin,  label: 'PowerCare on LinkedIn'  },
-  { Icon: IconInstagram, label: 'PowerCare on Instagram' },
+  { key: 'facebook',  Icon: IconFacebook,  label: 'PowerCare on Facebook'  },
+  { key: 'linkedin',  Icon: IconLinkedin,  label: 'PowerCare on LinkedIn'  },
+  { key: 'instagram', Icon: IconInstagram, label: 'PowerCare on Instagram' },
 ];
 
 const footerLinks = {
@@ -51,9 +52,9 @@ const footerLinks = {
 };
 
 const contactRows = [
-  { Icon: Phone,  text: '+1 (647) 400-0000',            href: 'tel:+16474000000' },
-  { Icon: Mail,   text: 'info@powercarestaffing.ca',    href: 'mailto:info@powercarestaffing.ca' },
-  { Icon: MapPin, text: 'Greater Toronto Area & Rural Ontario', href: null },
+  { Icon: Phone,  text: PHONE,        href: PHONE_HREF },
+  { Icon: Mail,   text: EMAIL,        href: EMAIL_HREF },
+  { Icon: MapPin, text: SERVICE_AREA, href: null },
 ];
 
 const Footer = () => (
@@ -104,20 +105,35 @@ const Footer = () => (
             })}
           </div>
 
-          <div className="flex gap-2.5 mt-7">
-            {socials.map(({ Icon, label }) => (
-              <a
-                key={label}
-                href="#"
-                aria-label={label}
-                className="w-9 h-9 rounded-lg border border-white/20 flex items-center justify-center
-                           text-white/70 hover:bg-accent-300 hover:border-accent-300 hover:text-primary-900
-                           transition-colors duration-200"
-              >
-                <Icon />
-              </a>
-            ))}
-          </div>
+          {/* Non-clickable until the accounts exist. Add the live URLs to
+              SOCIAL_PROFILES in src/data/contact.js and these become links
+              again — a dead href="#" is worse than no link at all. */}
+          <ul className="flex gap-2.5 mt-7">
+            {socials.map(({ Icon, label, key }) => {
+              const href = SOCIAL_PROFILES.find((p) => p.id === key)?.url;
+              const face = `w-9 h-9 rounded-lg border border-white/20 flex items-center justify-center
+                            text-white/70 transition-colors duration-200`;
+              return (
+                <li key={label}>
+                  {href ? (
+                    <a
+                      href={href}
+                      aria-label={label}
+                      rel="me noopener"
+                      target="_blank"
+                      className={`${face} hover:bg-accent-300 hover:border-accent-300 hover:text-primary-900`}
+                    >
+                      <Icon />
+                    </a>
+                  ) : (
+                    <span className={face} aria-hidden="true">
+                      <Icon />
+                    </span>
+                  )}
+                </li>
+              );
+            })}
+          </ul>
         </div>
 
         {/* Link columns */}

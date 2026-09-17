@@ -12,6 +12,7 @@ import { contactFAQs } from '../data/faqs';
 import CredentialBadges from '../components/ui/CredentialBadges';
 import { PRIMARY_CREDENTIALS } from '../data/credentials';
 import SEO, { faqSchema } from '../components/seo/SEO';
+import { PHONE, PHONE_HREF, EMAIL, EMAIL_HREF } from '../data/contact';
 
 // ── HERO ─────────────────────────────────────────────────────
 const Hero = () => (
@@ -24,10 +25,10 @@ const Hero = () => (
     imageAlt="A PowerCare coordinator with staff at a facility reception desk"
   >
     <div className="flex flex-col sm:flex-row gap-3 justify-center mt-8">
-      <a href="tel:+16474000000" className="btn-accent">
+      <a href={PHONE_HREF} className="btn-accent">
         <Phone size={15} /> Call 24/7 Dispatch
       </a>
-      <a href="mailto:info@powercarestaffing.ca" className="btn-white">
+      <a href={EMAIL_HREF} className="btn-white">
         <Mail size={15} /> Email Us
       </a>
     </div>
@@ -40,10 +41,10 @@ const ContactInfo = () => (
     <div className="max-w-7xl mx-auto px-5 sm:px-6 lg:px-8">
       <div className="grid sm:grid-cols-2 lg:grid-cols-4 border-l border-primary-200">
         {[
-          { icon: Phone,  title: 'Call Us',            lines: ['+1 (647) 400-0000', 'Mon–Fri: 8am–8pm ET'],             href: 'tel:+16474000000' },
-          { icon: Mail,   title: 'Email Us',           lines: ['info@powercarestaffing.ca', 'Response within 4 hours'], href: 'mailto:info@powercarestaffing.ca' },
+          { icon: Phone,  title: 'Call Us',            lines: [PHONE, 'Mon–Fri: 8am–8pm ET'],                          href: PHONE_HREF },
+          { icon: Mail,   title: 'Email Us',           lines: [EMAIL, 'Response within 4 hours'],                      href: EMAIL_HREF },
           { icon: MapPin, title: 'Service Area',       lines: ['Greater Toronto Area', 'Rural Ontario Communities'],    href: null },
-          { icon: Clock,  title: 'Emergency Staffing', lines: ['24/7 Dispatch Available', 'Same-day coverage'],         href: 'tel:+16474000000' },
+          { icon: Clock,  title: 'Emergency Staffing', lines: ['24/7 Dispatch Available', 'Same-day coverage'],         href: PHONE_HREF },
         ].map(({ icon: Icon, title, lines, href }) => (
           <div key={title} className="text-ink-900 border-r border-b sm:border-b-0 border-primary-200 px-6 py-7">
             <div className="flex items-center gap-2.5 mb-4">
@@ -296,9 +297,9 @@ const ContactForms = () => {
               <p className="text-ink-600 text-[0.9375rem] mb-6 text-pretty">
                 For urgent, same-day staffing needs, call our 24/7 dispatch line directly.
               </p>
-              <a href="tel:+16474000000" className="btn-primary w-full">
+              <a href={PHONE_HREF} className="btn-primary w-full">
                 <Phone size={15} />
-                Call 24/7 Dispatch: +1 (647) 400-0000
+                Call 24/7 Dispatch: {PHONE}
               </a>
             </div>
           </div>

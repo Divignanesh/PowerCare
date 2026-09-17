@@ -1,5 +1,6 @@
 import { Helmet } from 'react-helmet-async'
 import { services } from '../../data/services'
+import { PHONE_E164, EMAIL, SOCIAL_PROFILES } from '../../data/contact'
 
 const BASE_URL = 'https://www.powercarestaffing.ca'
 const OG_IMAGE = `${BASE_URL}/og-image.jpg`
@@ -22,8 +23,8 @@ const localBusinessSchema = {
   description:
     'PowerCare is a trusted healthcare staffing agency serving the Greater Toronto Area and Rural Ontario. We place vetted, in-house trained RNs, RPNs, PSWs, DSWs, OTs, SLPs, Psychotherapists, Dietitians and support staff 24/7.',
   url: BASE_URL,
-  telephone: '+16474000000',
-  email: 'info@powercarestaffing.ca',
+  telephone: PHONE_E164,
+  email: EMAIL,
   priceRange: '$$',
   currenciesAccepted: 'CAD',
   logo: {
@@ -37,7 +38,7 @@ const localBusinessSchema = {
   contactPoint: [
     {
       '@type': 'ContactPoint',
-      telephone: '+16474000000',
+      telephone: PHONE_E164,
       contactType: 'emergency staffing dispatch',
       areaServed: 'CA-ON',
       availableLanguage: ['English'],
@@ -50,8 +51,8 @@ const localBusinessSchema = {
     },
     {
       '@type': 'ContactPoint',
-      telephone: '+16474000000',
-      email: 'info@powercarestaffing.ca',
+      telephone: PHONE_E164,
+      email: EMAIL,
       contactType: 'customer service',
       areaServed: 'CA-ON',
       availableLanguage: ['English'],
@@ -105,11 +106,10 @@ const localBusinessSchema = {
       description: '24/7 emergency dispatch available',
     },
   ],
-  sameAs: [
-    'https://www.linkedin.com/company/powercare-staffing',
-    'https://www.facebook.com/powercarestaffing',
-    'https://www.instagram.com/powercarestaffing',
-  ],
+  // sameAs is populated from SOCIAL_PROFILES in src/data/contact.js. It stays
+  // out of the payload entirely while that list is empty — claiming profiles
+  // that 404 is worse for the entity graph than claiming none at all.
+  ...(SOCIAL_PROFILES.length ? { sameAs: SOCIAL_PROFILES.map((p) => p.url) } : {}),
   hasOfferCatalog: {
     '@type': 'OfferCatalog',
     name: 'Healthcare Staffing Services',
