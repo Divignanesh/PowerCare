@@ -42,7 +42,7 @@ const Background = ({ image, imageAlt, variant }) => (
       alt={imageAlt}
       aria-hidden={imageAlt ? undefined : 'true'}
       fetchPriority="high"
-      className="absolute inset-0 w-full h-full object-cover"
+      className="absolute inset-0 w-full h-full object-cover object-top"
     />
     <div
       className={`absolute inset-0 ${variant === 'center' ? 'scrim-soft' : 'scrim'}`}
@@ -110,7 +110,7 @@ const PageHero = ({
               <img
                 src={detailImage}
                 alt={detailImageAlt}
-                className="w-full aspect-[4/3] object-cover object-[center_20%] rounded-2xl border border-white/20 shadow-panel"
+                className="w-full aspect-[4/3] object-cover object-top rounded-2xl border border-white/20 shadow-panel"
               />
             </div>
           )}

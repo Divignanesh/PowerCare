@@ -22,7 +22,7 @@ const PageHero = () => (
       src="/images/careers-corridor.jpg"
       alt="A PowerCare nurse on shift in a hospital corridor"
       fetchPriority="high"
-      className="absolute inset-0 w-full h-full object-cover object-[center_38%]"
+      className="absolute inset-0 w-full h-full object-cover object-[center_30%]"
     />
     <div className="absolute inset-0 scrim" aria-hidden="true" />
     <div className="absolute inset-0 bg-grid-invert pointer-events-none" aria-hidden="true" />
@@ -231,7 +231,7 @@ const Benefits = () => (
             src="/images/nurse-confident.jpg"
             alt="A healthcare professional placed by PowerCare"
             loading="lazy"
-            className="w-full h-[420px] object-cover rounded-2xl"
+            className="w-full h-[420px] object-cover object-top rounded-2xl"
           />
         </div>
         <div className="lg:col-span-7 grid sm:grid-cols-2 gap-x-10 gap-y-10">

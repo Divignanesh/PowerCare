@@ -82,7 +82,7 @@ const OurStory = () => (
               src="/images/therapy-pets.jpg"
               alt="PowerCare staff and residents during an afternoon activity"
               loading="lazy"
-              className="w-full h-[220px] object-cover"
+              className="w-full h-[220px] object-cover object-top"
             />
           </figure>
           <div className="rounded-2xl bg-primary-50 border border-primary-100 p-8">
@@ -185,7 +185,7 @@ const AboutCTA = () => (
       alt=""
       aria-hidden="true"
       loading="lazy"
-      className="absolute inset-0 w-full h-full object-cover"
+      className="absolute inset-0 w-full h-full object-cover object-top"
     />
     <div className="absolute inset-0 scrim-soft" aria-hidden="true" />
     <div className="container-custom relative z-10 section-padding text-center">

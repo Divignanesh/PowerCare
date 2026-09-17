@@ -34,7 +34,7 @@ const ServiceCard = ({ service, index, onClick }) => {
           src={service.image}
           alt=""
           loading="lazy"
-          className="w-full h-full object-cover transition-transform duration-500 ease-out-soft group-hover:scale-105"
+          className="w-full h-full object-cover object-top transition-transform duration-500 ease-out-soft group-hover:scale-105"
         />
         <div className="absolute inset-x-0 bottom-0 h-20 bg-gradient-to-t from-primary-900/75 to-transparent" aria-hidden="true" />
         <span className="absolute left-4 bottom-3 font-mono text-[0.625rem] font-semibold uppercase tracking-widest text-white/90">
@@ -112,7 +112,7 @@ const ServiceModal = ({ service, onClose }) => {
             className="relative bg-white rounded-2xl max-w-xl w-full max-h-[88vh] overflow-y-auto shadow-panel"
           >
             <div className="relative h-44 overflow-hidden bg-ink-100">
-              <img src={service.image} alt="" className="w-full h-full object-cover" />
+              <img src={service.image} alt="" className="w-full h-full object-cover object-top" />
               <div className="absolute inset-0 bg-gradient-to-t from-primary-900/85 via-primary-900/30 to-transparent" aria-hidden="true" />
               <button
                 onClick={onClose}
@@ -293,7 +293,7 @@ const NursingSection = () => (
               src="/images/theatre-team.jpg"
               alt="A surgical nursing team at work"
               loading="lazy"
-              className="w-full h-[280px] object-cover"
+              className="w-full h-[280px] object-cover object-top"
             />
           </figure>
           <h3 className="font-mono text-[0.6875rem] font-semibold uppercase tracking-widest text-primary-700 mb-5">
@@ -408,7 +408,7 @@ const PersonalCareSection = () => (
               src="/images/home-visit.jpg"
               alt="A PowerCare support worker checking a client's blood pressure during a community visit"
               loading="lazy"
-              className="w-full h-[420px] object-cover"
+              className="w-full h-[420px] object-cover object-top"
             />
           </figure>
         </Reveal>
@@ -445,7 +445,7 @@ const ServicesCTA = () => (
       alt=""
       aria-hidden="true"
       loading="lazy"
-      className="absolute inset-0 w-full h-full object-cover"
+      className="absolute inset-0 w-full h-full object-cover object-top"
     />
     <div className="absolute inset-0 scrim-soft" aria-hidden="true" />
     <div className="container-custom relative z-10 section-padding text-center">

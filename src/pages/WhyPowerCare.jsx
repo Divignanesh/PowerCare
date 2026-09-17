@@ -201,7 +201,7 @@ const VettingProcess = () => (
               src="/images/team-review.jpg"
               alt="A PowerCare clinical reviewer going through a candidate file"
               loading="lazy"
-              className="w-full h-[260px] object-cover"
+              className="w-full h-[260px] object-cover object-top"
             />
           </figure>
           <figure className="fig-frame">
@@ -209,7 +209,7 @@ const VettingProcess = () => (
               src="/images/credential-review.jpg"
               alt="A PowerCare compliance reviewer checking a candidate's college registration"
               loading="lazy"
-              className="w-full h-[260px] object-cover"
+              className="w-full h-[260px] object-cover object-top"
             />
           </figure>
         </div>
@@ -360,7 +360,7 @@ const WhyPowerCareCTA = () => (
       alt=""
       aria-hidden="true"
       loading="lazy"
-      className="absolute inset-0 w-full h-full object-cover"
+      className="absolute inset-0 w-full h-full object-cover object-top"
     />
     <div className="absolute inset-0 scrim-soft" aria-hidden="true" />
     <div className="container-custom relative z-10 section-padding text-center">

@@ -55,7 +55,7 @@ const Hero = () => {
         src="/images/hero-elder-care.jpg"
         alt="A PowerCare nurse talking with an older client during a home visit"
         fetchPriority="high"
-        className="absolute inset-0 w-full h-full object-cover object-[center_22%]"
+        className="absolute inset-0 w-full h-full object-cover object-[center_18%]"
       />
       <div className="absolute inset-0 scrim" aria-hidden="true" />
       <div className="absolute inset-0 bg-grid-invert pointer-events-none" aria-hidden="true" />
@@ -252,7 +252,7 @@ const ProblemsWeSolve = () => (
               src="/images/care-team-hallway.jpg"
               alt="A PowerCare coordinator handing over to a nurse at the start of a shift"
               loading="lazy"
-              className="w-full h-[320px] lg:h-[400px] object-cover"
+              className="w-full h-[320px] lg:h-[400px] object-cover object-top"
             />
           </figure>
           <div className="mt-6 rounded-xl border border-primary-200 bg-primary-50 p-6">
@@ -376,7 +376,7 @@ const ProfessionsPreview = () => {
                     src={s.image}
                     alt=""
                     loading="lazy"
-                    className="w-full h-full object-cover transition-transform duration-500 ease-out-soft group-hover:scale-105"
+                    className="w-full h-full object-cover object-top transition-transform duration-500 ease-out-soft group-hover:scale-105"
                   />
                   <span className="absolute inset-x-0 bottom-0 h-16 bg-gradient-to-t from-primary-900/70 to-transparent" aria-hidden="true" />
                   <span className="absolute left-4 bottom-3 font-mono text-[0.625rem] font-semibold uppercase tracking-widest text-white/90">
@@ -432,7 +432,7 @@ const VettingProcess = () => (
               src="/images/training-lab.jpg"
               alt="PowerCare candidates in a supervised clinical skills session"
               loading="lazy"
-              className="w-full h-[300px] object-cover"
+              className="w-full h-[300px] object-cover object-top"
             />
           </figure>
 
@@ -486,7 +486,7 @@ const IndustriesPreview = () => (
                   src={ind.image}
                   alt=""
                   loading="lazy"
-                  className="absolute inset-0 w-full h-full object-cover transition-transform duration-500 ease-out-soft group-hover:scale-105"
+                  className="absolute inset-0 w-full h-full object-cover object-top transition-transform duration-500 ease-out-soft group-hover:scale-105"
                 />
                 <span
                   className="absolute inset-0 bg-gradient-to-t from-primary-900 via-primary-900/80 to-primary-900/30"

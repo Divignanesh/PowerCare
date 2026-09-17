@@ -69,7 +69,7 @@ const SectorGrid = () => (
                     src={ind.image}
                     alt=""
                     loading="lazy"
-                    className="w-full h-full object-cover transition-transform duration-500 ease-out-soft group-hover:scale-105"
+                    className="w-full h-full object-cover object-top transition-transform duration-500 ease-out-soft group-hover:scale-105"
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-primary-900/85 via-primary-900/25 to-transparent" aria-hidden="true" />
                   <div className="absolute left-5 right-5 bottom-5 flex items-end gap-3">
@@ -159,7 +159,7 @@ const HowItWorks = () => (
               src="/images/handover.jpg"
               alt="PowerCare coordinators handing over a shift to facility staff"
               loading="lazy"
-              className="w-full h-[300px] object-cover"
+              className="w-full h-[300px] object-cover object-top"
             />
           </figure>
           <div className="mt-6 rounded-xl border border-ink-200 bg-white p-7">
@@ -195,7 +195,7 @@ const IndustriesCTA = () => (
       alt=""
       aria-hidden="true"
       loading="lazy"
-      className="absolute inset-0 w-full h-full object-cover object-center"
+      className="absolute inset-0 w-full h-full object-cover object-top"
     />
     <div className="absolute inset-0 scrim-soft" aria-hidden="true" />
     <div className="container-custom relative z-10 section-padding text-center">
