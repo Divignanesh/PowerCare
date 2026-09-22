@@ -4,14 +4,16 @@ import { Plus, ArrowRight } from 'lucide-react';
 import { AnimatePresence, motion, useReducedMotion } from 'framer-motion';
 
 /**
- * Questions read as a ruled list rather than a stack of boxes — a hairline
- * between each row, the number at the margin, and one row open at a time.
- * The mark rotates from + to x so the control states its own action.
+ * Questions read as an open list — no rules, no boxes, just space between
+ * each row and one open at a time. The mark rotates from + to x so the
+ * control states its own action.
  *
  * The heading sits in a left rail with a route out to a real person, so the
  * column beside the questions carries something rather than sitting empty.
+ * Pages that already put a way to reach someone on the screen pass
+ * `aside={false}` rather than asking twice.
  */
-const FAQ = ({ faqs, badge = 'Frequently Asked Questions', title = 'Common Questions', subtitle = '' }) => {
+const FAQ = ({ faqs, badge = 'Frequently Asked Questions', title = 'Common Questions', subtitle = '', aside = true }) => {
   const [openId, setOpenId] = useState(null);
   const reduceMotion = useReducedMotion();
   const baseId = useId();
@@ -30,26 +32,28 @@ const FAQ = ({ faqs, badge = 'Frequently Asked Questions', title = 'Common Quest
               <p className="mt-5 text-ink-600 leading-relaxed text-pretty">{subtitle}</p>
             )}
 
-            <div className="mt-8 rounded-xl border border-ink-200 bg-surface p-6">
-              <h3 className="font-heading font-semibold text-ink-900 mb-2">Still have a question?</h3>
-              <p className="text-ink-600 text-[0.9375rem] leading-relaxed mb-5 text-pretty">
-                A coordinator will talk it through with you — no call centre, no script.
-              </p>
-              <Link to="/contact" className="btn-primary w-full">
-                Talk to a Coordinator <ArrowRight size={16} />
-              </Link>
-            </div>
+            {aside && (
+              <div className="mt-8 rounded-2xl bg-surface p-7">
+                <h3 className="font-heading font-semibold text-ink-900 mb-2">Still have a question?</h3>
+                <p className="text-ink-600 text-[0.9375rem] leading-relaxed mb-5 text-pretty">
+                  A coordinator will talk it through with you — no call centre, no script.
+                </p>
+                <Link to="/contact" className="btn-primary w-full">
+                  Talk to a Coordinator <ArrowRight size={16} />
+                </Link>
+              </div>
+            )}
           </div>
 
           <div className="lg:col-span-8">
-            <div className="space-y-1 border-t border-ink-200">
+            <div className="space-y-2">
               {faqs.map((faq, index) => {
                 const isOpen = openId === index;
                 const panelId = `${baseId}-panel-${index}`;
                 const buttonId = `${baseId}-button-${index}`;
 
                 return (
-                  <div key={index} className="border-b border-ink-200 transition-colors duration-200 hover:bg-primary-50/50">
+                  <div key={index} className="rounded-2xl transition-colors duration-200 hover:bg-primary-50/60">
                     <h3>
                       <button
                         id={buttonId}

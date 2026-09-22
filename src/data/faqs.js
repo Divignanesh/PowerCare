@@ -1,160 +1,170 @@
+/**
+ * FAQ content.
+ *
+ * These are the site's answer-engine surface, so each one is written the way a
+ * person — or an assistant answering on their behalf — would actually ask it,
+ * and every answer opens with a sentence that stands on its own when quoted.
+ *
+ * Nothing here claims a duration, a count or a guarantee.
+ */
+
 export const homeFAQs = [
   {
-    q: 'What healthcare staffing services does PowerCare provide in the GTA?',
-    a: 'PowerCare provides Registered Nurse (RN), Registered Practical Nurse (RPN), Personal Support Worker (PSW), Developmental Support Worker (DSW), Dietary Aide / Dietitian, Occupational Therapist (OT), Speech-Language Pathologist (SLP), Psychotherapist, Housekeeping Aide, and Front Desk Screener staffing across the Greater Toronto Area and Rural Ontario.',
+    q: 'What does PowerCare do?',
+    a: 'PowerCare places nurses, personal support workers and therapists with long-term care homes, retirement residences and community care teams across the Greater Toronto Area and rural Ontario. Everyone we place trains with us before their first shift, so they arrive ready to look after the people in your care.',
   },
   {
-    q: 'How quickly can PowerCare fill a healthcare staffing shift in Ontario?',
-    a: 'PowerCare can typically confirm emergency same-day coverage within 1–2 hours via our 24/7 dispatch line. For planned staffing, we confirm placements within 24 hours.',
+    q: 'Which healthcare roles does PowerCare place?',
+    a: 'PowerCare places Registered Nurses (RNs), Registered Practical Nurses (RPNs), Personal Support Workers (PSWs), Developmental Support Workers (DSWs), Occupational Therapists (OTs), Speech-Language Pathologists (SLPs), Psychotherapists, Dietitians and Dietary Aides, Housekeeping Aides and Front Desk Screeners.',
   },
   {
-    q: 'Does PowerCare provide healthcare staffing for long-term care homes in Ontario?',
-    a: 'Yes. PowerCare is a specialized provider of staffing solutions for long-term care homes across the GTA and Rural Ontario, including RNs, RPNs, PSWs, Dietary Aides and Dietitians, Speech-Language Pathologists and Housekeeping staff.',
+    q: 'Where in Ontario does PowerCare work?',
+    a: 'PowerCare works across the Greater Toronto Area and rural Ontario. That includes Toronto, Mississauga, Brampton, Vaughan, Markham, Oakville, Hamilton and Burlington, and reaches out to Guelph, Waterloo Region, London, Sarnia, Barrie, Simcoe County, Muskoka, Kawartha Lakes and Peterborough.',
   },
   {
-    q: 'What makes PowerCare different from other healthcare staffing agencies in Toronto?',
-    a: 'PowerCare operates an exclusive 80-hour in-house training program, a 10-step candidate vetting process, 24/7 dispatch availability, and a placement satisfaction guarantee — making our staff the most prepared healthcare professionals in the GTA.',
+    q: 'How does PowerCare choose the people it places?',
+    a: 'We get to know everyone before we send them anywhere. That means meeting them, verifying their college registration or certification, running police and Vulnerable Sector checks, and training them ourselves — so the person who arrives at your door is someone we would be glad to see caring for our own family.',
   },
   {
-    q: 'Does PowerCare serve rural Ontario communities?',
-    a: 'Yes. PowerCare actively serves rural and underserved Ontario communities beyond the GTA, including Barrie, Guelph, Hamilton, Kitchener-Waterloo, Kingston, London, and surrounding regions.',
+    q: 'Does PowerCare cover nights, weekends and holidays?',
+    a: 'Yes. Care does not keep office hours, so neither do we. PowerCare covers mornings, overnights, weekends and holidays across the GTA and rural Ontario.',
   },
 ];
 
 export const aboutFAQs = [
   {
-    q: 'What is PowerCare\'s mission?',
-    a: 'Our mission is to connect quality healthcare professionals with the facilities that need them most — building stronger care teams while creating meaningful employment opportunities in healthcare.',
+    q: 'Who is PowerCare?',
+    a: 'PowerCare is an Ontario healthcare staffing company that places trained care professionals with long-term care homes, retirement residences and community care teams. We were started by people who had done the work themselves, and we still run it the way we wished agencies had run when we were on the floor.',
   },
   {
-    q: 'How many facilities does PowerCare serve?',
-    a: 'PowerCare currently partners with 500+ healthcare facilities across the GTA and Rural Ontario, including long-term care homes, hospitals, retirement residences, group homes, and community care agencies.',
+    q: 'Why was PowerCare started?',
+    a: 'We started PowerCare because we knew what it cost when the right person did not arrive. Having spent our own nights on the floor, we wanted somewhere that knew its people properly, taught them well, and stayed close after they were placed.',
   },
   {
-    q: 'What training does PowerCare provide to its staff?',
-    a: 'Every PowerCare candidate completes an 80-hour in-house training program covering clinical protocols, facility-specific procedures, patient safety, and communication standards — ensuring they arrive job-ready.',
+    q: 'What does PowerCare care about most?',
+    a: 'That every older person in Ontario is looked after by someone patient, prepared and glad to be there. Kindness, dignity and honesty guide how we choose people, how we teach them, and how we treat the homes that trust us.',
   },
   {
-    q: 'Is PowerCare certified or regulated?',
-    a: 'Yes. PowerCare operates as a licensed healthcare staffing agency and complies with all Ontario healthcare staffing regulations, WSIB requirements, and professional standards.',
+    q: 'Is PowerCare a licensed healthcare staffing agency in Ontario?',
+    a: 'Yes. PowerCare operates as a licensed healthcare staffing agency and meets Ontario healthcare staffing requirements, including WSIB coverage for placed staff and verification of college registration where a role requires it.',
   },
 ];
 
 export const whyPowerCareFAQs = [
   {
-    q: 'What is the 80-hour in-house training program?',
-    a: 'Every PowerCare candidate commits to 80 hours of structured, facility-focused training covering clinical skills, safety protocols, patient communication, and industry best practices — before their first placement.',
+    q: 'What training do PowerCare staff receive?',
+    a: 'Everyone who works with us trains with us before their first placement. The programme covers clinical foundations and safety, resident-centred and dementia care, communication and documentation, and hands-on practice for the particular role — and it is written and taught by registered healthcare professionals who have worked Ontario floors themselves.',
   },
   {
-    q: 'How does PowerCare\'s 10-step vetting process work?',
-    a: 'Our vetting includes: credential verification, background checks, reference checks, clinical assessments, communication evaluations, cultural fit interviews, mock scenarios, WSIB coverage verification, health and immunization clearance, and facility-specific orientation.',
+    q: 'How does PowerCare check the people it places?',
+    a: 'We verify college registration or certification, run criminal record and Vulnerable Sector checks, confirm health and immunization clearance, take up references, and meet every person ourselves. WSIB coverage is in place for everyone we place.',
   },
   {
-    q: 'What does "placement satisfaction guarantee" mean?',
-    a: 'If a facility is not satisfied with a PowerCare placement within the first 24 hours, we will replace the staff member at no additional cost and continue support at no charge until satisfaction is achieved.',
+    q: 'What happens if a placement is not the right fit?',
+    a: 'Tell us and we will put it right. We would far rather hear early that someone is not settling than find out later, so we check in after the first shift and keep checking in after that.',
   },
   {
-    q: 'Is PowerCare available 24/7?',
-    a: 'Yes. PowerCare operates 24/7 emergency dispatch. Whether you need coverage for a morning shift or a midnight emergency, call our dispatch line anytime for immediate response.',
+    q: 'Will we get the same coordinator each time?',
+    a: 'Yes. You work with one coordinator who gets to know your home, your team and the residents you worry about most. There is no call centre and no script.',
   },
   {
-    q: 'What areas does PowerCare cover?',
-    a: 'We serve the Greater Toronto Area (Toronto, Mississauga, Brampton, Oakville, and surrounding regions) and Rural Ontario including Barrie, Guelph, Hamilton, Kitchener-Waterloo, Kingston, London, and beyond.',
+    q: 'Where does PowerCare place staff?',
+    a: 'PowerCare places staff across the Greater Toronto Area and rural Ontario, in long-term care homes, retirement residences, group homes and developmental services, rehabilitation and therapy centres, mental health services, and home and community care.',
   },
 ];
 
 export const servicesFAQs = [
   {
-    q: 'Can PowerCare source a role that is not listed on this page?',
-    a: 'Yes. The roles on this page are the ones we place most often — they are not a closed list. Tell us the role, the setting and the college registration or certification you need, and we will either match someone from our existing pool or recruit and screen for it. New roles go through the same ten-step vetting and in-house training as every other placement.',
+    q: 'What roles can PowerCare place?',
+    a: 'PowerCare places RNs, RPNs, PSWs and DSWs, along with regulated allied health professionals — Occupational Therapists, Speech-Language Pathologists, Psychotherapists and Dietitians — and facility roles such as Dietary Aides, Housekeeping Aides and Front Desk Screeners.',
   },
   {
     q: 'Can PowerCare place regulated allied health professionals?',
-    a: 'Yes. Beyond core nursing and care roles, PowerCare places Occupational Therapists (OTs), Speech-Language Pathologists (SLPs), Psychotherapists, Dietitians and Dietary Aides, Housekeeping Aides, Front Desk Screeners, and other specialized healthcare roles.',
+    a: 'Yes. We place college-registered Occupational Therapists, Speech-Language Pathologists, Psychotherapists and Dietitians for rehabilitation programmes, therapy hours in long-term care, developmental services and mental health teams.',
   },
   {
-    q: 'How long does it take to request and receive a staff placement?',
-    a: 'Emergency same-day placements are confirmed within 1–2 hours. Planned staffing requests are typically confirmed within 24 hours. We work around your facility\'s schedule to meet urgent needs.',
+    q: 'Can PowerCare find a role that is not listed?',
+    a: 'Usually, yes. The roles we list are the ones we place most often, not a closed list. Tell us the role, the setting and the registration or certification you need, and we will either match someone we already know or go and find the right person.',
   },
   {
-    q: 'Does PowerCare provide long-term contract staffing or just temporary coverage?',
-    a: 'PowerCare excels at both. We provide emergency same-day coverage, shift-by-shift staffing, and long-term contract placements for extended absences or seasonal capacity needs.',
+    q: 'Does PowerCare offer long-term placements as well as short shifts?',
+    a: 'Both. We cover single shifts, ongoing lines of work, and longer placements for extended absences or seasonal pressure — whatever keeps care steady for the people in your home.',
   },
   {
-    q: 'Are all PowerCare staff fully credentialed and screened?',
-    a: 'Yes. Every PowerCare staff member is fully credentialed, police background checked, cleared through Vulnerable Sector Screening, and WSIB-covered. We verify all college registrations and credentials before placement.',
+    q: 'Are PowerCare staff credentialed and screened?',
+    a: 'Yes. Every person we place has their college registration or certification verified, has passed police and Vulnerable Sector screening, and is covered by WSIB.',
   },
 ];
 
 export const industriesFAQs = [
   {
-    q: 'Does PowerCare have experience with multiple care settings?',
-    a: 'Yes. PowerCare staffs long-term care homes, hospitals, retirement residences, group homes and developmental services, rehabilitation and therapy centres, mental health and addictions facilities, and home, community and respite care programs.',
+    q: 'What kinds of care settings does PowerCare staff?',
+    a: 'PowerCare staffs long-term care homes, retirement residences, home and community care, group homes and developmental services, rehabilitation and therapy centres, and mental health and addictions services.',
   },
   {
-    q: 'Can PowerCare handle staffing for multiple facilities at the same time?',
-    a: 'Absolutely. Our 24/7 dispatch system manages thousands of placements across 500+ facilities simultaneously, ensuring all your staffing needs are met.',
+    q: 'Does PowerCare work with long-term care homes?',
+    a: 'Yes. Long-term care is the setting we know best. We place RNs, RPNs, PSWs, Dietary Aides, Dietitians, Speech-Language Pathologists and housekeeping staff into homes across the GTA and rural Ontario.',
   },
   {
-    q: 'Does PowerCare understand the unique challenges of rural healthcare staffing?',
-    a: 'Yes. We have specialized expertise in rural Ontario staffing. We understand smaller team sizes, broader skill requirements, and the challenges of staff retention in underserved communities.',
+    q: 'Does PowerCare serve rural Ontario?',
+    a: 'Yes. We work well beyond the GTA, including Barrie, Guelph, Hamilton, Kitchener-Waterloo, London, Sarnia, Muskoka, Simcoe County, Kawartha Lakes and Peterborough. Smaller teams carry a wider range of work, and we staff for that.',
   },
   {
-    q: 'How does PowerCare match staff to industry-specific roles?',
-    a: 'We profile each facility\'s specific needs, culture, and patient demographics. Then our team matches candidates with relevant experience, cultural fit, and the right skill set for that particular sector.',
+    q: 'How does PowerCare match staff to a particular setting?',
+    a: 'We start by understanding what your setting is actually like — its pace, its people and its standards — then match someone whose experience and temperament suit it. A long-term care home and a group home ask different things of the people who work in them.',
   },
   {
-    q: 'Can PowerCare provide staff for specialized industries like mental health or rehabilitation?',
-    a: 'Yes. PowerCare staffs specialized care settings including psychiatric facilities, addiction treatment centres, rehabilitation hospitals, and mental health agencies with appropriately trained professionals.',
+    q: 'Can PowerCare staff mental health and rehabilitation services?',
+    a: 'Yes. We place appropriately trained professionals into mental health and addictions services, psychiatric settings, and rehabilitation and therapy centres, including Psychotherapists, Occupational Therapists and Speech-Language Pathologists.',
   },
 ];
 
 export const contactFAQs = [
   {
     q: 'How do I request staff from PowerCare?',
-    a: 'Fill out our online contact form with your facility details, staffing needs, and preferred shift times. A PowerCare representative will confirm your request within 2 hours. For emergencies, call our 24/7 dispatch line directly.',
+    a: 'Send us a note through the contact form or email us, and a coordinator will get back to you. Tell us your home, the role you need and when you need it, and we will take it from there.',
   },
   {
-    q: 'What information do you need to process a staffing request?',
-    a: 'We need your facility name, location, role required, number of staff needed, shift details (date, start/end time), any specialized skills, and your preferred contact method.',
+    q: 'What should I tell you when I get in touch?',
+    a: 'Your home or organisation, where you are, the role you need, how many people, and the shifts you are trying to cover. Anything you can tell us about your team and your residents helps us match someone who will settle in.',
   },
   {
-    q: 'What is PowerCare\'s response time for urgent staffing requests?',
-    a: 'For true emergencies, we commit to confirming coverage within 1–2 hours via our 24/7 dispatch line. For planned requests submitted before 5 PM, we typically confirm placements by the next business day.',
+    q: 'How soon will someone reply?',
+    a: 'A person reads every message and replies as soon as they can. If something is urgent, say so in the first line and we will treat it that way.',
   },
   {
-    q: 'Does PowerCare provide staffing support for overnight or weekend shifts?',
-    a: 'Yes. PowerCare provides 24/7 staffing support including nights, weekends, and holidays. Our dispatch team is standing by anytime you need coverage.',
+    q: 'Can I reach PowerCare outside office hours?',
+    a: 'Yes. Staffing needs do not wait for Monday morning, so you can reach us at any hour, including overnight, weekends and holidays.',
   },
   {
-    q: 'How do I become a PowerCare partner?',
-    a: 'Contact our partnership team via our contact form. We\'ll discuss your facility\'s staffing model, commitment level, and how PowerCare can become your reliable staffing partner.',
+    q: 'How do I start working with PowerCare?',
+    a: 'Get in touch and we will arrange a conversation about your home — how you like things done, what your team needs, and where we can help. There is no obligation and no hard sell.',
   },
 ];
 
 export const findJobFAQs = [
   {
     q: 'What roles does PowerCare hire for?',
-    a: 'PowerCare hires Registered Nurses (RNs), Registered Practical Nurses (RPNs), Personal Support Workers (PSWs), Developmental Support Workers (DSWs), Occupational Therapists (OTs), Speech-Language Pathologists (SLPs), Psychotherapists, Dietitians and Dietary Aides, Housekeeping Aides, and other healthcare support roles.',
+    a: 'PowerCare hires Registered Nurses (RNs), Registered Practical Nurses (RPNs), Personal Support Workers (PSWs), Developmental Support Workers (DSWs), Occupational Therapists (OTs), Speech-Language Pathologists (SLPs), Psychotherapists, Dietitians and Dietary Aides, and Housekeeping Aides.',
   },
   {
-    q: 'Do I need to be credentialed to apply to PowerCare?',
-    a: 'It depends on the role. RNs, RPNs, OTs, SLPs and Psychotherapists must hold current registration with their Ontario college. PSWs and support roles may require certifications (some may be obtained through our training program). Contact our recruitment team for role-specific requirements.',
+    q: 'Do I need to be registered or certified to apply?',
+    a: 'It depends on the role. RNs, RPNs, OTs, SLPs and Psychotherapists need current registration with their Ontario college. PSW and support roles may need a certificate, and some of that can be covered through our own training. If you are unsure, get in touch and ask.',
   },
   {
-    q: 'Does PowerCare offer training to new hires?',
-    a: 'Yes. All PowerCare employees complete our 80-hour in-house training program before their first placement. This ensures you\'re fully prepared and confident for your assignments.',
+    q: 'Does PowerCare provide training?',
+    a: 'Yes, and it comes with the job at no cost to you. Everyone trains with us before their first placement, covering clinical foundations and safety, resident-centred and dementia care, communication and documentation, and hands-on practice for your role.',
   },
   {
-    q: 'How does PowerCare match me with job opportunities?',
-    a: 'After your application and initial assessment, a dedicated PowerCare recruiter learns your preferences, skills, and career goals. We match you with opportunities that align with your qualifications and desired work environment.',
+    q: 'How does PowerCare match me with work?',
+    a: 'A coordinator gets to know you first — what you are good at, what you enjoy, where you can travel and what your life outside work looks like — then matches you with places where you will fit. You are not a name on a list.',
   },
   {
-    q: 'What is the pay rate and benefits with PowerCare?',
-    a: 'Competitive pay depends on your role, experience, and credentials. We offer WSIB coverage, free in-house training, flexible scheduling, and advancement opportunities. Contact our recruitment team for specific rate information.',
+    q: 'What is the pay and what comes with the job?',
+    a: 'Pay depends on your role, your credentials and your experience, and we will be straightforward with you about it. The job comes with WSIB coverage, training at no cost, shifts that work around your life, and a coordinator who knows your name.',
   },
   {
-    q: 'Can I choose my own shifts at PowerCare?',
-    a: 'Yes. PowerCare offers flexible scheduling. You can express preferences for shift types, locations, and frequency, and we\'ll match you with opportunities that fit your lifestyle.',
+    q: 'Can I choose my own shifts?',
+    a: 'Yes. Tell us the kinds of shifts you want, where you can get to and how often you want to work, and we will match you to work that fits. Your life comes first.',
   },
 ];

@@ -1,6 +1,5 @@
 import { Link } from 'react-router-dom';
-import { Phone, Mail, MapPin, Building, ShieldCheck } from 'lucide-react';
-import CredentialBadges from '../ui/CredentialBadges';
+import { Phone, Mail, MapPin, Building } from 'lucide-react';
 import { PHONE_ENABLED, PHONE, PHONE_HREF, EMAIL, EMAIL_HREF, SERVICE_AREA, ADDRESS_LINE, MAP_HREF, SOCIAL_PROFILES } from '../../data/contact';
 
 const IconFacebook = () => (
@@ -36,7 +35,6 @@ const footerLinks = {
   ],
   industries: [
     { label: 'Long-Term Care',                  to: '/industries' },
-    { label: 'Hospitals & Acute Care',          to: '/industries' },
     { label: 'Home & Community Care / Respite', to: '/industries' },
     { label: 'Group Homes & Developmental Services / Respite', to: '/industries' },
     { label: 'Mental Health & Addictions',      to: '/industries' },
@@ -60,7 +58,6 @@ const contactRows = [
 
 const Footer = () => (
   <footer className="relative bg-primary-900 text-white overflow-hidden">
-    <div className="absolute inset-0 bg-grid-invert pointer-events-none" aria-hidden="true" />
 
     <div className="relative max-w-7xl mx-auto px-5 sm:px-6 lg:px-8 py-16 lg:py-20">
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-12 gap-x-8 gap-y-12">
@@ -112,7 +109,7 @@ const Footer = () => (
           <ul className="flex gap-2.5 mt-7">
             {socials.map(({ Icon, label, key }) => {
               const href = SOCIAL_PROFILES.find((p) => p.id === key)?.url;
-              const face = `w-9 h-9 rounded-lg border border-white/20 flex items-center justify-center
+              const face = `w-9 h-9 rounded-full bg-white/10 flex items-center justify-center
                             text-white/70 transition-colors duration-200`;
               return (
                 <li key={label}>
@@ -122,7 +119,7 @@ const Footer = () => (
                       aria-label={label}
                       rel="me noopener"
                       target="_blank"
-                      className={`${face} hover:bg-accent-300 hover:border-accent-300 hover:text-primary-900`}
+                      className={`${face} hover:bg-accent-300 hover:text-primary-900`}
                     >
                       <Icon />
                     </a>
@@ -165,22 +162,6 @@ const Footer = () => (
           </div>
         ))}
       </div>
-    </div>
-
-    {/* Credentials */}
-    <div className="relative max-w-7xl mx-auto px-5 sm:px-6 lg:px-8 pb-12">
-      <h4 className="font-mono text-[0.625rem] font-semibold uppercase tracking-widest text-accent-300 mb-5">
-        Credentials &amp; Coverage
-      </h4>
-      <CredentialBadges variant="footer" useFull />
-      <ul className="flex flex-wrap gap-x-5 gap-y-3 mt-3">
-        {['AODA Accessible', 'PIPEDA Compliant'].map((c) => (
-          <li key={c} className="flex items-center gap-2 text-white/70 text-sm">
-            <ShieldCheck size={15} strokeWidth={1.8} className="text-accent-300 flex-shrink-0" />
-            {c}
-          </li>
-        ))}
-      </ul>
     </div>
 
     {/* Bottom bar */}

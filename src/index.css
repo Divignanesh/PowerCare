@@ -73,8 +73,8 @@
   /* ── Buttons ───────────────────────────────────────────────── */
 
   .btn-base {
-    @apply inline-flex items-center justify-center gap-2 px-6 py-3
-           text-[0.9375rem] font-semibold rounded-lg
+    @apply inline-flex items-center justify-center gap-2 px-7 py-3
+           text-[0.9375rem] font-semibold rounded-full
            transition-[background-color,color,border-color,box-shadow,transform]
            duration-200 ease-out-soft
            focus:outline-none focus-visible:outline-none
@@ -87,25 +87,10 @@
            hover:bg-primary-800 active:translate-y-px;
   }
 
-  /* Outlined — the quieter partner to btn-primary */
+  /* The quieter partner to btn-primary — a soft fill, no outline */
   .btn-secondary {
-    @apply btn-base bg-transparent text-primary-700
-           border border-primary-300
-           hover:bg-primary-50 hover:border-primary-500 active:translate-y-px;
-  }
-
-  /* Luminous sky — the call to action on deep blue grounds */
-  .btn-accent {
-    @apply btn-base bg-accent-300 text-primary-900
-           hover:bg-accent-200 active:translate-y-px
-           focus-visible:ring-offset-primary-900;
-  }
-
-  /* White — the quieter partner on deep blue grounds */
-  .btn-white {
-    @apply btn-base bg-transparent text-white border border-white/25
-           hover:bg-white/10 hover:border-white/50 active:translate-y-px
-           focus-visible:ring-offset-primary-900;
+    @apply btn-base bg-primary-50 text-primary-700
+           hover:bg-primary-100 active:translate-y-px;
   }
 
   /* ── Layout ────────────────────────────────────────────────── */
@@ -125,11 +110,12 @@
 
   /* ── Card ──────────────────────────────────────────────────── */
 
+  /* No frame. A soft fill separates a card from the page where it needs to;
+     elsewhere the spacing does the work on its own. */
   .card {
-    @apply bg-white rounded-xl border border-ink-200 p-6
-           shadow-card transition-[border-color,box-shadow,transform]
-           duration-300 ease-out-soft
-           hover:border-primary-300 hover:shadow-card-hover hover:-translate-y-0.5;
+    @apply bg-surface rounded-2xl p-7
+           transition-colors duration-300 ease-out-soft
+           hover:bg-primary-50;
   }
 
   /* ── Typography helpers ────────────────────────────────────── */
@@ -147,14 +133,6 @@
     @apply block w-6 h-px bg-primary-400;
   }
 
-  .section-badge-light {
-    @apply text-accent-300;
-  }
-
-  .section-badge-light::before {
-    @apply bg-accent-300/60;
-  }
-
   .section-title {
     @apply text-display-sm font-heading font-semibold text-ink-900;
   }
@@ -168,7 +146,7 @@
      not a dashboard readout. */
 
   /* No tabular figures here: these are single display numbers, not a column
-     to align, and tabular spacing blows a gap open in "2 hrs" / "80 hrs". */
+     to align, and tabular spacing blows a gap open in short figures. */
   .figure-lg {
     @apply font-heading font-semibold text-primary-700;
     letter-spacing: -0.015em;
@@ -195,23 +173,6 @@
     @apply font-mono text-xl lg:text-2xl font-medium text-primary-700;
   }
 
-  /* Kept so existing markup that opts in explicitly still reads correctly. */
-  .ledger-light .ledger-label { @apply text-ink-600; }
-  .ledger-light .ledger-figure { @apply text-primary-700; }
-
-  /* Deep-ground variant — the footer. */
-  .ledger-dark {
-    @apply space-y-5;
-  }
-
-  .ledger-dark .ledger-label {
-    @apply text-white/70;
-  }
-
-  .ledger-dark .ledger-figure {
-    @apply text-accent-300;
-  }
-
   /* A mono index numeral for content that genuinely is a sequence. */
   .index-num {
     @apply font-mono text-xs font-medium text-primary-500 tabular-nums;
@@ -219,10 +180,13 @@
 
   /* ── Form inputs ───────────────────────────────────────────── */
 
+  /* Filled rather than outlined — the field is legible without a box drawn
+     around it, and the form stops looking like paperwork. */
+  /* A field has to look like something you can type into, so it carries a
+     real edge rather than only a fill. */
   .input {
     @apply w-full px-4 py-3 text-[0.9375rem] bg-white
-           border border-ink-200 rounded-lg
-           text-ink-900 placeholder-ink-400
+           rounded-xl border border-ink-300 text-ink-900 placeholder-ink-400
            focus:outline-none focus:border-primary-500
            focus:ring-2 focus:ring-primary-500/20
            transition-colors duration-150;
@@ -258,57 +222,10 @@
     text-wrap: pretty;
   }
 
-  /* A very faint ruled field — just enough to catch the light. */
-  .bg-grid {
-    background-image:
-      linear-gradient(to right,  rgba(15,24,34,0.016) 1px, transparent 1px),
-      linear-gradient(to bottom, rgba(15,24,34,0.016) 1px, transparent 1px);
-    background-size: 88px 88px;
-  }
-
-  /* Same field, inverted, for the deep footer ground. */
-  .bg-grid-invert {
-    background-image:
-      linear-gradient(to right,  rgba(255,255,255,0.022) 1px, transparent 1px),
-      linear-gradient(to bottom, rgba(255,255,255,0.022) 1px, transparent 1px);
-    background-size: 88px 88px;
-  }
-
-  /* Kept so existing markup still resolves. Lora has no width or optical-size
-     axis, so these now only trim tracking on the largest display lines. */
-  .wdth-wide {
-    letter-spacing: -0.012em;
-  }
-
-  .wdth-normal {
-    letter-spacing: 0;
-  }
-
-  /* ── Photographic grounds ──────────────────────────────────── */
-  /* Type over a photograph needs a scrim it can rely on regardless of what
-     is behind it: a deep brand wash, weighted toward the reading edge. */
-
-  .scrim {
-    background:
-      linear-gradient(100deg,
-        rgba(0, 30, 56, 0.93) 0%,
-        rgba(0, 30, 56, 0.84) 30%,
-        rgba(0, 30, 56, 0.58) 54%,
-        rgba(0, 47, 85, 0.30) 100%);
-  }
-
-  .scrim-soft {
-    background:
-      linear-gradient(180deg,
-        rgba(0, 30, 56, 0.82) 0%,
-        rgba(0, 30, 56, 0.66) 45%,
-        rgba(0, 30, 56, 0.86) 100%);
-  }
-
   /* A hairline of brand colour under a photograph, so images sit on the
      page rather than floating. */
   .fig-frame {
-    @apply rounded-2xl overflow-hidden border border-ink-200 bg-ink-100;
+    @apply rounded-2xl overflow-hidden bg-ink-100;
   }
 
 }

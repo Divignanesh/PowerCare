@@ -4,7 +4,9 @@
  * the sequence can never drift between the two.
  *
  * `image` is the photograph that stands for the role; it is used by the
- * /services grid and by the home page preview.
+ * /services grid and by the home page preview. `imagePos` is the object-position
+ * for that photograph — the default top crop loses the subject on a handful of
+ * these frames, so those carry their own.
  */
 export const services = [
   {
@@ -13,14 +15,14 @@ export const services = [
     title: 'Registered Nurse (RN)',
     category: 'Medical & Nursing',
     icon: 'Stethoscope',
-    image: '/images/rn-care.jpg',
+    image: '/images/home-visit.jpg',
     shortDesc: 'Provides direct nursing care to patients and extends health education programs.',
     fullDesc:
-      'Our Registered Nurses deliver comprehensive, evidence-based patient care across acute, long-term, and community settings. They conduct patient assessments, administer medications, manage complex care plans, and collaborate with interdisciplinary teams to ensure optimal health outcomes.',
+      'Our Registered Nurses deliver comprehensive, evidence-based care across long-term care, retirement and community settings. They conduct patient assessments, administer medications, manage complex care plans, and collaborate with interdisciplinary teams to ensure optimal health outcomes.',
     highlights: [
       'Patient assessment & care planning',
       'Medication administration & IV therapy',
-      'Wound care & post-surgical support',
+      'Wound care & post-operative recovery',
       'Health education & discharge planning',
       'Chronic disease management',
     ],
@@ -31,7 +33,7 @@ export const services = [
     title: 'Registered Practical Nurse (RPN)',
     category: 'Medical & Nursing',
     icon: 'HeartPulse',
-    image: '/images/rpn-care.jpg',
+    image: '/images/ltc-resident.jpg',
     shortDesc: 'Delivers primary care and participates in service planning and evaluation.',
     fullDesc:
       'PowerCare RPNs are skilled practitioners who deliver high-quality nursing care in collaboration with RNs and other healthcare professionals. They assess patient health, administer treatments, and contribute to care plans across long-term care, home care, and community health settings.',
@@ -68,6 +70,7 @@ export const services = [
     category: 'Care Support',
     icon: 'Users',
     image: '/images/group-home.jpg',
+    imagePos: 'object-center',
     shortDesc: 'Assists individuals with disabilities throughout life stages, promoting community participation.',
     fullDesc:
       "Our Developmental Support Workers help individuals with intellectual and developmental disabilities live fulfilling, independent lives. They create personalized support plans, facilitate community inclusion, develop life skills, and provide behavioural support tailored to each person's goals.",
@@ -88,7 +91,7 @@ export const services = [
     image: '/images/dietitian.jpg',
     shortDesc: 'Plans and prepares nutrition that accounts for therapeutic diets, allergies and special needs.',
     fullDesc:
-      'PowerCare places both Registered Dietitians and Dietary Aides. Dietitians assess nutritional risk, build therapeutic diet plans and advise clinical teams; Dietary Aides prepare and serve those meals accurately and safely in long-term care homes, hospitals and retirement residences.',
+      'PowerCare places both Registered Dietitians and Dietary Aides. Dietitians assess nutritional risk, build therapeutic diet plans and advise clinical teams; Dietary Aides prepare and serve those meals accurately and safely in long-term care homes, retirement residences and group homes.',
     highlights: [
       'Nutritional assessment & care planning',
       'Therapeutic and texture-modified diets',
@@ -104,6 +107,7 @@ export const services = [
     category: 'Allied Health & Therapy',
     icon: 'Accessibility',
     image: '/images/ot-hand.jpg',
+    imagePos: 'object-center',
     shortDesc: 'Restores day-to-day function — mobility, self-care and safe independent living.',
     fullDesc:
       'Our Occupational Therapists help clients regain and maintain the activities of daily living after injury, surgery, stroke or as function declines with age. They assess the person and the environment, prescribe equipment and modifications, and build graded programmes that return people to safe independence at home and in the community.',
@@ -158,6 +162,7 @@ export const services = [
     category: 'Specialized Care',
     icon: 'HeartHandshake',
     image: '/images/dementia-care.jpg',
+    imagePos: 'object-center',
     shortDesc: "Specialized support for individuals living with Alzheimer's and dementia-related conditions.",
     fullDesc:
       "PowerCare's Dementia Care Specialists are trained in person-centered dementia care approaches. They provide structured routines, cognitive engagement, safety monitoring, and compassionate support to individuals living with Alzheimer's disease and other forms of dementia.",
@@ -194,6 +199,7 @@ export const services = [
     category: 'Facility & Administrative',
     icon: 'Sparkles',
     image: '/images/housekeeping.jpg',
+    imagePos: 'object-[center_35%]',
     shortDesc: 'Maintains hygiene standards across healthcare facilities with thorough cleaning protocols.',
     fullDesc:
       'Maintaining a clean, infection-controlled environment is critical in healthcare settings. PowerCare Housekeeping and Laundry Aides are trained in healthcare-grade sanitation protocols, ensuring facilities remain safe and comfortable for residents, patients, and staff.',
@@ -211,7 +217,8 @@ export const services = [
     title: 'Front Desk Screener',
     category: 'Facility & Administrative',
     icon: 'ClipboardList',
-    image: '/images/reception.jpg',
+    image: '/images/cta-corridor.jpg',
+    imagePos: 'object-center',
     shortDesc: 'Handles client interactions, visitor management, and facility communications.',
     fullDesc:
       'Our Front Desk Screeners are the first point of contact in healthcare facilities, managing visitor access, conducting health screenings, and coordinating communications. They ensure smooth operations while upholding safety protocols and delivering professional, welcoming service.',

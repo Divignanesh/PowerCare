@@ -9,7 +9,7 @@ export const CREDENTIALS = [
   { id: 'wsib',     icon: Shield,         short: 'WSIB Covered',            full: 'WSIB Covered' },
   { id: 'vsc',      icon: UserCheck,      short: 'Vulnerable Sector Check', full: 'Vulnerable Sector Check' },
   { id: 'police',   icon: Fingerprint,    short: 'Police Verified',         full: 'Police Background Verified' },
-  { id: 'trained',  icon: GraduationCap,  short: 'In-House Trained',        full: '80-Hour In-House Trained' },
+  { id: 'trained',  icon: GraduationCap,  short: 'In-House Trained',        full: 'In-House Trained' },
   { id: 'dispatch', icon: Headset,        short: '24/7 Dispatch',           full: '24/7 Dispatch' },
 ];
 

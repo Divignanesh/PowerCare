@@ -19,7 +19,7 @@ export const COLORS = {
   skyWash:     '#ECFAFF',   // accent-50   — faint accent fill
 
   white:        '#FFFFFF',
-  surface:      '#F2F7FC',   // alternating section ground
+  surface:      '#FAFAF8',   // warm off-white — alternating section ground
   border:       '#DCE3EC',   // ink-200 — dividers and card borders
   hairline:     '#EDF1F6',   // ink-100 — the finest rule
   textDark:     '#0F1822',   // ink-900 — headings
@@ -35,9 +35,9 @@ export const RADIUS = {
 };
 
 export const SHADOW = {
-  card:      '0 1px 2px rgba(15,24,34,0.05), 0 1px 1px rgba(15,24,34,0.04)',
-  cardHover: '0 10px 30px -12px rgba(15,24,34,0.22), 0 2px 6px rgba(15,24,34,0.06)',
-  panel:     '0 24px 60px -28px rgba(15,24,34,0.35)',
+  card:      '0 1px 2px rgba(15,24,34,0.04)',
+  cardHover: '0 2px 8px -2px rgba(15,24,34,0.08)',
+  panel:     '0 20px 50px -24px rgba(15,24,34,0.25)',
 };
 
 export const FONT = {

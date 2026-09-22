@@ -11,6 +11,7 @@ import FAQ from '../components/ui/FAQ';
 import { contactFAQs } from '../data/faqs';
 import CredentialBadges from '../components/ui/CredentialBadges';
 import { PRIMARY_CREDENTIALS } from '../data/credentials';
+import CredentialBand from '../components/ui/CredentialBand';
 import SEO, { faqSchema } from '../components/seo/SEO';
 import { PHONE_ENABLED, PHONE, PHONE_HREF, EMAIL, EMAIL_HREF, ADDRESS, MAP_HREF } from '../data/contact';
 
@@ -19,22 +20,12 @@ const Hero = () => (
   <PageHero
     variant="center"
     eyebrow="Contact Us"
-    title="Talk to a Coordinator"
-    subtitle="Whether you need staffing support or are looking for your next healthcare role — we're here and ready to help, 24 hours a day."
-    image="/images/reception-desk.jpg"
-    imageAlt="A PowerCare coordinator with staff at a facility reception desk"
-  >
-    <div className="flex flex-col sm:flex-row gap-3 justify-center mt-8">
-      {PHONE_ENABLED && (
-        <a href={PHONE_HREF} className="btn-accent">
-          <Phone size={15} /> Call 24/7 Dispatch
-        </a>
-      )}
-      <a href={EMAIL_HREF} className={PHONE_ENABLED ? 'btn-white' : 'btn-accent'}>
-        <Mail size={15} /> Email Us
-      </a>
-    </div>
-  </PageHero>
+    title="We're here to talk"
+    subtitle="Whether you are looking after a home full of residents or looking for somewhere to do your best work — there is a real person at this end."
+    image="/images/hands-reach.jpg"
+    imageAlt="Two hands reaching towards one another"
+    imagePos="object-center"
+  />
 );
 
 // ── CONTACT INFO BAR ─────────────────────────────────────────
@@ -42,7 +33,7 @@ const CONTACT_CELLS = [
   ...(PHONE_ENABLED
     ? [{ icon: Phone, title: 'Call Us', lines: [PHONE, 'Mon–Fri: 8am–8pm ET'], href: PHONE_HREF }]
     : []),
-  { icon: Mail,   title: 'Email Us',           lines: [EMAIL, 'Response within 4 hours'], href: EMAIL_HREF },
+  { icon: Mail,   title: 'Email Us',           lines: [EMAIL, 'We read every message'], href: EMAIL_HREF },
   { icon: MapPin, title: 'Visit Us',           lines: [ADDRESS.street, `${ADDRESS.locality}, ${ADDRESS.region} ${ADDRESS.postalCode}`], href: MAP_HREF },
   { icon: Clock,  title: 'Emergency Staffing', lines: ['24/7 Dispatch Available', 'Same-day coverage'], href: PHONE_ENABLED ? PHONE_HREF : EMAIL_HREF },
 ];
@@ -50,11 +41,11 @@ const CONTACT_CELLS = [
 const ContactInfo = () => (
   <section className="bg-primary-50 py-12">
     <div className="max-w-7xl mx-auto px-5 sm:px-6 lg:px-8">
-      <div className={`grid sm:grid-cols-2 border-l border-primary-200 ${
+      <div className={`grid sm:grid-cols-2 gap-x-10 gap-y-6 ${
         CONTACT_CELLS.length === 4 ? 'lg:grid-cols-4' : 'lg:grid-cols-3'
       }`}>
         {CONTACT_CELLS.map(({ icon: Icon, title, lines, href }) => (
-          <div key={title} className="text-ink-900 border-r border-b sm:border-b-0 border-primary-200 px-6 py-7">
+          <div key={title} className="text-ink-900 py-4">
             <div className="flex items-center gap-2.5 mb-4">
               <Icon size={16} strokeWidth={1.8} className="text-primary-600 flex-shrink-0" />
               <span className="font-mono text-[0.6875rem] font-semibold uppercase tracking-widest text-primary-700">{title}</span>
@@ -81,7 +72,7 @@ const SuccessMessage = () => (
     <CheckCircle2 size={40} strokeWidth={1.5} className="text-primary-600 mx-auto mb-4" />
     <h4 className="text-xl font-heading font-semibold text-ink-900 mb-3">Message Sent!</h4>
     <p className="text-ink-600 max-w-xs mx-auto text-pretty">
-      Thank you for reaching out. A member of our team will contact you within 4 business hours.
+      Thank you for reaching out. Someone from our team will be in touch soon.
     </p>
   </div>
 );
@@ -159,7 +150,7 @@ const FacilityForm = () => {
         </span>
       </label>
       <button type="submit" className="btn-primary w-full">
-        Submit Staffing Request <ArrowRight size={16} />
+        Send us a note <ArrowRight size={16} />
       </button>
     </form>
   );
@@ -208,7 +199,7 @@ const ProfessionalForm = () => {
           onChange={(e) => setForm({ ...form, message: e.target.value })} className="input resize-none" />
       </div>
       <button type="submit" className="btn-primary w-full">
-        Connect With a Recruiter <ArrowRight size={16} />
+        Tell us about yourself <ArrowRight size={16} />
       </button>
       <p className="text-sm text-ink-500 text-center">
         Or visit our full{' '}
@@ -252,7 +243,7 @@ const GeneralForm = () => {
           onChange={(e) => setForm({ ...form, message: e.target.value })} className="input resize-none" />
       </div>
       <button type="submit" className="btn-primary w-full">
-        Send Message <ArrowRight size={16} />
+        Send us a note <ArrowRight size={16} />
       </button>
     </form>
   );
@@ -278,10 +269,10 @@ const ContactForms = () => {
           <div className="lg:col-span-5">
             <span className="section-badge">Get in Touch</span>
             <h2 className="text-display-sm font-heading font-semibold text-ink-900 mb-6 text-balance">
-              How Can We Help You?
+              How can we help?
             </h2>
             <p className="text-ink-600 leading-relaxed mb-7 text-pretty">
-              Select your enquiry type below. Whether you're a healthcare facility looking for staffing support or a professional seeking career opportunities, we have the right team ready to assist.
+              Pick whichever fits best. However you reach us, a person reads it — there is no call centre and no script.
             </p>
 
             <div className="space-y-5">
@@ -300,24 +291,20 @@ const ContactForms = () => {
               ))}
             </div>
 
-            <div className="mt-10 bg-primary-50 rounded-2xl p-7">
-              <h3 className="font-heading font-semibold text-ink-900 text-lg mb-2">Need Immediate Staffing?</h3>
+            <div className="mt-10 bg-surface rounded-2xl p-7">
+              <h3 className="font-heading font-semibold text-ink-900 text-lg mb-2">Need someone today?</h3>
               <p className="text-ink-600 text-[0.9375rem] mb-6 text-pretty">
                 {PHONE_ENABLED
-                  ? 'For urgent, same-day staffing needs, call our 24/7 dispatch line directly.'
-                  : 'For urgent, same-day staffing needs, email the 24/7 dispatch desk — it is monitored around the clock.'}
+                  ? 'If a shift needs covering today, call us — someone answers at any hour.'
+                  : 'If a shift needs covering today, email us and say so in the first line. Someone reads it at any hour.'}
               </p>
-              {PHONE_ENABLED ? (
-                <a href={PHONE_HREF} className="btn-primary w-full">
-                  <Phone size={15} />
-                  Call 24/7 Dispatch: {PHONE}
-                </a>
-              ) : (
-                <a href={EMAIL_HREF} className="btn-primary w-full">
-                  <Mail size={15} />
-                  {EMAIL}
-                </a>
-              )}
+              <a
+                href={PHONE_ENABLED ? PHONE_HREF : EMAIL_HREF}
+                className="inline-flex items-center gap-2.5 font-heading font-semibold text-primary-700 hover:text-primary-800 transition-colors"
+              >
+                {PHONE_ENABLED ? <Phone size={16} /> : <Mail size={16} />}
+                {PHONE_ENABLED ? PHONE : EMAIL}
+              </a>
             </div>
           </div>
 
@@ -380,9 +367,10 @@ const Contact = () => (
   <main>
     <SEO page="contact" extraSchemas={[faqSchema(contactFAQs)]} />
     <Hero />
+    <CredentialBand />
     <ContactInfo />
     <ContactForms />
-    <FAQ faqs={contactFAQs} badge="Get in Touch" title="Contact & Support Questions" subtitle="Have questions before reaching out? Find answers here." />
+    <FAQ faqs={contactFAQs} badge="Get in Touch" title="Contact & Support Questions" subtitle="A few things people often ask before they write." aside={false} />
   </main>
 );
 

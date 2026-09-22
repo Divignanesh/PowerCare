@@ -50,7 +50,9 @@ export default {
           800: '#242E38',
           900: '#0F1822',  // headings — soft blue-black
         },
-        surface: '#F2F7FC',  // pale blue wash
+        // A warm off-white. The old pale-blue wash tinted every alternating
+        // band cold; warmth here lets the photographs carry the colour.
+        surface: '#FAFAF8',
       },
       fontFamily: {
         // A formal pairing that stays comfortable to read: Lora is a warm,
@@ -73,16 +75,18 @@ export default {
         'display-lg': ['clamp(2.125rem, 1.45rem + 3.1vw, 3.375rem)', { lineHeight: '1.16', letterSpacing: '-0.01em'  }],
       },
       boxShadow: {
-        'card':       '0 1px 2px rgba(15,24,34,0.04), 0 1px 1px rgba(15,24,34,0.03)',
-        'card-hover': '0 10px 30px -12px rgba(15,24,34,0.16), 0 2px 6px rgba(15,24,34,0.05)',
-        'panel':      '0 24px 60px -28px rgba(15,24,34,0.22)',
+        // Cards sit on the page rather than floating above it; a hairline
+        // border does the separating, so the shadows stay almost invisible.
+        'card':       '0 1px 2px rgba(15,24,34,0.04)',
+        'card-hover': '0 2px 8px -2px rgba(15,24,34,0.08)',
+        'panel':      '0 20px 50px -24px rgba(15,24,34,0.25)',
       },
       borderRadius: {
-        // Tighter than the default scale — the mark of drawn stationery
-        // rather than a rounded UI kit.
-        'lg':  '0.375rem',
-        'xl':  '0.5rem',
-        '2xl': '0.75rem',
+        // Soft and open. Tight corners and ruled boxes read as an institution;
+        // this page should feel like somewhere people are looked after.
+        'lg':  '0.75rem',
+        'xl':  '1rem',
+        '2xl': '1.5rem',
       },
       letterSpacing: {
         // Uppercase labels are set in the sans, so they need real tracking

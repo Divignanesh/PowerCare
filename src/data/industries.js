@@ -7,8 +7,6 @@ export const industries = [
     title: 'Long-Term Care Homes',
     icon: 'Building2',
     image: '/images/senior-walker.jpg',
-    heroStat: '1,000+',
-    heroStatLabel: 'LTC Facilities Served',
     description:
       'Long-term care homes require dependable, highly trained staff around the clock. PowerCare specializes in providing RNs, RPNs, PSWs, and support staff who understand the unique demands of LTC environments — from complex medical needs to person-centered dementia care.',
     challenges: [
@@ -36,8 +34,6 @@ export const industries = [
     title: 'Retirement Residences',
     icon: 'Home',
     image: '/images/retirement-corridor.jpg',
-    heroStat: '500+',
-    heroStatLabel: 'Retirement Homes Served',
     description:
       'Retirement residences demand staff who combine clinical competence with warmth and hospitality. PowerCare provides attentive PSWs, companions, and support staff who enhance residents\' quality of life while maintaining the highest standards of dignified care.',
     challenges: [
@@ -58,35 +54,6 @@ export const industries = [
     color: 'teal',
   },
   {
-    id: 'hospitals',
-    value: 'Credentialed clinical staff ready for high-acuity, fast-moving environments.',
-    tags: ['RN', 'RPN', 'OT'],
-    cta: 'Staff a hospital unit',
-    title: 'Hospitals & Acute Care',
-    icon: 'Hospital',
-    image: '/images/acute-care.jpg',
-    heroStat: '200+',
-    heroStatLabel: 'Hospital Partnerships',
-    description:
-      'Hospitals demand the highest calibre of clinical professionals who can hit the ground running. PowerCare supplies experienced RNs, RPNs, and allied health professionals ready to integrate seamlessly into fast-paced acute care environments.',
-    challenges: [
-      'Sudden census surges requiring immediate staffing',
-      'Credential verification and compliance requirements',
-      'Diverse specialty unit needs (ICU, ER, Med-Surg)',
-      'Integration with existing team workflows',
-      'High-acuity patient populations',
-    ],
-    ourSolutions: [
-      'Rigorous credential and competency verification for all clinical staff',
-      'Specialty-matched professionals for ICU, ER, OR, and Med-Surg',
-      'Rapid deployment capability for surge situations',
-      'Staff familiar with EMR systems and hospital protocols',
-      'Ongoing compliance tracking and continuing education',
-    ],
-    roles: ['RN', 'RPN', 'Occupational Therapist (OT)', 'Speech-Language Pathologist (SLP)', 'Dietary Aide / Dietitian', 'Front Desk Screener'],
-    color: 'indigo',
-  },
-  {
     id: 'home-care',
     value: 'PSWs, nurses & therapists for in-home, community and respite programs, scheduled around clients and families.',
     tags: ['PSW', 'RPN', 'OT'],
@@ -94,8 +61,6 @@ export const industries = [
     title: 'Home & Community Care / Respite',
     icon: 'Heart',
     image: '/images/home-respite.jpg',
-    heroStat: '3,000+',
-    heroStatLabel: 'Clients Supported at Home',
     description:
       'Home care requires professionals who are not only clinically skilled but also independent, trustworthy, and compassionate. PowerCare matches carefully vetted caregivers to clients across the GTA and rural communities, ensuring continuity and comfort in the home setting.',
     challenges: [
@@ -123,8 +88,6 @@ export const industries = [
     title: 'Group Homes & Developmental Services / Respite',
     icon: 'Users',
     image: '/images/developmental-services.jpg',
-    heroStat: '150+',
-    heroStatLabel: 'Group Home Partnerships',
     description:
       "Group homes and developmental service agencies require patient, skilled, and empathetic workers who support individuals with intellectual and physical disabilities in achieving their fullest potential. PowerCare's DSWs are trained in person-directed planning and positive behavioural support.",
     challenges: [
@@ -152,8 +115,6 @@ export const industries = [
     title: 'Rehabilitation & Therapy Centres',
     icon: 'Activity',
     image: '/images/rehab.jpg',
-    heroStat: '100+',
-    heroStatLabel: 'Rehab Centres Served',
     description:
       'Rehabilitation centres depend on skilled regulated therapists and support staff to deliver structured recovery programs. PowerCare provides Occupational Therapists and Speech-Language Pathologists equipped to assess, plan and deliver treatment with precision and compassion.',
     challenges: [
@@ -181,8 +142,6 @@ export const industries = [
     title: 'Mental Health & Addictions',
     icon: 'Brain',
     image: '/images/counselling.jpg',
-    heroStat: '80+',
-    heroStatLabel: 'Mental Health Facilities Served',
     description:
       "Mental health and addictions facilities require workers who bring both clinical competence and deep empathy. PowerCare's team includes professionals trained in trauma-informed care, de-escalation, and mental health first aid — ready to support vulnerable populations with skill and compassion.",
     challenges: [

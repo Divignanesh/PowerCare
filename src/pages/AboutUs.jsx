@@ -1,14 +1,13 @@
-import { Link } from 'react-router-dom';
 import {
-  ArrowRight, Award, Target, ChevronRight,
-  Eye, Lightbulb, Shield, CheckCircle,
-  GraduationCap, HeartHandshake,
+  Target, Eye, Lightbulb,
+  HandHeart, GraduationCap, Sparkles, HeartHandshake,
 } from 'lucide-react';
 import SectionHeader from '../components/ui/SectionHeader';
 import PageHero from '../components/ui/PageHero';
 import FAQ from '../components/ui/FAQ';
 import { aboutFAQs } from '../data/faqs';
 import Reveal, { RevealGroup, RevealItem } from '../components/ui/Reveal';
+import CredentialBand from '../components/ui/CredentialBand';
 import SEO, { faqSchema } from '../components/seo/SEO';
 
 const Hero = () => (
@@ -16,117 +15,144 @@ const Hero = () => (
     variant="center"
     eyebrow="Our Story"
     title="About PowerCare"
-    subtitle="Founded on the belief that quality healthcare staffing can transform lives — for caregivers, clients, and the communities we serve."
-    image="/images/team-diverse.jpg"
-    imageAlt="The PowerCare clinical team"
-  >
-    <div className="flex flex-col sm:flex-row gap-3 justify-center mt-8">
-      <Link to="/contact" className="btn-accent">Partner With Us <ArrowRight size={16} /></Link>
-      <Link to="/why-powercare" className="btn-white">Why PowerCare <ChevronRight size={16} /></Link>
-    </div>
-  </PageHero>
+    subtitle="We look after the people who once looked after us — and the families who trust us with them."
+    image="/images/psw-care.jpg"
+    imageAlt="A PowerCare support worker holding a resident's hands"
+    imagePos="object-center"
+  />
 );
 
-// A ruled row of figures directly under the hero — the page had nothing
-// between the headline and a wall of prose, which is what read as empty.
-const RecordBand = () => (
-  <section className="bg-white border-b border-ink-200">
-    <div className="container-custom">
-      <Reveal>
-        <dl className="grid grid-cols-2 lg:grid-cols-4 border-l border-ink-200">
-          {[
-            { value: '500+',   label: 'Facility partners across Ontario' },
-            { value: '5,000+', label: 'Shifts successfully filled'       },
-            { value: '80 hrs', label: 'Training before a first placement' },
-            { value: '24/7',   label: 'Live dispatch, every day of the year' },
-          ].map(({ value, label }) => (
-            <div key={label} className="border-r border-b lg:border-b-0 border-ink-200 px-6 py-9 lg:py-11">
-              <dd className="figure-lg text-3xl lg:text-[2.5rem] leading-none">{value}</dd>
-              <dt className="text-ink-600 text-sm mt-3 leading-snug">{label}</dt>
-            </div>
-          ))}
-        </dl>
-      </Reveal>
-    </div>
-  </section>
-);
-
-const OurStory = () => (
+// ─────────────────────────── ABOUT ────────────────────────────
+// Two photographs, offset and overlapping, with the prose beside them.
+const AboutIntro = () => (
   <section className="section-padding bg-white">
     <div className="container-custom">
-      <div className="grid lg:grid-cols-12 gap-x-12 gap-y-10 items-center">
-        <div className="lg:col-span-7">
-          <span className="section-badge">Why we exist</span>
-          <h2 className="text-display-sm font-heading font-semibold text-ink-900 mb-6 text-balance">
-            A Staffing Agency Built from the Inside Out
-          </h2>
-          <p className="text-ink-600 leading-relaxed mb-5 text-pretty">
-            PowerCare was founded by healthcare professionals who lived the staffing crisis firsthand. We watched facilities struggle to fill shifts, saw burnout take its toll on dedicated staff, and felt the impact of mismatched placements on resident care.
-          </p>
-          <p className="text-ink-600 leading-relaxed mb-9 text-pretty">
-            We built PowerCare on one conviction: <strong className="text-ink-900 font-semibold">that dependable, trained, and compassionate staffing isn't a luxury — it's a necessity.</strong> So we do it differently — training in-house, vetting rigorously, and matching for fit, not just availability.
-          </p>
-          <div className="flex flex-col sm:flex-row gap-3">
-            <Link to="/why-powercare" className="btn-primary">
-              Why PowerCare <ArrowRight size={16} />
-            </Link>
-            <Link to="/contact" className="btn-secondary">Get in Touch</Link>
-          </div>
-        </div>
-
-        {/* The three things that actually differentiate the agency, stated
-            plainly, over a photograph of the work itself. */}
-        <div className="lg:col-span-5">
-          <figure className="fig-frame mb-5">
+      <div className="grid lg:grid-cols-12 gap-x-14 gap-y-12 items-center">
+        <Reveal className="lg:col-span-6">
+          <div className="relative">
             <img
               src="/images/therapy-pets.jpg"
               alt="PowerCare staff and residents during an afternoon activity"
               loading="lazy"
-              className="w-full h-[220px] object-cover object-top"
+              /* The carer and the resident are left of frame; a centred crop
+                 leaves only the dog. */
+              className="w-[80%] aspect-[3/4] object-cover object-left rounded-2xl"
             />
-          </figure>
-          <div className="rounded-2xl bg-primary-50 border border-primary-100 p-8">
-            <h3 className="font-mono text-[0.6875rem] uppercase tracking-widest text-primary-700 mb-6">
-              How we do it differently
-            </h3>
-            <ul className="space-y-6">
-              {[
-                { icon: GraduationCap, title: 'Train in-house',    desc: 'Every professional completes our programme before a first placement.' },
-                { icon: Shield,        title: 'Vet rigorously',    desc: 'A ten-step screen, including Vulnerable Sector checks.' },
-                { icon: HeartHandshake, title: 'Match for fit',    desc: 'Clinically and culturally — not just whoever is free.' },
-              ].map(({ icon: Icon, title, desc }) => (
-                <li key={title} className="flex gap-4">
-                  <Icon size={20} strokeWidth={1.7} className="text-primary-600 flex-shrink-0 mt-0.5" />
-                  <div>
-                    <div className="font-heading font-semibold text-ink-900">{title}</div>
-                    <p className="text-ink-600 text-[0.9375rem] leading-relaxed mt-1 text-pretty">{desc}</p>
-                  </div>
-                </li>
-              ))}
-            </ul>
+            <img
+              src="/images/home-respite.jpg"
+              alt="A support worker sitting with a client and their family at home"
+              loading="lazy"
+              className="hidden sm:block absolute right-0 top-[20%] w-[54%] aspect-[3/4]
+                         object-cover object-top rounded-2xl ring-[12px] ring-white"
+            />
           </div>
+        </Reveal>
+
+        <div className="lg:col-span-6">
+          <span className="section-badge">About us</span>
+          <h2 className="text-display-sm font-heading font-semibold text-ink-900 mb-7 text-balance">
+            We care about the people you care about
+          </h2>
+          <p className="text-ink-600 leading-relaxed mb-5 text-pretty">
+            Everyone deserves to be looked after well. Growing older, or living with illness
+            or disability, should never cost someone their dignity, their routines, or their
+            place among the people who love them. How we care for one another at the most
+            vulnerable point of a life says a great deal about all of us.
+          </p>
+          <p className="text-ink-600 leading-relaxed mb-5 text-pretty">
+            That belief is why PowerCare exists. We were started by people who had done the
+            work themselves — nights on the floor, mornings handing over, the quiet weight of
+            looking after someone else&rsquo;s parent. We knew what a good day felt like, and we
+            knew what it cost when the right person did not arrive.
+          </p>
+          <p className="text-ink-600 leading-relaxed text-pretty">
+            So we built something gentler. We get to know every person before we send them
+            anywhere, we teach them the way we would want our own family cared for, and we
+            stay close long after they arrive. Nobody here is a shift to be filled.
+          </p>
         </div>
       </div>
     </div>
   </section>
 );
 
-const MissionVisionValues = () => (
+// ─────────────────────────── WHERE WE CARE ────────────────────────────
+const DEPENDABLE = [
+  {
+    title: 'Caring for older adults',
+    image: '/images/senior-walker.jpg',
+    pos:   'object-center',
+    alt:   'A care worker walking beside an older woman using a walker',
+    desc:  'Long-term care homes and retirement residences, where our people become part of your team rather than a face passing through.',
+  },
+  {
+    title: 'Support closer to home',
+    image: '/images/home-visit.jpg',
+    pos:   'object-center',
+    alt:   'A support worker checking on a client during a home visit',
+    desc:  'Home, community and respite care, so people can stay where they are most themselves for as long as they are able.',
+  },
+  {
+    title: 'Specialised and complex care',
+    image: '/images/group-home.jpg',
+    pos:   'object-center',
+    alt:   'A developmental support worker with a resident in a group home',
+    desc:  'Group homes, developmental services, rehabilitation and mental health — settings that ask for patience as much as skill.',
+  },
+];
+
+const DependableCare = () => (
   <section className="section-padding bg-surface">
     <div className="container-custom">
+      <div className="text-center mb-12">
+        <span className="section-badge">Pride in how we care</span>
+        <h2 className="text-display-sm font-heading font-semibold text-ink-900 text-balance">
+          Care you can depend on
+        </h2>
+      </div>
+
+      <RevealGroup className="grid sm:grid-cols-3 gap-x-8 gap-y-10">
+        {DEPENDABLE.map(({ title, image, pos, alt, desc }) => (
+          <RevealItem key={title}>
+            <figure>
+              <img
+                src={image}
+                alt={alt}
+                loading="lazy"
+                className={`w-full aspect-[4/3] object-cover ${pos} rounded-2xl`}
+              />
+              <figcaption>
+                <h3 className="mt-6 font-heading font-semibold text-ink-900 text-lg leading-snug text-balance min-h-[3.1rem]">
+                  {title}
+                </h3>
+                <p className="mt-2.5 text-ink-600 text-[0.9375rem] leading-relaxed text-pretty">
+                  {desc}
+                </p>
+              </figcaption>
+            </figure>
+          </RevealItem>
+        ))}
+      </RevealGroup>
+    </div>
+  </section>
+);
+
+const MissionVisionValues = () => (
+  <section className="section-padding bg-white">
+    <div className="container-custom">
       <SectionHeader
-        badge="Our Foundation"
+        badge="What guides us"
         title="Mission, Vision & Values"
-        subtitle="The principles behind every hire, every placement, and every interaction."
+        subtitle="Why we come in, and what we hope to leave behind."
         centered={false}
       />
-      <RevealGroup className="grid md:grid-cols-3 auto-rows-fr gap-x-10 gap-y-9 mb-9">
+      <RevealGroup className="grid md:grid-cols-3 auto-rows-fr gap-x-10 gap-y-9 mb-12">
         {[
-          { icon: Target,    title: 'Our Mission',  content: 'To make dependable, well-trained care staff available to every facility that needs them — so no shift goes uncovered and no resident goes without care.' },
-          { icon: Eye,       title: 'Our Vision',   content: 'A healthcare system where staffing is never the reason care falls short — in cities and rural communities alike.' },
-          { icon: Lightbulb, title: 'Our Approach', content: 'Train in-house, vet rigorously, match by fit — then stand behind every placement with our Fit Guarantee.' },
+          { icon: Target,    title: 'Our Mission',  content: 'That every older person in Ontario is looked after by someone patient, prepared and glad to be there — whatever the hour, wherever they live.' },
+          { icon: Eye,       title: 'Our Vision',   content: 'Communities where growing older is not something to be feared, because the care around you is steady and kind.' },
+          { icon: Lightbulb, title: 'Our Approach', content: 'Know the people we send, teach them well, and stay close enough to notice when something is not right.' },
         ].map(({ icon: Icon, title, content }) => (
-          <RevealItem key={title} className="border-t-2 border-primary-600 pt-7 h-full">
+          <RevealItem key={title} className="h-full">
             <Icon size={22} strokeWidth={1.6} className="text-primary-600" />
             <h3 className="text-xl font-heading font-semibold text-ink-900 mt-5 mb-3">{title}</h3>
             <p className="text-ink-600 leading-relaxed text-pretty">{content}</p>
@@ -134,10 +160,10 @@ const MissionVisionValues = () => (
         ))}
       </RevealGroup>
 
-      <h3 className="font-mono text-[0.6875rem] uppercase tracking-widest text-primary-700 mb-5">Core Values</h3>
+      <h3 className="font-mono text-[0.6875rem] uppercase tracking-widest text-primary-700 mb-5">What we value</h3>
       <ul className="flex flex-wrap gap-2.5">
-        {['Dependability', 'Compassion', 'Integrity', 'Excellence', 'Respect'].map((v) => (
-          <li key={v} className="rounded-lg bg-white border border-ink-200 px-4 py-2 font-semibold text-ink-900">
+        {['Kindness', 'Patience', 'Honesty', 'Dignity', 'Respect'].map((v) => (
+          <li key={v} className="rounded-full bg-surface px-5 py-2 font-semibold text-ink-900">
             {v}
           </li>
         ))}
@@ -146,59 +172,31 @@ const MissionVisionValues = () => (
   </section>
 );
 
-const Accreditations = () => (
-  <section className="relative section-padding bg-primary-50 overflow-hidden">
-      <div className="absolute inset-0 bg-grid pointer-events-none" aria-hidden="true" />
-    <div className="container-custom relative z-10">
-      <SectionHeader
-        badge="Credentials & Compliance"
-        title="Accredited, Insured & Compliant"
-        subtitle="PowerCare meets Ontario healthcare staffing standards — verifiable, not just stated."
-        centered={false}
-      />
-      <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-5">
-        {[
-          { icon: Shield,      title: 'WSIB Compliant',      desc: 'All placed workers are WSIB covered for your protection.' },
-          { icon: CheckCircle, title: 'Background Checked',  desc: 'Criminal record + vulnerable sector screening on every hire.' },
-          { icon: Award,       title: 'College Verified',    desc: 'Nurses, OTs, SLPs and psychotherapists verified against their Ontario colleges.' },
-          { icon: GraduationCap, title: 'In-House Trained',  desc: '80 hours of certification completed before a first placement.' },
-        ].map(({ icon: Icon, title, desc }) => (
-          <div
-            key={title}
-            className="border border-ink-200 rounded-xl p-6 text-ink-900
-                       transition-colors duration-300 hover:border-primary-300 hover:bg-primary-50/60"
-          >
-            <Icon size={20} strokeWidth={1.6} className="text-primary-600" />
-            <div className="font-heading font-semibold mt-5 mb-2">{title}</div>
-            <p className="text-ink-600 text-[0.9375rem] leading-relaxed text-pretty">{desc}</p>
-          </div>
-        ))}
+// ─────────────────────────── WHAT WE ARE KNOWN FOR ────────────────────
+const KnownFor = () => (
+  <section className="section-padding bg-surface">
+    <div className="container-custom">
+      <div className="text-center mb-12">
+        <span className="section-badge">Our speciality</span>
+        <h2 className="text-display-sm font-heading font-semibold text-ink-900 text-balance">
+          What we are known for
+        </h2>
       </div>
-    </div>
-  </section>
-);
 
-const AboutCTA = () => (
-  <section className="relative bg-primary-900 overflow-hidden">
-    <img
-      src="/images/cta-corridor.jpg"
-      alt=""
-      aria-hidden="true"
-      loading="lazy"
-      className="absolute inset-0 w-full h-full object-cover object-top"
-    />
-    <div className="absolute inset-0 scrim-soft" aria-hidden="true" />
-    <div className="container-custom relative z-10 section-padding text-center">
-      <h2 className="text-display-sm font-heading font-semibold text-white mb-5 text-balance">
-        Ready to Work with PowerCare?
-      </h2>
-      <p className="text-white/80 text-lg max-w-xl mx-auto mb-8 text-pretty">
-        Whether you need to fill a shift today or build a long-term staffing strategy, we&rsquo;re here.
-      </p>
-      <div className="flex flex-col sm:flex-row gap-3 justify-center">
-        <Link to="/contact" className="btn-accent">Partner With Us <ArrowRight size={16} /></Link>
-        <Link to="/careers" className="btn-white">Find a Job <ArrowRight size={16} /></Link>
-      </div>
+      <RevealGroup className="grid sm:grid-cols-2 lg:grid-cols-4 gap-x-10 gap-y-10">
+        {[
+          { icon: HandHeart,      title: 'A person, never a case', desc: 'Everyone we place is asked to see the person first — their history, their routines, and what makes a day a good one.' },
+          { icon: GraduationCap,  title: 'An experienced team',    desc: 'Our training is written and taught by registered professionals who have spent their working lives on Ontario floors.' },
+          { icon: Sparkles,       title: 'We fit ourselves to you', desc: 'Every home runs a little differently. We learn yours, rather than asking you to accommodate ours.' },
+          { icon: HeartHandshake, title: 'We stay close',          desc: 'We ring after the first shift and the ones after it. If something is not right, we would rather hear it early.' },
+        ].map(({ icon: Icon, title, desc }) => (
+          <RevealItem key={title}>
+            <Icon size={22} strokeWidth={1.6} className="text-primary-600 mb-5" />
+            <h3 className="font-heading font-semibold text-ink-900 text-lg leading-snug mb-2.5 text-balance min-h-[3.1rem]">{title}</h3>
+            <p className="text-ink-600 text-[0.9375rem] leading-relaxed text-pretty">{desc}</p>
+          </RevealItem>
+        ))}
+      </RevealGroup>
     </div>
   </section>
 );
@@ -207,12 +205,17 @@ const AboutUs = () => (
   <main>
     <SEO page="about" extraSchemas={[faqSchema(aboutFAQs)]} />
     <Hero />
-    <RecordBand />
-    <OurStory />
+    <CredentialBand />
+    <AboutIntro />
+    <DependableCare />
     <MissionVisionValues />
-    <Accreditations />
-    <FAQ faqs={aboutFAQs} badge="About PowerCare" title="Questions About Our Company" subtitle="Learn more about PowerCare's mission, values, and commitment to healthcare staffing excellence." />
-    <AboutCTA />
+    <KnownFor />
+    <FAQ
+      faqs={aboutFAQs}
+      badge="About PowerCare"
+      title="Questions About Our Company"
+      subtitle="A little more about who we are and how we work."
+    />
   </main>
 );
 

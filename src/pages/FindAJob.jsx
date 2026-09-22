@@ -11,50 +11,48 @@ import { jobCategories, employmentTypes, locations, hiringSteps, benefits } from
 import { findJobFAQs } from '../data/faqs';
 import { RevealGroup, RevealItem } from '../components/ui/Reveal';
 import CredentialBadges from '../components/ui/CredentialBadges';
+import CredentialBand from '../components/ui/CredentialBand';
 import SEO, { hiringHowToSchema, faqSchema } from '../components/seo/SEO';
 
 const iconMap = { Send, Search, ClipboardCheck, CheckCircle2, UserCheck, Zap, Clock, DollarSign, MapPin, Gift };
 
 // ── HERO ─────────────────────────────────────────────────────
 const PageHero = () => (
-  <section className="relative bg-primary-900 overflow-hidden">
+  <section className="bg-white">
     <img
-      src="/images/careers-corridor.jpg"
-      alt="A PowerCare nurse on shift in a hospital corridor"
+      src="/images/home-respite.jpg"
+      alt="A PowerCare support worker with a client and her family at home"
       fetchPriority="high"
-      className="absolute inset-0 w-full h-full object-cover object-[center_30%]"
+      className="w-full h-[220px] sm:h-[300px] lg:h-[360px] object-cover object-center"
     />
-    <div className="absolute inset-0 scrim" aria-hidden="true" />
-    <div className="absolute inset-0 bg-grid-invert pointer-events-none" aria-hidden="true" />
 
-    <div className="relative z-10 max-w-7xl mx-auto px-5 sm:px-6 lg:px-8 py-14 lg:py-20">
+    <div className="max-w-7xl mx-auto px-5 sm:px-6 lg:px-8 py-14 lg:py-16">
       <div className="grid lg:grid-cols-12 gap-x-12 gap-y-10 items-center">
         <div className="lg:col-span-6">
-          <span className="inline-flex items-center gap-2.5 font-mono text-[0.6875rem] font-semibold uppercase tracking-widest text-accent-300">
-            <span className="block w-6 h-px bg-accent-300/70" aria-hidden="true" />
+          <span className="inline-flex items-center gap-2.5 font-mono text-[0.6875rem] font-semibold uppercase tracking-widest text-primary-700">
+            <span className="block w-6 h-px bg-primary-400" aria-hidden="true" />
             Healthcare Careers
           </span>
-          <h1 className="text-display font-heading font-semibold text-white mt-6 text-balance wdth-wide">
-            Find Your Next{' '}
-            <span className="text-accent-300 lg:block">Healthcare Role</span>
+          <h1 className="text-display font-heading font-semibold text-ink-900 mt-5 text-balance">
+            Come and do work that matters
           </h1>
-          <p className="text-lg text-white/80 leading-relaxed mt-6 max-w-xl text-pretty">
-            Whether you&rsquo;re a seasoned RN, a newly registered OT or SLP, a PSW graduate or a DSW
-            looking for meaningful work — PowerCare has opportunities across the GTA and Rural
-            Ontario. Apply once, work everywhere.
+          <p className="text-lg text-ink-600 leading-relaxed mt-5 max-w-xl text-pretty">
+            Whether you are a seasoned RN, a newly registered OT or SLP, a PSW graduate or a
+            DSW looking for work with meaning in it — we would like to meet you. Apply once,
+            and we will find you somewhere you fit.
           </p>
           <div className="grid sm:grid-cols-2 gap-x-10 mt-10">
             {[
-              { label: 'GTA & Rural Ontario',   sub: 'Wide coverage area'  },
-              { label: 'Placement within Days', sub: 'Not weeks'           },
-              { label: 'All Shift Types',       sub: 'Flexible scheduling' },
-              { label: 'Dedicated Recruiter',   sub: 'Your own advocate'   },
+              { label: 'GTA & Rural Ontario', sub: 'Wherever you are'          },
+              { label: 'Shifts that fit',     sub: 'Around your life, not ours' },
+              { label: 'Training included',   sub: 'We teach you ourselves'     },
+              { label: 'A coordinator',       sub: 'Who knows your name'        },
             ].map(({ label, sub }) => (
               <div key={label} className="flex items-start gap-3 py-4">
-                <Check size={16} strokeWidth={2.5} className="text-accent-300 mt-0.5 flex-shrink-0" />
+                <Check size={16} strokeWidth={2.5} className="text-primary-500 mt-0.5 flex-shrink-0" />
                 <div>
-                  <div className="font-semibold text-[0.9375rem] text-white">{label}</div>
-                  <div className="text-white/65 text-sm mt-0.5">{sub}</div>
+                  <div className="font-semibold text-[0.9375rem] text-ink-900">{label}</div>
+                  <div className="text-ink-500 text-sm mt-0.5">{sub}</div>
                 </div>
               </div>
             ))}
@@ -62,23 +60,17 @@ const PageHero = () => (
         </div>
 
         {/* Quick apply form card */}
-        <div className="lg:col-span-6 bg-white rounded-2xl p-7 sm:p-8 shadow-panel">
-          <h2 className="text-2xl font-heading font-semibold text-ink-900 mb-2">Quick Apply</h2>
-          <p className="text-ink-600 text-[0.9375rem] mb-7">Start your application — a recruiter will call you within 24 hours.</p>
+        <div className="lg:col-span-6 bg-surface rounded-2xl p-7 sm:p-8">
+          <h2 className="text-2xl font-heading font-semibold text-ink-900 mb-2">Say hello</h2>
+          <p className="text-ink-600 text-[0.9375rem] mb-7">Tell us a little about yourself and a coordinator will be in touch.</p>
           <QuickApplyForm />
         </div>
-      </div>
-    </div>
-
-    <div className="relative z-10 border-t border-white/15 bg-primary-900/70 backdrop-blur-sm">
-      <div className="max-w-7xl mx-auto px-5 sm:px-6 lg:px-8 py-4">
-        <CredentialBadges variant="hero" />
       </div>
     </div>
   </section>
 );
 
-// ── QUICK APPLY FORM ──────────────────────────────────────────
+// ── QUICK APPLY FORM ─────────────────────────────────────────
 const QuickApplyForm = () => {
   const [form, setForm] = useState({ name: '', phone: '', email: '', role: '', location: '', type: '' });
   const [submitted, setSubmitted] = useState(false);
@@ -138,7 +130,7 @@ const QuickApplyForm = () => {
         </div>
       </div>
       <button type="submit" className="btn-primary w-full">
-        Submit Application <ArrowRight size={16} />
+        Send your application <ArrowRight size={16} />
       </button>
       <p className="text-sm text-ink-500 text-center">
         By applying you agree to be contacted by a PowerCare recruiter.
@@ -162,12 +154,12 @@ const RoleCategories = () => (
         {jobCategories.map((cat) => (
           <RevealItem key={cat.id} className="h-full">
             <div className="flex flex-col h-full rounded-xl border border-ink-200 bg-white p-7 shadow-card
-                            border-t-2 border-t-primary-600">
+">
               <h3 className="flex items-center gap-3 font-heading font-semibold text-ink-900 text-lg mb-5">
                 <Briefcase size={18} strokeWidth={1.7} className="text-primary-600 flex-shrink-0" />
                 {cat.label}
               </h3>
-              <ul className="space-y-2 border-t border-ink-100 pt-4">
+              <ul className="space-y-2 mt-4">
                 {cat.roles.map((role) => (
                   <li key={role} className="flex items-start gap-2.5 py-1.5 text-[0.9375rem] text-ink-700">
                     <Check size={14} strokeWidth={2.6} className="text-primary-500 mt-1.5 flex-shrink-0" />
@@ -198,7 +190,7 @@ const HiringProcess = () => (
         {hiringSteps.map((step) => {
           const Icon = iconMap[step.icon] || CheckCircle;
           return (
-            <li key={step.step} className="border-t-2 border-primary-600 pt-6">
+            <li key={step.step}>
               <div className="flex items-center justify-between mb-5">
                 <Icon size={20} strokeWidth={1.6} className="text-primary-600" />
                 <span className="font-mono text-sm text-primary-600 tabular-nums">
@@ -228,8 +220,8 @@ const Benefits = () => (
       <div className="grid lg:grid-cols-12 gap-x-12 gap-y-10 items-start">
         <div className="lg:col-span-5">
           <img
-            src="/images/team-laptop.jpg"
-            alt="A PowerCare recruiter going through openings with a placed professional"
+            src="/images/therapy-pets.jpg"
+            alt="A PowerCare care worker bringing a therapy dog to a resident"
             loading="lazy"
             className="w-full aspect-[16/10] object-cover object-top rounded-2xl"
           />
@@ -246,32 +238,6 @@ const Benefits = () => (
             );
           })}
         </div>
-      </div>
-    </div>
-  </section>
-);
-
-// ── EMPLOYMENT TYPES ─────────────────────────────────────────
-const EmploymentTypes = () => (
-  <section className="section-padding bg-surface">
-    <div className="container-custom">
-      <SectionHeader
-        badge="Flexibility"
-        title="Work on Your Terms"
-        subtitle="PowerCare offers multiple employment arrangements to match your lifestyle, goals, and availability."
-        centered={false}
-      />
-      <div className="grid grid-cols-2 lg:grid-cols-5 gap-4">
-        {employmentTypes.map((type) => (
-          <div
-            key={type.id}
-            className="bg-white rounded-xl p-6 border border-ink-200 text-center
-                       transition-colors duration-300 hover:border-primary-400"
-          >
-            <Briefcase size={19} strokeWidth={1.6} className="text-primary-600 mx-auto mb-4" />
-            <div className="font-heading font-semibold text-ink-900 text-[0.9375rem]">{type.label}</div>
-          </div>
-        ))}
       </div>
     </div>
   </section>
@@ -368,9 +334,9 @@ const FullApplicationForm = () => {
         <label htmlFor="fa-resume" className="field-label">Résumé (PDF or DOC)</label>
         <label
           htmlFor="fa-resume"
-          className="flex items-center justify-center gap-2.5 w-full px-4 py-5 rounded-lg cursor-pointer
-                     border border-dashed border-ink-300 bg-white text-ink-600 text-[0.9375rem]
-                     hover:border-primary-500 hover:text-primary-700 transition-colors"
+          className="flex items-center justify-center gap-2.5 w-full px-4 py-5 rounded-xl cursor-pointer
+                     bg-white border border-dashed border-ink-300 text-ink-600 text-[0.9375rem]
+                     hover:border-primary-400 hover:text-primary-700 transition-colors"
         >
           <Upload size={17} strokeWidth={1.8} />
           {resumeName || 'Upload your résumé'}
@@ -401,7 +367,7 @@ const FullApplicationForm = () => {
       </label>
 
       <button type="submit" className="btn-primary w-full">
-        Submit Application <ArrowRight size={16} />
+        Send your application <ArrowRight size={16} />
       </button>
       <CredentialBadges variant="form" only={['wsib', 'trained', 'dispatch']} className="pt-2" />
     </form>
@@ -410,20 +376,18 @@ const FullApplicationForm = () => {
 
 // ── TESTIMONIALS ─────────────────────────────────────────────
 const Testimonials = () => (
-  <section className="relative section-padding bg-primary-900 overflow-hidden">
-    <div className="absolute inset-0 bg-grid-invert pointer-events-none" aria-hidden="true" />
-    <div className="container-custom relative z-10">
+  <section className="section-padding bg-surface">
+    <div className="container-custom">
       <SectionHeader
         badge="Staff stories"
         title="What Our Caregivers Say"
-        subtitle="Real experiences from healthcare professionals who found their next role through PowerCare."
+        subtitle="A few words from people who came to work with us."
         centered={false}
-        light
       />
       <div className="grid md:grid-cols-3 gap-x-10 gap-y-9">
         {[
           {
-            quote: "PowerCare placed me within 3 days of my first call. My recruiter listened to exactly what I wanted — flexible shifts near Brampton — and delivered. I've been with them for 2 years now.",
+            quote: "My coordinator actually listened to what I wanted — shifts near Brampton that worked around my family. I have been with them a while now and that has not changed.",
             name: 'Aisha K.', role: 'Registered Practical Nurse', location: 'Brampton, ON',
           },
           {
@@ -435,16 +399,16 @@ const Testimonials = () => (
             name: 'Maria S.', role: 'Developmental Support Worker', location: 'Barrie, ON',
           },
         ].map(({ quote, name, role, location }) => (
-          <figure key={name} className="flex flex-col rounded-xl border border-white/15 bg-white/5 p-7">
+          <figure key={name} className="flex flex-col rounded-2xl bg-white p-7">
             <blockquote className="flex-1">
-              <p className="font-heading text-lg text-white/85 leading-relaxed text-pretty">
+              <p className="font-heading text-lg text-ink-700 leading-relaxed text-pretty">
                 &ldquo;{quote}&rdquo;
               </p>
             </blockquote>
-            <figcaption className="mt-7 pt-5 border-t border-white/15">
-              <div className="font-semibold text-white">{name}</div>
-              <div className="text-white/65 text-sm mt-0.5">{role}</div>
-              <div className="font-mono text-[0.6875rem] font-semibold uppercase tracking-widest text-accent-300 mt-2 flex items-center gap-1.5">
+            <figcaption className="mt-7">
+              <div className="font-semibold text-ink-900">{name}</div>
+              <div className="text-ink-500 text-sm mt-0.5">{role}</div>
+              <div className="font-mono text-[0.6875rem] font-semibold uppercase tracking-widest text-primary-700 mt-2 flex items-center gap-1.5">
                 <MapPin size={11} />
                 {location}
               </div>
@@ -460,13 +424,13 @@ const FindAJob = () => (
   <main>
     <SEO page="careers" extraSchemas={[hiringHowToSchema, faqSchema(findJobFAQs)]} />
     <PageHero />
+    <CredentialBand />
     <RoleCategories />
     <HiringProcess />
     <Benefits />
-    <EmploymentTypes />
     <CoverageMap />
     <Testimonials />
-    <FAQ faqs={findJobFAQs} badge="Find Your Role" title="Questions About Working with PowerCare" subtitle="Get answers about our hiring process, roles, training, and benefits." />
+    <FAQ faqs={findJobFAQs} badge="Find Your Role" title="Questions About Working with PowerCare" subtitle="What people usually ask before they apply." />
   </main>
 );
 

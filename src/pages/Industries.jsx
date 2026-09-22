@@ -1,40 +1,37 @@
 import { Link } from 'react-router-dom';
 import {
-  ArrowRight, Building2, Home, Hospital, Heart,
+  Building2, Home, Heart,
   Users, Activity, Brain, ChevronRight, Shield, Plus, Check,
 } from 'lucide-react';
 import SectionHeader from '../components/ui/SectionHeader';
 import PageHero from '../components/ui/PageHero';
-import CredentialBadges from '../components/ui/CredentialBadges';
 import Reveal, { RevealGroup, RevealItem } from '../components/ui/Reveal';
 import FAQ from '../components/ui/FAQ';
 import { industries } from '../data/industries';
 import { industriesFAQs } from '../data/faqs';
+import CredentialBand from '../components/ui/CredentialBand';
 import SEO, { faqSchema } from '../components/seo/SEO';
 import { PHONE_ENABLED, PHONE_HREF, EMAIL_HREF } from '../data/contact';
 
-const iconMap = { Building2, Home, Hospital, Heart, Users, Activity, Brain };
+const iconMap = { Building2, Home, Heart, Users, Activity, Brain };
 
 const Hero = () => (
   <PageHero
     variant="center"
     eyebrow="Industries We Serve"
     title="Built for Every Care Setting"
-    subtitle="The staffing challenges differ by setting — we staff for the realities of each one."
-    image="/images/facility-exterior.jpg"
-    imageAlt="The entrance to a regional hospital served by PowerCare"
+    subtitle="A long-term care home and a group home ask different things of the people who work in them. We staff for what each one is really like."
+    image="/images/senior-care.jpg"
+    imageAlt="A PowerCare care worker sitting close with a resident"
+    imagePos="object-center"
   >
     <ul className="flex flex-wrap gap-2 justify-center mt-8">
-      {['Sector-specific training', 'Same-day & 24/7', 'Credentialed & screened'].map((t) => (
-        <li key={t} className="rounded-lg border border-white/25 bg-white/10 px-3.5 py-2 font-mono text-[0.6875rem] font-semibold uppercase tracking-widest text-white">
+      {['Trained for the setting', 'Whenever you need us', 'Known to us before we send them'].map((t) => (
+        <li key={t} className="rounded-full bg-surface px-4 py-2 font-mono text-[0.6875rem] font-semibold uppercase tracking-widest text-primary-700">
           {t}
         </li>
       ))}
     </ul>
-    <div className="flex flex-col sm:flex-row gap-3 justify-center mt-8">
-      <Link to="/contact" className="btn-accent">Request Staff <ArrowRight size={16} /></Link>
-      <Link to="/services" className="btn-white">Browse Professions <ChevronRight size={16} /></Link>
-    </div>
   </PageHero>
 );
 
@@ -61,25 +58,25 @@ const SectorGrid = () => (
           return (
             <RevealItem key={ind.id} className="h-full">
               <div
-                className="group flex flex-col h-full rounded-xl border border-ink-200 bg-white overflow-hidden
-                           shadow-card transition-[border-color,box-shadow,transform] duration-300 ease-out-soft
-                           hover:border-primary-300 hover:shadow-card-hover hover:-translate-y-0.5"
+                className="group flex flex-col h-full rounded-2xl bg-surface overflow-hidden
+                           transition-colors duration-300 ease-out-soft hover:bg-primary-50"
               >
-                <div className="relative h-52 overflow-hidden bg-ink-100">
+                <div className="h-52 overflow-hidden bg-ink-100">
                   <img
                     src={ind.image}
                     alt=""
                     loading="lazy"
-                    className="w-full h-full object-cover object-top transition-transform duration-500 ease-out-soft group-hover:scale-105"
+                    /* These frames all put their subjects mid-height; a top
+                       crop lands on ceilings and empty corridor. */
+                    className="w-full h-full object-cover object-center"
                   />
-                  <div className="absolute inset-0 bg-gradient-to-t from-primary-900/85 via-primary-900/25 to-transparent" aria-hidden="true" />
-                  <div className="absolute left-5 right-5 bottom-5 flex items-end gap-3">
-                    <Icon size={20} strokeWidth={1.7} className="text-accent-300 flex-shrink-0 mb-1" />
-                    <h3 className="font-heading font-semibold text-white text-lg leading-snug">{ind.title}</h3>
-                  </div>
                 </div>
 
                 <div className="flex flex-col flex-1 p-6">
+                  <div className="flex items-start gap-3 mb-3 min-h-[3.1rem]">
+                    <Icon size={20} strokeWidth={1.7} className="text-primary-600 flex-shrink-0 mt-0.5" />
+                    <h3 className="font-heading font-semibold text-ink-900 text-lg leading-snug">{ind.title}</h3>
+                  </div>
                   <p className="text-ink-600 text-[0.9375rem] leading-relaxed text-pretty">{ind.value}</p>
 
                   <h4 className="font-mono text-[0.625rem] font-semibold uppercase tracking-widest text-ink-400 mt-6 mb-2.5">
@@ -103,21 +100,25 @@ const SectorGrid = () => (
           );
         })}
 
-        {/* An eighth cell so the grid closes cleanly and nobody self-excludes. */}
-        <RevealItem className="h-full">
-          <div className="flex flex-col h-full rounded-xl border border-primary-200 bg-primary-50 p-7">
-            <Plus size={22} strokeWidth={1.6} className="text-primary-600 mb-5" />
+      </RevealGroup>
+
+      {/* Outside the grid on purpose: auto-rows-fr would stretch this strip to
+          a full card's height and leave a hole under it. */}
+      <Reveal>
+        <div className="mt-5 flex flex-col sm:flex-row sm:items-center gap-x-8 gap-y-4 rounded-2xl bg-primary-50 p-7">
+          <Plus size={22} strokeWidth={1.6} className="text-primary-600 flex-shrink-0" />
+          <div className="flex-1">
             <h3 className="text-lg font-heading font-semibold text-ink-900 mb-2">Another setting?</h3>
             <p className="text-ink-600 text-[0.9375rem] leading-relaxed text-pretty">
               If it&rsquo;s a care environment in Ontario — a clinic, a school board programme, a
               shelter, a supportive housing site — we can likely staff it.
             </p>
-            <Link to="/contact" className="link-arrow mt-auto pt-6">
-              Talk to us <ChevronRight size={14} />
-            </Link>
           </div>
-        </RevealItem>
-      </RevealGroup>
+          <Link to="/contact" className="link-arrow flex-shrink-0">
+            Talk to us <ChevronRight size={14} />
+          </Link>
+        </div>
+      </Reveal>
     </div>
   </section>
 );
@@ -134,14 +135,14 @@ const HowItWorks = () => (
       />
 
       <div className="grid lg:grid-cols-12 gap-x-12 gap-y-10 items-start">
-        <RevealGroup className="lg:col-span-7 border-t border-ink-200">
+        <RevealGroup className="lg:col-span-7">
           {[
             ['You tell us the gap',   'Setting, role, shift times and any unit-specific requirement. By phone, or through the request form.'],
             ['We match from the pool', 'Coordinators shortlist staff who already know your setting and hold the right college registration.'],
             ['We confirm in writing',  'You get the name, credential and arrival time — plus a standby name for emergency bookings.'],
             ['We follow up after',     'A post-shift check with your charge nurse, and the feedback goes onto that worker’s record.'],
           ].map(([title, desc], i) => (
-            <RevealItem key={title} className="flex items-start gap-5 py-6 border-b border-ink-200">
+            <RevealItem key={title} className="flex items-start gap-5 py-6">
               <span className="w-11 h-11 rounded-full border-2 border-primary-600 bg-white flex items-center justify-center flex-shrink-0
                                font-mono text-sm font-semibold text-primary-700 tabular-nums">
                 {String(i + 1).padStart(2, '0')}
@@ -157,10 +158,10 @@ const HowItWorks = () => (
         <Reveal className="lg:col-span-5">
           <figure className="fig-frame">
             <img
-              src="/images/handover.jpg"
-              alt="PowerCare coordinators handing over a shift to facility staff"
+              src="/images/training-lab.jpg"
+              alt="A PowerCare coordinator introducing staff to a resident and her family"
               loading="lazy"
-              className="w-full h-[300px] object-cover object-top"
+              className="w-full h-[300px] object-cover object-center"
             />
           </figure>
           <div className="mt-6 rounded-xl border border-ink-200 bg-white p-7">
@@ -180,53 +181,14 @@ const HowItWorks = () => (
   </section>
 );
 
-const ProofBand = () => (
-  <section className="bg-white section-padding-tight border-t border-ink-200">
-    <div className="container-custom">
-      <Reveal>
-        <h2 className="font-mono text-[0.6875rem] font-semibold uppercase tracking-widest text-ink-500 mb-6 text-center">
-          Credentials &amp; coverage on every placement
-        </h2>
-        <CredentialBadges variant="band" useFull />
-      </Reveal>
-    </div>
-  </section>
-);
-
-const IndustriesCTA = () => (
-  <section className="relative bg-primary-900 overflow-hidden">
-    <img
-      src="/images/cta-team.jpg"
-      alt=""
-      aria-hidden="true"
-      loading="lazy"
-      className="absolute inset-0 w-full h-full object-cover object-top"
-    />
-    <div className="absolute inset-0 scrim-soft" aria-hidden="true" />
-    <div className="container-custom relative z-10 section-padding text-center">
-      <h2 className="text-display-sm font-heading font-semibold text-white mb-5 text-balance">
-        Staff Your Facility Today
-      </h2>
-      <p className="text-white/80 text-lg max-w-xl mx-auto mb-8 text-pretty">
-        Tell us your setting and your need — we&rsquo;ll match the right people, fast.
-      </p>
-      <div className="flex flex-col sm:flex-row gap-3 justify-center">
-        <Link to="/contact" className="btn-accent">Request Staff <ArrowRight size={16} /></Link>
-        <Link to="/services" className="btn-white">Browse Professions <ChevronRight size={16} /></Link>
-      </div>
-    </div>
-  </section>
-);
-
 const Industries = () => (
   <main>
     <SEO page="industries" extraSchemas={[faqSchema(industriesFAQs)]} />
     <Hero />
+    <CredentialBand />
     <SectorGrid />
     <HowItWorks />
-    <ProofBand />
     <FAQ faqs={industriesFAQs} badge="Industries we serve" title="Questions About Our Industry Expertise" subtitle="Learn how PowerCare staffs different care settings across Ontario." />
-    <IndustriesCTA />
   </main>
 );
 

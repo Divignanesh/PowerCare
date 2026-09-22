@@ -148,49 +148,49 @@ const PAGE_META = {
     title: 'PowerCare | Trusted Healthcare Staffing Agency',
     crumb: 'Home',
     description:
-      'Trusted healthcare staffing across the GTA and Rural Ontario. Vetted, in-house trained RNs, RPNs, PSWs, DSWs, OTs and SLPs — 24/7 emergency coverage.',
+      'Compassionate healthcare staffing across the GTA and Rural Ontario. In-house trained RNs, RPNs, PSWs, DSWs, OTs and SLPs who care for your residents like their own.',
     path: '/',
   },
   about: {
     title: 'About PowerCare | Trusted Healthcare Staffing Agency',
     crumb: 'About Us',
     description:
-      'The mission, values and team behind Ontario\'s trusted healthcare staffing partner — serving the GTA and Rural Ontario since day one.',
+      'The people behind PowerCare, why we started, and what we hold ourselves to when we care for Ontario\'s older adults.',
     path: '/about',
   },
   whyPowerCare: {
     title: 'Why PowerCare | Trusted Healthcare Staffing Agency',
     crumb: 'Why PowerCare',
     description:
-      '80-hour in-house training, 10-step vetting, 24/7 dispatch and a fit guarantee — why Ontario facilities choose PowerCare over a typical agency.',
+      'How we train the people we place, how we stay close after they arrive, and what working with PowerCare should feel like.',
     path: '/why-powercare',
   },
   services: {
     title: 'Our Services | Trusted Healthcare Staffing Agency',
     crumb: 'Our Services',
     description:
-      'Vetted RNs, RPNs, PSWs, DSWs, Dietitians, OTs, SLPs and Psychotherapists placed across every Ontario care setting. See every profession we staff.',
+      'RNs, RPNs, PSWs, DSWs, Dietitians, OTs, SLPs and Psychotherapists placed across every Ontario care setting. See everyone we place.',
     path: '/services',
   },
   industries: {
     title: 'Industries We Serve | Trusted Staffing Agency Ontario',
     crumb: 'Industries We Serve',
     description:
-      'Long-term care, hospitals, retirement residences, group homes, respite, rehab and mental health — staffed for the realities of each setting.',
+      'Long-term care, retirement residences, home and community care, group homes, respite, rehab and mental health — staffed for the realities of each setting.',
     path: '/industries',
   },
   careers: {
     title: 'Find a Job | Trusted Healthcare Staffing Agency',
     crumb: 'Find a Job',
     description:
-      'RN, RPN, PSW, DSW, OT, SLP and Psychotherapist jobs across Ontario. Dedicated recruiter, flexible shifts, weekly pay, free in-house training.',
+      'RN, RPN, PSW, DSW, OT, SLP and Psychotherapist roles across Ontario. A coordinator who knows you, shifts that fit your life, and training that comes with the job.',
     path: '/careers',
   },
   contact: {
     title: 'Contact Us | Trusted Healthcare Staffing Agency',
     crumb: 'Contact',
     description:
-      'Urgent staffing support, career enquiries or partnerships — talk to a real coordinator. 24/7 dispatch across the GTA and Rural Ontario.',
+      'Talk to a real coordinator about staffing your home, or about working with us. Across the GTA and Rural Ontario.',
     path: '/contact',
   },
 }

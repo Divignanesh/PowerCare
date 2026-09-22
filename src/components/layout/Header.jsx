@@ -73,7 +73,7 @@ const Header = () => {
 
   return (
     <header
-      className={`fixed top-0 left-0 right-0 z-50 bg-white transition-shadow duration-300 border-b border-ink-200 ${
+      className={`fixed top-0 left-0 right-0 z-50 bg-white transition-shadow duration-300 ${
         scrolled ? 'shadow-[0_1px_20px_-8px_rgba(15,24,34,0.25)]' : ''
       }`}
     >
@@ -151,14 +151,8 @@ const Header = () => {
           </nav>
 
           <div className="hidden lg:flex items-center gap-2">
-            <Link
-              to="/contact"
-              className="text-[0.9375rem] font-medium text-ink-600 hover:text-primary-700 transition-colors px-3 py-2"
-            >
-              Partner With Us
-            </Link>
-            <Link to="/careers" className="btn-primary text-sm px-5 py-2.5">
-              Find a Job
+            <Link to="/contact" className="btn-primary text-sm px-5 py-2.5">
+              Get in touch
             </Link>
           </div>
 
@@ -182,7 +176,7 @@ const Header = () => {
             animate={{ height: 'auto', opacity: 1 }}
             exit={reduceMotion ? { opacity: 0 } : { height: 0, opacity: 0 }}
             transition={{ duration: 0.28, ease: [0.22, 1, 0.36, 1] }}
-            className="lg:hidden overflow-hidden bg-white border-t border-ink-100"
+            className="lg:hidden overflow-hidden bg-white"
           >
             <div className="px-5 py-5 max-h-[calc(100vh-5rem)] overflow-y-auto">
               <div>
@@ -211,12 +205,9 @@ const Header = () => {
                   </div>
                 ))}
               </div>
-              <div className="pt-6 flex flex-col gap-3">
-                <Link to="/careers" className="btn-primary w-full">
-                  Find a Job
-                </Link>
-                <Link to="/contact" className="btn-secondary w-full">
-                  Partner With Us
+              <div className="pt-6">
+                <Link to="/contact" className="btn-primary w-full">
+                  Get in touch
                 </Link>
               </div>
             </div>
