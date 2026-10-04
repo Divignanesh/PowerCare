@@ -3,7 +3,7 @@ import { useSearchParams } from 'react-router-dom';
 import { Link } from 'react-router-dom';
 import { ArrowRight } from 'lucide-react';
 import {
-  Phone, Envelope as Mail, MapPin, Clock, CheckCircle as CheckCircle2,
+  Phone, Envelope as Mail, MapPin, CheckCircle as CheckCircle2,
 } from '@phosphor-icons/react';
 import { AnimatePresence, motion, useReducedMotion } from 'framer-motion';
 import PageHero from '../components/ui/PageHero';
@@ -11,61 +11,22 @@ import FAQ from '../components/ui/FAQ';
 import { contactFAQs } from '../data/faqs';
 import CredentialBadges from '../components/ui/CredentialBadges';
 import { PRIMARY_CREDENTIALS } from '../data/credentials';
-import CredentialBand from '../components/ui/CredentialBand';
 import SEO, { faqSchema } from '../components/seo/SEO';
+import { useFormSubmit } from '../lib/submitForm';
+import { Honeypot, FormError } from '../components/ui/FormStatus';
 import { PHONE_ENABLED, PHONE, PHONE_HREF, EMAIL, EMAIL_HREF, ADDRESS, MAP_HREF } from '../data/contact';
 
 // ── HERO ─────────────────────────────────────────────────────
 const Hero = () => (
   <PageHero
-    variant="center"
+    variant="overlay"
+    large
     eyebrow="Contact Us"
     title="We're here to talk"
-    subtitle="Whether you are looking after a home full of residents or looking for somewhere to do your best work — there is a real person at this end."
     image="/images/hands-reach.jpg"
     imageAlt="Two hands reaching towards one another"
     imagePos="object-center"
   />
-);
-
-// ── CONTACT INFO BAR ─────────────────────────────────────────
-const CONTACT_CELLS = [
-  ...(PHONE_ENABLED
-    ? [{ icon: Phone, title: 'Call Us', lines: [PHONE, 'Mon–Fri: 8am–8pm ET'], href: PHONE_HREF }]
-    : []),
-  { icon: Mail,   title: 'Email Us',           lines: [EMAIL, 'We read every message'], href: EMAIL_HREF },
-  { icon: MapPin, title: 'Visit Us',           lines: [ADDRESS.street, `${ADDRESS.locality}, ${ADDRESS.region} ${ADDRESS.postalCode}`], href: MAP_HREF },
-  { icon: Clock,  title: 'Emergency Staffing', lines: ['24/7 Dispatch Available', 'Same-day coverage'], href: PHONE_ENABLED ? PHONE_HREF : EMAIL_HREF },
-];
-
-const ContactInfo = () => (
-  <section className="bg-primary-50 py-12">
-    <div className="max-w-7xl mx-auto px-5 sm:px-6 lg:px-8">
-      {/* Three cells sit in one row from tablet up, so none is left orphaned
-          on a line of its own; four fall back to a 2×2 before going wide. */}
-      <div className={`grid gap-x-10 gap-y-6 ${
-        CONTACT_CELLS.length === 4 ? 'sm:grid-cols-2 lg:grid-cols-4' : 'sm:grid-cols-3'
-      }`}>
-        {CONTACT_CELLS.map(({ icon: Icon, title, lines, href }) => (
-          <div key={title} className="text-ink-900 py-4 text-center">
-            <div className="flex flex-col items-center gap-3 mb-4">
-              <Icon size={40} className="text-primary-700" />
-              <span className="font-mono text-[0.625rem] font-semibold uppercase tracking-widest text-primary-700">{title}</span>
-            </div>
-            {lines.map((line, i) => (
-              href && i === 0 ? (
-                <a key={line} href={href} className="block text-ink-900 text-base font-medium hover:text-primary-600 transition-colors">
-                  {line}
-                </a>
-              ) : (
-                <div key={line} className="text-ink-600 text-sm mt-1">{line}</div>
-              )
-            ))}
-          </div>
-        ))}
-      </div>
-    </div>
-  </section>
 );
 
 // ── SUCCESS MESSAGE ───────────────────────────────────────────
@@ -88,11 +49,27 @@ const FacilityForm = () => {
     role: params.get('role') ?? '', urgency: '', message: '',
   });
   const [consent, setConsent] = useState(false);
-  const [submitted, setSubmitted] = useState(false);
-  if (submitted) return <SuccessMessage />;
+  const [trap, setTrap] = useState('');
+  const { status, error, send } = useFormSubmit('Staff request');
+  if (status === 'sent') return <SuccessMessage />;
+
+  const onSubmit = (e) => {
+    e.preventDefault();
+    const urgency = e.currentTarget.querySelector('#f-urgency');
+    send([
+      ['Name', form.name],
+      ['Phone', form.phone],
+      ['Email', form.email],
+      ['Facility', form.facility],
+      ['Role(s) needed', form.role],
+      ['Urgency', form.urgency ? urgency.selectedOptions[0].text : ''],
+      ['Details', form.message],
+    ], null, trap);
+  };
 
   return (
-    <form onSubmit={(e) => { e.preventDefault(); setSubmitted(true); }} className="space-y-4">
+    <form onSubmit={onSubmit} className="relative space-y-4">
+      <Honeypot value={trap} onChange={setTrap} />
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
         <div>
           <label htmlFor="f-name" className="field-label">Your Name *</label>
@@ -151,9 +128,10 @@ const FacilityForm = () => {
           ; my details are used only to respond to this request. <span className="font-semibold">(PIPEDA)</span>
         </span>
       </label>
-      <button type="submit" className="btn-primary w-full">
-        Send us a note <ArrowRight size={16} />
+      <button type="submit" disabled={status === 'sending'} className="btn-primary w-full disabled:opacity-60">
+        {status === 'sending' ? 'Sending…' : <>Send us a note <ArrowRight size={16} /></>}
       </button>
+      <FormError message={error} />
     </form>
   );
 };
@@ -161,11 +139,25 @@ const FacilityForm = () => {
 // ── PROFESSIONAL FORM ─────────────────────────────────────────
 const ProfessionalForm = () => {
   const [form, setForm] = useState({ name: '', email: '', phone: '', role: '', location: '', message: '' });
-  const [submitted, setSubmitted] = useState(false);
-  if (submitted) return <SuccessMessage />;
+  const [trap, setTrap] = useState('');
+  const { status, error, send } = useFormSubmit('Job enquiry');
+  if (status === 'sent') return <SuccessMessage />;
+
+  const onSubmit = (e) => {
+    e.preventDefault();
+    send([
+      ['Name', form.name],
+      ['Phone', form.phone],
+      ['Email', form.email],
+      ['Current role / credential', form.role],
+      ['Preferred location', form.location],
+      ['About them', form.message],
+    ], null, trap);
+  };
 
   return (
-    <form onSubmit={(e) => { e.preventDefault(); setSubmitted(true); }} className="space-y-4">
+    <form onSubmit={onSubmit} className="relative space-y-4">
+      <Honeypot value={trap} onChange={setTrap} />
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
         <div>
           <label htmlFor="p-name" className="field-label">Full Name *</label>
@@ -200,9 +192,10 @@ const ProfessionalForm = () => {
         <textarea id="p-message" rows={4} placeholder="Experience, availability, what you're looking for..." value={form.message}
           onChange={(e) => setForm({ ...form, message: e.target.value })} className="input resize-none" />
       </div>
-      <button type="submit" className="btn-primary w-full">
-        Tell us about yourself <ArrowRight size={16} />
+      <button type="submit" disabled={status === 'sending'} className="btn-primary w-full disabled:opacity-60">
+        {status === 'sending' ? 'Sending…' : <>Tell us about yourself <ArrowRight size={16} /></>}
       </button>
+      <FormError message={error} />
       <p className="text-sm text-ink-500 text-center">
         Or visit our full{' '}
         <Link to="/careers" className="text-primary-700 font-medium underline underline-offset-2 hover:text-primary-800">
@@ -217,11 +210,23 @@ const ProfessionalForm = () => {
 // ── GENERAL FORM ──────────────────────────────────────────────
 const GeneralForm = () => {
   const [form, setForm] = useState({ name: '', email: '', subject: '', message: '' });
-  const [submitted, setSubmitted] = useState(false);
-  if (submitted) return <SuccessMessage />;
+  const [trap, setTrap] = useState('');
+  const { status, error, send } = useFormSubmit('General enquiry');
+  if (status === 'sent') return <SuccessMessage />;
+
+  const onSubmit = (e) => {
+    e.preventDefault();
+    send([
+      ['Name', form.name],
+      ['Email', form.email],
+      ['Subject', form.subject],
+      ['Message', form.message],
+    ], null, trap);
+  };
 
   return (
-    <form onSubmit={(e) => { e.preventDefault(); setSubmitted(true); }} className="space-y-4">
+    <form onSubmit={onSubmit} className="relative space-y-4">
+      <Honeypot value={trap} onChange={setTrap} />
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
         <div>
           <label htmlFor="g-name" className="field-label">Your Name *</label>
@@ -244,9 +249,10 @@ const GeneralForm = () => {
         <textarea id="g-message" rows={6} required placeholder="Tell us more..." value={form.message}
           onChange={(e) => setForm({ ...form, message: e.target.value })} className="input resize-none" />
       </div>
-      <button type="submit" className="btn-primary w-full">
-        Send us a note <ArrowRight size={16} />
+      <button type="submit" disabled={status === 'sending'} className="btn-primary w-full disabled:opacity-60">
+        {status === 'sending' ? 'Sending…' : <>Send us a note <ArrowRight size={16} /></>}
       </button>
+      <FormError message={error} />
     </form>
   );
 };
@@ -270,8 +276,8 @@ const ContactForms = () => {
           {/* Left info — the visitor already knows why they're here, so this
               is just who we are and how to reach us directly. */}
           <div className="lg:col-span-5">
-            <h2 className="text-display-sm font-heading font-semibold text-ink-900 mb-6 text-balance">
-              PowerCare Health Staffing Solutions
+            <h2 className="text-display-sm font-heading font-semibold text-primary-700 mb-6 text-balance">
+              PowerCare Health Services
             </h2>
             <p className="text-ink-600 leading-relaxed mb-9 text-pretty">
               Whether you need staff for your home or facility, or want to join our team,
@@ -310,9 +316,9 @@ const ContactForms = () => {
               </h3>
               <ol className="space-y-5">
                 {[
-                  ['A person reads it',        'Your message goes to our team, not an automated queue. If it’s urgent, say so in the first line.'],
-                  ['We get back to you',       'A coordinator or recruiter replies, and asks anything else we need to help.'],
-                  ['We agree the next step',   'For facilities, who we can send and when. For professionals, an interview and a credential check.'],
+                  ['We receive it',            'Your message comes straight to our team. If it’s urgent, say so in the first line.'],
+                  ['We reach out to you',      'A coordinator or recruiter gets in touch and asks anything else we need to help.'],
+                  ['We move to next steps',    'For facilities, who we can send and when. For professionals, an interview and a credential check.'],
                 ].map(([title, desc], i) => (
                   <li key={title} className="flex gap-4">
                     <span className="index-num flex-shrink-0 w-6 mt-1">{String(i + 1).padStart(2, '0')}</span>
@@ -337,7 +343,7 @@ const ContactForms = () => {
                   aria-selected={tab === t.id}
                   aria-controls={`panel-${t.id}`}
                   onClick={() => setTab(t.id)}
-                  className={`flex-1 px-3 py-4 font-mono text-[0.625rem] font-semibold uppercase tracking-widest
+                  className={`flex-1 px-3 py-4 font-mono text-xs font-semibold uppercase tracking-widest
                               transition-colors duration-200 border-b-2 -mb-px ${
                     tab === t.id
                       ? 'border-primary-600 text-primary-700'
@@ -395,7 +401,7 @@ const JoinOurTeam = () => (
     <div className="absolute inset-0 bg-white/70" aria-hidden="true" />
 
     <div className="relative container-custom text-center max-w-2xl">
-      <h2 className="text-display-sm font-heading font-semibold text-ink-900 text-balance">
+      <h2 className="text-display-sm font-heading font-semibold text-primary-700 text-balance">
         Looking to Join Our Team?
       </h2>
       <p className="mt-4 text-ink-800 leading-relaxed text-pretty">
@@ -412,8 +418,6 @@ const Contact = () => (
   <main>
     <SEO page="contact" extraSchemas={[faqSchema(contactFAQs)]} />
     <Hero />
-    <CredentialBand />
-    <ContactInfo />
     <ContactForms />
     <FAQ faqs={contactFAQs} badge="Get in Touch" title="Contact & Support Questions" subtitle="A few things people often ask before they write." aside={false} />
     <JoinOurTeam />

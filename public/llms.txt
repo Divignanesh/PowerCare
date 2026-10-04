@@ -1,9 +1,10 @@
-# PowerCare Health Staffing Solutions
+# PowerCare Health Services
 
 > PowerCare is a healthcare staffing agency based in Mississauga, Ontario. It places in-house trained nurses, personal support workers and allied health professionals in long-term care homes, retirement residences, home and community care, group homes, rehabilitation and mental health services across the Greater Toronto Area and rural Ontario.
 
-PowerCare Health Staffing Solutions is not affiliated with Power Staffing Solutions or Power Healthcare Solutions.
+PowerCare Health Services is not affiliated with Power Staffing Solutions or Power Healthcare Solutions.
 
+- Legal name: PowerCare Health Inc.
 - Address: 10 Kingsbridge Garden Cir, Mississauga, ON L5R 3K6, Canada
 - Email: connect@powercare.ca
 - Service area: Greater Toronto Area and rural Ontario

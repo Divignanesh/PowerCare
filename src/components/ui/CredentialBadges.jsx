@@ -51,7 +51,9 @@ const CredentialBadges = ({ variant = 'strip', only, useFull = false, className 
   if (variant === 'band') {
     return (
       <ul
-        className={`grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-y-6 ${className}`}
+        className={`grid grid-cols-2 gap-y-6 ${
+          items.length === 4 ? 'lg:grid-cols-4 max-w-5xl mx-auto' : 'sm:grid-cols-3 lg:grid-cols-6'
+        } ${className}`}
       >
         {items.map(({ id, icon: Icon, ...c }) => (
           <li
@@ -87,7 +89,7 @@ const CredentialBadges = ({ variant = 'strip', only, useFull = false, className 
   return (
     <ul className={`flex flex-wrap items-center gap-x-6 gap-y-3 ${className}`}>
       {items.map(({ id, icon: Icon, ...c }) => (
-        <li key={id} className="flex items-center gap-2 font-mono text-[0.625rem] uppercase tracking-widest text-primary-700">
+        <li key={id} className="flex items-center gap-2 font-mono text-xs uppercase tracking-widest text-primary-700">
           <Icon size={17} className="text-primary-700 flex-shrink-0" />
           {labelOf(c)}
         </li>

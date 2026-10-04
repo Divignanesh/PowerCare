@@ -6,10 +6,11 @@ import SectionHeader from '../components/ui/SectionHeader';
 import FAQ from '../components/ui/FAQ';
 import { jobCategories, employmentTypes, locations } from '../data/jobs';
 import { findJobFAQs } from '../data/faqs';
-import { RevealGroup, RevealItem } from '../components/ui/Reveal';
+import Reveal, { RevealGroup, RevealItem } from '../components/ui/Reveal';
 import CredentialBadges from '../components/ui/CredentialBadges';
-import CredentialBand from '../components/ui/CredentialBand';
 import SEO, { faqSchema } from '../components/seo/SEO';
+import { useFormSubmit, MAX_FILE_MB } from '../lib/submitForm';
+import { Honeypot, FormError } from '../components/ui/FormStatus';
 
 // ── HERO ─────────────────────────────────────────────────────
 // A short banner: the photograph under a white wash, the title and one line.
@@ -26,11 +27,11 @@ const PageHero = () => (
     <div className="absolute inset-0 bg-white/70" aria-hidden="true" />
 
     <div className="relative container-custom py-12 text-center">
-      <h1 className="text-display-lg font-heading font-semibold text-ink-900 text-balance">
+      <h1 className="text-display-lg font-heading font-semibold text-primary-700 text-balance">
         Careers
       </h1>
       <p className="mt-4 text-lg text-ink-800 max-w-2xl mx-auto leading-relaxed text-pretty">
-        Come and do work that matters.
+        Join us on our mission to bring good care to every community.
       </p>
     </div>
   </section>
@@ -39,11 +40,11 @@ const PageHero = () => (
 // ── RÉSUMÉ UPLOAD ────────────────────────────────────────────
 // Shared by both application forms. The native input is visually hidden and
 // the dashed label stands in for it, showing the chosen file's name.
-const ResumeUpload = ({ id }) => {
-  const [fileName, setFileName] = useState('');
+const ResumeUpload = ({ id, file, onFile }) => {
+  const fileName = file?.name ?? '';
   return (
     <div>
-      <label htmlFor={id} className="field-label">Résumé (PDF or DOC)</label>
+      <label htmlFor={id} className="field-label">Résumé (PDF or DOC, up to {MAX_FILE_MB} MB)</label>
       <label
         htmlFor={id}
         className="flex items-center justify-center gap-2.5 w-full px-4 py-5 rounded-xl cursor-pointer
@@ -58,7 +59,7 @@ const ResumeUpload = ({ id }) => {
         type="file"
         accept=".pdf,.doc,.docx"
         className="sr-only"
-        onChange={(e) => setFileName(e.target.files?.[0]?.name ?? '')}
+        onChange={(e) => onFile(e.target.files?.[0] ?? null)}
       />
     </div>
   );
@@ -108,7 +109,7 @@ const CoverageMap = () => (
           {/* Sets expectations before the form, so people can see whether
               they fit without needing a job board. */}
           <span className="section-badge">Before You Apply</span>
-          <h2 className="text-display-sm font-heading font-semibold text-ink-900 mb-6 text-balance">
+          <h2 className="text-display-sm font-heading font-semibold text-primary-700 mb-6 text-balance">
             Who We&rsquo;re Looking For
           </h2>
           <p className="text-ink-600 leading-relaxed mb-7 text-pretty">
@@ -150,59 +151,42 @@ const CoverageMap = () => (
   </section>
 );
 
-// One looping strip. The list is rendered twice so sliding by half lands the
-// second copy where the first began. Hovering pauses it; with reduced motion
-// the first strip becomes a plain wrapped list and the second is dropped.
-const MarqueeRow = ({ items, reverse = false }) => (
-  <div
-    className={`group [mask-image:linear-gradient(to_right,transparent,black_8%,black_92%,transparent)]
-                motion-reduce:[mask-image:none] ${reverse ? 'motion-reduce:hidden' : ''}`}
-    aria-hidden={reverse || undefined}
-  >
-    <ul
-      className={`flex w-max gap-4 animate-marquee group-hover:[animation-play-state:paused]
-                  ${reverse ? '[animation-direction:reverse]' : ''}
-                  motion-reduce:animate-none motion-reduce:w-auto motion-reduce:flex-wrap
-                  motion-reduce:justify-center motion-reduce:px-5`}
-    >
-      {[...items, ...items].map((loc, i) => (
-        <li
-          key={`${loc}-${i}`}
-          aria-hidden={i >= items.length || undefined}
-          className={`flex items-center gap-2 whitespace-nowrap rounded-full bg-white border border-ink-200
-                      px-5 py-2.5 text-base text-ink-700
-                      ${i >= items.length ? 'motion-reduce:hidden' : ''}`}
-        >
-          <MapPin size={17} className="text-primary-700 flex-shrink-0" aria-hidden="true" />
-          {loc}
-        </li>
-      ))}
-    </ul>
-  </div>
-);
-
 // ── WHERE WE PLACE ───────────────────────────────────────────
-// The locations drift past in two slow strips rather than sitting in a
-// column nobody reads.
+// The copy on the left; on the right the coverage map, with every place we
+// place people listed under it.
 const WherePlace = () => (
-  <section className="section-padding bg-surface overflow-hidden">
-    <div className="container-custom text-center max-w-3xl">
-      <span className="section-badge">Where We Place</span>
-      <h2 className="text-display-sm font-heading font-semibold text-ink-900 mb-6 text-balance">
-        GTA &amp; Rural Ontario Opportunities
-      </h2>
-      <p className="text-ink-600 leading-relaxed text-pretty">
-        PowerCare has one of the widest geographic staffing networks in Ontario. We place healthcare
-        professionals not just in major urban centres, but in the rural and underserved communities
-        that need skilled caregivers most.
-      </p>
-    </div>
+  <section className="section-padding bg-surface">
+    <div className="container-custom grid lg:grid-cols-12 gap-x-14 gap-y-10 items-center">
+      <Reveal className="lg:col-span-5">
+        <span className="section-badge">Where We Place</span>
+        <h2 className="section-title text-balance">GTA &amp; Rural Ontario Opportunities</h2>
+        <p className="mt-6 text-lg text-ink-600 leading-relaxed text-pretty">
+          We place healthcare professionals in the GTA&rsquo;s major centres and in the rural and
+          underserved communities that need skilled caregivers most.
+        </p>
+        <p className="mt-4 text-ink-600 leading-relaxed text-pretty">
+          Tell us where you would like to work. You can choose one area or several.
+        </p>
+      </Reveal>
 
-    {/* Two strips running opposite ways. Each carries the whole list, the
-        second in reverse order, so neither runs short on a wide screen. */}
-    <div className="mt-12 space-y-4">
-      <MarqueeRow items={locations} />
-      <MarqueeRow items={[...locations].reverse()} reverse />
+      <Reveal className="lg:col-span-7" delay={0.1}>
+        <figure className="rounded-2xl overflow-hidden border border-ink-200 bg-white">
+          <img
+            src="/images/coverage-map.jpg"
+            alt="Map of southern Ontario showing PowerCare's coverage around the Greater Toronto Area, from London and Kitchener to Barrie and Peterborough"
+            loading="lazy"
+            className="w-full aspect-[9/7] object-cover"
+          />
+        </figure>
+        <ul className="mt-6 grid grid-cols-2 sm:grid-cols-3 gap-x-6 gap-y-3">
+          {locations.map((loc) => (
+            <li key={loc} className="flex items-center gap-2 text-base text-ink-700">
+              <MapPin size={17} className="text-primary-700 flex-shrink-0" aria-hidden="true" />
+              {loc}
+            </li>
+          ))}
+        </ul>
+      </Reveal>
     </div>
   </section>
 );
@@ -214,20 +198,38 @@ const FullApplicationForm = () => {
     experience: '', message: ''
   });
   const [consent, setConsent] = useState(false);
-  const [submitted, setSubmitted] = useState(false);
+  const [resume, setResume] = useState(null);
+  const [trap, setTrap] = useState('');
+  const { status, error, send } = useFormSubmit('Job application');
 
-  if (submitted) {
+  if (status === 'sent') {
     return (
       <div className="text-center py-8" role="status">
         <CheckCircle2 size={44} className="text-primary-700 mx-auto mb-4" />
         <h4 className="text-xl font-heading font-semibold text-ink-900 mb-2">Application Submitted!</h4>
-        <p className="text-ink-600">We'll be in touch within 24 hours.</p>
+        <p className="text-ink-600">Thank you. Our recruiting team will be in touch.</p>
       </div>
     );
   }
 
+  const onSubmit = (e) => {
+    e.preventDefault();
+    send([
+      ['Name', form.name],
+      ['Phone', form.phone],
+      ['Email', form.email],
+      ['Role seeking', form.role],
+      ['Location preference', form.location],
+      ['Employment type', employmentTypes.find((t) => t.id === form.type)?.label ?? ''],
+      ['Experience', form.experience],
+      ['About them', form.message],
+      ['Résumé', resume ? resume.name : 'Not attached'],
+    ], resume, trap);
+  };
+
   return (
-    <form onSubmit={(e) => { e.preventDefault(); setSubmitted(true); }} className="space-y-4">
+    <form onSubmit={onSubmit} className="relative space-y-4">
+      <Honeypot value={trap} onChange={setTrap} />
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
         <input type="text" required aria-label="Full Name" placeholder="Full Name *" value={form.name}
           onChange={(e) => setForm({ ...form, name: e.target.value })} className="input" />
@@ -259,7 +261,7 @@ const FullApplicationForm = () => {
       <textarea aria-label="Tell us about yourself" value={form.message} onChange={(e) => setForm({ ...form, message: e.target.value })}
         placeholder="Tell us about yourself (optional)" rows={3} className="input resize-none" />
 
-      <ResumeUpload id="fa-resume" />
+      <ResumeUpload id="fa-resume" file={resume} onFile={setResume} />
 
       <label className="flex items-start gap-3 text-sm text-ink-600 leading-relaxed">
         <input
@@ -277,9 +279,10 @@ const FullApplicationForm = () => {
         </span>
       </label>
 
-      <button type="submit" className="btn-primary w-full">
-        Send your application <ArrowRight size={16} />
+      <button type="submit" disabled={status === 'sending'} className="btn-primary w-full disabled:opacity-60">
+        {status === 'sending' ? 'Sending…' : <>Send your application <ArrowRight size={16} /></>}
       </button>
+      <FormError message={error} />
     </form>
   );
 };
@@ -288,7 +291,6 @@ const FindAJob = () => (
   <main>
     <SEO page="careers" extraSchemas={[faqSchema(findJobFAQs)]} />
     <PageHero />
-    <CredentialBand />
     <CoverageMap />
     <WherePlace />
     <RoleCategories />

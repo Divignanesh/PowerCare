@@ -15,7 +15,7 @@ export const services = [
     title: 'Registered Nurse (RN)',
     category: 'Medical & Nursing',
     icon: 'Stethoscope',
-    image: '/images/home-visit.jpg',
+    image: '/images/scrubs-portrait.jpg',
     shortDesc: 'Provides direct nursing care to patients and extends health education programs.',
     fullDesc:
       'Our Registered Nurses deliver comprehensive, evidence-based care across long-term care, retirement and community settings. They conduct patient assessments, administer medications, manage complex care plans, and collaborate with interdisciplinary teams to ensure optimal health outcomes.',
@@ -51,7 +51,9 @@ export const services = [
     title: 'Personal Support Worker (PSW)',
     category: 'Care Support',
     icon: 'HandHeart',
-    image: '/images/psw-care.jpg',
+    image: '/images/psw-home-support.jpg',
+    // The carer and the man she supports sit left of centre.
+    imagePos: 'object-[30%_center]',
     shortDesc: 'Providing patients with attentive, practical and emotional support.',
     fullDesc:
       "PowerCare's Personal Support Workers provide compassionate, hands-on care to clients in their homes, retirement homes, and long-term care facilities. They assist with daily living activities, personal hygiene, mobility, and emotional well-being, allowing clients to maintain dignity and independence.",
@@ -88,7 +90,8 @@ export const services = [
     title: 'Dietary Aide / Dietitian',
     category: 'Allied Health & Therapy',
     icon: 'UtensilsCrossed',
-    image: '/images/dietitian.jpg',
+    image: '/images/dietitian-consult.jpg',
+    imagePos: 'object-[40%_20%]',
     shortDesc: 'Plans and prepares nutrition that accounts for therapeutic diets, allergies and special needs.',
     fullDesc:
       'PowerCare places both Registered Dietitians and Dietary Aides. Dietitians assess nutritional risk, build therapeutic diet plans and advise clinical teams; Dietary Aides prepare and serve those meals accurately and safely in long-term care homes, retirement residences and group homes.',
@@ -106,8 +109,8 @@ export const services = [
     title: 'Occupational Therapist (OT)',
     category: 'Allied Health & Therapy',
     icon: 'Accessibility',
-    image: '/images/ot-hand.jpg',
-    imagePos: 'object-center',
+    image: '/images/ot-session.jpg',
+    imagePos: 'object-[58%_center]',
     shortDesc: 'Restores day-to-day function — mobility, self-care and safe independent living.',
     fullDesc:
       'Our Occupational Therapists help clients regain and maintain the activities of daily living after injury, surgery, stroke or as function declines with age. They assess the person and the environment, prescribe equipment and modifications, and build graded programmes that return people to safe independence at home and in the community.',
@@ -143,7 +146,7 @@ export const services = [
     title: 'Psychotherapist',
     category: 'Allied Health & Therapy',
     icon: 'Brain',
-    image: '/images/psychotherapy.jpg',
+    image: '/images/psychotherapy-session.jpg',
     shortDesc: 'Structured, evidence-based talk therapy for mental health and behavioural needs.',
     fullDesc:
       'Our Registered Psychotherapists deliver evidence-based individual and group therapy in mental health programmes, addictions services, developmental services and community agencies. They work within the circle of care, contribute to treatment planning, and are trained in trauma-informed practice.',

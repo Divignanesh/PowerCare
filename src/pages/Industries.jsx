@@ -23,13 +23,13 @@ const Hero = () => (
     eyebrow="Industries We Serve"
     title="Built for Every Care Setting"
     subtitle="A long-term care home and a group home ask different things of the people who work in them. We staff for what each one is really like."
-    image="/images/senior-care.jpg"
-    imageAlt="A PowerCare care worker sitting close with a resident"
+    image="/images/care-home-lounge.jpg"
+    imageAlt="Care workers and residents together in a care home lounge"
     imagePos="object-center"
   >
     <ul className="flex flex-wrap gap-2 justify-center mt-8">
       {['Trained for the setting', 'Whenever you need us', 'Known to us before we send them'].map((t) => (
-        <li key={t} className="rounded-full bg-white px-4 py-2 font-mono text-[0.625rem] font-semibold uppercase tracking-widest text-primary-700">
+        <li key={t} className="rounded-full bg-white px-4 py-2 font-mono text-xs font-semibold uppercase tracking-widest text-primary-700">
           {t}
         </li>
       ))}
@@ -81,7 +81,7 @@ const SectorGrid = () => (
                   </div>
                   <p className="text-ink-600 text-base leading-relaxed text-pretty">{ind.value}</p>
 
-                  <h4 className="font-mono text-[0.625rem] font-semibold uppercase tracking-widest text-ink-400 mt-6 mb-2.5">
+                  <h4 className="font-mono text-xs font-semibold uppercase tracking-widest text-ink-400 mt-6 mb-2.5">
                     Roles we place here
                   </h4>
                   <ul className="space-y-1.5">

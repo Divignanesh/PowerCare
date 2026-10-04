@@ -9,6 +9,7 @@
  *  - "center" — the photograph full-bleed as a band, copy centred below it.
  *  - "split"  — copy on the left, the photograph framed on the right.
  *  - "overlay" — copy centred on the photograph under a white wash.
+ *    `large` sets the title a size up, for heroes that carry no subtitle.
  *
  * `insetImage` (split only) adds a second, smaller photograph overlapping
  * the bottom-left corner of the first.
@@ -41,11 +42,16 @@ const PageHero = ({
   insetImageAlt = '',
   insetImagePos = 'object-center',
   variant = 'split',
+  large = false,
   children,
 }) => {
   if (variant === 'overlay') {
     return (
-      <section className="relative flex items-center min-h-[360px] sm:min-h-[420px] lg:min-h-[480px] overflow-hidden">
+      <section
+        className={`relative flex items-center overflow-hidden ${
+          large ? 'min-h-[220px] sm:min-h-[300px] lg:min-h-[360px]' : 'min-h-[360px] sm:min-h-[420px] lg:min-h-[480px]'
+        }`}
+      >
         <img
           src={image}
           alt={imageAlt}
@@ -57,7 +63,11 @@ const PageHero = ({
 
         <div className="relative w-full max-w-7xl mx-auto px-5 sm:px-6 lg:px-8 py-14 lg:py-16 text-center">
           <Eyebrow label={eyebrow} flanked />
-          <h1 className="text-display-lg font-heading font-semibold text-ink-900 mt-5 max-w-3xl mx-auto text-balance">
+          <h1
+            className={`${
+              large ? 'text-display-xl font-extrabold' : 'text-display-lg'
+            } font-heading font-semibold text-primary-700 mt-5 max-w-3xl mx-auto text-balance`}
+          >
             {title}
           </h1>
           {subtitle && (
@@ -86,7 +96,7 @@ const PageHero = ({
 
         <div className="max-w-7xl mx-auto px-5 sm:px-6 lg:px-8 pt-10 pb-9 lg:pt-12 lg:pb-10 text-center">
           <Eyebrow label={eyebrow} flanked />
-          <h1 className="text-display font-heading font-semibold text-ink-900 mt-5 max-w-3xl mx-auto text-balance">
+          <h1 className="text-display font-heading font-semibold text-primary-700 mt-5 max-w-3xl mx-auto text-balance">
             {title}
           </h1>
           {subtitle && (
@@ -106,7 +116,7 @@ const PageHero = ({
         <div className="grid lg:grid-cols-12 gap-x-12 gap-y-10 items-center">
           <div className="lg:col-span-6">
             <Eyebrow label={eyebrow} />
-            <h1 className="text-display font-heading font-semibold text-ink-900 mt-5 text-balance">
+            <h1 className="text-display font-heading font-semibold text-primary-700 mt-5 text-balance">
               {title}
             </h1>
             {subtitle && (

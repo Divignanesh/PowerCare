@@ -22,7 +22,7 @@ import Reveal from './Reveal';
 const SectionHeader = ({ badge, title, subtitle, centered = true, light = false }) => {
   const eyebrowTone = light ? 'text-accent-300' : 'text-primary-600';
   const ruleTone    = light ? 'bg-accent-300/60' : 'bg-primary-400';
-  const titleTone   = light ? 'text-white' : 'text-ink-900';
+  const titleTone   = light ? 'text-white' : 'text-primary-700';
   const subTone     = light ? 'text-white/65' : 'text-ink-600';
 
   if (centered) {

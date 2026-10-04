@@ -11,12 +11,12 @@ import SEO, { faqSchema } from '../components/seo/SEO';
 
 const Hero = () => (
   <PageHero
-    variant="center"
+    variant="overlay"
     eyebrow="Our Story"
     title="About PowerCare"
     subtitle="We look after the people who once looked after us — and the families who trust us with them."
-    image="/images/psw-care.jpg"
-    imageAlt="A PowerCare support worker holding a resident's hands"
+    image="/images/home-sofa-carer.jpg"
+    imageAlt="A PowerCare carer sitting with an older woman on her sofa"
     imagePos="object-center"
   />
 );
@@ -38,8 +38,8 @@ const AboutIntro = () => (
               className="w-[80%] aspect-[3/4] object-cover object-left rounded-2xl"
             />
             <img
-              src="/images/home-respite.jpg"
-              alt="A support worker sitting with a client and their family at home"
+              src="/images/home-desk-visit.jpg"
+              alt="A carer going through the day’s plans with an older man at home"
               loading="lazy"
               className="hidden sm:block absolute right-0 top-[20%] w-[54%] aspect-[3/4]
                          object-cover object-top rounded-2xl ring-[12px] ring-white"
@@ -49,7 +49,7 @@ const AboutIntro = () => (
 
         <div className="lg:col-span-6">
           <span className="section-badge">About us</span>
-          <h2 className="text-display-sm font-heading font-semibold text-ink-900 mb-7 text-balance">
+          <h2 className="text-display-sm font-heading font-semibold text-primary-700 mb-7 text-balance">
             We care about the people you care about
           </h2>
           <p className="text-ink-600 leading-relaxed mb-5 text-pretty">
@@ -79,23 +79,23 @@ const AboutIntro = () => (
 const DEPENDABLE = [
   {
     title: 'Caring for older adults',
-    image: '/images/senior-walker.jpg',
+    image: '/images/ltc-table-cards.jpg',
     pos:   'object-center',
-    alt:   'A care worker walking beside an older woman using a walker',
+    alt:   'A care worker playing cards with a resident at the table',
     desc:  'Long-term care homes and retirement residences, where our people become part of your team rather than a face passing through.',
   },
   {
     title: 'Support closer to home',
-    image: '/images/home-visit.jpg',
+    image: '/images/home-visit-man.jpg',
     pos:   'object-center',
-    alt:   'A support worker checking on a client during a home visit',
+    alt:   'A visiting nurse checking an older man’s chest at home',
     desc:  'Home, community and respite care, so people can stay where they are most themselves for as long as they are able.',
   },
   {
     title: 'Specialised and complex care',
-    image: '/images/group-home.jpg',
+    image: '/images/care-home-activity.jpg',
     pos:   'object-center',
-    alt:   'A developmental support worker with a resident in a group home',
+    alt:   'A care worker leaning in to talk with a resident during an activity',
     desc:  'Group homes, developmental services, rehabilitation and mental health — settings that ask for patience as much as skill.',
   },
 ];
@@ -105,7 +105,7 @@ const DependableCare = () => (
     <div className="container-custom">
       <div className="text-center mb-12">
         <span className="section-badge">Pride in how we care</span>
-        <h2 className="text-display-sm font-heading font-semibold text-ink-900 text-balance">
+        <h2 className="text-display-sm font-heading font-semibold text-primary-700 text-balance">
           Care you can depend on
         </h2>
       </div>
@@ -159,7 +159,7 @@ const MissionVisionValues = () => (
         ))}
       </RevealGroup>
 
-      <h3 className="font-mono text-[0.625rem] uppercase tracking-widest text-primary-700 mb-5">What we value</h3>
+      <h3 className="font-mono text-xs uppercase tracking-widest text-primary-700 mb-5">What we value</h3>
       <ul className="flex flex-wrap gap-2.5">
         {['Kindness', 'Patience', 'Honesty', 'Dignity', 'Respect'].map((v) => (
           <li key={v} className="rounded-full bg-surface px-5 py-2 font-semibold text-ink-900">
@@ -177,7 +177,7 @@ const KnownFor = () => (
     <div className="container-custom">
       <div className="text-center mb-12">
         <span className="section-badge">Our speciality</span>
-        <h2 className="text-display-sm font-heading font-semibold text-ink-900 text-balance">
+        <h2 className="text-display-sm font-heading font-semibold text-primary-700 text-balance">
           What we are known for
         </h2>
       </div>

@@ -64,14 +64,9 @@ const Footer = () => (
 
         {/* Brand */}
         <div className="lg:col-span-4 sm:col-span-2">
-          <Link to="/" className="inline-flex items-center gap-3 mb-6">
-            <img src="/logo.png" alt="PowerCare logo" className="h-10 w-auto object-contain rounded-lg" />
-            <span className="leading-none">
-              <span className="block font-heading font-bold text-lg text-white tracking-tight">PowerCare</span>
-              <span className="block font-mono text-[0.625rem] font-semibold uppercase tracking-widest text-accent-300 mt-1">
-                Health Staffing Solutions
-              </span>
-            </span>
+          <Link to="/" className="inline-flex mb-6" aria-label="PowerCare Health Services, home">
+            {/* The navy wordmark, knocked out to white for the deep ground. */}
+            <img src="/logo-wordmark.png" alt="PowerCare Health Services" width="559" height="204" className="h-14 w-auto brightness-0 invert" />
           </Link>
 
           <p className="text-white/65 text-sm leading-relaxed max-w-sm mb-8 text-pretty">
@@ -142,7 +137,7 @@ const Footer = () => (
           { heading: 'Locations',  links: footerLinks.locations  },
         ].map(({ heading, links }) => (
           <div key={heading} className="lg:col-span-2 lg:col-start-auto">
-            <h4 className="font-mono text-[0.625rem] font-semibold uppercase tracking-widest text-accent-300 mb-5">
+            <h4 className="font-mono text-xs font-semibold uppercase tracking-widest text-accent-300 mb-5">
               {heading}
             </h4>
             <ul className="space-y-3">
@@ -168,7 +163,7 @@ const Footer = () => (
     <div className="relative">
       <div className="max-w-7xl mx-auto px-5 sm:px-6 lg:px-8 py-6 flex flex-col sm:flex-row justify-between items-center gap-4">
         <p className="font-mono text-xs text-white/45 text-center sm:text-left">
-          &copy; {new Date().getFullYear()} PowerCare Health Staffing Solutions. All rights reserved.
+          &copy; {new Date().getFullYear()} PowerCare Health Inc. All rights reserved.
         </p>
         <div className="flex gap-6">
           <Link to="/privacy" className="font-mono text-xs text-white/45 hover:text-white transition-colors">Privacy Policy</Link>

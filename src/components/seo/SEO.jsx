@@ -17,11 +17,12 @@ const localBusinessSchema = {
   '@context': 'https://schema.org',
   '@type': ['LocalBusiness', 'EmploymentAgency'],
   '@id': ORG_ID,
-  name: 'PowerCare Health Staffing Solutions',
+  name: 'PowerCare Health Services',
   alternateName: 'PowerCare',
+  legalName: 'PowerCare Health Inc.',
   slogan: 'Good care starts with good people.',
   description:
-    'PowerCare Health Staffing Solutions is a healthcare staffing agency in Mississauga, Ontario. It places vetted, in-house trained RNs, RPNs, PSWs, DSWs, occupational therapists, speech-language pathologists, psychotherapists and dietitians in long-term care, retirement, home and community settings across the Greater Toronto Area and rural Ontario.',
+    'PowerCare Health Services is a healthcare staffing agency in Mississauga, Ontario. It places vetted, in-house trained RNs, RPNs, PSWs, DSWs, occupational therapists, speech-language pathologists, psychotherapists and dietitians in long-term care, retirement, home and community settings across the Greater Toronto Area and rural Ontario.',
   url: BASE_URL,
   ...(PHONE_ENABLED ? { telephone: PHONE_E164 } : {}),
   email: EMAIL,
@@ -32,7 +33,7 @@ const localBusinessSchema = {
     '@id': `${BASE_URL}/#logo`,
     url: `${BASE_URL}/logo.png`,
     contentUrl: `${BASE_URL}/logo.png`,
-    caption: 'PowerCare Health Staffing Solutions',
+    caption: 'PowerCare Health Services',
   },
   image: OG_IMAGE,
   contactPoint: [
@@ -138,7 +139,7 @@ const websiteSchema = {
   '@type': 'WebSite',
   '@id': SITE_ID,
   url: BASE_URL,
-  name: 'PowerCare Health Staffing Solutions',
+  name: 'PowerCare Health Services',
   inLanguage: 'en-CA',
   publisher: { '@id': ORG_ID },
 }
@@ -288,7 +289,7 @@ const SEO = ({ page, extraSchemas = [] }) => {
           (scripts/prerender.mjs), so these reach crawlers that never run
           JavaScript. */}
       <meta property="og:type" content="website" />
-      <meta property="og:site_name" content="PowerCare Health Staffing Solutions" />
+      <meta property="og:site_name" content="PowerCare Health Services" />
       <meta property="og:locale" content="en_CA" />
       <meta property="og:url" content={url} />
       <meta property="og:title" content={meta.title} />
@@ -296,7 +297,7 @@ const SEO = ({ page, extraSchemas = [] }) => {
       <meta property="og:image" content={OG_IMAGE} />
       <meta property="og:image:width" content="1200" />
       <meta property="og:image:height" content="630" />
-      <meta property="og:image:alt" content="PowerCare Health Staffing Solutions" />
+      <meta property="og:image:alt" content="PowerCare Health Services" />
       <meta name="twitter:card" content="summary_large_image" />
       <meta name="twitter:title" content={meta.title} />
       <meta name="twitter:description" content={meta.description} />

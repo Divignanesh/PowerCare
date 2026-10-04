@@ -16,9 +16,9 @@ import SEO, { faqSchema } from '../components/seo/SEO';
 // A statement on white, then a strip of four care moments. The photos stay
 // bright and sharp; staggered heights keep the row from reading as a grid.
 const HERO_PHOTOS = [
-  { src: '/images/psw-care.jpg',      alt: 'A PowerCare care worker holding a resident’s hands',          h: 'md:h-64' },
-  { src: '/images/senior-walker.jpg', alt: 'A care worker walking beside an older woman with a walker',    h: 'md:h-80' },
-  { src: '/images/home-respite.jpg',  alt: 'A care worker sitting at the table with two clients at home',  h: 'md:h-72' },
+  { src: '/images/kitchen-chat.jpg',      alt: 'A carer chatting with an older woman at her kitchen table',          h: 'md:h-64' },
+  { src: '/images/wheelchair-support.jpg', alt: 'Care workers helping a resident in a wheelchair',    h: 'md:h-80' },
+  { src: '/images/bp-check-home.jpg', alt: 'A nurse checking an older man’s blood pressure at home',  h: 'md:h-72' },
   { src: '/images/why-lounge.jpg',    alt: 'A care worker helping a resident in a bright care home lounge', h: 'md:h-56' },
 ];
 
@@ -30,7 +30,7 @@ const Hero = () => (
         Why PowerCare
         <span className="block w-6 h-px bg-primary-400" aria-hidden="true" />
       </span>
-      <h1 className="mt-5 text-display-lg font-heading font-semibold text-ink-900 max-w-3xl mx-auto text-balance">
+      <h1 className="mt-5 text-display-lg font-heading font-semibold text-primary-700 max-w-3xl mx-auto text-balance">
         Good care starts with good people.
       </h1>
       <p className="mt-5 text-lg text-ink-600 max-w-2xl mx-auto text-pretty">
@@ -119,7 +119,7 @@ const Commitments = () => (
         <RevealItem className="md:col-span-2 lg:col-span-1 lg:row-span-2">
           <div className="relative h-full min-h-[300px] rounded-2xl overflow-hidden">
             <img
-              src="/images/why-close.jpg"
+              src="/images/physio-session.jpg"
               alt=""
               loading="lazy"
               className="absolute inset-0 w-full h-full object-cover object-center"
@@ -166,7 +166,7 @@ const WhyPowerCare = () => (
       subtitle="What people usually want to know before they call."
     />
     <CtaBand
-      image="/images/cta-corridor.jpg"
+      image="/images/resident-room.jpg"
       title="Ready when your next shift isn’t covered"
       text="Tell us the role, the setting and the hours. We’ll take it from there."
       cta="Request staff"

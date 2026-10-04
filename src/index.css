@@ -16,11 +16,11 @@
   }
 
   body {
-    font-family: Inter, system-ui, sans-serif;
-    /* Loosened from the browser default: long paragraphs of 15–17px sans need
-       the extra leading far more than they need the vertical space back. */
-    font-size: 0.85rem;
-    line-height: 1.5;
+    font-family: Montserrat, system-ui, sans-serif;
+    /* Montserrat at 15px, as on lifecare.org.au. Their paragraphs run at 1.2
+       leading; ours keep 1.6, which long passages of copy need. */
+    font-size: 0.9375rem;
+    line-height: 1.6;
     color: #242E38;
     background: #ffffff;
     -webkit-font-smoothing: antialiased;
@@ -29,10 +29,10 @@
   }
 
   h1, h2, h3, h4, h5, h6 {
-    font-family: Inter, system-ui, sans-serif;
+    font-family: Montserrat, system-ui, sans-serif;
     font-weight: 700;
-    letter-spacing: -0.01em;
-    line-height: 1.125;
+    letter-spacing: 0;
+    line-height: 1.2;
   }
 
   /* Small headings sit at normal tracking; the negative value is only there
@@ -73,7 +73,7 @@
 
   .btn-base {
     @apply inline-flex items-center justify-center gap-2 px-7 py-3
-           text-[0.75rem] font-semibold rounded-full
+           text-[1rem] font-semibold rounded-full
            transition-[background-color,color,border-color,box-shadow,transform]
            duration-200 ease-out-soft
            focus:outline-none focus-visible:outline-none
@@ -84,6 +84,12 @@
   .btn-primary {
     @apply btn-base bg-primary-700 text-white
            hover:bg-primary-800 active:translate-y-px;
+  }
+
+  /* Outline only: the brand blue as a ring, no fill, filling in on hover */
+  .btn-outline {
+    @apply btn-base border-2 border-primary-700 bg-transparent text-primary-700
+           hover:bg-primary-700 hover:text-white active:translate-y-px;
   }
 
   /* The quieter partner to btn-primary — a soft fill, no outline */
@@ -133,7 +139,7 @@
   }
 
   .section-title {
-    @apply text-display-sm font-heading font-semibold text-ink-900;
+    @apply text-display-sm font-heading font-semibold text-primary-700;
   }
 
   .section-subtitle {
@@ -182,7 +188,7 @@
   /* A field has to look like something you can type into, so it carries a
      real edge rather than only a fill. */
   .input {
-    @apply w-full px-4 py-3 text-[0.75rem] bg-white
+    @apply w-full px-4 py-3 text-base bg-white
            rounded-xl border border-ink-300 text-ink-900 placeholder-ink-400
            focus:outline-none focus:border-primary-500
            focus:ring-2 focus:ring-primary-500/20
@@ -210,7 +216,7 @@
   }
 
   .field-label {
-    @apply block font-mono text-[0.625rem] font-medium uppercase
+    @apply block font-mono text-xs font-medium uppercase
            tracking-widest text-ink-500 mb-2;
   }
 
@@ -237,6 +243,15 @@
 
   .text-pretty {
     text-wrap: pretty;
+  }
+
+  /* A scroll container that still scrolls, without the bar. */
+  .no-scrollbar {
+    scrollbar-width: none;
+  }
+
+  .no-scrollbar::-webkit-scrollbar {
+    display: none;
   }
 
   /* A hairline of brand colour under a photograph, so images sit on the

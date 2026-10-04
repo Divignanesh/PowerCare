@@ -1,6 +1,6 @@
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { Link } from 'react-router-dom';
-import { ArrowRight, Check, X } from 'lucide-react';
+import { ArrowRight, Check } from 'lucide-react';
 import {
   Stethoscope, Heartbeat as HeartPulse, UsersThree as Users, House as Home,
   Pulse as Activity, Sparkle as Sparkles, ClipboardText as ClipboardList, Brain,
@@ -8,7 +8,6 @@ import {
   ShieldCheck as Shield, Clock, Medal as Award, CheckCircle,
   HandHeart, Wheelchair as Accessibility, ChatsCircle as Speech, Handshake as HeartHandshake,
 } from '@phosphor-icons/react';
-import { AnimatePresence, motion, useReducedMotion } from 'framer-motion';
 import SectionHeader from '../components/ui/SectionHeader';
 import PageHero from '../components/ui/PageHero';
 import FAQ from '../components/ui/FAQ';
@@ -24,136 +23,45 @@ const iconMap = {
   HandHeart, Accessibility, Speech, HeartHandshake,
 };
 
-const ServiceCard = ({ service, onClick }) => {
+const ServiceCard = ({ service }) => {
   const Icon = iconMap[service.icon] || CheckCircle;
   return (
-    <div
-      className="group flex flex-col h-full rounded-2xl bg-surface overflow-hidden
-                 transition-colors duration-300 ease-out-soft hover:bg-primary-50"
+    // The whole card is the request: the role travels with it so the contact
+    // form arrives pre-filled. The photograph fills the card; a dark wash from
+    // the foot up keeps the white type readable over any picture.
+    <Link
+      to={`/contact?role=${encodeURIComponent(service.title)}`}
+      className="group relative isolate flex h-full min-h-[440px] rounded-[1.75rem] overflow-hidden bg-ink-200"
     >
-      <div className="h-44 overflow-hidden bg-ink-100">
-        <img
-          src={service.image}
-          alt=""
-          loading="lazy"
-          className={`w-full h-full object-cover ${service.imagePos || 'object-top'}`}
-        />
-      </div>
+      <img
+        src={service.image}
+        alt=""
+        loading="lazy"
+        className={`absolute inset-0 -z-20 w-full h-full object-cover ${service.imagePos || 'object-top'}
+                    transition-transform duration-700 ease-out-soft group-hover:scale-[1.04]`}
+      />
+      <span
+        className="absolute inset-0 -z-10 bg-gradient-to-t from-ink-900/90 via-ink-900/45 to-ink-900/15"
+        aria-hidden="true"
+      />
 
-      <div className="flex flex-col flex-1 p-5">
-        <div className="flex items-center gap-2.5 mb-2">
-          <Icon size={20} className="text-primary-700 flex-shrink-0" />
-          <span className="font-mono text-[0.625rem] font-semibold uppercase tracking-widest text-primary-700">
+      <span className="mt-auto w-full p-7">
+        <span className="flex items-center gap-2.5 mb-2">
+          <Icon size={18} className="text-white/80 flex-shrink-0" />
+          <span className="font-mono text-xs font-semibold uppercase tracking-widest text-white/80">
             {service.category}
           </span>
-        </div>
-        <h3 className="text-lg font-heading font-semibold text-ink-900 mb-2 leading-snug min-h-[3.3rem]">
-          {/* The title opens the full role details. */}
-          <button
-            type="button"
-            onClick={() => onClick(service)}
-            className="text-left hover:text-primary-700 transition-colors"
-          >
-            {service.title}
-          </button>
+        </span>
+        <h3 className="text-2xl font-heading font-bold text-white leading-tight text-balance">
+          {service.title}
         </h3>
-        <p className="text-ink-600 text-sm leading-relaxed text-pretty flex-1">{service.shortDesc}</p>
-
-        <div className="mt-6">
-          {/* The role travels with the request so the form arrives pre-filled. */}
-          <Link
-            to={`/contact?role=${encodeURIComponent(service.title)}`}
-            className="btn-secondary w-full !px-3 !py-2.5 !text-[0.6875rem] group-hover:bg-primary-100"
-          >
-            {service.requestLabel} <ArrowRight size={15} />
-          </Link>
-        </div>
-      </div>
-    </div>
-  );
-};
-
-const ServiceModal = ({ service, onClose }) => {
-  const reduceMotion = useReducedMotion();
-
-  // Escape closes the dialog and the page behind it must not scroll.
-  useEffect(() => {
-    if (!service) return;
-    const onKey = (e) => e.key === 'Escape' && onClose();
-    document.addEventListener('keydown', onKey);
-    const prev = document.body.style.overflow;
-    document.body.style.overflow = 'hidden';
-    return () => {
-      document.removeEventListener('keydown', onKey);
-      document.body.style.overflow = prev;
-    };
-  }, [service, onClose]);
-
-  const Icon = service ? (iconMap[service.icon] || CheckCircle) : null;
-
-  return (
-    <AnimatePresence>
-      {service && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 sm:p-6">
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            transition={{ duration: 0.2 }}
-            onClick={onClose}
-            className="absolute inset-0 bg-ink-900/60"
-          />
-          <motion.div
-            role="dialog"
-            aria-modal="true"
-            aria-label={service.title}
-            initial={reduceMotion ? { opacity: 0 } : { opacity: 0, y: 20, scale: 0.98 }}
-            animate={{ opacity: 1, y: 0, scale: 1 }}
-            exit={reduceMotion ? { opacity: 0 } : { opacity: 0, y: 10, scale: 0.98 }}
-            transition={{ duration: 0.26, ease: [0.22, 1, 0.36, 1] }}
-            className="relative bg-white rounded-2xl max-w-xl w-full max-h-[88vh] overflow-y-auto shadow-panel"
-          >
-            <div className="relative h-44 overflow-hidden bg-ink-100">
-              <img src={service.image} alt="" className={`w-full h-full object-cover ${service.imagePos || 'object-top'}`} />
-              <button
-                onClick={onClose}
-                aria-label="Close"
-                className="absolute top-4 right-4 w-9 h-9 rounded-full bg-white flex items-center justify-center
-                           text-ink-700 hover:bg-ink-50 transition-colors"
-              >
-                <X size={16} />
-              </button>
-            </div>
-
-            <div className="p-7 sm:p-9">
-              <Icon size={40} className="text-primary-700 mb-5" />
-              <p className="text-ink-600 leading-relaxed mb-8 text-pretty">{service.fullDesc}</p>
-
-              <h3 className="font-mono text-[0.625rem] font-semibold uppercase tracking-widest text-ink-500 mb-4">
-                Key Responsibilities &amp; Highlights
-              </h3>
-              <ul className="mb-9 space-y-2">
-                {service.highlights.map((h) => (
-                  <li key={h} className="flex items-start gap-3 py-1.5 text-base text-ink-700">
-                    <Check size={15} strokeWidth={2.5} className="text-primary-500 mt-1 flex-shrink-0" />
-                    {h}
-                  </li>
-                ))}
-              </ul>
-
-              <div className="flex flex-col sm:flex-row gap-3">
-                <Link to="/contact" className="btn-primary flex-1" onClick={onClose}>
-                  Request This Role
-                </Link>
-                <Link to="/careers" className="btn-secondary flex-1" onClick={onClose}>
-                  Apply for This Role
-                </Link>
-              </div>
-            </div>
-          </motion.div>
-        </div>
-      )}
-    </AnimatePresence>
+        <span className="block mt-2 text-white/80 text-sm leading-relaxed text-pretty">{service.shortDesc}</span>
+        <span className="mt-5 inline-flex items-center gap-2 text-base font-semibold text-primary-200
+                         transition-colors group-hover:text-white">
+          {service.requestLabel} <ArrowRight size={16} className="transition-transform group-hover:translate-x-1" />
+        </span>
+      </span>
+    </Link>
   );
 };
 
@@ -170,7 +78,7 @@ const Hero = () => (
   >
     <ul className="flex flex-wrap gap-2 mt-8">
       {['Nursing', 'Personal & developmental support', 'Allied health', 'Facility services'].map((t) => (
-        <li key={t} className="rounded-full bg-surface px-4 py-2 font-mono text-[0.625rem] font-semibold uppercase tracking-widest text-primary-700">
+        <li key={t} className="rounded-full bg-surface px-4 py-2 font-mono text-xs font-semibold uppercase tracking-widest text-primary-700">
           {t}
         </li>
       ))}
@@ -201,7 +109,6 @@ const ServicesIntro = () => (
 const ServicesGrid = () => {
   const [active, setActive] = useState('All');
   const [showAll, setShowAll] = useState(false);
-  const [selectedService, setSelectedService] = useState(null);
 
   // Six cards — two full rows — until the visitor asks for the rest.
   // Changing the filter collapses the list again.
@@ -225,7 +132,7 @@ const ServicesGrid = () => {
               key={cat}
               onClick={() => { setActive(cat); setShowAll(false); }}
               aria-pressed={active === cat}
-              className={`px-4 py-2.5 rounded-full border font-mono text-[0.625rem] font-semibold uppercase tracking-widest transition-colors duration-200 ${
+              className={`px-4 py-2.5 rounded-full border font-mono text-xs font-semibold uppercase tracking-widest transition-colors duration-200 ${
                 active === cat
                   ? 'bg-primary-700 border-primary-700 text-white'
                   : 'bg-white border-ink-300 text-ink-600 hover:border-primary-400 hover:bg-primary-50 hover:text-primary-700'
@@ -244,7 +151,7 @@ const ServicesGrid = () => {
         >
           {visible.map((service) => (
             <RevealItem key={service.id} className="h-full">
-              <ServiceCard service={service} onClick={setSelectedService} />
+              <ServiceCard service={service} />
             </RevealItem>
           ))}
         </RevealGroup>
@@ -267,7 +174,6 @@ const ServicesGrid = () => {
         </div>
       </div>
 
-      <ServiceModal service={selectedService} onClose={() => setSelectedService(null)} />
     </section>
   );
 };
@@ -278,7 +184,7 @@ const NursingSection = () => (
       <div className="grid lg:grid-cols-12 gap-x-12 gap-y-10 items-center">
         <div className="lg:col-span-6">
           <span className="section-badge">Nursing services</span>
-          <h2 className="text-display-sm font-heading font-semibold text-ink-900 mb-6 text-balance">
+          <h2 className="text-display-sm font-heading font-semibold text-primary-700 mb-6 text-balance">
             Clinical Excellence at Every Level
           </h2>
           <p className="text-ink-600 leading-relaxed mb-8 text-pretty">
@@ -315,7 +221,7 @@ const NursingSection = () => (
               className="w-full h-[320px] object-cover object-center"
             />
           </figure>
-          <h3 className="font-mono text-[0.625rem] font-semibold uppercase tracking-widest text-primary-700 mb-5">
+          <h3 className="font-mono text-xs font-semibold uppercase tracking-widest text-primary-700 mb-5">
             Nursing roles we place
           </h3>
           <div>
@@ -346,8 +252,8 @@ const PersonalCareSection = () => (
         <Reveal className="lg:col-span-6 order-2 lg:order-1">
           <figure className="fig-frame">
             <img
-              src="/images/home-visit.jpg"
-              alt="A PowerCare support worker checking a client's blood pressure during a community visit"
+              src="/images/home-breakfast.jpg"
+              alt="A PowerCare carer helping an older man at breakfast during a home visit"
               loading="lazy"
               className="w-full h-[420px] object-cover object-top"
             />
@@ -356,7 +262,7 @@ const PersonalCareSection = () => (
 
         <div className="lg:col-span-6 order-1 lg:order-2">
           <span className="section-badge">Personal &amp; community care</span>
-          <h2 className="text-display-sm font-heading font-semibold text-ink-900 mb-6 text-balance">
+          <h2 className="text-display-sm font-heading font-semibold text-primary-700 mb-6 text-balance">
             Compassionate Hands-On Care
           </h2>
           <p className="text-ink-600 leading-relaxed mb-5 text-pretty">
@@ -389,7 +295,7 @@ const OurServices = () => (
     <PersonalCareSection />
     <FAQ faqs={servicesFAQs} badge="Our services" title="Questions About Healthcare Staffing Services" subtitle="More about the people we place and how to reach us." />
     <CtaBand
-      image="/images/cta-services.jpg"
+      image="/images/activity-room.jpg"
       title="Get the right people on your floor"
       text="Tell us the roles and shifts you need, and we'll take it from there."
       cta="Request staff"

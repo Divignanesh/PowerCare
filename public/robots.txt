@@ -1,4 +1,4 @@
-# PowerCare Health Staffing Solutions
+# PowerCare Health Services
 # Every public page may be crawled. Search engines and AI answer engines are
 # named explicitly so the intent is unambiguous; all of them are allowed.
 

@@ -19,7 +19,7 @@ const CtaBand = ({ image, imagePos = 'object-center', title, text, cta, to = '/c
     <div className="absolute inset-0 bg-white/75" aria-hidden="true" />
 
     <Reveal className="relative container-custom py-16 lg:py-20 text-center">
-      <h2 className="text-display-sm font-heading font-semibold text-ink-900 max-w-3xl mx-auto text-balance">
+      <h2 className="text-display-sm font-heading font-semibold text-primary-700 max-w-3xl mx-auto text-balance">
         {title}
       </h2>
       <p className="mt-4 text-base text-ink-800 max-w-2xl mx-auto text-pretty">{text}</p>

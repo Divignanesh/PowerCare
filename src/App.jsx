@@ -42,7 +42,7 @@ const NotFound = () => (
     </Helmet>
     <div className="text-center max-w-md">
       <div className="font-mono text-sm tracking-widest text-primary-600 mb-6">404</div>
-      <h1 className="text-display font-heading font-semibold text-ink-900 mb-4 text-balance">Page Not Found</h1>
+      <h1 className="text-display font-heading font-semibold text-primary-700 mb-4 text-balance">Page Not Found</h1>
       <p className="text-ink-600 leading-relaxed mb-9 text-pretty">
         The page you're looking for doesn't exist. Let's get you back on track.
       </p>

@@ -25,7 +25,7 @@ const FAQ = ({ faqs, badge = 'Frequently Asked Questions', title = 'Common Quest
 
           <div className="lg:col-span-4 lg:sticky lg:top-28">
             <span className="section-badge">{badge}</span>
-            <h2 className="text-display-sm font-heading font-semibold text-ink-900 mt-1 text-balance">
+            <h2 className="text-display-sm font-heading font-semibold text-primary-700 mt-1 text-balance">
               {title}
             </h2>
             {subtitle && (

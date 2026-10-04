@@ -55,29 +55,31 @@ export default {
         surface: '#FAFAF8',
       },
       fontFamily: {
-        // Inter throughout, as on powerstaffingsolutions.ca, which the client
-        // chose as the reference.
-        sans:    ['Inter', 'Helvetica Neue', 'Arial', 'sans-serif'],
-        heading: ['Inter', 'Helvetica Neue', 'Arial', 'sans-serif'],
+        // Montserrat throughout, as on lifecare.org.au, which the client chose
+        // as the type reference.
+        sans:    ['Montserrat', 'Helvetica Neue', 'Arial', 'sans-serif'],
+        heading: ['Montserrat', 'Helvetica Neue', 'Arial', 'sans-serif'],
         // `font-mono` is used site-wide for eyebrows, labels and figures.
-        // It resolves to Inter at a tracked, uppercase setting rather than
+        // It resolves to the sans at a tracked, uppercase setting rather than
         // a typewriter face.
-        mono:    ['Inter', 'Helvetica Neue', 'Arial', 'sans-serif'],
+        mono:    ['Montserrat', 'Helvetica Neue', 'Arial', 'sans-serif'],
       },
       fontSize: {
-        // A compact scale: H1 34px, H2 26px, card H3 18px, small headings
-        // 14.5px, body 13.5px, small print 12px, labels 10px (the floor —
-        // nothing on the site is set smaller). Display sizes scale with the
-        // viewport and stop at those values.
-        'xs':         ['0.625rem',  { lineHeight: '1.5' }],
-        'sm':         ['0.75rem',   { lineHeight: '1.5' }],
-        'base':       ['0.85rem',   { lineHeight: '1.65' }],
-        'lg':         ['0.9rem',    { lineHeight: '1.45' }],
-        'xl':         ['1.1rem',    { lineHeight: '1.3' }],
-        '2xl':        ['1.2rem',    { lineHeight: '1.25' }],
-        'display-sm': ['clamp(1.375rem, 1.1rem + 0.9vw, 1.6rem)',  { lineHeight: '1.2', letterSpacing: '-0.1px' }],
-        'display':    ['clamp(1.5rem, 1.15rem + 1.3vw, 1.9rem)',   { lineHeight: '1.15', letterSpacing: '-0.1px' }],
-        'display-lg': ['clamp(1.625rem, 1.2rem + 1.45vw, 2.1rem)', { lineHeight: '1.15', letterSpacing: '-0.1px' }],
+        // The lifecare.org.au scale: hero 72-96px, page H1 48px, H2 40px
+        // (32px on phones), large H3 32px, card H3 24px, lead 20px, body
+        // 15px, buttons 16px. Labels stop at 12px. Display sizes scale with
+        // the viewport and stop at those values.
+        'xs':         ['0.75rem',   { lineHeight: '1.5' }],
+        'sm':         ['0.8125rem', { lineHeight: '1.5' }],
+        'base':       ['0.9375rem', { lineHeight: '1.6' }],
+        'lg':         ['1.125rem',  { lineHeight: '1.5' }],
+        'xl':         ['1.25rem',   { lineHeight: '1.4' }],
+        '2xl':        ['1.5rem',    { lineHeight: '1.2' }],
+        '3xl':        ['2rem',      { lineHeight: '1.2' }],
+        'display-sm': ['clamp(2rem, 1.6rem + 1.1vw, 2.5rem)',     { lineHeight: '1.2' }],
+        'display':    ['clamp(2.25rem, 1.75rem + 1.4vw, 3rem)',   { lineHeight: '1.2' }],
+        'display-lg': ['clamp(2.25rem, 1.75rem + 1.4vw, 3rem)',   { lineHeight: '1.2' }],
+        'display-xl': ['clamp(2.5rem, 1.4rem + 3.4vw, 4.5rem)',   { lineHeight: '1.1' }],
       },
       fontWeight: {
         // Every heading and emphasised label on the reference is set at 700.
