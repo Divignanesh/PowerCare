@@ -5,39 +5,15 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
     <!--
-      Primary SEO.
-      description, robots and canonical are deliberately NOT set here: they are
-      per-page and react-helmet-async owns them. A static copy would sit in the
-      DOM alongside Helmet's, and a second canonical pointing at "/" would tell
-      Google every inner page is a duplicate of the home page.
-
-      The og:* and twitter:* tags below stay static because social crawlers do
-      not execute JavaScript and would otherwise see nothing at all.
+      Per-page SEO lives in src/components/seo/SEO.jsx: title, description,
+      canonical, robots, Open Graph, Twitter and JSON-LD. The build
+      pre-renders every route (scripts/prerender.mjs), so those tags are in
+      each page's HTML for crawlers that never run JavaScript. Nothing
+      page-specific is set here, or it would duplicate Helmet's copy; the
+      title below is only the fallback for the app shell.
     -->
-    <title>PowerCare | Trusted Healthcare Staffing Agency</title>
-    <meta name="keywords" content="healthcare staffing agency Toronto, trusted staffing agency Ontario, PSW staffing Toronto, RN agency Ontario, RPN agency GTA, occupational therapist staffing Ontario, speech language pathologist staffing Ontario, psychotherapist staffing Ontario, dietitian staffing Ontario, LTC staffing Ontario, respite staffing Ontario, nursing agency GTA, PowerCare staffing" />
+    <title data-ssr>PowerCare Health Staffing Solutions</title>
     <meta name="author" content="PowerCare Health Staffing Solutions" />
-
-    <!-- Open Graph / Facebook -->
-    <meta property="og:type" content="website" />
-    <meta property="og:url" content="https://www.powercarestaffing.ca/" />
-    <meta property="og:title" content="PowerCare | Trusted Healthcare Staffing Agency — GTA &amp; Rural Ontario" />
-    <meta property="og:description" content="Vetted, in-house trained RNs, RPNs, PSWs, DSWs, OTs, SLPs and Psychotherapists — available 24/7 across the GTA and Rural Ontario. Trusted by 500+ facilities." />
-    <meta property="og:image:secure_url" content="https://www.powercarestaffing.ca/og-image.jpg" />
-    <meta property="og:image:type" content="image/jpeg" />
-    <meta property="og:image:width" content="1200" />
-    <meta property="og:image:height" content="630" />
-    <meta property="og:image:alt" content="PowerCare — trusted healthcare staffing solutions across the GTA and Rural Ontario" />
-    <meta property="og:image" content="https://www.powercarestaffing.ca/og-image.jpg" />
-    <meta property="og:locale" content="en_CA" />
-    <meta property="og:site_name" content="PowerCare Health Staffing Solutions" />
-
-    <!-- Twitter Card -->
-    <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:title" content="PowerCare | Trusted Healthcare Staffing Agency — GTA &amp; Rural Ontario" />
-    <meta name="twitter:description" content="Vetted, in-house trained RNs, RPNs, PSWs, DSWs, OTs, SLPs and Psychotherapists — available 24/7 across the GTA and Rural Ontario." />
-    <meta name="twitter:image:alt" content="PowerCare — trusted healthcare staffing solutions across the GTA and Rural Ontario" />
-    <meta name="twitter:image" content="https://www.powercarestaffing.ca/og-image.jpg" />
 
     <!-- Browser chrome -->
     <meta name="theme-color" content="#001E38" />
@@ -50,9 +26,7 @@
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400..700;1,400..600&family=Source+Sans+3:ital,wght@0,300..700;1,400..600&display=swap" rel="stylesheet" />
-
-    <link rel="preload" as="image" href="/images/hero-elder-care.jpg" fetchpriority="high" />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,300..700;1,14..32,400..600&display=swap" rel="stylesheet" />
 
     <!-- Geo targeting -->
     <meta name="geo.region" content="CA-ON" />

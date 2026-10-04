@@ -15,7 +15,7 @@ const navLinks = [
       { label: 'Industries We Serve', to: '/industries' },
     ],
   },
-  { label: 'Find a Job', to: '/careers' },
+  { label: 'Careers', to: '/careers' },
   { label: 'Contact', to: '/contact' },
 ];
 
@@ -61,7 +61,7 @@ const Header = () => {
   };
 
   const linkClass = (active) =>
-    `relative px-3 py-2 text-[0.9375rem] transition-colors duration-200 ${
+    `relative px-3 py-2 text-base transition-colors duration-200 ${
       active ? 'text-primary-700 font-semibold' : 'text-ink-600 font-medium hover:text-primary-700'
     }`;
 
@@ -130,7 +130,7 @@ const Header = () => {
                             <Link
                               key={child.to}
                               to={child.to}
-                              className="block px-3.5 py-2.5 rounded-lg text-[0.9375rem] text-ink-600
+                              className="block px-3.5 py-2.5 rounded-lg text-base text-ink-600
                                          hover:bg-primary-50 hover:text-primary-700 transition-colors duration-150"
                             >
                               {child.label}
@@ -184,7 +184,7 @@ const Header = () => {
                   <div key={link.label}>
                     <Link
                       to={link.to}
-                      className={`block py-3.5 text-[0.9375rem] transition-colors ${
+                      className={`block py-3.5 text-base transition-colors ${
                         isActive(link.to)
                           ? 'text-primary-700 font-semibold'
                           : 'text-ink-700 font-medium hover:text-primary-700'

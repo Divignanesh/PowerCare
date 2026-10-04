@@ -55,24 +55,33 @@ export default {
         surface: '#FAFAF8',
       },
       fontFamily: {
-        // A formal pairing that stays comfortable to read: Lora is a warm,
-        // low-contrast serif with open counters and a generous x-height —
-        // the same institutional register as a sharper transitional face,
-        // without the glare of thin hairlines against thick stems.
-        sans:    ['"Source Sans 3"', 'Helvetica Neue', 'Arial', 'sans-serif'],
-        heading: ['Lora', 'Georgia', 'Times New Roman', 'serif'],
+        // Inter throughout, as on powerstaffingsolutions.ca, which the client
+        // chose as the reference.
+        sans:    ['Inter', 'Helvetica Neue', 'Arial', 'sans-serif'],
+        heading: ['Inter', 'Helvetica Neue', 'Arial', 'sans-serif'],
         // `font-mono` is used site-wide for eyebrows, labels and figures.
-        // It now resolves to the sans at a tracked, uppercase setting rather
-        // than a typewriter face — the tech-startup note the client heard.
-        mono:    ['"Source Sans 3"', 'Helvetica Neue', 'Arial', 'sans-serif'],
+        // It resolves to Inter at a tracked, uppercase setting rather than
+        // a typewriter face.
+        mono:    ['Inter', 'Helvetica Neue', 'Arial', 'sans-serif'],
       },
       fontSize: {
-        // Display sizes scale with the viewport so headings stay in
-        // proportion instead of stepping at breakpoints. A serif needs a
-        // touch more line height and almost no negative tracking.
-        'display-sm': ['clamp(1.5rem, 1.2rem + 1.4vw, 1.9375rem)',   { lineHeight: '1.28', letterSpacing: '-0.004em' }],
-        'display':    ['clamp(1.875rem, 1.4rem + 2.1vw, 2.625rem)',  { lineHeight: '1.22', letterSpacing: '-0.006em' }],
-        'display-lg': ['clamp(2.125rem, 1.45rem + 3.1vw, 3.375rem)', { lineHeight: '1.16', letterSpacing: '-0.01em'  }],
+        // A compact scale: H1 34px, H2 26px, card H3 18px, small headings
+        // 14.5px, body 13.5px, small print 12px, labels 10px (the floor —
+        // nothing on the site is set smaller). Display sizes scale with the
+        // viewport and stop at those values.
+        'xs':         ['0.625rem',  { lineHeight: '1.5' }],
+        'sm':         ['0.75rem',   { lineHeight: '1.5' }],
+        'base':       ['0.85rem',   { lineHeight: '1.65' }],
+        'lg':         ['0.9rem',    { lineHeight: '1.45' }],
+        'xl':         ['1.1rem',    { lineHeight: '1.3' }],
+        '2xl':        ['1.2rem',    { lineHeight: '1.25' }],
+        'display-sm': ['clamp(1.375rem, 1.1rem + 0.9vw, 1.6rem)',  { lineHeight: '1.2', letterSpacing: '-0.1px' }],
+        'display':    ['clamp(1.5rem, 1.15rem + 1.3vw, 1.9rem)',   { lineHeight: '1.15', letterSpacing: '-0.1px' }],
+        'display-lg': ['clamp(1.625rem, 1.2rem + 1.45vw, 2.1rem)', { lineHeight: '1.15', letterSpacing: '-0.1px' }],
+      },
+      fontWeight: {
+        // Every heading and emphasised label on the reference is set at 700.
+        semibold: '700',
       },
       boxShadow: {
         // Cards sit on the page rather than floating above it; a hairline
@@ -101,9 +110,16 @@ export default {
           from: { opacity: '0', transform: 'translateY(12px)' },
           to:   { opacity: '1', transform: 'translateY(0)' },
         },
+        // The track holds the list twice, so sliding it by half lands the
+        // second copy exactly where the first began and the loop is seamless.
+        marquee: {
+          from: { transform: 'translateX(0)' },
+          to:   { transform: 'translateX(-50%)' },
+        },
       },
       animation: {
         rise: 'rise 0.6s cubic-bezier(0.22, 1, 0.36, 1) both',
+        marquee: 'marquee 70s linear infinite',
       },
     },
   },

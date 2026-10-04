@@ -1,61 +1,104 @@
 import { Link } from 'react-router-dom';
-import { ArrowRight, HeartHandshake, Shield, BookOpen, Users } from 'lucide-react';
+import { ArrowRight } from 'lucide-react';
+import {
+  Handshake, ShieldCheck, BookOpen, UsersThree,
+  FirstAid, Brain, ChatsCircle, HandHeart,
+} from '@phosphor-icons/react';
 import SectionHeader from '../components/ui/SectionHeader';
 import FAQ from '../components/ui/FAQ';
-import { whyPowerCareFAQs } from '../data/faqs';
-import { RevealGroup, RevealItem } from '../components/ui/Reveal';
+import CtaBand from '../components/ui/CtaBand';
 import CredentialBand from '../components/ui/CredentialBand';
+import Reveal, { RevealGroup, RevealItem } from '../components/ui/Reveal';
+import { whyPowerCareFAQs } from '../data/faqs';
 import SEO, { faqSchema } from '../components/seo/SEO';
 
-// What the training covers. No hours are claimed — the point is the ground it
-// covers and who teaches it, not how long anybody sat in a room.
-const MODULES = [
-  { title: 'Clinical foundations & safety',    desc: 'Infection control, medication safety, and what to do when something goes wrong.' },
-  { title: 'Resident-centred & dementia care', desc: 'Seeing the person first, and staying patient when someone is frightened or confused.' },
-  { title: 'Communication & documentation',    desc: 'Charting, handover, and how to talk with a worried family.' },
-  { title: 'Role-specific practical skills',   desc: 'Hands-on practice for the particular work each person will be doing.' },
+// ─────────────────────────── HERO ────────────────────────────
+// A statement on white, then a strip of four care moments. The photos stay
+// bright and sharp; staggered heights keep the row from reading as a grid.
+const HERO_PHOTOS = [
+  { src: '/images/psw-care.jpg',      alt: 'A PowerCare care worker holding a resident’s hands',          h: 'md:h-64' },
+  { src: '/images/senior-walker.jpg', alt: 'A care worker walking beside an older woman with a walker',    h: 'md:h-80' },
+  { src: '/images/home-respite.jpg',  alt: 'A care worker sitting at the table with two clients at home',  h: 'md:h-72' },
+  { src: '/images/why-lounge.jpg',    alt: 'A care worker helping a resident in a bright care home lounge', h: 'md:h-56' },
 ];
 
-// ─────────────────────────── TRAINING ────────────────────────────
-// This section carries the page's h1 now that the hero band is gone.
-const InHouseTraining = () => (
-  <section className="section-padding bg-white">
-    <div className="container-custom">
-      <span className="section-badge">Before anyone arrives</span>
-      <h1 className="text-display font-heading font-semibold text-ink-900 text-balance max-w-3xl">
-        We teach people the way we would want our own family cared for
+const Hero = () => (
+  <section className="bg-white pt-14 lg:pt-20 pb-14 lg:pb-16 overflow-hidden">
+    <div className="container-custom text-center">
+      <span className="inline-flex items-center gap-3 font-mono text-sm leading-tight font-semibold uppercase tracking-[4px] text-primary-600">
+        <span className="block w-6 h-px bg-primary-400" aria-hidden="true" />
+        Why PowerCare
+        <span className="block w-6 h-px bg-primary-400" aria-hidden="true" />
+      </span>
+      <h1 className="mt-5 text-display-lg font-heading font-semibold text-ink-900 max-w-3xl mx-auto text-balance">
+        Good care starts with good people.
       </h1>
-      <p className="section-subtitle mb-12">
-        Everyone who works with us learns with us first. Not because a rule says so,
-        but because the first morning on an unfamiliar floor is no place to be finding
-        your feet.
+      <p className="mt-5 text-lg text-ink-600 max-w-2xl mx-auto text-pretty">
+        PowerCare connects long-term care homes, retirement residences and community agencies
+        across the GTA and rural Ontario with vetted, in-house trained nurses and support workers.
       </p>
+      <div className="flex flex-wrap justify-center gap-3 mt-8">
+        <Link to="/contact" className="btn-primary">
+          Request staff <ArrowRight size={16} />
+        </Link>
+        <Link to="/careers" className="btn-secondary">Join our team</Link>
+      </div>
+    </div>
 
-      <div className="grid lg:grid-cols-12 gap-x-12 gap-y-10 items-center">
-        <div className="lg:col-span-5">
-          <p className="text-ink-600 leading-relaxed mb-5 text-pretty">
-            Our training is written and taught by registered healthcare professionals
-            who have spent their working lives on Ontario floors — in long-term care,
-            in retirement residences, and in people's own homes.
-          </p>
-          <p className="text-ink-600 leading-relaxed mb-8 text-pretty">
-            They know which things a textbook cannot teach: how to settle someone at
-            three in the morning, how to notice that a resident is not quite themselves,
-            how to hand over so nothing is lost between shifts.
-          </p>
+    <RevealGroup className="mt-12 lg:mt-14 max-w-[1400px] mx-auto px-5 sm:px-6 lg:px-8 grid grid-cols-2 md:grid-cols-4 items-end gap-3 md:gap-4">
+      {HERO_PHOTOS.map(({ src, alt, h }) => (
+        <RevealItem key={src}>
+          <img
+            src={src}
+            alt={alt}
+            fetchPriority="high"
+            className={`w-full h-40 sm:h-52 ${h} object-cover object-center rounded-2xl`}
+          />
+        </RevealItem>
+      ))}
+    </RevealGroup>
+  </section>
+);
 
-          <Link to="/careers" className="link-arrow text-base">
-            Train with us <ArrowRight size={16} />
-          </Link>
-        </div>
+// ─────────────────────────── TRAINING ────────────────────────────
+// No hours are claimed: the point is what the training covers.
+const MODULES = [
+  { icon: FirstAid,    title: 'Clinical safety',        desc: 'Infection control, medication safety, emergencies.' },
+  { icon: Brain,       title: 'Dementia care',          desc: 'Patience when someone is frightened or confused.' },
+  { icon: ChatsCircle, title: 'Handover & charting',    desc: 'Nothing lost between shifts.' },
+  { icon: HandHeart,   title: 'Hands-on practice',      desc: 'The exact work each person will do.' },
+];
 
-        <RevealGroup className="lg:col-span-7 grid sm:grid-cols-2 auto-rows-fr gap-4">
-          {MODULES.map(({ title, desc }) => (
-            <RevealItem key={title} className="h-full">
-              <div className="h-full rounded-2xl bg-surface p-7">
-                <h2 className="font-heading font-semibold text-ink-900 mb-3">{title}</h2>
-                <p className="text-ink-600 text-[0.9375rem] leading-relaxed text-pretty">{desc}</p>
-              </div>
+const Training = () => (
+  <section className="section-padding bg-white">
+    <div className="container-custom grid lg:grid-cols-12 gap-x-14 gap-y-10 items-center">
+      <Reveal className="lg:col-span-6 order-2 lg:order-1">
+        <figure className="fig-frame">
+          <img
+            src="/images/why-training.jpg"
+            alt="A PowerCare care worker sitting with an older man, holding his hand"
+            loading="lazy"
+            className="w-full aspect-[4/3] object-cover object-center"
+          />
+        </figure>
+      </Reveal>
+
+      <div className="lg:col-span-6 order-1 lg:order-2">
+        <h2 className="section-title text-balance">Trained by us before they reach you</h2>
+        <p className="section-subtitle">
+          Taught by registered professionals who have worked Ontario floors for years.
+        </p>
+
+        <RevealGroup className="mt-9 grid sm:grid-cols-2 gap-x-8 gap-y-7">
+          {MODULES.map(({ icon: Icon, title, desc }) => (
+            <RevealItem key={title} className="flex items-start gap-4">
+              <span className="w-11 h-11 rounded-xl bg-primary-50 flex items-center justify-center flex-shrink-0">
+                <Icon size={22} className="text-primary-700" aria-hidden="true" />
+              </span>
+              <span>
+                <span className="block font-heading font-semibold text-ink-900 text-lg">{title}</span>
+                <span className="block text-ink-600 text-base mt-1 text-pretty">{desc}</span>
+              </span>
             </RevealItem>
           ))}
         </RevealGroup>
@@ -64,30 +107,48 @@ const InHouseTraining = () => (
   </section>
 );
 
-// ─────────────────────────── PILLARS ────────────────────────────
-const KeyPillars = () => (
+// ─────────────────────────── COMMITMENTS (BENTO) ────────────────────────────
+const Commitments = () => (
   <section className="section-padding bg-surface">
     <div className="container-custom">
-      <SectionHeader
-        badge="What we hold to"
-        title="The things we will not let slip"
-        subtitle="Beyond the training, this is what working with us should feel like."
-        centered={false}
-      />
-      <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-x-10 gap-y-9">
-        {[
-          { icon: HeartHandshake, title: 'We stay close',        desc: 'We ring after the first shift, and the ones after it. If something is not working we would rather hear it early and put it right.' },
-          { icon: Users,          title: 'You get a person',     desc: 'The same coordinator, who knows your home, your team and the residents you worry about most. Not a queue.' },
-          { icon: Shield,         title: 'We stand behind them', desc: 'Everyone we send is someone we have met, taught and would be happy to see caring for our own family.' },
-          { icon: BookOpen,       title: 'We keep learning',     desc: 'Our people keep training long after their first placement, because care does not stand still and neither should we.' },
-        ].map(({ icon: Icon, title, desc }) => (
-          <div key={title}>
-            <Icon size={20} strokeWidth={1.6} className="text-primary-600 mb-6" />
-            <h3 className="font-heading font-semibold text-ink-900 text-lg mb-3">{title}</h3>
-            <p className="text-ink-600 text-[0.9375rem] leading-relaxed text-pretty">{desc}</p>
+      <SectionHeader title="What working with us feels like" centered={false} />
+
+      {/* Four commitments, four cells: one photo tile spanning two rows on
+          desktop, three icon tiles beside it. Single column on mobile. */}
+      <RevealGroup className="grid md:grid-cols-2 lg:grid-cols-3 lg:grid-rows-2 gap-5">
+        <RevealItem className="md:col-span-2 lg:col-span-1 lg:row-span-2">
+          <div className="relative h-full min-h-[300px] rounded-2xl overflow-hidden">
+            <img
+              src="/images/why-close.jpg"
+              alt=""
+              loading="lazy"
+              className="absolute inset-0 w-full h-full object-cover object-center"
+            />
+            <div className="absolute inset-0 bg-gradient-to-t from-ink-900/80 via-ink-900/20 to-transparent" aria-hidden="true" />
+            <div className="relative h-full flex flex-col justify-end p-7">
+              <Handshake size={36} className="text-white mb-4" aria-hidden="true" />
+              <h3 className="text-xl font-heading font-semibold text-white">We stay close</h3>
+              <p className="mt-2 text-white/85 text-base text-pretty">
+                We check in after the first shift and the ones after it.
+              </p>
+            </div>
           </div>
+        </RevealItem>
+
+        {[
+          { icon: UsersThree,  title: 'You get a person',     desc: 'The same coordinator every time, who knows your home and your team.', tone: 'bg-primary-700 text-white', sub: 'text-white/80', ic: 'text-white' },
+          { icon: ShieldCheck, title: 'Honest conversations',  desc: 'If something doesn’t feel right, we would always rather hear it.',      tone: 'bg-white border border-ink-200', sub: 'text-ink-600', ic: 'text-primary-700' },
+          { icon: BookOpen,    title: 'We keep learning',     desc: 'Training carries on long after the first placement.',                tone: 'bg-primary-50', sub: 'text-ink-600', ic: 'text-primary-700', wide: true },
+        ].map(({ icon: Icon, title, desc, tone, sub, ic, wide }) => (
+          <RevealItem key={title} className={`h-full ${wide ? 'lg:col-span-2' : ''}`}>
+            <div className={`h-full rounded-2xl p-7 ${tone}`}>
+              <Icon size={36} className={`${ic} mb-4`} aria-hidden="true" />
+              <h3 className={`text-xl font-heading font-semibold ${tone.includes('text-white') ? 'text-white' : 'text-ink-900'}`}>{title}</h3>
+              <p className={`mt-2 text-base text-pretty ${sub}`}>{desc}</p>
+            </div>
+          </RevealItem>
         ))}
-      </div>
+      </RevealGroup>
     </div>
   </section>
 );
@@ -95,14 +156,21 @@ const KeyPillars = () => (
 const WhyPowerCare = () => (
   <main>
     <SEO page="whyPowerCare" extraSchemas={[faqSchema(whyPowerCareFAQs)]} />
-    <InHouseTraining />
+    <Hero />
+    <Training />
     <CredentialBand />
-    <KeyPillars />
+    <Commitments />
     <FAQ
       faqs={whyPowerCareFAQs}
-      badge="Why PowerCare"
       title="Your Questions About PowerCare"
       subtitle="What people usually want to know before they call."
+    />
+    <CtaBand
+      image="/images/cta-corridor.jpg"
+      title="Ready when your next shift isn’t covered"
+      text="Tell us the role, the setting and the hours. We’ll take it from there."
+      cta="Request staff"
+      points={['Nursing', 'Personal support', 'Allied health']}
     />
   </main>
 );

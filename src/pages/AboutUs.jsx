@@ -1,13 +1,12 @@
 import {
   Target, Eye, Lightbulb,
-  HandHeart, GraduationCap, Sparkles, HeartHandshake,
-} from 'lucide-react';
+  HandHeart, GraduationCap, Sparkle as Sparkles, Handshake as HeartHandshake,
+} from '@phosphor-icons/react';
 import SectionHeader from '../components/ui/SectionHeader';
 import PageHero from '../components/ui/PageHero';
 import FAQ from '../components/ui/FAQ';
 import { aboutFAQs } from '../data/faqs';
 import Reveal, { RevealGroup, RevealItem } from '../components/ui/Reveal';
-import CredentialBand from '../components/ui/CredentialBand';
 import SEO, { faqSchema } from '../components/seo/SEO';
 
 const Hero = () => (
@@ -125,7 +124,7 @@ const DependableCare = () => (
                 <h3 className="mt-6 font-heading font-semibold text-ink-900 text-lg leading-snug text-balance min-h-[3.1rem]">
                   {title}
                 </h3>
-                <p className="mt-2.5 text-ink-600 text-[0.9375rem] leading-relaxed text-pretty">
+                <p className="mt-2.5 text-ink-600 text-base leading-relaxed text-pretty">
                   {desc}
                 </p>
               </figcaption>
@@ -153,14 +152,14 @@ const MissionVisionValues = () => (
           { icon: Lightbulb, title: 'Our Approach', content: 'Know the people we send, teach them well, and stay close enough to notice when something is not right.' },
         ].map(({ icon: Icon, title, content }) => (
           <RevealItem key={title} className="h-full">
-            <Icon size={22} strokeWidth={1.6} className="text-primary-600" />
+            <Icon size={40} className="text-primary-700" />
             <h3 className="text-xl font-heading font-semibold text-ink-900 mt-5 mb-3">{title}</h3>
             <p className="text-ink-600 leading-relaxed text-pretty">{content}</p>
           </RevealItem>
         ))}
       </RevealGroup>
 
-      <h3 className="font-mono text-[0.6875rem] uppercase tracking-widest text-primary-700 mb-5">What we value</h3>
+      <h3 className="font-mono text-[0.625rem] uppercase tracking-widest text-primary-700 mb-5">What we value</h3>
       <ul className="flex flex-wrap gap-2.5">
         {['Kindness', 'Patience', 'Honesty', 'Dignity', 'Respect'].map((v) => (
           <li key={v} className="rounded-full bg-surface px-5 py-2 font-semibold text-ink-900">
@@ -191,9 +190,9 @@ const KnownFor = () => (
           { icon: HeartHandshake, title: 'We stay close',          desc: 'We ring after the first shift and the ones after it. If something is not right, we would rather hear it early.' },
         ].map(({ icon: Icon, title, desc }) => (
           <RevealItem key={title}>
-            <Icon size={22} strokeWidth={1.6} className="text-primary-600 mb-5" />
+            <Icon size={40} className="text-primary-700 mb-5" />
             <h3 className="font-heading font-semibold text-ink-900 text-lg leading-snug mb-2.5 text-balance min-h-[3.1rem]">{title}</h3>
-            <p className="text-ink-600 text-[0.9375rem] leading-relaxed text-pretty">{desc}</p>
+            <p className="text-ink-600 text-base leading-relaxed text-pretty">{desc}</p>
           </RevealItem>
         ))}
       </RevealGroup>
@@ -205,7 +204,6 @@ const AboutUs = () => (
   <main>
     <SEO page="about" extraSchemas={[faqSchema(aboutFAQs)]} />
     <Hero />
-    <CredentialBand />
     <AboutIntro />
     <DependableCare />
     <MissionVisionValues />

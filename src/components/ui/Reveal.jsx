@@ -2,6 +2,10 @@ import { motion, useReducedMotion } from 'framer-motion';
 
 const EASE = [0.22, 1, 0.36, 1];
 
+// Pre-rendered HTML is read by crawlers that never scroll, so on the server
+// everything renders in its final, visible state.
+const IS_SERVER = typeof window === 'undefined';
+
 /**
  * Scroll-triggered reveal.
  *
@@ -16,7 +20,7 @@ export const Reveal = ({ children, delay = 0, y = 18, as = 'div', className = ''
   return (
     <Tag
       className={className}
-      initial={reduce ? { opacity: 0 } : { opacity: 0, y }}
+      initial={IS_SERVER ? false : reduce ? { opacity: 0 } : { opacity: 0, y }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, amount: 0.2, margin: '0px 0px -80px 0px' }}
       transition={{ duration: 0.6, ease: EASE, delay: reduce ? 0 : delay }}
@@ -38,7 +42,7 @@ export const RevealGroup = ({ children, className = '', stagger = 0.07, as = 'di
   return (
     <Tag
       className={className}
-      initial="hidden"
+      initial={IS_SERVER ? false : 'hidden'}
       whileInView="show"
       viewport={{ once: true, amount: 0.15, margin: '0px 0px -60px 0px' }}
       variants={{ hidden: {}, show: { transition: { staggerChildren: reduce ? 0 : stagger } } }}

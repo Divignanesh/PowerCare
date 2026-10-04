@@ -8,6 +8,10 @@
  *
  *  - "center" — the photograph full-bleed as a band, copy centred below it.
  *  - "split"  — copy on the left, the photograph framed on the right.
+ *  - "overlay" — copy centred on the photograph under a white wash.
+ *
+ * `insetImage` (split only) adds a second, smaller photograph overlapping
+ * the bottom-left corner of the first.
  *
  * `imagePos` is the object-position for the photograph. The band crops hard,
  * and a top crop loses the subject on frames where they sit low, so those
@@ -17,7 +21,7 @@
 
 const Eyebrow = ({ label, flanked }) =>
   label ? (
-    <span className="inline-flex items-center gap-2.5 font-mono text-[0.6875rem] font-semibold uppercase tracking-widest text-primary-700">
+    <span className="inline-flex items-center gap-3 font-mono text-sm leading-tight font-semibold uppercase tracking-[4px] text-primary-600">
       <span className="block w-6 h-px bg-primary-400" aria-hidden="true" />
       {label}
       {flanked && <span className="block w-6 h-px bg-primary-400" aria-hidden="true" />}
@@ -33,9 +37,40 @@ const PageHero = ({
   imagePos = 'object-top',
   detailImage,
   detailImageAlt = '',
+  insetImage,
+  insetImageAlt = '',
+  insetImagePos = 'object-center',
   variant = 'split',
   children,
 }) => {
+  if (variant === 'overlay') {
+    return (
+      <section className="relative flex items-center min-h-[360px] sm:min-h-[420px] lg:min-h-[480px] overflow-hidden">
+        <img
+          src={image}
+          alt={imageAlt}
+          aria-hidden={imageAlt ? undefined : 'true'}
+          fetchPriority="high"
+          className={`absolute inset-0 w-full h-full object-cover ${imagePos}`}
+        />
+        <div className="absolute inset-0 bg-white/70" aria-hidden="true" />
+
+        <div className="relative w-full max-w-7xl mx-auto px-5 sm:px-6 lg:px-8 py-14 lg:py-16 text-center">
+          <Eyebrow label={eyebrow} flanked />
+          <h1 className="text-display-lg font-heading font-semibold text-ink-900 mt-5 max-w-3xl mx-auto text-balance">
+            {title}
+          </h1>
+          {subtitle && (
+            <p className="text-lg text-ink-800 mt-5 max-w-2xl mx-auto leading-relaxed text-pretty">
+              {subtitle}
+            </p>
+          )}
+          {children}
+        </div>
+      </section>
+    );
+  }
+
   if (variant === 'center') {
     return (
       <section className="bg-white">
@@ -83,13 +118,21 @@ const PageHero = ({
           </div>
 
           {(detailImage || image) && (
-            <div className="lg:col-span-6">
+            <div className={`lg:col-span-6 ${insetImage ? 'relative pb-16 sm:pb-20 pl-10 sm:pl-16' : ''}`}>
               <img
                 src={detailImage || image}
                 alt={detailImage ? detailImageAlt : imageAlt}
                 fetchPriority="high"
                 className={`w-full aspect-[4/3] object-cover ${imagePos} rounded-2xl`}
               />
+              {insetImage && (
+                <img
+                  src={insetImage}
+                  alt={insetImageAlt}
+                  className={`absolute bottom-0 left-0 w-[46%] aspect-[4/3] object-cover ${insetImagePos}
+                              rounded-2xl ring-[6px] ring-white shadow-panel`}
+                />
+              )}
             </div>
           )}
         </div>

@@ -1,12 +1,14 @@
 import { Link } from 'react-router-dom';
+import { ChevronRight, Plus, Check } from 'lucide-react';
 import {
-  Building2, Home, Heart,
-  Users, Activity, Brain, ChevronRight, Shield, Plus, Check,
-} from 'lucide-react';
+  Buildings as Building2, House as Home, Heart,
+  UsersThree as Users, Pulse as Activity, Brain, ShieldCheck as Shield,
+} from '@phosphor-icons/react';
 import SectionHeader from '../components/ui/SectionHeader';
 import PageHero from '../components/ui/PageHero';
 import Reveal, { RevealGroup, RevealItem } from '../components/ui/Reveal';
 import FAQ from '../components/ui/FAQ';
+import CtaBand from '../components/ui/CtaBand';
 import { industries } from '../data/industries';
 import { industriesFAQs } from '../data/faqs';
 import CredentialBand from '../components/ui/CredentialBand';
@@ -17,7 +19,7 @@ const iconMap = { Building2, Home, Heart, Users, Activity, Brain };
 
 const Hero = () => (
   <PageHero
-    variant="center"
+    variant="overlay"
     eyebrow="Industries We Serve"
     title="Built for Every Care Setting"
     subtitle="A long-term care home and a group home ask different things of the people who work in them. We staff for what each one is really like."
@@ -27,7 +29,7 @@ const Hero = () => (
   >
     <ul className="flex flex-wrap gap-2 justify-center mt-8">
       {['Trained for the setting', 'Whenever you need us', 'Known to us before we send them'].map((t) => (
-        <li key={t} className="rounded-full bg-surface px-4 py-2 font-mono text-[0.6875rem] font-semibold uppercase tracking-widest text-primary-700">
+        <li key={t} className="rounded-full bg-white px-4 py-2 font-mono text-[0.625rem] font-semibold uppercase tracking-widest text-primary-700">
           {t}
         </li>
       ))}
@@ -74,10 +76,10 @@ const SectorGrid = () => (
 
                 <div className="flex flex-col flex-1 p-6">
                   <div className="flex items-start gap-3 mb-3 min-h-[3.1rem]">
-                    <Icon size={20} strokeWidth={1.7} className="text-primary-600 flex-shrink-0 mt-0.5" />
+                    <Icon size={28} className="text-primary-700 flex-shrink-0" />
                     <h3 className="font-heading font-semibold text-ink-900 text-lg leading-snug">{ind.title}</h3>
                   </div>
-                  <p className="text-ink-600 text-[0.9375rem] leading-relaxed text-pretty">{ind.value}</p>
+                  <p className="text-ink-600 text-base leading-relaxed text-pretty">{ind.value}</p>
 
                   <h4 className="font-mono text-[0.625rem] font-semibold uppercase tracking-widest text-ink-400 mt-6 mb-2.5">
                     Roles we place here
@@ -109,7 +111,7 @@ const SectorGrid = () => (
           <Plus size={22} strokeWidth={1.6} className="text-primary-600 flex-shrink-0" />
           <div className="flex-1">
             <h3 className="text-lg font-heading font-semibold text-ink-900 mb-2">Another setting?</h3>
-            <p className="text-ink-600 text-[0.9375rem] leading-relaxed text-pretty">
+            <p className="text-ink-600 text-base leading-relaxed text-pretty">
               If it&rsquo;s a care environment in Ontario — a clinic, a school board programme, a
               shelter, a supportive housing site — we can likely staff it.
             </p>
@@ -149,7 +151,7 @@ const HowItWorks = () => (
               </span>
               <span>
                 <span className="block font-heading font-semibold text-ink-900 text-lg">{title}</span>
-                <span className="block text-ink-600 text-[0.9375rem] leading-relaxed mt-1.5 text-pretty">{desc}</span>
+                <span className="block text-ink-600 text-base leading-relaxed mt-1.5 text-pretty">{desc}</span>
               </span>
             </RevealItem>
           ))}
@@ -166,7 +168,7 @@ const HowItWorks = () => (
           </figure>
           <div className="mt-6 rounded-xl border border-ink-200 bg-white p-7">
             <h3 className="font-heading font-semibold text-ink-900 text-lg mb-2">Need cover tonight?</h3>
-            <p className="text-ink-600 text-[0.9375rem] mb-6 text-pretty">
+            <p className="text-ink-600 text-base mb-6 text-pretty">
               Emergency bookings are confirmed in 1–2 hours through the 24/7 dispatch desk.
             </p>
             {PHONE_ENABLED ? (
@@ -189,6 +191,13 @@ const Industries = () => (
     <SectorGrid />
     <HowItWorks />
     <FAQ faqs={industriesFAQs} badge="Industries we serve" title="Questions About Our Industry Expertise" subtitle="Learn how PowerCare staffs different care settings across Ontario." />
+    <CtaBand
+      image="/images/cta-industries.jpg"
+      title="Staffing built around your setting"
+      text="Tell us about your home or facility, and we'll match people who already know that kind of work."
+      cta="Request a staffing assessment"
+      points={['Long-term care', 'Retirement residences', 'Group homes']}
+    />
   </main>
 );
 

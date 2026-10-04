@@ -41,9 +41,9 @@ export const SHADOW = {
 };
 
 export const FONT = {
-  sans:    '"Source Sans 3", "Helvetica Neue", Arial, sans-serif',
-  heading: 'Lora, Georgia, "Times New Roman", serif',
-  // `mono` resolves to the sans: it is used for tracked, uppercase labels
-  // rather than for typewriter text.
-  mono:    '"Source Sans 3", "Helvetica Neue", Arial, sans-serif',
+  sans:    'Inter, "Helvetica Neue", Arial, sans-serif',
+  heading: 'Inter, "Helvetica Neue", Arial, sans-serif',
+  // `mono` resolves to the same face: it is used for tracked, uppercase
+  // labels rather than for typewriter text.
+  mono:    'Inter, "Helvetica Neue", Arial, sans-serif',
 };

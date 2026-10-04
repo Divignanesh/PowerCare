@@ -19,9 +19,9 @@ const localBusinessSchema = {
   '@id': ORG_ID,
   name: 'PowerCare Health Staffing Solutions',
   alternateName: 'PowerCare',
-  slogan: 'Trusted healthcare staffing solutions',
+  slogan: 'Good care starts with good people.',
   description:
-    'PowerCare is a trusted healthcare staffing agency serving the Greater Toronto Area and Rural Ontario. We place vetted, in-house trained RNs, RPNs, PSWs, DSWs, OTs, SLPs, Psychotherapists, Dietitians and support staff 24/7.',
+    'PowerCare Health Staffing Solutions is a healthcare staffing agency in Mississauga, Ontario. It places vetted, in-house trained RNs, RPNs, PSWs, DSWs, occupational therapists, speech-language pathologists, psychotherapists and dietitians in long-term care, retirement, home and community settings across the Greater Toronto Area and rural Ontario.',
   url: BASE_URL,
   ...(PHONE_ENABLED ? { telephone: PHONE_E164 } : {}),
   email: EMAIL,
@@ -143,54 +143,56 @@ const websiteSchema = {
   publisher: { '@id': ORG_ID },
 }
 
+// Titles stay under 60 characters and descriptions under 160 so neither is
+// truncated in results. Descriptions say what the page is, never promise.
 const PAGE_META = {
   home: {
-    title: 'PowerCare | Trusted Healthcare Staffing Agency',
+    title: 'Healthcare Staffing Agency in Ontario | PowerCare',
     crumb: 'Home',
     description:
-      'Compassionate healthcare staffing across the GTA and Rural Ontario. In-house trained RNs, RPNs, PSWs, DSWs, OTs and SLPs who care for your residents like their own.',
+      'PowerCare places in-house trained nurses, PSWs and allied health staff in long-term care, retirement and community settings across the GTA and rural Ontario.',
     path: '/',
   },
   about: {
-    title: 'About PowerCare | Trusted Healthcare Staffing Agency',
+    title: 'About PowerCare | Healthcare Staffing in Ontario',
     crumb: 'About Us',
     description:
-      'The people behind PowerCare, why we started, and what we hold ourselves to when we care for Ontario\'s older adults.',
+      'Who we are, why PowerCare was started, and the values behind how we care for older adults and the people who look after them across Ontario.',
     path: '/about',
   },
   whyPowerCare: {
-    title: 'Why PowerCare | Trusted Healthcare Staffing Agency',
+    title: 'Why PowerCare | Trained Nurses & PSWs in Ontario',
     crumb: 'Why PowerCare',
     description:
-      'How we train the people we place, how we stay close after they arrive, and what working with PowerCare should feel like.',
+      'Good care starts with good people. How PowerCare trains the nurses and support workers it places, and what working with us feels like.',
     path: '/why-powercare',
   },
   services: {
-    title: 'Our Services | Trusted Healthcare Staffing Agency',
+    title: 'Nurse, PSW & Allied Health Staffing | PowerCare',
     crumb: 'Our Services',
     description:
-      'RNs, RPNs, PSWs, DSWs, Dietitians, OTs, SLPs and Psychotherapists placed across every Ontario care setting. See everyone we place.',
+      'RNs, RPNs, PSWs, DSWs, dietitians, OTs, SLPs and psychotherapists placed in long-term care, retirement, home and community settings across Ontario.',
     path: '/services',
   },
   industries: {
-    title: 'Industries We Serve | Trusted Staffing Agency Ontario',
+    title: 'Long-Term Care & Community Staffing | PowerCare',
     crumb: 'Industries We Serve',
     description:
-      'Long-term care, retirement residences, home and community care, group homes, respite, rehab and mental health — staffed for the realities of each setting.',
+      'Staffing for long-term care, retirement residences, home and community care, group homes, rehabilitation and mental health services in Ontario.',
     path: '/industries',
   },
   careers: {
-    title: 'Find a Job | Trusted Healthcare Staffing Agency',
-    crumb: 'Find a Job',
+    title: 'Nursing, PSW & Allied Health Jobs in Ontario | PowerCare',
+    crumb: 'Careers',
     description:
-      'RN, RPN, PSW, DSW, OT, SLP and Psychotherapist roles across Ontario. A coordinator who knows you, shifts that fit your life, and training that comes with the job.',
+      'Apply to work with PowerCare as an RN, RPN, PSW, DSW or allied health professional in care homes and communities across the GTA and rural Ontario.',
     path: '/careers',
   },
   contact: {
-    title: 'Contact Us | Trusted Healthcare Staffing Agency',
+    title: 'Contact PowerCare | Healthcare Staffing in the GTA',
     crumb: 'Contact',
     description:
-      'Talk to a real coordinator about staffing your home, or about working with us. Across the GTA and Rural Ontario.',
+      'Get in touch with PowerCare about staffing your care home or agency, or about working with us. Serving the GTA and rural Ontario.',
     path: '/contact',
   },
 }
@@ -235,20 +237,6 @@ const webPageSchema = (meta) => ({
   about: { '@id': ORG_ID },
   primaryImageOfPage: { '@type': 'ImageObject', url: OG_IMAGE },
 })
-
-const hiringHowToSchema = {
-  '@context': 'https://schema.org',
-  '@type': 'HowTo',
-  name: 'How to Find a Healthcare Job Through PowerCare in Ontario',
-  description:
-    'PowerCare places RNs, PSWs, DSWs, OTs, SLPs and more across the GTA and Rural Ontario in 4 simple steps.',
-  step: [
-    { '@type': 'HowToStep', name: 'Apply or Connect', text: 'Submit your application online or call us. A recruiter will respond within 24 hours.' },
-    { '@type': 'HowToStep', name: 'Job Matching', text: 'Your dedicated recruiter matches you with suitable roles from our Ontario facility network.' },
-    { '@type': 'HowToStep', name: 'Interview Preparation', text: 'We prepare you for client interviews with coaching and documentation support.' },
-    { '@type': 'HowToStep', name: 'Onboarding & Placement', text: 'We guide you through all onboarding paperwork — your first day starts smoothly.' },
-  ],
-}
 
 /** The professions, as an explicit ordered list — used on /services. */
 const servicesListSchema = {
@@ -296,10 +284,23 @@ const SEO = ({ page, extraSchemas = [] }) => {
         content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1"
       />
 
-      {/* og:* and twitter:* are served statically from index.html. Social
-          crawlers do not execute JavaScript, so a Helmet copy would never
-          reach them — it would only duplicate the tag for crawlers that do
-          render. See the note in index.html. */}
+      {/* Social previews. Every page is pre-rendered at build time
+          (scripts/prerender.mjs), so these reach crawlers that never run
+          JavaScript. */}
+      <meta property="og:type" content="website" />
+      <meta property="og:site_name" content="PowerCare Health Staffing Solutions" />
+      <meta property="og:locale" content="en_CA" />
+      <meta property="og:url" content={url} />
+      <meta property="og:title" content={meta.title} />
+      <meta property="og:description" content={meta.description} />
+      <meta property="og:image" content={OG_IMAGE} />
+      <meta property="og:image:width" content="1200" />
+      <meta property="og:image:height" content="630" />
+      <meta property="og:image:alt" content="PowerCare Health Staffing Solutions" />
+      <meta name="twitter:card" content="summary_large_image" />
+      <meta name="twitter:title" content={meta.title} />
+      <meta name="twitter:description" content={meta.description} />
+      <meta name="twitter:image" content={OG_IMAGE} />
 
       {/* JSON-LD Structured Data */}
       {schemas.map((schema, i) => (
@@ -314,7 +315,6 @@ const SEO = ({ page, extraSchemas = [] }) => {
 export {
   SEO,
   faqSchema,
-  hiringHowToSchema,
   servicesListSchema,
   PAGE_META,
   BASE_URL,

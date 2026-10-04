@@ -24,7 +24,7 @@ const CredentialBadges = ({ variant = 'strip', only, useFull = false, className 
       <ul className={`flex flex-wrap gap-x-5 gap-y-3 ${className}`}>
         {items.map(({ id, icon: Icon, ...c }) => (
           <li key={id} className="flex items-center gap-2 text-white/70 text-sm">
-            <Icon size={15} strokeWidth={1.8} className="text-accent-300 flex-shrink-0" />
+            <Icon size={17} className="text-accent-300 flex-shrink-0" />
             {labelOf(c)}
           </li>
         ))}
@@ -37,7 +37,7 @@ const CredentialBadges = ({ variant = 'strip', only, useFull = false, className 
       <ul className={`flex flex-wrap gap-x-5 gap-y-2.5 ${className}`}>
         {items.map(({ id, icon: Icon, ...c }) => (
           <li key={id} className="flex items-center gap-2 text-ink-600 text-sm">
-            <Icon size={15} strokeWidth={1.8} className="text-primary-600 flex-shrink-0" />
+            <Icon size={18} className="text-primary-700 flex-shrink-0" />
             {labelOf(c)}
           </li>
         ))}
@@ -58,7 +58,7 @@ const CredentialBadges = ({ variant = 'strip', only, useFull = false, className 
             key={id}
             className="flex flex-col items-center justify-start text-center gap-3 px-4"
           >
-            <Icon size={24} strokeWidth={1.5} className="text-primary-600" />
+            <Icon size={40} className="text-primary-700" />
             <span className="text-ink-800 text-sm font-semibold leading-snug">{labelOf(c)}</span>
           </li>
         ))}
@@ -75,7 +75,7 @@ const CredentialBadges = ({ variant = 'strip', only, useFull = false, className 
             className="inline-flex items-center gap-2 px-3 py-1.5 rounded-lg
                        bg-primary-50 text-primary-700 text-sm font-medium"
           >
-            <Icon size={14} strokeWidth={1.9} className="flex-shrink-0" />
+            <Icon size={16} className="flex-shrink-0" />
             {labelOf(c)}
           </li>
         ))}
@@ -87,8 +87,8 @@ const CredentialBadges = ({ variant = 'strip', only, useFull = false, className 
   return (
     <ul className={`flex flex-wrap items-center gap-x-6 gap-y-3 ${className}`}>
       {items.map(({ id, icon: Icon, ...c }) => (
-        <li key={id} className="flex items-center gap-2 font-mono text-[0.6875rem] uppercase tracking-widest text-primary-700">
-          <Icon size={15} strokeWidth={1.9} className="text-primary-600 flex-shrink-0" />
+        <li key={id} className="flex items-center gap-2 font-mono text-[0.625rem] uppercase tracking-widest text-primary-700">
+          <Icon size={17} className="text-primary-700 flex-shrink-0" />
           {labelOf(c)}
         </li>
       ))}

@@ -1,4 +1,6 @@
-import { BadgeCheck, Shield, GraduationCap, UserCheck, Fingerprint, Headset } from 'lucide-react';
+import {
+  SealCheck as BadgeCheck, ShieldCheck as Shield, GraduationCap, UserCheck, Fingerprint, Headset,
+} from '@phosphor-icons/react';
 
 /**
  * One source of truth for what PowerCare holds and does.

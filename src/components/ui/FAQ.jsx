@@ -34,8 +34,8 @@ const FAQ = ({ faqs, badge = 'Frequently Asked Questions', title = 'Common Quest
 
             {aside && (
               <div className="mt-8 rounded-2xl bg-surface p-7">
-                <h3 className="font-heading font-semibold text-ink-900 mb-2">Still have a question?</h3>
-                <p className="text-ink-600 text-[0.9375rem] leading-relaxed mb-5 text-pretty">
+                <h3 className="text-lg font-heading font-semibold text-ink-900 mb-2">Still have a question?</h3>
+                <p className="text-ink-600 text-base leading-relaxed mb-5 text-pretty">
                   A coordinator will talk it through with you — no call centre, no script.
                 </p>
                 <Link to="/contact" className="btn-primary w-full">

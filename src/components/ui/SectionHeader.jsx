@@ -10,7 +10,7 @@
 /** Mono label prefixed with a rule; flanked on both sides when centred. */
 const Eyebrow = ({ badge, tone, ruleTone, flanked }) =>
   badge ? (
-    <span className={`inline-flex items-center gap-2.5 font-mono text-[0.6875rem] font-medium tracking-widest uppercase ${tone}`}>
+    <span className={`inline-flex items-center gap-3 font-mono text-sm leading-tight font-semibold tracking-[4px] uppercase ${tone}`}>
       <span className={`block w-6 h-px ${ruleTone}`} aria-hidden="true" />
       {badge}
       {flanked && <span className={`block w-6 h-px ${ruleTone}`} aria-hidden="true" />}
@@ -20,7 +20,7 @@ const Eyebrow = ({ badge, tone, ruleTone, flanked }) =>
 import Reveal from './Reveal';
 
 const SectionHeader = ({ badge, title, subtitle, centered = true, light = false }) => {
-  const eyebrowTone = light ? 'text-accent-300' : 'text-primary-700';
+  const eyebrowTone = light ? 'text-accent-300' : 'text-primary-600';
   const ruleTone    = light ? 'bg-accent-300/60' : 'bg-primary-400';
   const titleTone   = light ? 'text-white' : 'text-ink-900';
   const subTone     = light ? 'text-white/65' : 'text-ink-600';
@@ -33,7 +33,7 @@ const SectionHeader = ({ badge, title, subtitle, centered = true, light = false 
           {title}
         </h2>
         {subtitle && (
-          <p className={`mt-5 text-base leading-relaxed max-w-2xl mx-auto text-pretty ${subTone}`}>
+          <p className={`mt-5 text-base leading-[1.5] max-w-2xl mx-auto text-pretty ${subTone}`}>
             {subtitle}
           </p>
         )}
@@ -51,7 +51,7 @@ const SectionHeader = ({ badge, title, subtitle, centered = true, light = false 
           </h2>
         </div>
         {subtitle && (
-          <p className={`lg:col-span-5 text-base leading-relaxed text-pretty ${subTone}`}>
+          <p className={`lg:col-span-5 text-base leading-[1.5] text-pretty ${subTone}`}>
             {subtitle}
           </p>
         )}

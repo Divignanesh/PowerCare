@@ -1,38 +1,50 @@
 import { Link } from 'react-router-dom';
+import { Helmet } from 'react-helmet-async';
 import { ArrowRight, ChevronRight } from 'lucide-react';
+import {
+  Buildings as Building2, House as HomeIcon, Heart, UsersThree as Users, Pulse as Activity, Brain,
+} from '@phosphor-icons/react';
 import SectionHeader from '../components/ui/SectionHeader';
 import FAQ from '../components/ui/FAQ';
 import { services } from '../data/services';
+import { industries } from '../data/industries';
 import { homeFAQs } from '../data/faqs';
 import { RevealGroup, RevealItem } from '../components/ui/Reveal';
 import CredentialBand from '../components/ui/CredentialBand';
 import SEO, { faqSchema } from '../components/seo/SEO';
 
 // ─────────────────────────── HERO ────────────────────────────
-// The photograph is shown as it was taken. One line of type beneath it, a
-// rule, and a sentence — nothing else above the fold. Anything that asks the
-// reader for something belongs further down the page.
+// After universalhomecare.ca: one bright photograph, a short statement, a
+// thin rule and a single line, nothing that asks the reader for anything.
+// The photo is never dimmed: it fills the right of the hero and fades into
+// white on its left edge, where the type sits. On phones it sits above.
 const Hero = () => (
-  <section className="bg-white">
-    <div className="relative flex items-center min-h-[360px] sm:min-h-[430px] lg:min-h-[480px]">
-      <img
-        src="/images/hero-elder-care.jpg"
-        alt="A PowerCare nurse talking with an older man during a visit"
-        fetchPriority="high"
-        className="absolute inset-0 w-full h-full object-cover object-top"
-      />
-      {/* A single flat tone, not a ramp — enough to carry white type without
-          draining the light out of the photograph. */}
-      <div className="absolute inset-0 bg-ink-900/38" aria-hidden="true" />
+  <section className="relative bg-white overflow-hidden">
+    <Helmet>
+      <link rel="preload" as="image" href="/images/why-hero-companion.jpg" fetchPriority="high" />
+    </Helmet>
+    <img
+      src="/images/why-hero-companion.jpg"
+      alt="A PowerCare care worker laughing with an older woman outdoors"
+      fetchPriority="high"
+      className="w-full h-64 sm:h-80 object-cover object-[70%_30%]
+                 lg:absolute lg:inset-y-0 lg:right-0 lg:w-[62%] lg:h-full lg:object-[30%_30%]"
+    />
+    {/* Softens the photo's left edge into the white so there is no hard seam. */}
+    <div
+      className="hidden lg:block absolute inset-y-0 left-[38%] w-48 bg-gradient-to-r from-white to-transparent"
+      aria-hidden="true"
+    />
 
-      <div className="relative container-custom py-10 text-center">
-        <h1 className="text-display-lg font-heading font-semibold text-white max-w-4xl mx-auto text-balance">
+    <div className="relative container-custom py-12 lg:py-0 lg:min-h-[540px] lg:flex lg:items-center">
+      <div className="max-w-xl lg:max-w-[min(36rem,34vw)]">
+        <h1 className="text-display-lg font-heading font-semibold text-ink-900 text-balance">
           We care for your residents like our own.
         </h1>
-        <span className="block w-16 h-px bg-white/50 mx-auto my-6" aria-hidden="true" />
-        <p className="text-lg text-white max-w-2xl mx-auto leading-relaxed text-pretty">
+        <span className="block w-20 h-px bg-ink-900/25 my-6" aria-hidden="true" />
+        <p className="text-lg text-ink-700 text-pretty">
           Every day, PowerCare nurses, support workers and therapists look after the
-          people who once looked after us — with dignity, patience and warmth.
+          people who once looked after us, with dignity, patience and warmth.
         </p>
       </div>
     </div>
@@ -94,7 +106,7 @@ const ThePromise = () => (
                   <h3 className="mt-5 font-heading font-semibold text-ink-900 text-lg leading-snug text-balance min-h-[3.1rem]">
                     {title}
                   </h3>
-                  <p className="mt-2 text-ink-600 text-[0.9375rem] leading-relaxed text-pretty">
+                  <p className="mt-2 text-ink-600 text-base leading-relaxed text-pretty">
                     {desc}
                   </p>
                 </figcaption>
@@ -144,7 +156,7 @@ const ProfessionsPreview = () => {
                   <span className="block font-mono text-[0.625rem] font-semibold uppercase tracking-widest text-primary-700 mb-2">
                     {s.category}
                   </span>
-                  <span className="block text-[1.0625rem] font-heading font-semibold text-ink-900 mb-2 leading-snug min-h-[2.9rem] transition-colors group-hover:text-primary-700">
+                  <span className="block text-base font-heading font-semibold text-ink-900 mb-2 leading-snug min-h-[2.9rem] transition-colors group-hover:text-primary-700">
                     {s.title}
                   </span>
                   <span className="block text-ink-600 text-sm leading-relaxed text-pretty">{s.shortDesc}</span>
@@ -165,6 +177,48 @@ const ProfessionsPreview = () => {
   );
 };
 
+// ─────────────────────────── CARE SETTINGS ────────────────────────────
+// The page named the people we place but never the places they work, so a
+// reader had no sense of the range. Titles and lines are read from the same
+// array /industries uses, which is what keeps the two from drifting apart.
+const settingIcons = { Building2, Home: HomeIcon, Heart, Users, Activity, Brain };
+
+const CareSettings = () => (
+  <section className="section-padding bg-white">
+    <div className="container-custom">
+      <SectionHeader
+        badge="Care settings"
+        title="Where Our People Work"
+        subtitle="Across Ontario — in long-term care and retirement homes, in group homes and therapy programmes, and in people’s own living rooms."
+        centered={false}
+      />
+
+      <RevealGroup className="grid sm:grid-cols-2 lg:grid-cols-3 gap-x-10 gap-y-9 mb-9">
+        {industries.map((ind) => {
+          const Icon = settingIcons[ind.icon] || Heart;
+          return (
+            <RevealItem key={ind.id}>
+              <Icon size={40} className="text-primary-700" aria-hidden="true" />
+              {/* One of these titles runs to two lines; the floor keeps every
+                  body paragraph in a row starting on the same line. */}
+              <h3 className="mt-4 font-heading font-semibold text-ink-900 text-base leading-snug text-balance min-h-[3.1rem]">
+                {ind.title}
+              </h3>
+              <p className="mt-2 text-ink-600 text-base leading-relaxed text-pretty">
+                {ind.value}
+              </p>
+            </RevealItem>
+          );
+        })}
+      </RevealGroup>
+
+      <Link to="/industries" className="link-arrow text-base">
+        See every setting we serve <ArrowRight size={16} />
+      </Link>
+    </div>
+  </section>
+);
+
 const Home = () => (
   <main>
     <SEO page="home" extraSchemas={[faqSchema(homeFAQs)]} />
@@ -172,6 +226,7 @@ const Home = () => (
     <CredentialBand />
     <ThePromise />
     <ProfessionsPreview />
+    <CareSettings />
     <FAQ
       faqs={homeFAQs}
       title="Frequently Asked Questions"

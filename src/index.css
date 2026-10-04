@@ -16,10 +16,11 @@
   }
 
   body {
-    font-family: 'Source Sans 3', system-ui, sans-serif;
+    font-family: Inter, system-ui, sans-serif;
     /* Loosened from the browser default: long paragraphs of 15–17px sans need
        the extra leading far more than they need the vertical space back. */
-    line-height: 1.65;
+    font-size: 0.85rem;
+    line-height: 1.5;
     color: #242E38;
     background: #ffffff;
     -webkit-font-smoothing: antialiased;
@@ -27,13 +28,11 @@
     text-rendering: optimizeLegibility;
   }
 
-  /* Lora keeps the formal, printed register of an institution but holds its
-     stroke weight even — there are no hairlines to glare against the stems,
-     which is what makes a serif tiring at display sizes on a screen. */
   h1, h2, h3, h4, h5, h6 {
-    font-family: Lora, Georgia, 'Times New Roman', serif;
-    letter-spacing: -0.004em;
-    line-height: 1.3;
+    font-family: Inter, system-ui, sans-serif;
+    font-weight: 700;
+    letter-spacing: -0.01em;
+    line-height: 1.125;
   }
 
   /* Small headings sit at normal tracking; the negative value is only there
@@ -74,7 +73,7 @@
 
   .btn-base {
     @apply inline-flex items-center justify-center gap-2 px-7 py-3
-           text-[0.9375rem] font-semibold rounded-full
+           text-[0.75rem] font-semibold rounded-full
            transition-[background-color,color,border-color,box-shadow,transform]
            duration-200 ease-out-soft
            focus:outline-none focus-visible:outline-none
@@ -123,9 +122,9 @@
   /* The eyebrow is set in mono and prefixed with a rule — it reads as a
      line off a roster rather than a marketing pill. */
   .section-badge {
-    @apply inline-flex items-center gap-2.5 font-mono
-           text-[0.6875rem] font-semibold tracking-widest uppercase
-           text-primary-700 mb-4;
+    @apply inline-flex items-center gap-3 font-mono
+           text-sm leading-tight font-semibold tracking-[4px] uppercase
+           text-primary-600 mb-4;
   }
 
   .section-badge::before {
@@ -138,7 +137,7 @@
   }
 
   .section-subtitle {
-    @apply text-[1.0625rem] text-ink-600 mt-4 max-w-2xl leading-[1.7];
+    @apply text-base text-ink-600 mt-4 max-w-2xl leading-[1.5];
   }
 
   /* ── Figure ────────────────────────────────────────────────── */
@@ -166,7 +165,7 @@
   }
 
   .ledger-label {
-    @apply text-[0.9375rem] text-ink-600;
+    @apply text-base text-ink-600;
   }
 
   .ledger-figure {
@@ -180,20 +179,38 @@
 
   /* ── Form inputs ───────────────────────────────────────────── */
 
-  /* Filled rather than outlined — the field is legible without a box drawn
-     around it, and the form stops looking like paperwork. */
   /* A field has to look like something you can type into, so it carries a
      real edge rather than only a fill. */
   .input {
-    @apply w-full px-4 py-3 text-[0.9375rem] bg-white
+    @apply w-full px-4 py-3 text-[0.75rem] bg-white
            rounded-xl border border-ink-300 text-ink-900 placeholder-ink-400
            focus:outline-none focus:border-primary-500
            focus:ring-2 focus:ring-primary-500/20
            transition-colors duration-150;
   }
 
+  /* Dropdowns drop the browser's own arrow, which sat hard against the
+     edge and drew differently in every browser. Ours is drawn in ink-600,
+     inset to match the text padding. While the empty first option is
+     chosen, the label reads as a placeholder, the same grey as an empty
+     text field beside it. */
+  select.input {
+    @apply appearance-none cursor-pointer pr-11 bg-no-repeat;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20' fill='none' stroke='%234C5A6A' stroke-width='1.8' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M5 7.5l5 5 5-5'/%3E%3C/svg%3E");
+    background-position: right 1rem center;
+    background-size: 1.125rem;
+  }
+
+  select.input:has(option[value='']:checked) {
+    @apply text-ink-400;
+  }
+
+  select.input option {
+    @apply text-ink-900;
+  }
+
   .field-label {
-    @apply block font-mono text-[0.6875rem] font-medium uppercase
+    @apply block font-mono text-[0.625rem] font-medium uppercase
            tracking-widest text-ink-500 mb-2;
   }
 

@@ -138,7 +138,7 @@ export const contactFAQs = [
   },
   {
     q: 'How do I start working with PowerCare?',
-    a: 'Get in touch and we will arrange a conversation about your home — how you like things done, what your team needs, and where we can help. There is no obligation and no hard sell.',
+    a: 'Get in touch and we will arrange a conversation about your home — how you like things done, what your team needs, and where we can help.',
   },
 ];
 

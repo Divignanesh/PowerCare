@@ -74,7 +74,7 @@ const Footer = () => (
             </span>
           </Link>
 
-          <p className="text-white/65 text-[0.9375rem] leading-relaxed max-w-sm mb-8 text-pretty">
+          <p className="text-white/65 text-sm leading-relaxed max-w-sm mb-8 text-pretty">
             PowerCare connects healthcare facilities across the GTA and Rural Ontario with vetted, in-house trained professionals who deliver dependable, compassionate care.
           </p>
 
@@ -91,12 +91,12 @@ const Footer = () => (
                   {href ? (
                     <a
                       href={href}
-                      className="flex items-center gap-3 py-1.5 text-[0.9375rem] text-white/70 hover:text-accent-300 transition-colors"
+                      className="flex items-center gap-3 py-1.5 text-sm text-white/70 hover:text-accent-300 transition-colors"
                     >
                       {inner}
                     </a>
                   ) : (
-                    <span className="flex items-center gap-3 py-1.5 text-[0.9375rem] text-white/70">{inner}</span>
+                    <span className="flex items-center gap-3 py-1.5 text-sm text-white/70">{inner}</span>
                   )}
                 </div>
               );
@@ -152,7 +152,7 @@ const Footer = () => (
                 <li key={l.label}>
                   <Link
                     to={l.to}
-                    className="text-[0.9375rem] text-white/65 hover:text-white transition-colors"
+                    className="text-sm text-white/65 hover:text-white transition-colors"
                   >
                     {l.label}
                   </Link>

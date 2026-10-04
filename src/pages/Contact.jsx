@@ -1,10 +1,10 @@
 import { useState } from 'react';
 import { useSearchParams } from 'react-router-dom';
 import { Link } from 'react-router-dom';
+import { ArrowRight } from 'lucide-react';
 import {
-  Phone, Mail, MapPin, Clock, ArrowRight, CheckCircle2,
-  Building2, User, MessageSquare
-} from 'lucide-react';
+  Phone, Envelope as Mail, MapPin, Clock, CheckCircle as CheckCircle2,
+} from '@phosphor-icons/react';
 import { AnimatePresence, motion, useReducedMotion } from 'framer-motion';
 import PageHero from '../components/ui/PageHero';
 import FAQ from '../components/ui/FAQ';
@@ -41,18 +41,20 @@ const CONTACT_CELLS = [
 const ContactInfo = () => (
   <section className="bg-primary-50 py-12">
     <div className="max-w-7xl mx-auto px-5 sm:px-6 lg:px-8">
-      <div className={`grid sm:grid-cols-2 gap-x-10 gap-y-6 ${
-        CONTACT_CELLS.length === 4 ? 'lg:grid-cols-4' : 'lg:grid-cols-3'
+      {/* Three cells sit in one row from tablet up, so none is left orphaned
+          on a line of its own; four fall back to a 2×2 before going wide. */}
+      <div className={`grid gap-x-10 gap-y-6 ${
+        CONTACT_CELLS.length === 4 ? 'sm:grid-cols-2 lg:grid-cols-4' : 'sm:grid-cols-3'
       }`}>
         {CONTACT_CELLS.map(({ icon: Icon, title, lines, href }) => (
-          <div key={title} className="text-ink-900 py-4">
-            <div className="flex items-center gap-2.5 mb-4">
-              <Icon size={16} strokeWidth={1.8} className="text-primary-600 flex-shrink-0" />
-              <span className="font-mono text-[0.6875rem] font-semibold uppercase tracking-widest text-primary-700">{title}</span>
+          <div key={title} className="text-ink-900 py-4 text-center">
+            <div className="flex flex-col items-center gap-3 mb-4">
+              <Icon size={40} className="text-primary-700" />
+              <span className="font-mono text-[0.625rem] font-semibold uppercase tracking-widest text-primary-700">{title}</span>
             </div>
             {lines.map((line, i) => (
               href && i === 0 ? (
-                <a key={line} href={href} className="block text-ink-900 text-[0.9375rem] font-medium hover:text-primary-600 transition-colors">
+                <a key={line} href={href} className="block text-ink-900 text-base font-medium hover:text-primary-600 transition-colors">
                   {line}
                 </a>
               ) : (
@@ -69,7 +71,7 @@ const ContactInfo = () => (
 // ── SUCCESS MESSAGE ───────────────────────────────────────────
 const SuccessMessage = () => (
   <div className="text-center py-10" role="status">
-    <CheckCircle2 size={40} strokeWidth={1.5} className="text-primary-600 mx-auto mb-4" />
+    <CheckCircle2 size={44} className="text-primary-700 mx-auto mb-4" />
     <h4 className="text-xl font-heading font-semibold text-ink-900 mb-3">Message Sent!</h4>
     <p className="text-ink-600 max-w-xs mx-auto text-pretty">
       Thank you for reaching out. Someone from our team will be in touch soon.
@@ -204,7 +206,7 @@ const ProfessionalForm = () => {
       <p className="text-sm text-ink-500 text-center">
         Or visit our full{' '}
         <Link to="/careers" className="text-primary-700 font-medium underline underline-offset-2 hover:text-primary-800">
-          Find a Job
+          Careers
         </Link>{' '}
         page to apply.
       </p>
@@ -265,46 +267,62 @@ const ContactForms = () => {
       <div className="container-custom">
         <div className="grid lg:grid-cols-12 gap-x-12 gap-y-10 items-start">
 
-          {/* Left info */}
+          {/* Left info — the visitor already knows why they're here, so this
+              is just who we are and how to reach us directly. */}
           <div className="lg:col-span-5">
-            <span className="section-badge">Get in Touch</span>
             <h2 className="text-display-sm font-heading font-semibold text-ink-900 mb-6 text-balance">
-              How can we help?
+              PowerCare Health Staffing Solutions
             </h2>
-            <p className="text-ink-600 leading-relaxed mb-7 text-pretty">
-              Pick whichever fits best. However you reach us, a person reads it — there is no call centre and no script.
+            <p className="text-ink-600 leading-relaxed mb-9 text-pretty">
+              Whether you need staff for your home or facility, or want to join our team,
+              we&rsquo;re here to help every step of the way.
             </p>
 
-            <div className="space-y-5">
+            <h3 className="font-heading font-semibold text-ink-900 text-lg mb-6">
+              Prefer to speak with us directly?
+            </h3>
+            <ul className="space-y-6">
               {[
-                { icon: Building2,     title: 'For Healthcare Facilities',    desc: 'Request staff, discuss a staffing strategy, or enquire about partnership opportunities.' },
-                { icon: User,          title: 'For Healthcare Professionals', desc: 'Apply for roles, enquire about current openings, or connect with a recruiter.' },
-                { icon: MessageSquare, title: 'General Enquiries',            desc: 'Any other question about PowerCare, our training programs, or our services.' },
-              ].map(({ icon: Icon, title, desc }) => (
-                <div key={title} className="flex gap-4 py-5">
-                  <Icon size={19} strokeWidth={1.6} className="text-primary-600 flex-shrink-0 mt-0.5" />
-                  <div>
-                    <div className="font-heading font-semibold text-ink-900">{title}</div>
-                    <div className="text-ink-600 text-[0.9375rem] mt-1 leading-relaxed text-pretty">{desc}</div>
-                  </div>
-                </div>
+                { icon: MapPin, href: MAP_HREF,   lines: [ADDRESS.street, `${ADDRESS.locality}, ${ADDRESS.region} ${ADDRESS.postalCode}`], external: true },
+                { icon: Mail,   href: EMAIL_HREF, lines: [EMAIL] },
+                ...(PHONE_ENABLED ? [{ icon: Phone, href: PHONE_HREF, lines: [PHONE] }] : []),
+              ].map(({ icon: Icon, href, lines, external }) => (
+                <li key={lines[0]} className="flex gap-4">
+                  <Icon size={24} className="text-primary-700 flex-shrink-0 mt-0.5" aria-hidden="true" />
+                  <a
+                    href={href}
+                    {...(external ? { target: '_blank', rel: 'noopener noreferrer' } : {})}
+                    className="text-ink-900 text-base leading-relaxed underline underline-offset-4 decoration-ink-300
+                               hover:text-primary-700 hover:decoration-primary-400 transition-colors"
+                  >
+                    {lines.map((line) => <span key={line} className="block">{line}</span>)}
+                  </a>
+                </li>
               ))}
-            </div>
+            </ul>
 
-            <div className="mt-10 bg-surface rounded-2xl p-7">
-              <h3 className="font-heading font-semibold text-ink-900 text-lg mb-2">Need someone today?</h3>
-              <p className="text-ink-600 text-[0.9375rem] mb-6 text-pretty">
-                {PHONE_ENABLED
-                  ? 'If a shift needs covering today, call us — someone answers at any hour.'
-                  : 'If a shift needs covering today, email us and say so in the first line. Someone reads it at any hour.'}
-              </p>
-              <a
-                href={PHONE_ENABLED ? PHONE_HREF : EMAIL_HREF}
-                className="inline-flex items-center gap-2.5 font-heading font-semibold text-primary-700 hover:text-primary-800 transition-colors"
-              >
-                {PHONE_ENABLED ? <Phone size={16} /> : <Mail size={16} />}
-                {PHONE_ENABLED ? PHONE : EMAIL}
-              </a>
+            {/* Fills the column beside the taller form, and answers the
+                question every sender has: what happens now? No reply times
+                are promised — the FAQ deliberately doesn't either. */}
+            <div className="mt-12 bg-surface rounded-2xl border border-ink-200 p-7">
+              <h3 className="font-heading font-semibold text-ink-900 text-lg mb-6">
+                What to Expect After You Contact Us
+              </h3>
+              <ol className="space-y-5">
+                {[
+                  ['A person reads it',        'Your message goes to our team, not an automated queue. If it’s urgent, say so in the first line.'],
+                  ['We get back to you',       'A coordinator or recruiter replies, and asks anything else we need to help.'],
+                  ['We agree the next step',   'For facilities, who we can send and when. For professionals, an interview and a credential check.'],
+                ].map(([title, desc], i) => (
+                  <li key={title} className="flex gap-4">
+                    <span className="index-num flex-shrink-0 w-6 mt-1">{String(i + 1).padStart(2, '0')}</span>
+                    <div>
+                      <div className="font-heading font-semibold text-ink-900">{title}</div>
+                      <p className="text-ink-600 text-base mt-1 leading-relaxed text-pretty">{desc}</p>
+                    </div>
+                  </li>
+                ))}
+              </ol>
             </div>
           </div>
 
@@ -319,7 +337,7 @@ const ContactForms = () => {
                   aria-selected={tab === t.id}
                   aria-controls={`panel-${t.id}`}
                   onClick={() => setTab(t.id)}
-                  className={`flex-1 px-3 py-4 font-mono text-[0.6875rem] font-semibold uppercase tracking-widest
+                  className={`flex-1 px-3 py-4 font-mono text-[0.625rem] font-semibold uppercase tracking-widest
                               transition-colors duration-200 border-b-2 -mb-px ${
                     tab === t.id
                       ? 'border-primary-600 text-primary-700'
@@ -338,7 +356,7 @@ const ContactForms = () => {
                   role="tabpanel"
                   id={`panel-${tab}`}
                   aria-labelledby={`tab-${tab}`}
-                  initial={reduceMotion ? { opacity: 0 } : { opacity: 0, y: 8 }}
+                  initial={typeof window === 'undefined' ? false : reduceMotion ? { opacity: 0 } : { opacity: 0, y: 8 }}
                   animate={{ opacity: 1, y: 0 }}
                   exit={{ opacity: 0 }}
                   transition={{ duration: 0.22, ease: [0.22, 1, 0.36, 1] }}
@@ -363,6 +381,33 @@ const ContactForms = () => {
   );
 };
 
+// ── JOIN OUR TEAM ────────────────────────────────────────────
+// A closing pointer for job seekers who landed on Contact looking for work.
+const JoinOurTeam = () => (
+  <section className="relative overflow-hidden section-padding">
+    <img
+      src="/images/care-team.jpg"
+      alt=""
+      loading="lazy"
+      className="absolute inset-0 w-full h-full object-cover object-[50%_25%]"
+    />
+    {/* A white wash so the dark type holds up over the faces behind it. */}
+    <div className="absolute inset-0 bg-white/70" aria-hidden="true" />
+
+    <div className="relative container-custom text-center max-w-2xl">
+      <h2 className="text-display-sm font-heading font-semibold text-ink-900 text-balance">
+        Looking to Join Our Team?
+      </h2>
+      <p className="mt-4 text-ink-800 leading-relaxed text-pretty">
+        Explore career opportunities and learn what it&rsquo;s like to work with PowerCare.
+      </p>
+      <Link to="/careers" className="btn-primary mt-8">
+        Explore careers <ArrowRight size={16} />
+      </Link>
+    </div>
+  </section>
+);
+
 const Contact = () => (
   <main>
     <SEO page="contact" extraSchemas={[faqSchema(contactFAQs)]} />
@@ -371,6 +416,7 @@ const Contact = () => (
     <ContactInfo />
     <ContactForms />
     <FAQ faqs={contactFAQs} badge="Get in Touch" title="Contact & Support Questions" subtitle="A few things people often ask before they write." aside={false} />
+    <JoinOurTeam />
   </main>
 );
 

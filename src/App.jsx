@@ -1,5 +1,6 @@
 import { BrowserRouter, Routes, Route, useLocation } from 'react-router-dom'
-import { useEffect } from 'react'
+import { Helmet } from 'react-helmet-async'
+import { useEffect, useRef } from 'react'
 import { AnimatePresence, motion, useReducedMotion } from 'framer-motion'
 import Header from './components/layout/Header'
 import Footer from './components/layout/Footer'
@@ -11,18 +12,34 @@ import Industries from './pages/Industries'
 import FindAJob from './pages/FindAJob'
 import Contact from './pages/Contact'
 
+const IS_SERVER = typeof window === 'undefined'
+
 // Scroll to top on every route change
 const ScrollToTop = () => {
   const { pathname } = useLocation()
+  const first = useRef(true)
   useEffect(() => {
     window.scrollTo({ top: 0, behavior: 'instant' })
+    // gtag's own config call already counts the first load; in-app
+    // navigation never reloads the page, so report each later route here.
+    if (first.current) { first.current = false; return }
+    window.gtag?.('event', 'page_view', {
+      page_path: pathname,
+      page_location: window.location.href,
+      page_title: document.title,
+    })
   }, [pathname])
   return null
 }
 
-// 404 page
+// 404 page. Kept out of the index: a soft-404 that returns this markup with
+// a 200 would otherwise be crawled as a real page.
 const NotFound = () => (
   <div className="min-h-[70vh] flex items-center justify-center bg-white px-5 py-24">
+    <Helmet>
+      <title>Page Not Found | PowerCare</title>
+      <meta name="robots" content="noindex, follow" />
+    </Helmet>
     <div className="text-center max-w-md">
       <div className="font-mono text-sm tracking-widest text-primary-600 mb-6">404</div>
       <h1 className="text-display font-heading font-semibold text-ink-900 mb-4 text-balance">Page Not Found</h1>
@@ -52,7 +69,8 @@ const AnimatedRoutes = () => {
     <AnimatePresence mode="wait">
       <motion.div
         key={location.pathname}
-        initial={reduce ? { opacity: 0 } : { opacity: 0, y: 8 }}
+        // Pre-rendered HTML must show the page, not its first animation frame.
+        initial={IS_SERVER ? false : reduce ? { opacity: 0 } : { opacity: 0, y: 8 }}
         animate={{ opacity: 1, y: 0 }}
         exit={{ opacity: 0 }}
         transition={{ duration: 0.28, ease: [0.22, 1, 0.36, 1] }}
@@ -72,12 +90,20 @@ const AnimatedRoutes = () => {
   )
 }
 
-const App = () => (
-  <BrowserRouter>
+// Router-agnostic shell: the browser wraps it in BrowserRouter, the build-time
+// pre-renderer (src/entry-server.jsx) in StaticRouter.
+export const AppShell = () => (
+  <>
     <ScrollToTop />
     <Layout>
       <AnimatedRoutes />
     </Layout>
+  </>
+)
+
+const App = () => (
+  <BrowserRouter>
+    <AppShell />
   </BrowserRouter>
 )
 

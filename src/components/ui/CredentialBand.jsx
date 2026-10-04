@@ -12,7 +12,7 @@ const CredentialBand = () => (
   <section className="bg-white pt-5 pb-7 lg:pt-6 lg:pb-8">
     <div className="container-custom">
       <Reveal>
-        <h2 className="font-mono text-[0.6875rem] font-semibold uppercase tracking-widest text-ink-500 mb-4 text-center">
+        <h2 className="font-mono text-[0.625rem] font-semibold uppercase tracking-widest text-ink-500 mb-4 text-center">
           Credentials &amp; coverage on every placement
         </h2>
         <CredentialBadges variant="band" useFull />
