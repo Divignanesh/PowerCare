@@ -31,8 +31,8 @@ const localBusinessSchema = {
   logo: {
     '@type': 'ImageObject',
     '@id': `${BASE_URL}/#logo`,
-    url: `${BASE_URL}/logo.png`,
-    contentUrl: `${BASE_URL}/logo.png`,
+    url: `${BASE_URL}/logo-wordmark.png`,
+    contentUrl: `${BASE_URL}/logo-wordmark.png`,
     caption: 'PowerCare Health Services',
   },
   image: OG_IMAGE,
@@ -148,49 +148,49 @@ const websiteSchema = {
 // truncated in results. Descriptions say what the page is, never promise.
 const PAGE_META = {
   home: {
-    title: 'Healthcare Staffing Agency in Ontario | PowerCare',
+    title: 'PowerCare Health Services | Healthcare Staffing in Ontario',
     crumb: 'Home',
     description:
       'PowerCare places in-house trained nurses, PSWs and allied health staff in long-term care, retirement and community settings across the GTA and rural Ontario.',
     path: '/',
   },
   about: {
-    title: 'About PowerCare | Healthcare Staffing in Ontario',
+    title: 'About Us | PowerCare Health Services',
     crumb: 'About Us',
     description:
       'Who we are, why PowerCare was started, and the values behind how we care for older adults and the people who look after them across Ontario.',
     path: '/about',
   },
   whyPowerCare: {
-    title: 'Why PowerCare | Trained Nurses & PSWs in Ontario',
+    title: 'Why PowerCare | PowerCare Health Services',
     crumb: 'Why PowerCare',
     description:
       'Good care starts with good people. How PowerCare trains the nurses and support workers it places, and what working with us feels like.',
     path: '/why-powercare',
   },
   services: {
-    title: 'Nurse, PSW & Allied Health Staffing | PowerCare',
+    title: 'Our Services | PowerCare Health Services',
     crumb: 'Our Services',
     description:
       'RNs, RPNs, PSWs, DSWs, dietitians, OTs, SLPs and psychotherapists placed in long-term care, retirement, home and community settings across Ontario.',
     path: '/services',
   },
   industries: {
-    title: 'Long-Term Care & Community Staffing | PowerCare',
+    title: 'Industries We Serve | PowerCare Health Services',
     crumb: 'Industries We Serve',
     description:
       'Staffing for long-term care, retirement residences, home and community care, group homes, rehabilitation and mental health services in Ontario.',
     path: '/industries',
   },
   careers: {
-    title: 'Nursing, PSW & Allied Health Jobs in Ontario | PowerCare',
+    title: 'Careers | PowerCare Health Services',
     crumb: 'Careers',
     description:
       'Apply to work with PowerCare as an RN, RPN, PSW, DSW or allied health professional in care homes and communities across the GTA and rural Ontario.',
     path: '/careers',
   },
   contact: {
-    title: 'Contact PowerCare | Healthcare Staffing in the GTA',
+    title: 'Contact Us | PowerCare Health Services',
     crumb: 'Contact',
     description:
       'Get in touch with PowerCare about staffing your care home or agency, or about working with us. Serving the GTA and rural Ontario.',
