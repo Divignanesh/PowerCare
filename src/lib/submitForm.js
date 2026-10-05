@@ -10,7 +10,7 @@ import { useState } from 'react';
 // The Apps Script web app URL. To point the forms at a new deployment (for
 // example the client's own), replace this. It ships in the page bundle
 // either way, so there is nothing to hide here.
-const ENDPOINT =
+export const ENDPOINT =
   'https://script.google.com/macros/s/AKfycbxLj7oFfjAH2V2jThjgJcz7-6H33W617JoJBNYU5p7LIxy1oJIp9-trra2in06eAWbNhA/exec';
 
 export const MAX_FILE_MB = 5;

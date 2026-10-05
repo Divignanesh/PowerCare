@@ -23,6 +23,10 @@ var CONFIG = {
 
   MAX_FILE_MB: 5,
   ALLOWED_TYPES: ['pdf', 'doc', 'docx'],
+
+  // The tab the Careers page reads job postings from. Row 1 is the headers;
+  // only rows with "Yes" in the Show column go on the site.
+  JOBS_TAB: 'Jobs',
 };
 
 // ─────────────────────────── Entry points ────────────────────────────
@@ -51,9 +55,64 @@ function doPost(e) {
   }
 }
 
-// Opening the web app URL in a browser shows this, so you can check it's live.
-function doGet() {
+// The Careers page loads its postings from `<url>?jobs`. Add `&debug` to see
+// which tab and headers the script found. Opening the plain URL in a browser
+// shows the "running" line, so you can check it's live.
+function doGet(e) {
+  var p = (e && e.parameter) || {};
+  if ('jobs' in p) return reply_('debug' in p ? jobsDebug_() : { ok: true, jobs: jobs_() });
   return ContentService.createTextOutput('PowerCare forms endpoint is running.');
+}
+
+// The Jobs tab: named "Jobs" exactly, or failing that any tab whose name
+// contains "job" (an imported "jobs-template", say), but never the
+// "Job application" tab the forms write to.
+function jobsSheet_() {
+  var sheets = SpreadsheetApp.getActiveSpreadsheet().getSheets();
+  var want = CONFIG.JOBS_TAB.toLowerCase();
+  var exact = sheets.filter(function (sh) { return sh.getName().trim().toLowerCase() === want; })[0];
+  return exact || sheets.filter(function (sh) {
+    var name = sh.getName().toLowerCase();
+    return name.indexOf('job') !== -1 && name.indexOf('application') === -1;
+  })[0] || null;
+}
+
+function jobRows_() {
+  var sheet = jobsSheet_();
+  if (!sheet || sheet.getLastRow() < 2) return { sheet: sheet, rows: [] };
+
+  var values = sheet.getDataRange().getDisplayValues();
+  var headers = values.shift().map(function (h) { return String(h).trim(); });
+  var rows = values.map(function (row) {
+    var job = {};
+    headers.forEach(function (h, i) { if (h) job[h] = String(row[i]).trim(); });
+    return job;
+  });
+  return { sheet: sheet, headers: headers, rows: rows };
+}
+
+// Shown means Yes, Y or a ticked checkbox (TRUE). A tab without a Show
+// column shows every row.
+function isShown_(job) {
+  if (!('Show' in job)) return true;
+  return /^(y|yes|true)$/i.test(job['Show']);
+}
+
+// Each shown row of the Jobs tab, as { header: cell text }.
+function jobs_() {
+  return jobRows_().rows.filter(function (job) { return isShown_(job) && job['Title']; });
+}
+
+function jobsDebug_() {
+  var found = jobRows_();
+  return {
+    ok: true,
+    tabs: SpreadsheetApp.getActiveSpreadsheet().getSheets().map(function (sh) { return sh.getName(); }),
+    jobsTab: found.sheet ? found.sheet.getName() : null,
+    headers: found.headers || [],
+    rows: found.rows.map(function (job) { return { title: job['Title'] || '', show: job['Show'] }; }),
+    shown: jobs_().length,
+  };
 }
 
 // ─────────────────────────── Steps ────────────────────────────
@@ -74,20 +133,29 @@ function saveResume_(file, fields) {
   return { blob: blob, url: saved.getUrl(), name: blob.getName() };
 }
 
+// Columns are matched by header, and a field the tab hasn't seen yet gets a
+// new column at the end, so forms can gain fields without shifting old rows.
 function logRow_(form, fields, resume) {
   var ss = SpreadsheetApp.getActiveSpreadsheet();
   var sheet = ss.getSheetByName(form) || ss.insertSheet(form);
-  var headers = ['Received'].concat(fields.map(function (f) { return f[0]; }));
-  if (resume) headers.push('Résumé link');
+  var cells = [['Received', new Date()]].concat(fields);
+  if (resume) cells.push(['Résumé link', resume.url]);
 
-  if (sheet.getLastRow() === 0) {
-    sheet.appendRow(headers);
-    sheet.getRange(1, 1, 1, headers.length).setFontWeight('bold');
-    sheet.setFrozenRows(1);
-  }
+  var headers = sheet.getLastRow() === 0 ? [] :
+    sheet.getRange(1, 1, 1, sheet.getLastColumn()).getValues()[0].map(String);
+  var row = headers.map(function () { return ''; });
+  cells.forEach(function (cell) {
+    var col = headers.indexOf(cell[0]);
+    if (col === -1) {
+      col = headers.length;
+      headers.push(cell[0]);
+      row.push('');
+      sheet.getRange(1, col + 1).setValue(cell[0]).setFontWeight('bold');
+    }
+    row[col] = cell[1];
+  });
 
-  var row = [new Date()].concat(fields.map(function (f) { return f[1]; }));
-  if (resume) row.push(resume.url);
+  sheet.setFrozenRows(1);
   sheet.appendRow(row);
 }
 

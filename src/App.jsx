@@ -10,6 +10,7 @@ import WhyPowerCare from './pages/WhyPowerCare'
 import OurServices from './pages/OurServices'
 import Industries from './pages/Industries'
 import FindAJob from './pages/FindAJob'
+import JobDetail from './pages/JobDetail'
 import Contact from './pages/Contact'
 
 const IS_SERVER = typeof window === 'undefined'
@@ -82,6 +83,7 @@ const AnimatedRoutes = () => {
         <Route path="/services"      element={<OurServices />} />
         <Route path="/industries"    element={<Industries />} />
         <Route path="/careers"       element={<FindAJob />} />
+        <Route path="/careers/:slug" element={<JobDetail />} />
         <Route path="/contact"       element={<Contact />} />
           <Route path="*"              element={<NotFound />} />
         </Routes>
