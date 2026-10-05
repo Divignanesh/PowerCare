@@ -1,24 +1,34 @@
 import { useEffect, useState } from 'react';
 import { ENDPOINT } from './submitForm';
+import { JOBS_CSV_URL, headerKey as key, jobRowsFromCSV, slugOf } from './jobsFeed';
 
 /**
- * Job postings, read live from the "Jobs" tab of the forms Google Sheet
- * through the same Apps Script (apps-script/Code.gs, `?jobs`). The tab has
+ * Job postings from the "Jobs" tab of the forms Google Sheet. The tab has
  * one row per job; apps-script/jobs-template.csv shows its columns.
+ *
+ * Where they come from, fastest first:
+ *   1. this browser's copy from the last hour (localStorage), with no request;
+ *   2. the tab published as CSV (src/lib/jobsFeed.js), a second or two;
+ *   3. the Apps Script (`?jobs`), which can take half a minute or fail, so
+ *      it is only the fallback, with one retry.
+ * An older copy, or failing that the build's snapshot (/jobs.json), shows
+ * at once while a fresh list loads.
  */
+
+// A cell that only looks empty (spaces, line breaks, or the invisible
+// characters text pasted from a document carries) counts as empty, so the
+// heading or section built from it is left out entirely.
+const INVISIBLE = /[\u200B-\u200D\u2060\uFEFF]/g;
+const clean = (cell) => String(cell ?? '').replace(INVISIBLE, '').trim();
 
 // List cells hold one point per line. Leading bullets or dashes are dropped,
 // so points pasted from a document come through clean.
-const toList = (cell = '') =>
-  cell.split('\n').map((line) => line.replace(/^[\s•\-*·]+/, '').trim()).filter(Boolean);
-
-// Headers are matched loosely ("role id", "Role ID ", "Type/Schedule"), so a
-// header typed slightly differently in the Sheet still lands.
-const key = (header) => header.toLowerCase().replace(/[^a-z0-9]/g, '');
+const toList = (cell) =>
+  clean(cell).split('\n').map((line) => clean(line.replace(/^[\s•\-*·]+/, ''))).filter(Boolean);
 
 const toJob = (raw) => {
   const row = Object.fromEntries(Object.entries(raw).map(([h, v]) => [key(h), v]));
-  const get = (header) => row[key(header)] ?? '';
+  const get = (header) => clean(row[key(header)]);
   return {
     id: get('Role ID') || get('Title'),
     title: get('Title'),
@@ -39,55 +49,78 @@ const toJob = (raw) => {
 };
 
 /** The URL slug for a job, e.g. "PC-PSW-001" → "pc-psw-001". */
-export const jobSlug = (job) => job.id.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '');
+export const jobSlug = (job) => slugOf(job.id);
 
-// Two sources. /jobs.json is the Sheet as it was at the last build
-// (scripts/prerender.mjs writes it): same-origin and instant. The Apps Script
-// is live but can take many seconds, and now and then fails, so it gets one
-// retry. The snapshot shows first; the live list replaces it when it lands.
-const fromBody = (body) => {
-  if (!body?.ok || !Array.isArray(body.jobs)) throw new Error('jobs-failed');
-  return body.jobs.map(toJob);
+const CACHE_KEY = 'powercare-jobs-v1';
+const CACHE_MS = 60 * 60 * 1000; // refresh at most once an hour
+
+// Storage can be missing or blocked (private windows, strict settings); the
+// page then simply loads the list each visit.
+const readCache = () => {
+  try {
+    const saved = JSON.parse(localStorage.getItem(CACHE_KEY));
+    return Array.isArray(saved?.rows) ? saved : null;
+  } catch {
+    return null;
+  }
 };
-const getJSON = (url) => fetch(url).then((res) => res.json()).then(fromBody);
-const fetchLive = () => getJSON(`${ENDPOINT}?jobs`);
+const writeCache = (rows) => {
+  try {
+    localStorage.setItem(CACHE_KEY, JSON.stringify({ at: Date.now(), rows }));
+  } catch { /* storage unavailable */ }
+};
 
-let snapshot; // one request per visit, shared by every page
-let live;
-let latest; // the newest list seen this visit, so revisits render at once
-const loadSnapshot = () => (snapshot ??= getJSON('/jobs.json'));
-const loadLive = () => {
-  live ??= fetchLive()
-    .catch(fetchLive)
-    .then((jobs) => (latest = jobs))
+const fetchCSV = () =>
+  fetch(JOBS_CSV_URL)
+    .then((res) => (res.ok ? res.text() : Promise.reject(new Error(`csv ${res.status}`))))
+    .then(jobRowsFromCSV);
+const fetchJSON = (url) =>
+  fetch(url)
+    .then((res) => res.json())
+    .then((body) => (body?.ok && Array.isArray(body.jobs) ? body.jobs : Promise.reject(new Error('jobs-failed'))));
+const fetchScript = () => fetchJSON(`${ENDPOINT}?jobs`);
+
+let fresh; // one fresh fetch per visit, shared by every page
+const loadFresh = () => {
+  fresh ??= fetchCSV()
+    .catch(fetchScript)
+    .catch(fetchScript)
+    .then((rows) => {
+      writeCache(rows);
+      return rows;
+    })
     .catch((err) => {
-      live = undefined; // let the next page view try again
+      fresh = undefined; // let the next page view try again
       throw err;
     });
-  return live;
+  return fresh;
 };
 
 /** { status: 'loading' | 'ready' | 'error', jobs } */
 export function useJobs() {
-  const [state, setState] = useState(() =>
-    latest ? { status: 'ready', jobs: latest } : { status: 'loading', jobs: [] }
-  );
+  // Starts as loading on the server and in the browser alike, so the
+  // pre-rendered HTML hydrates cleanly; a saved copy shows right after.
+  const [state, setState] = useState({ status: 'loading', jobs: [] });
   useEffect(() => {
     let mounted = true;
-    let shown = Boolean(latest);
-    let fresh = false;
-    loadSnapshot().then(
-      (jobs) => {
-        if (!mounted || fresh || shown) return;
-        shown = true;
-        setState({ status: 'ready', jobs });
-      },
-      () => {}
-    );
-    loadLive().then(
-      (jobs) => {
-        fresh = shown = true;
-        if (mounted) setState({ status: 'ready', jobs });
+    let shown = false;
+    let current = false;
+    const show = (rows) => {
+      shown = true;
+      if (mounted) setState({ status: 'ready', jobs: rows.map(toJob) });
+    };
+
+    const saved = readCache();
+    if (saved) show(saved.rows);
+    if (saved && Date.now() - saved.at < CACHE_MS) return () => { mounted = false; };
+
+    if (!saved) {
+      fetchJSON('/jobs.json').then((rows) => !shown && !current && show(rows), () => {});
+    }
+    loadFresh().then(
+      (rows) => {
+        current = true;
+        show(rows);
       },
       () => {
         if (mounted && !shown) setState({ status: 'error', jobs: [] });

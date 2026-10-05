@@ -46,26 +46,17 @@ for (const { path: route } of Object.values(PAGE_META)) {
 
 // Job postings live in the Google Sheet, so their pages render in the
 // browser. Listing them in the sitemap lets search engines find each one,
-// and dist/jobs.json gives the Careers page something to show at once; a
-// posting added later is picked up live, and by the next build. If the Sheet can't
-// be reached the build goes on with the static pages only.
-const ENDPOINT = fs
-  .readFileSync(path.join(root, 'src/lib/submitForm.js'), 'utf8')
-  .match(/https:\/\/script\.google\.com\/macros\/s\/[^'"]+\/exec/)?.[0]
+// and dist/jobs.json gives a first-time visitor something to show at once;
+// a posting added later is picked up live, and by the next build. If the
+// Sheet can't be reached the build goes on with the static pages only.
+const { JOBS_CSV_URL, jobRowsFromCSV, slugOf } = await import(
+  pathToFileURL(path.join(root, 'src/lib/jobsFeed.js')).href
+)
 try {
-  // Apps Script now and then answers with an HTML error page; one retry
-  // is enough to get past it.
-  const getJobs = async () => {
-    const res = await fetch(`${ENDPOINT}?jobs`, { signal: AbortSignal.timeout(45000) })
-    return (await res.json()).jobs ?? []
-  }
-  const jobs = await getJobs().catch(getJobs)
-  // Same slug rule as jobSlug() in src/lib/jobs.js.
-  const key = (h) => h.toLowerCase().replace(/[^a-z0-9]/g, '')
-  const slugs = jobs
-    .map((row) => Object.fromEntries(Object.entries(row).map(([h, v]) => [key(h), v])))
-    .map((row) => (row.roleid || row.title || '').toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, ''))
-    .filter(Boolean)
+  const res = await fetch(JOBS_CSV_URL, { signal: AbortSignal.timeout(30000) })
+  if (!res.ok) throw new Error(`published CSV answered ${res.status}`)
+  const jobs = jobRowsFromCSV(await res.text())
+  const slugs = jobs.map((row) => slugOf(row.roleid || row.title)).filter(Boolean)
   // The snapshot src/lib/jobs.js shows while the live list loads.
   fs.writeFileSync(path.join(dist, 'jobs.json'), JSON.stringify({ ok: true, jobs }))
   const today = new Date().toISOString().slice(0, 10)
