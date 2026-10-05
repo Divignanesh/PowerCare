@@ -13,7 +13,8 @@ import { homeFAQs } from '../data/faqs';
 import { RevealGroup, RevealItem } from '../components/ui/Reveal';
 import CredentialBand from '../components/ui/CredentialBand';
 import RoleCarousel from '../components/ui/RoleCarousel';
-import SEO, { faqSchema } from '../components/seo/SEO';
+import SEO from '../components/seo/SEO';
+import { faqSchema } from '../components/seo/schema';
 
 // ─────────────────────────── HERO ────────────────────────────
 // Copy on white to the left, sitting on a large pale circle; on the right a

@@ -35,4 +35,4 @@ Allow: /
 User-agent: Applebot-Extended
 Allow: /
 
-Sitemap: https://www.powercarestaffing.ca/sitemap.xml
+Sitemap: https://www.powercare.ca/sitemap.xml

@@ -1,5 +1,7 @@
 import { Link, useParams } from 'react-router-dom';
 import { Helmet } from 'react-helmet-async';
+import SEO from '../components/seo/SEO';
+import { jobPostingSchema } from '../components/seo/schema';
 import { ArrowLeft, ArrowRight, Check } from 'lucide-react';
 import ApplicationForm from '../components/careers/ApplicationForm';
 import JobFacts from '../components/careers/JobFacts';
@@ -44,12 +46,23 @@ const BackLink = () => (
   </Link>
 );
 
-const Posting = ({ job }) => (
+const Posting = ({ job }) => {
+  const path = `/careers/${jobSlug(job)}`;
+  const description = (
+    job.summary ||
+    `Apply for ${job.title} with PowerCare${job.location ? ` in ${job.location}` : ''}. See the duties, requirements and pay.`
+  ).slice(0, 160);
+  return (
   <>
-    <Helmet>
-      <title>{`${job.title} | Careers | PowerCare Health Services`}</title>
-      {job.summary && <meta name="description" content={job.summary} />}
-    </Helmet>
+    <SEO
+      meta={{
+        title: `${job.title} | PowerCare Careers`,
+        description,
+        path,
+        trail: [{ name: 'Careers', path: '/careers' }, { name: job.title, path }],
+      }}
+      extraSchemas={[jobPostingSchema(job, path)]}
+    />
 
     <section className="bg-surface pt-10 lg:pt-14 pb-10 lg:pb-12 border-b border-ink-200">
       <div className="container-custom max-w-4xl">
@@ -117,7 +130,8 @@ const Posting = ({ job }) => (
       </section>
     </article>
   </>
-);
+  );
+};
 
 const JobDetail = () => {
   const { slug } = useParams();
@@ -128,6 +142,15 @@ const JobDetail = () => {
 
   return (
     <main className="container-custom max-w-4xl py-16 lg:py-24">
+      {/* A closed or unknown posting must not stay in search results. Only
+          once the list has loaded, though: a crawler that snapshots while it
+          loads, or after a failed request, would otherwise drop a live one. */}
+      {status === 'ready' && (
+        <Helmet>
+          <title>Careers | PowerCare Health Services</title>
+          <meta name="robots" content="noindex, follow" />
+        </Helmet>
+      )}
       <BackLink />
       {status === 'loading' ? (
         <div role="status" className="mt-8 flex items-center gap-3 text-ink-600">

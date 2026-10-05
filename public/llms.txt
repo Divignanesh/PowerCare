@@ -16,10 +16,10 @@ Registered Nurses (RNs), Registered Practical Nurses (RPNs), Personal Support Wo
 
 ## Pages
 
-- [Home](https://www.powercarestaffing.ca/): What PowerCare does and where it works
-- [About](https://www.powercarestaffing.ca/about): Who PowerCare is, why it was started, mission, vision and values
-- [Why PowerCare](https://www.powercarestaffing.ca/why-powercare): How PowerCare trains the people it places
-- [Services](https://www.powercarestaffing.ca/services): Every healthcare role PowerCare places
-- [Industries](https://www.powercarestaffing.ca/industries): The care settings PowerCare staffs
-- [Careers](https://www.powercarestaffing.ca/careers): Apply to work with PowerCare
-- [Contact](https://www.powercarestaffing.ca/contact): Request staff or get in touch
+- [Home](https://www.powercare.ca/): What PowerCare does and where it works
+- [About](https://www.powercare.ca/about): Who PowerCare is, why it was started, mission, vision and values
+- [Why PowerCare](https://www.powercare.ca/why-powercare): How PowerCare trains the people it places
+- [Services](https://www.powercare.ca/services): Every healthcare role PowerCare places
+- [Industries](https://www.powercare.ca/industries): The care settings PowerCare staffs
+- [Careers](https://www.powercare.ca/careers): Current job openings, each with its own page at /careers/<role-id> and an online application. General applications are also accepted. Hiring questions: hiring@powercare.ca
+- [Contact](https://www.powercare.ca/contact): Request staff or get in touch

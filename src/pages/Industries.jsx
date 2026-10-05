@@ -12,7 +12,8 @@ import CtaBand from '../components/ui/CtaBand';
 import { industries } from '../data/industries';
 import { industriesFAQs } from '../data/faqs';
 import CredentialBand from '../components/ui/CredentialBand';
-import SEO, { faqSchema } from '../components/seo/SEO';
+import SEO from '../components/seo/SEO';
+import { faqSchema } from '../components/seo/schema';
 import { PHONE_ENABLED, PHONE_HREF, EMAIL_HREF } from '../data/contact';
 
 const iconMap = { Building2, Home, Heart, Users, Activity, Brain };

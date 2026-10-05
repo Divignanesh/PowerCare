@@ -7,7 +7,8 @@ import PageHero from '../components/ui/PageHero';
 import FAQ from '../components/ui/FAQ';
 import { aboutFAQs } from '../data/faqs';
 import Reveal, { RevealGroup, RevealItem } from '../components/ui/Reveal';
-import SEO, { faqSchema } from '../components/seo/SEO';
+import SEO from '../components/seo/SEO';
+import { faqSchema } from '../components/seo/schema';
 
 const Hero = () => (
   <PageHero

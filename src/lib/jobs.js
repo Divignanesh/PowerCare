@@ -41,32 +41,59 @@ const toJob = (raw) => {
 /** The URL slug for a job, e.g. "PC-PSW-001" → "pc-psw-001". */
 export const jobSlug = (job) => job.id.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '');
 
-// One request per visit: the list and the detail pages share it.
-let request;
-const loadJobs = () => {
-  request ??= fetch(`${ENDPOINT}?jobs`)
-    .then((res) => res.json())
-    .then((body) => {
-      if (!body.ok) throw new Error('jobs-failed');
-      return body.jobs.map(toJob);
-    })
+// Two sources. /jobs.json is the Sheet as it was at the last build
+// (scripts/prerender.mjs writes it): same-origin and instant. The Apps Script
+// is live but can take many seconds, and now and then fails, so it gets one
+// retry. The snapshot shows first; the live list replaces it when it lands.
+const fromBody = (body) => {
+  if (!body?.ok || !Array.isArray(body.jobs)) throw new Error('jobs-failed');
+  return body.jobs.map(toJob);
+};
+const getJSON = (url) => fetch(url).then((res) => res.json()).then(fromBody);
+const fetchLive = () => getJSON(`${ENDPOINT}?jobs`);
+
+let snapshot; // one request per visit, shared by every page
+let live;
+let latest; // the newest list seen this visit, so revisits render at once
+const loadSnapshot = () => (snapshot ??= getJSON('/jobs.json'));
+const loadLive = () => {
+  live ??= fetchLive()
+    .catch(fetchLive)
+    .then((jobs) => (latest = jobs))
     .catch((err) => {
-      request = undefined; // let the next visit try again
+      live = undefined; // let the next page view try again
       throw err;
     });
-  return request;
+  return live;
 };
 
 /** { status: 'loading' | 'ready' | 'error', jobs } */
 export function useJobs() {
-  const [state, setState] = useState({ status: 'loading', jobs: [] });
+  const [state, setState] = useState(() =>
+    latest ? { status: 'ready', jobs: latest } : { status: 'loading', jobs: [] }
+  );
   useEffect(() => {
-    let live = true;
-    loadJobs().then(
-      (jobs) => live && setState({ status: 'ready', jobs }),
-      () => live && setState({ status: 'error', jobs: [] })
+    let mounted = true;
+    let shown = Boolean(latest);
+    let fresh = false;
+    loadSnapshot().then(
+      (jobs) => {
+        if (!mounted || fresh || shown) return;
+        shown = true;
+        setState({ status: 'ready', jobs });
+      },
+      () => {}
     );
-    return () => { live = false; };
+    loadLive().then(
+      (jobs) => {
+        fresh = shown = true;
+        if (mounted) setState({ status: 'ready', jobs });
+      },
+      () => {
+        if (mounted && !shown) setState({ status: 'error', jobs: [] });
+      }
+    );
+    return () => { mounted = false; };
   }, []);
   return state;
 }

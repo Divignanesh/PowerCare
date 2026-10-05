@@ -15,7 +15,8 @@ import CtaBand from '../components/ui/CtaBand';
 import { services, serviceCategories } from '../data/services';
 import { servicesFAQs } from '../data/faqs';
 import Reveal, { RevealGroup, RevealItem } from '../components/ui/Reveal';
-import SEO, { faqSchema, servicesListSchema } from '../components/seo/SEO';
+import SEO from '../components/seo/SEO';
+import { faqSchema, servicesListSchema } from '../components/seo/schema';
 
 const iconMap = {
   Stethoscope, HeartPulse, Users, Home, Activity, Sparkles,

@@ -10,7 +10,8 @@ import CtaBand from '../components/ui/CtaBand';
 import CredentialBand from '../components/ui/CredentialBand';
 import Reveal, { RevealGroup, RevealItem } from '../components/ui/Reveal';
 import { whyPowerCareFAQs } from '../data/faqs';
-import SEO, { faqSchema } from '../components/seo/SEO';
+import SEO from '../components/seo/SEO';
+import { faqSchema } from '../components/seo/schema';
 
 // ─────────────────────────── HERO ────────────────────────────
 // A statement on white, then a strip of four care moments. The photos stay
