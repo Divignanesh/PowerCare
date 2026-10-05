@@ -64,9 +64,14 @@ const Footer = () => (
 
         {/* Brand */}
         <div className="lg:col-span-4 sm:col-span-2">
-          <Link to="/" className="inline-flex mb-6" aria-label="PowerCare Health Services, home">
-            {/* The navy wordmark, knocked out to white for the deep ground. */}
-            <img src="/logo-wordmark.png" alt="PowerCare Health Services" width="559" height="204" className="h-14 w-auto brightness-0 invert" />
+          <Link to="/" className="inline-flex items-center gap-3 mb-6">
+            <img src="/logo.png" alt="PowerCare logo" className="h-10 w-auto object-contain rounded-lg" />
+            <span className="leading-none">
+              <span className="block font-heading font-bold text-lg text-white tracking-tight">PowerCare</span>
+              <span className="block font-mono text-[0.625rem] font-semibold uppercase tracking-widest text-accent-300 mt-1">
+                Health Services
+              </span>
+            </span>
           </Link>
 
           <p className="text-white/65 text-sm leading-relaxed max-w-sm mb-8 text-pretty">

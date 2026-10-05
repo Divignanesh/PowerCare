@@ -21,6 +21,10 @@ export const PHONE_HREF = `tel:${PHONE_E164}`;
 export const EMAIL = 'connect@powercare.ca';
 export const EMAIL_HREF = `mailto:${EMAIL}`;
 
+/** For job seekers: applications, résumés and hiring questions. */
+export const HIRING_EMAIL = 'hiring@powercare.ca';
+export const HIRING_EMAIL_HREF = `mailto:${HIRING_EMAIL}`;
+
 export const SERVICE_AREA = 'Greater Toronto Area & Rural Ontario';
 
 /** Registered business address. */

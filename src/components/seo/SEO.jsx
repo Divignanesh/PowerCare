@@ -31,8 +31,8 @@ const localBusinessSchema = {
   logo: {
     '@type': 'ImageObject',
     '@id': `${BASE_URL}/#logo`,
-    url: `${BASE_URL}/logo-wordmark.png`,
-    contentUrl: `${BASE_URL}/logo-wordmark.png`,
+    url: `${BASE_URL}/logo.png`,
+    contentUrl: `${BASE_URL}/logo.png`,
     caption: 'PowerCare Health Services',
   },
   image: OG_IMAGE,

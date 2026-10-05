@@ -31,11 +31,10 @@ const Hero = () => (
         <span className="block w-6 h-px bg-primary-400" aria-hidden="true" />
       </span>
       <h1 className="mt-5 text-display-lg font-heading font-semibold text-primary-700 max-w-3xl mx-auto text-balance">
-        Good care starts with good people.
+        Care you can trust.
       </h1>
       <p className="mt-5 text-lg text-ink-600 max-w-2xl mx-auto text-pretty">
-        PowerCare connects long-term care homes, retirement residences and community agencies
-        across the GTA and rural Ontario with vetted, in-house trained nurses and support workers.
+        Trained nurses and support workers for care homes across Ontario.
       </p>
       <div className="flex flex-wrap justify-center gap-3 mt-8">
         <Link to="/contact" className="btn-primary">

@@ -81,8 +81,16 @@ const Header = () => {
         <div className="flex items-center justify-between h-20">
 
           {/* Logo */}
-          <Link to="/" className="flex items-center flex-shrink-0" aria-label="PowerCare Health Services, home">
-            <img src="/logo-wordmark.png" alt="PowerCare Health Services" width="559" height="204" className="h-12 w-auto" />
+          <Link to="/" className="flex items-center gap-3 flex-shrink-0 group">
+            <img src="/logo.png" alt="PowerCare logo" className="h-11 w-auto object-contain" />
+            <div className="leading-none">
+              <span className="block font-heading font-bold text-lg text-ink-900 tracking-tight">
+                PowerCare
+              </span>
+              <span className="block font-mono text-[0.625rem] font-semibold uppercase tracking-widest text-primary-700 mt-1">
+                Health Services
+              </span>
+            </div>
           </Link>
 
           {/* Desktop nav */}

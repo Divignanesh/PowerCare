@@ -20,10 +20,10 @@ import SEO, { faqSchema } from '../components/seo/SEO';
 // framed photograph that cross-fades through our people with the people
 // they look after, at home, out and about, and in care.
 const HERO_SLIDES = [
-  { src: '/images/activity-exercise-class.jpg',    pos: 'object-center',    alt: 'An instructor and an older man smiling during a seated exercise class' },
+  { src: '/images/why-hero-companion.jpg',         pos: 'object-[60%_30%]', alt: 'A PowerCare carer laughing with an older woman outdoors' },
   { src: '/images/hero-home-visit.jpg',            pos: 'object-center',    alt: 'A PowerCare support worker visiting an older woman at home' },
   { src: '/images/activity-wheelchair-outing.jpg', pos: 'object-[50%_35%]', alt: 'A support worker taking an older woman out in her wheelchair' },
-  { src: '/images/why-hero-companion.jpg',         pos: 'object-[60%_30%]', alt: 'A PowerCare carer laughing with an older woman outdoors' },
+  { src: '/images/activity-exercise-class.jpg',    pos: 'object-center',    alt: 'An instructor and an older man smiling during a seated exercise class' },
   { src: '/images/hero-home-assessment.jpg',       pos: 'object-center',    alt: 'A PowerCare nurse talking through care plans with an older man at home' },
 ];
 const SLIDE_MS = 5000;

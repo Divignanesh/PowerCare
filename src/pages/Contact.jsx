@@ -14,7 +14,7 @@ import { PRIMARY_CREDENTIALS } from '../data/credentials';
 import SEO, { faqSchema } from '../components/seo/SEO';
 import { useFormSubmit } from '../lib/submitForm';
 import { Honeypot, FormError } from '../components/ui/FormStatus';
-import { PHONE_ENABLED, PHONE, PHONE_HREF, EMAIL, EMAIL_HREF, ADDRESS, MAP_HREF } from '../data/contact';
+import { PHONE_ENABLED, PHONE, PHONE_HREF, EMAIL, EMAIL_HREF, HIRING_EMAIL, HIRING_EMAIL_HREF, ADDRESS, MAP_HREF } from '../data/contact';
 
 // ── HERO ─────────────────────────────────────────────────────
 const Hero = () => (
@@ -195,7 +195,7 @@ const ProfessionalForm = () => {
       <button type="submit" disabled={status === 'sending'} className="btn-primary w-full disabled:opacity-60">
         {status === 'sending' ? 'Sending…' : <>Tell us about yourself <ArrowRight size={16} /></>}
       </button>
-      <FormError message={error} />
+      <FormError message={error} email={HIRING_EMAIL} />
       <p className="text-sm text-ink-500 text-center">
         Or visit our full{' '}
         <Link to="/careers" className="text-primary-700 font-medium underline underline-offset-2 hover:text-primary-800">
@@ -291,6 +291,7 @@ const ContactForms = () => {
               {[
                 { icon: MapPin, href: MAP_HREF,   lines: [ADDRESS.street, `${ADDRESS.locality}, ${ADDRESS.region} ${ADDRESS.postalCode}`], external: true },
                 { icon: Mail,   href: EMAIL_HREF, lines: [EMAIL] },
+                { icon: Mail,   href: HIRING_EMAIL_HREF, lines: [HIRING_EMAIL, 'Jobs and applications'] },
                 ...(PHONE_ENABLED ? [{ icon: Phone, href: PHONE_HREF, lines: [PHONE] }] : []),
               ].map(({ icon: Icon, href, lines, external }) => (
                 <li key={lines[0]} className="flex gap-4">
