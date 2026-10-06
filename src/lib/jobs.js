@@ -6,13 +6,15 @@ import { JOBS_CSV_URL, headerKey as key, jobRowsFromCSV, slugOf } from './jobsFe
  * Job postings from the "Jobs" tab of the forms Google Sheet. The tab has
  * one row per job; apps-script/jobs-template.csv shows its columns.
  *
- * Where they come from, fastest first:
- *   1. this browser's copy from the last hour (localStorage), with no request;
- *   2. the tab published as CSV (src/lib/jobsFeed.js), a second or two;
- *   3. the Apps Script (`?jobs`), which can take half a minute or fail, so
- *      it is only the fallback, with one retry.
- * An older copy, or failing that the build's snapshot (/jobs.json), shows
- * at once while a fresh list loads.
+ * Edits in the Sheet should show on the next page load, so every visit asks
+ * two sources at once and shows whatever it has, newest last:
+ *   1. at once: this browser's last copy (localStorage), or failing that the
+ *      build's snapshot (/jobs.json);
+ *   2. the tab published as CSV (src/lib/jobsFeed.js): a second or two, but
+ *      Google refreshes it only about five minutes after an edit;
+ *   3. the Apps Script (`?jobs`): reads the Sheet live, so it has an edit
+ *      the moment it's saved, but takes a few seconds (sometimes far more,
+ *      or fails), so it gets one retry. Once it answers, its list stays.
  */
 
 // A cell that only looks empty (spaces, line breaks, or the invisible
@@ -52,7 +54,6 @@ const toJob = (raw) => {
 export const jobSlug = (job) => slugOf(job.id);
 
 const CACHE_KEY = 'powercare-jobs-v1';
-const CACHE_MS = 60 * 60 * 1000; // refresh at most once an hour
 
 // Storage can be missing or blocked (private windows, strict settings); the
 // page then simply loads the list each visit.
@@ -80,21 +81,26 @@ const fetchJSON = (url) =>
     .then((body) => (body?.ok && Array.isArray(body.jobs) ? body.jobs : Promise.reject(new Error('jobs-failed'))));
 const fetchScript = () => fetchJSON(`${ENDPOINT}?jobs`);
 
-let fresh; // one fresh fetch per visit, shared by every page
-const loadFresh = () => {
-  fresh ??= fetchCSV()
-    .catch(fetchScript)
-    .catch(fetchScript)
-    .then((rows) => {
-      writeCache(rows);
+// One request to each source per visit, shared by every page.
+// The published CSV can lag the live list, so it is saved only if the live
+// one hasn't landed yet.
+let csv;
+let live;
+let liveSaved = false;
+const once = (get, reset, isLive) =>
+  get().then(
+    (rows) => {
+      if (isLive || !liveSaved) writeCache(rows);
+      if (isLive) liveSaved = true;
       return rows;
-    })
-    .catch((err) => {
-      fresh = undefined; // let the next page view try again
+    },
+    (err) => {
+      reset(); // let the next page view try again
       throw err;
-    });
-  return fresh;
-};
+    }
+  );
+const loadCSV = () => (csv ??= once(fetchCSV, () => { csv = undefined; }, false));
+const loadLive = () => (live ??= once(() => fetchScript().catch(fetchScript), () => { live = undefined; }, true));
 
 /** { status: 'loading' | 'ready' | 'error', jobs } */
 export function useJobs() {
@@ -104,7 +110,7 @@ export function useJobs() {
   useEffect(() => {
     let mounted = true;
     let shown = false;
-    let current = false;
+    let fresh = false; // the live list has arrived; nothing replaces it
     const show = (rows) => {
       shown = true;
       if (mounted) setState({ status: 'ready', jobs: rows.map(toJob) });
@@ -112,20 +118,16 @@ export function useJobs() {
 
     const saved = readCache();
     if (saved) show(saved.rows);
-    if (saved && Date.now() - saved.at < CACHE_MS) return () => { mounted = false; };
+    else fetchJSON('/jobs.json').then((rows) => !shown && show(rows), () => {});
 
-    if (!saved) {
-      fetchJSON('/jobs.json').then((rows) => !shown && !current && show(rows), () => {});
-    }
-    loadFresh().then(
-      (rows) => {
-        current = true;
-        show(rows);
-      },
-      () => {
-        if (mounted && !shown) setState({ status: 'error', jobs: [] });
-      }
-    );
+    const fail = () => mounted && !shown && setState({ status: 'error', jobs: [] });
+    const csvDone = loadCSV().then((rows) => !fresh && show(rows));
+    const liveDone = loadLive().then((rows) => {
+      fresh = true;
+      show(rows);
+    });
+    // An error only when every source failed and nothing is on screen.
+    Promise.allSettled([csvDone, liveDone]).then(fail);
     return () => { mounted = false; };
   }, []);
   return state;

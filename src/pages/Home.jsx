@@ -24,7 +24,6 @@ const HERO_SLIDES = [
   { src: '/images/why-hero-companion.jpg',         pos: 'object-[60%_30%]', alt: 'A PowerCare carer laughing with an older woman outdoors' },
   { src: '/images/hero-home-visit.jpg',            pos: 'object-center',    alt: 'A PowerCare support worker visiting an older woman at home' },
   { src: '/images/activity-wheelchair-outing.jpg', pos: 'object-[50%_35%]', alt: 'A support worker taking an older woman out in her wheelchair' },
-  { src: '/images/activity-exercise-class.jpg',    pos: 'object-center',    alt: 'An instructor and an older man smiling during a seated exercise class' },
   { src: '/images/hero-home-assessment.jpg',       pos: 'object-center',    alt: 'A PowerCare nurse talking through care plans with an older man at home' },
 ];
 const SLIDE_MS = 5000;
@@ -181,13 +180,19 @@ const ThePromise = () => (
 );
 
 // ─────────────────────────── PROFESSIONS ────────────────────────────
-// The first eight roles from the shared list, each carrying its photograph.
-// Order matches /services exactly, because both read the same array.
+// The first eight roles from the shared list, each carrying its photograph,
+// with PSWs and DSWs, the roles most homes come to us for, moved to the front.
+const LEAD_ROLES = ['psw', 'dsw'];
+const homeRoles = [
+  ...LEAD_ROLES.map((id) => services.find((s) => s.id === id)),
+  ...services.filter((s) => !LEAD_ROLES.includes(s.id)),
+].filter(Boolean).slice(0, 8);
+
 const ProfessionsPreview = () => (
   <RoleCarousel
     title="Healthcare Professionals We Place"
     intro={<>Not sure who you need? <Link to="/contact" className="font-semibold text-primary-700 underline-offset-4 hover:underline">Get in touch</Link>.</>}
-    items={services.slice(0, 8)}
+    items={homeRoles}
   />
 );
 

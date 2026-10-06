@@ -14,8 +14,8 @@ const Hero = () => (
   <PageHero
     variant="overlay"
     eyebrow="Our Story"
-    title="Who We Are"
-    subtitle="We look after the people who once looked after us — and the families who trust us with them."
+    title="FIT FOR PURPOSE"
+    subtitle="The right care, in the right place, when you need them."
     image="/images/home-sofa-carer.jpg"
     imageAlt="A PowerCare carer sitting with an older woman on her sofa"
     imagePos="object-center"
