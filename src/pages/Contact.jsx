@@ -5,7 +5,6 @@ import { ArrowRight } from 'lucide-react';
 import {
   Phone, Envelope as Mail, MapPin, CheckCircle as CheckCircle2,
 } from '@phosphor-icons/react';
-import { AnimatePresence, motion, useReducedMotion } from 'framer-motion';
 import PageHero from '../components/ui/PageHero';
 import FAQ from '../components/ui/FAQ';
 import { contactFAQs } from '../data/faqs';
@@ -51,7 +50,7 @@ const FacilityForm = () => {
   });
   const [consent, setConsent] = useState(false);
   const [trap, setTrap] = useState('');
-  const { status, error, send } = useFormSubmit('Staff request');
+  const { status, error, send } = useFormSubmit('New enquiry');
   if (status === 'sent') return <SuccessMessage />;
 
   const onSubmit = (e) => {
@@ -137,138 +136,7 @@ const FacilityForm = () => {
   );
 };
 
-// ── PROFESSIONAL FORM ─────────────────────────────────────────
-const ProfessionalForm = () => {
-  const [form, setForm] = useState({ name: '', email: '', phone: '', role: '', location: '', message: '' });
-  const [trap, setTrap] = useState('');
-  const { status, error, send } = useFormSubmit('Job enquiry');
-  if (status === 'sent') return <SuccessMessage />;
-
-  const onSubmit = (e) => {
-    e.preventDefault();
-    send([
-      ['Name', form.name],
-      ['Phone', form.phone],
-      ['Email', form.email],
-      ['Current role / credential', form.role],
-      ['Preferred location', form.location],
-      ['About them', form.message],
-    ], null, trap);
-  };
-
-  return (
-    <form onSubmit={onSubmit} className="relative space-y-4">
-      <Honeypot value={trap} onChange={setTrap} />
-      <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
-        <div>
-          <label htmlFor="p-name" className="field-label">Full Name *</label>
-          <input id="p-name" type="text" required placeholder="Your name" value={form.name}
-            onChange={(e) => setForm({ ...form, name: e.target.value })} className="input" />
-        </div>
-        <div>
-          <label htmlFor="p-phone" className="field-label">Phone *</label>
-          <input id="p-phone" type="tel" required placeholder="(647) 000-0000" value={form.phone}
-            onChange={(e) => setForm({ ...form, phone: e.target.value })} className="input" />
-        </div>
-      </div>
-      <div>
-        <label htmlFor="p-email" className="field-label">Email *</label>
-        <input id="p-email" type="email" required placeholder="your@email.com" value={form.email}
-          onChange={(e) => setForm({ ...form, email: e.target.value })} className="input" />
-      </div>
-      <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
-        <div>
-          <label htmlFor="p-role" className="field-label">Current Role / Credential</label>
-          <input id="p-role" type="text" placeholder="e.g. PSW, RN, DSW" value={form.role}
-            onChange={(e) => setForm({ ...form, role: e.target.value })} className="input" />
-        </div>
-        <div>
-          <label htmlFor="p-loc" className="field-label">Preferred Location</label>
-          <input id="p-loc" type="text" placeholder="City or region" value={form.location}
-            onChange={(e) => setForm({ ...form, location: e.target.value })} className="input" />
-        </div>
-      </div>
-      <div>
-        <label htmlFor="p-message" className="field-label">Tell Us About Yourself</label>
-        <textarea id="p-message" rows={4} placeholder="Experience, availability, what you're looking for..." value={form.message}
-          onChange={(e) => setForm({ ...form, message: e.target.value })} className="input resize-none" />
-      </div>
-      <button type="submit" disabled={status === 'sending'} className="btn-primary w-full disabled:opacity-60">
-        {status === 'sending' ? 'Sending…' : <>Tell us about yourself <ArrowRight size={16} /></>}
-      </button>
-      <FormError message={error} email={HIRING_EMAIL} />
-      <p className="text-sm text-ink-500 text-center">
-        Or visit our full{' '}
-        <Link to="/careers" className="text-primary-700 font-medium underline underline-offset-2 hover:text-primary-800">
-          Careers
-        </Link>{' '}
-        page to apply.
-      </p>
-    </form>
-  );
-};
-
-// ── GENERAL FORM ──────────────────────────────────────────────
-const GeneralForm = () => {
-  const [form, setForm] = useState({ name: '', email: '', subject: '', message: '' });
-  const [trap, setTrap] = useState('');
-  const { status, error, send } = useFormSubmit('General enquiry');
-  if (status === 'sent') return <SuccessMessage />;
-
-  const onSubmit = (e) => {
-    e.preventDefault();
-    send([
-      ['Name', form.name],
-      ['Email', form.email],
-      ['Subject', form.subject],
-      ['Message', form.message],
-    ], null, trap);
-  };
-
-  return (
-    <form onSubmit={onSubmit} className="relative space-y-4">
-      <Honeypot value={trap} onChange={setTrap} />
-      <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
-        <div>
-          <label htmlFor="g-name" className="field-label">Your Name *</label>
-          <input id="g-name" type="text" required placeholder="Full name" value={form.name}
-            onChange={(e) => setForm({ ...form, name: e.target.value })} className="input" />
-        </div>
-        <div>
-          <label htmlFor="g-email" className="field-label">Email *</label>
-          <input id="g-email" type="email" required placeholder="your@email.com" value={form.email}
-            onChange={(e) => setForm({ ...form, email: e.target.value })} className="input" />
-        </div>
-      </div>
-      <div>
-        <label htmlFor="g-subject" className="field-label">Subject *</label>
-        <input id="g-subject" type="text" required placeholder="What is this about?" value={form.subject}
-          onChange={(e) => setForm({ ...form, subject: e.target.value })} className="input" />
-      </div>
-      <div>
-        <label htmlFor="g-message" className="field-label">Message *</label>
-        <textarea id="g-message" rows={6} required placeholder="Tell us more..." value={form.message}
-          onChange={(e) => setForm({ ...form, message: e.target.value })} className="input resize-none" />
-      </div>
-      <button type="submit" disabled={status === 'sending'} className="btn-primary w-full disabled:opacity-60">
-        {status === 'sending' ? 'Sending…' : <>Send us a note <ArrowRight size={16} /></>}
-      </button>
-      <FormError message={error} />
-    </form>
-  );
-};
-
-// ── CONTACT FORMS SECTION ─────────────────────────────────────
 const ContactForms = () => {
-  const [tab, setTab] = useState('facility');
-  const reduceMotion = useReducedMotion();
-
-  const tabs = [
-    { id: 'facility',     label: 'I Need Staff'         },
-    { id: 'professional', label: "I'm Looking for Work" },
-    { id: 'general',      label: 'General Enquiry'      },
-  ];
-
   return (
     <section className="section-padding bg-white">
       <div className="container-custom">
@@ -336,44 +204,12 @@ const ContactForms = () => {
 
           {/* Right form */}
           <div className="lg:col-span-7 bg-surface rounded-2xl border border-ink-200 overflow-hidden">
-            <div role="tablist" aria-label="Enquiry type" className="flex bg-white">
-              {tabs.map((t) => (
-                <button
-                  key={t.id}
-                  role="tab"
-                  id={`tab-${t.id}`}
-                  aria-selected={tab === t.id}
-                  aria-controls={`panel-${t.id}`}
-                  onClick={() => setTab(t.id)}
-                  className={`flex-1 px-3 py-4 font-mono text-xs font-semibold uppercase tracking-widest
-                              transition-colors duration-200 border-b-2 -mb-px ${
-                    tab === t.id
-                      ? 'border-primary-600 text-primary-700'
-                      : 'border-transparent text-ink-500 hover:text-ink-800'
-                  }`}
-                >
-                  {t.label}
-                </button>
-              ))}
+            <div className="bg-white px-6 py-4 sm:px-7 border-b border-ink-200">
+              <h2 className="font-mono text-xs font-semibold uppercase tracking-widest text-primary-700">New Enquiry</h2>
             </div>
 
             <div className="p-6 sm:p-7">
-              <AnimatePresence mode="wait">
-                <motion.div
-                  key={tab}
-                  role="tabpanel"
-                  id={`panel-${tab}`}
-                  aria-labelledby={`tab-${tab}`}
-                  initial={typeof window === 'undefined' ? false : reduceMotion ? { opacity: 0 } : { opacity: 0, y: 8 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  exit={{ opacity: 0 }}
-                  transition={{ duration: 0.22, ease: [0.22, 1, 0.36, 1] }}
-                >
-                  {tab === 'facility'     && <FacilityForm />}
-                  {tab === 'professional' && <ProfessionalForm />}
-                  {tab === 'general'      && <GeneralForm />}
-                </motion.div>
-              </AnimatePresence>
+              <FacilityForm />
 
               {/* Reassurance at the point of conversion. */}
               <CredentialBadges

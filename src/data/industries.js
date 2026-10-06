@@ -12,7 +12,7 @@ export const industries = [
     challenges: [
       'High staff turnover creating critical gaps',
       'Complex, high-acuity resident populations',
-      '24/7 staffing requirements',
+      'Day, night and weekend staffing requirements',
       'Regulatory compliance and documentation demands',
       'Specialized dementia and palliative care needs',
     ],

@@ -39,7 +39,7 @@ const FAQ = ({ faqs, badge = 'Frequently Asked Questions', title = 'Common Quest
                   A coordinator will talk it through with you — no call centre, no script.
                 </p>
                 <Link to="/contact" className="btn-primary w-full">
-                  Talk to a Coordinator <ArrowRight size={16} />
+                  Get in touch <ArrowRight size={16} />
                 </Link>
               </div>
             )}

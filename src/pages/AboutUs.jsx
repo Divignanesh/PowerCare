@@ -14,7 +14,7 @@ const Hero = () => (
   <PageHero
     variant="overlay"
     eyebrow="Our Story"
-    title="About PowerCare"
+    title="Who We Are"
     subtitle="We look after the people who once looked after us — and the families who trust us with them."
     image="/images/home-sofa-carer.jpg"
     imageAlt="A PowerCare carer sitting with an older woman on her sofa"
@@ -211,7 +211,7 @@ const AboutUs = () => (
     <KnownFor />
     <FAQ
       faqs={aboutFAQs}
-      badge="About PowerCare"
+      badge="Good to Know"
       title="Questions About Our Company"
       subtitle="A little more about who we are and how we work."
     />

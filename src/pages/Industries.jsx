@@ -14,7 +14,6 @@ import { industriesFAQs } from '../data/faqs';
 import CredentialBand from '../components/ui/CredentialBand';
 import SEO from '../components/seo/SEO';
 import { faqSchema } from '../components/seo/schema';
-import { PHONE_ENABLED, PHONE_HREF, EMAIL_HREF } from '../data/contact';
 
 const iconMap = { Building2, Home, Heart, Users, Activity, Brain };
 
@@ -118,68 +117,10 @@ const SectorGrid = () => (
             </p>
           </div>
           <Link to="/contact" className="link-arrow flex-shrink-0">
-            Talk to us <ChevronRight size={14} />
+            Get in touch <ChevronRight size={14} />
           </Link>
         </div>
       </Reveal>
-    </div>
-  </section>
-);
-
-/** What a facility manager actually gets when they book through us. */
-const HowItWorks = () => (
-  <section className="section-padding bg-surface">
-    <div className="container-custom">
-      <SectionHeader
-        badge="How a booking runs"
-        title="From Your Call to Cover on the Floor"
-        subtitle="The same four steps whether it's a single overnight call-in or a full line of planned shifts."
-        centered={false}
-      />
-
-      <div className="grid lg:grid-cols-12 gap-x-12 gap-y-10 items-start">
-        <RevealGroup className="lg:col-span-7">
-          {[
-            ['You tell us the gap',   'Setting, role, shift times and any unit-specific requirement. By phone, or through the request form.'],
-            ['We match from the pool', 'Coordinators shortlist staff who already know your setting and hold the right college registration.'],
-            ['We confirm in writing',  'You get the name, credential and arrival time — plus a standby name for emergency bookings.'],
-            ['We follow up after',     'A post-shift check with your charge nurse, and the feedback goes onto that worker’s record.'],
-          ].map(([title, desc], i) => (
-            <RevealItem key={title} className="flex items-start gap-5 py-6">
-              <span className="w-11 h-11 rounded-full border-2 border-primary-600 bg-white flex items-center justify-center flex-shrink-0
-                               font-mono text-sm font-semibold text-primary-700 tabular-nums">
-                {String(i + 1).padStart(2, '0')}
-              </span>
-              <span>
-                <span className="block font-heading font-semibold text-ink-900 text-lg">{title}</span>
-                <span className="block text-ink-600 text-base leading-relaxed mt-1.5 text-pretty">{desc}</span>
-              </span>
-            </RevealItem>
-          ))}
-        </RevealGroup>
-
-        <Reveal className="lg:col-span-5">
-          <figure className="fig-frame">
-            <img
-              src="/images/training-lab.jpg"
-              alt="A PowerCare coordinator introducing staff to a resident and her family"
-              loading="lazy"
-              className="w-full h-[300px] object-cover object-center"
-            />
-          </figure>
-          <div className="mt-6 rounded-xl border border-ink-200 bg-white p-7">
-            <h3 className="font-heading font-semibold text-ink-900 text-lg mb-2">Need cover tonight?</h3>
-            <p className="text-ink-600 text-base mb-6 text-pretty">
-              Emergency bookings are confirmed in 1–2 hours through the 24/7 dispatch desk.
-            </p>
-            {PHONE_ENABLED ? (
-              <a href={PHONE_HREF} className="btn-primary w-full">Call 24/7 Dispatch</a>
-            ) : (
-              <a href={EMAIL_HREF} className="btn-primary w-full">Email 24/7 Dispatch</a>
-            )}
-          </div>
-        </Reveal>
-      </div>
     </div>
   </section>
 );
@@ -190,7 +131,6 @@ const Industries = () => (
     <Hero />
     <CredentialBand />
     <SectorGrid />
-    <HowItWorks />
     <FAQ faqs={industriesFAQs} badge="Industries we serve" title="Questions About Our Industry Expertise" subtitle="Learn how PowerCare staffs different care settings across Ontario." />
     <CtaBand
       image="/images/cta-industries.jpg"

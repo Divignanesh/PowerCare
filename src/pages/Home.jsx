@@ -186,7 +186,7 @@ const ThePromise = () => (
 const ProfessionsPreview = () => (
   <RoleCarousel
     title="Healthcare Professionals We Place"
-    intro={<>Not sure who you need? <Link to="/contact" className="font-semibold text-primary-700 underline-offset-4 hover:underline">Talk to us</Link>.</>}
+    intro={<>Not sure who you need? <Link to="/contact" className="font-semibold text-primary-700 underline-offset-4 hover:underline">Get in touch</Link>.</>}
     items={services.slice(0, 8)}
   />
 );

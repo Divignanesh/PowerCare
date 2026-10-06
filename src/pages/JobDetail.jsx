@@ -112,14 +112,10 @@ const Posting = ({ job }) => {
         assessed on qualifications, competence, experience and lawful job requirements.
       </Para>
 
-      {(job.vacancy || job.ai) && (
-        <dl className="mt-10 grid sm:grid-cols-2 gap-4 rounded-xl border border-ink-200 bg-surface p-5 text-sm">
-          {job.vacancy && (
-            <div><dt className="text-ink-500">Vacancy</dt><dd className="mt-1 font-medium text-ink-900">{job.vacancy}</dd></div>
-          )}
-          {job.ai && (
-            <div><dt className="text-ink-500">AI used to screen applications</dt><dd className="mt-1 font-medium text-ink-900">{job.ai}</dd></div>
-          )}
+      {job.vacancy && (
+        <dl className="mt-10 rounded-xl border border-ink-200 bg-surface p-5 text-sm">
+          <dt className="text-ink-500">Vacancy</dt>
+          <dd className="mt-1 font-medium text-ink-900">{job.vacancy}</dd>
         </dl>
       )}
 

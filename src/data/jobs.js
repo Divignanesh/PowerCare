@@ -61,7 +61,7 @@ export const hiringSteps = [
 export const benefits = [
   { icon: 'UserCheck', title: 'Dedicated Recruiter', desc: 'You get a personal recruiter who knows your career goals and advocates for the right opportunities.' },
   { icon: 'Zap', title: 'Rapid Placement', desc: 'Most candidates receive placement offers within days of applying, not weeks.' },
-  { icon: 'Clock', title: '24/7 Support', desc: 'Our team is available around the clock to support you before, during, and after placement.' },
+  { icon: 'Clock', title: 'Ongoing Support', desc: 'Our team supports you before, during, and after placement.' },
   { icon: 'DollarSign', title: 'Competitive Pay', desc: 'We negotiate competitive compensation packages and benefits on your behalf.' },
   { icon: 'MapPin', title: 'Wide Assignment Pool', desc: 'Access roles across the GTA, rural Ontario, and beyond — flexibility is your advantage.' },
   { icon: 'Gift', title: 'Referral Bonuses', desc: 'Refer a colleague and earn a bonus when they successfully place through PowerCare.' },

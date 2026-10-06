@@ -139,3 +139,12 @@ export const toApply = (e) => {
   form.scrollIntoView({ behavior: 'smooth', block: 'start' });
   history.replaceState(null, '', '#apply');
 };
+
+export const ALL = 'All';
+
+const searchable = (job) => [job.title, job.category, job.location, job.type, job.summary].filter(Boolean).join(' ').toLowerCase();
+
+export function filterJobs(jobs, query, category) {
+  const words = query.trim().toLowerCase().split(/\s+/).filter(Boolean);
+  return jobs.filter((job) => (category === ALL || job.category === category) && words.every((w) => searchable(job).includes(w)));
+}

@@ -12,7 +12,7 @@ export const CREDENTIALS = [
   { id: 'vsc',      icon: UserCheck,      short: 'Vulnerable Sector Check', full: 'Vulnerable Sector Check' },
   { id: 'police',   icon: Fingerprint,    short: 'Police Verified',         full: 'Police Background Verified' },
   { id: 'trained',  icon: GraduationCap,  short: 'In-House Trained',        full: 'In-House Trained' },
-  { id: 'dispatch', icon: Headset,        short: '24/7 Dispatch',           full: '24/7 Dispatch' },
+  { id: 'dispatch', icon: Headset,        short: 'Emergency Dispatch',      full: 'Emergency Dispatch' },
 ];
 
 /** The four strongest signals — used in the hero and beside forms. */

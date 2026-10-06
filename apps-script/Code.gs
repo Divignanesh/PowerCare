@@ -13,10 +13,10 @@
 // ─────────────────────────── Settings ────────────────────────────
 var CONFIG = {
   // Who receives the emails. Separate several addresses with commas.
-  NOTIFY_TO: 'you@example.com',
+  NOTIFY_TO: 'connect@powercare.ca',
 
   // Optional: send job applications somewhere else. Leave '' to use NOTIFY_TO.
-  CAREERS_TO: '',
+  CAREERS_TO: 'hiring@powercare.ca',
 
   // The Drive folder résumés are saved into (created on first use).
   RESUME_FOLDER: 'PowerCare Résumés',
@@ -173,7 +173,7 @@ function sendEmail_(form, fields, resume) {
 
   var html =
     '<div style="font-family:Arial,sans-serif;font-size:14px;max-width:620px">' +
-    '<h2 style="margin:0 0 4px;color:#003E6F">New ' + esc_(form.toLowerCase()) + '</h2>' +
+    '<h2 style="margin:0 0 4px;color:#003E6F">' + esc_(title_(form)) + '</h2>' +
     '<p style="margin:0 0 18px;color:#677585">From the PowerCare website</p>' +
     '<table style="border-collapse:collapse;width:100%">' + rows + '</table>' +
     (resume ? '<p style="margin-top:18px">Résumé attached, and saved to Drive: <a href="' + resume.url + '">' + esc_(resume.name) + '</a></p>' : '') +
@@ -187,7 +187,22 @@ function sendEmail_(form, fields, resume) {
   if (replyTo) options.replyTo = replyTo;
   if (resume) options.attachments = [resume.blob];
 
-  MailApp.sendEmail(to, 'New ' + form.toLowerCase() + ': ' + who, plainText_(form, fields), options);
+  MailApp.sendEmail(to, subject_(form, fields, who), plainText_(form, fields), options);
+}
+
+// "New application: <role>: <applicant>" and "New enquiry: <facility>: <person>".
+function subject_(form, fields, who) {
+  if (form === 'Job application') {
+    return 'New application: ' + (valueOf_(fields, 'Role seeking') || valueOf_(fields, 'Job title') || 'General application') + ': ' + who;
+  }
+  if (form === 'New enquiry') {
+    return 'New enquiry: ' + (valueOf_(fields, 'Facility') || 'Facility not given') + ': ' + who;
+  }
+  return title_(form) + ': ' + who;
+}
+
+function title_(form) {
+  return /^new /i.test(form) ? form : 'New ' + form.toLowerCase();
 }
 
 // ─────────────────────────── Helpers ────────────────────────────
@@ -202,7 +217,7 @@ function valueOf_(fields, label) {
 }
 
 function plainText_(form, fields) {
-  return 'New ' + form + '\n\n' + fields.map(function (f) { return f[0] + ': ' + f[1]; }).join('\n');
+  return title_(form) + '\n\n' + fields.map(function (f) { return f[0] + ': ' + f[1]; }).join('\n');
 }
 
 function clean_(value, max) {

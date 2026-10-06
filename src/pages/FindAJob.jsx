@@ -1,5 +1,6 @@
+import { useMemo, useRef, useState } from 'react';
 import { Link } from 'react-router-dom';
-import { ArrowRight, Check } from 'lucide-react';
+import { ArrowRight, Check, ChevronLeft, ChevronRight, Search, X } from 'lucide-react';
 import SectionHeader from '../components/ui/SectionHeader';
 import FAQ from '../components/ui/FAQ';
 import { findJobFAQs } from '../data/faqs';
@@ -8,7 +9,7 @@ import SEO from '../components/seo/SEO';
 import { faqSchema } from '../components/seo/schema';
 import ApplicationForm from '../components/careers/ApplicationForm';
 import JobFacts from '../components/careers/JobFacts';
-import { useJobs, jobSlug, toApply } from '../lib/jobs';
+import { useJobs, jobSlug, toApply, filterJobs, ALL } from '../lib/jobs';
 
 // ── HERO ─────────────────────────────────────────────────────
 // A short banner: the photograph under a white wash, the title and one line.
@@ -41,6 +42,8 @@ const PageHero = () => (
 const JobCard = ({ job }) => (
   <Link
     to={`/careers/${jobSlug(job)}`}
+    target="_blank"
+    rel="noopener noreferrer"
     className="group flex flex-col h-full rounded-xl border border-ink-200 bg-white p-7 shadow-card
                hover:border-primary-400 transition-colors"
   >
@@ -59,10 +62,88 @@ const JobCard = ({ job }) => (
   </Link>
 );
 
+const PER_PAGE = 6;
+
+const pageBtn = 'inline-flex h-10 min-w-10 items-center justify-center rounded-full border px-3 text-sm font-semibold transition-colors';
+
+const Pager = ({ page, pages, onPage }) => (
+  <nav aria-label="Job openings pages" className="mt-10 flex flex-wrap items-center justify-center gap-2">
+    <button type="button" onClick={() => onPage(page - 1)} disabled={page === 1}
+            className={`${pageBtn} gap-1 border-ink-200 bg-white text-ink-700 hover:border-primary-400 disabled:opacity-40 disabled:pointer-events-none`}>
+      <ChevronLeft size={16} /> Previous
+    </button>
+    {Array.from({ length: pages }, (_, i) => i + 1).map((n) => (
+      <button key={n} type="button" onClick={() => onPage(n)} aria-current={n === page ? 'page' : undefined}
+              className={`${pageBtn} ${n === page ? 'border-primary-700 bg-primary-700 text-white' : 'border-ink-200 bg-white text-ink-700 hover:border-primary-400'}`}>
+        {n}
+      </button>
+    ))}
+    <button type="button" onClick={() => onPage(page + 1)} disabled={page === pages}
+            className={`${pageBtn} gap-1 border-ink-200 bg-white text-ink-700 hover:border-primary-400 disabled:opacity-40 disabled:pointer-events-none`}>
+      Next <ChevronRight size={16} />
+    </button>
+  </nav>
+);
+
+
+const chip = 'rounded-full border px-4 py-2 text-sm font-semibold transition-colors';
+
 const RolesAvailable = () => {
   const { status, jobs } = useJobs();
+  const [page, setPage] = useState(1);
+  const [query, setQuery] = useState('');
+  const [category, setCategory] = useState(ALL);
+  const top = useRef(null);
+  const categories = useMemo(() => [ALL, ...new Set(jobs.map((j) => j.category).filter(Boolean))], [jobs]);
+  const matches = useMemo(() => filterJobs(jobs, query, category), [jobs, query, category]);
+  const pages = Math.max(1, Math.ceil(matches.length / PER_PAGE));
+  const current = Math.min(page, pages);
+  const go = (n) => {
+    setPage(Math.min(pages, Math.max(1, n)));
+    top.current?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  };
+  const search = (v) => {
+    setQuery(v);
+    setPage(1);
+  };
+  const pick = (c) => {
+    setCategory(c);
+    setPage(1);
+  };
+  const shown = matches.slice((current - 1) * PER_PAGE, current * PER_PAGE);
+  const tools = jobs.length > 0 && (
+    <div className="mb-8 flex flex-col gap-4 lg:flex-row lg:items-center lg:justify-between">
+      <label className="relative w-full lg:max-w-sm">
+        <span className="sr-only">Search job openings</span>
+        <Search size={18} className="pointer-events-none absolute left-4 top-1/2 -translate-y-1/2 text-ink-500" aria-hidden="true" />
+        <input
+          type="search"
+          value={query}
+          onChange={(e) => search(e.target.value)}
+          placeholder="Search by role, place or schedule"
+          className="w-full rounded-full border border-ink-200 bg-white py-3 pl-11 pr-11 text-base text-ink-900 placeholder:text-ink-500 focus:border-primary-500 focus:outline-none focus:ring-2 focus:ring-primary-100"
+        />
+        {query && (
+          <button type="button" onClick={() => search('')} aria-label="Clear search"
+                  className="absolute right-3 top-1/2 -translate-y-1/2 rounded-full p-1.5 text-ink-500 hover:text-ink-900">
+            <X size={16} />
+          </button>
+        )}
+      </label>
+      {categories.length > 2 && (
+        <div role="group" aria-label="Filter by category" className="flex flex-wrap gap-2">
+          {categories.map((c) => (
+            <button key={c} type="button" onClick={() => pick(c)} aria-pressed={c === category}
+                    className={`${chip} ${c === category ? 'border-primary-700 bg-primary-700 text-white' : 'border-ink-200 bg-white text-ink-700 hover:border-primary-400'}`}>
+              {c}
+            </button>
+          ))}
+        </div>
+      )}
+    </div>
+  );
   return (
-    <section className="section-padding bg-surface">
+    <section ref={top} className="section-padding bg-surface scroll-mt-20">
       <div className="container-custom">
         <SectionHeader
           badge="Roles Available"
@@ -75,9 +156,24 @@ const RolesAvailable = () => {
             Loading current openings&hellip;
           </div>
         ) : jobs.length ? (
-          <div className="grid sm:grid-cols-2 lg:grid-cols-3 auto-rows-fr gap-5">
-            {jobs.map((job) => <JobCard key={job.id} job={job} />)}
-          </div>
+          <>
+            {tools}
+            {matches.length ? (
+              <>
+                <div className="grid sm:grid-cols-2 lg:grid-cols-3 auto-rows-fr gap-5">
+                  {shown.map((job) => <JobCard key={job.id} job={job} />)}
+                </div>
+                {pages > 1 && <Pager page={current} pages={pages} onPage={go} />}
+              </>
+            ) : (
+              <p role="status" className="rounded-xl border border-ink-200 bg-white p-7 text-ink-600 text-pretty">
+                No openings match that search.{' '}
+                <button type="button" onClick={() => { search(''); pick(ALL); }} className="font-medium text-primary-700 underline underline-offset-2">
+                  Show all openings
+                </button>
+              </p>
+            )}
+          </>
         ) : (
           <p className="rounded-xl border border-ink-200 bg-white p-7 text-ink-600 text-pretty">
             {status === 'error' ? 'We couldn\u2019t load the openings just now.' : 'There are no openings posted right now.'}{' '}

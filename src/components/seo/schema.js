@@ -113,7 +113,7 @@ export const localBusinessSchema = {
       dayOfWeek: ['Saturday', 'Sunday'],
       opens: '00:00',
       closes: '23:59',
-      description: '24/7 emergency dispatch available',
+      description: 'Emergency dispatch available',
     },
   ],
   // sameAs is populated from SOCIAL_PROFILES in src/data/contact.js. It stays

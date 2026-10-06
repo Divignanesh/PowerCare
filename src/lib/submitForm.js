@@ -11,7 +11,7 @@ import { useState } from 'react';
 // example the client's own), replace this. It ships in the page bundle
 // either way, so there is nothing to hide here.
 export const ENDPOINT =
-  'https://script.google.com/macros/s/AKfycbxLj7oFfjAH2V2jThjgJcz7-6H33W617JoJBNYU5p7LIxy1oJIp9-trra2in06eAWbNhA/exec';
+  'https://script.google.com/macros/s/AKfycbxLqKBvaOPtgiVYUkIlboTBS6K0ASWG0DJhUPJ3VubxCxXOX3tG1SvtgtKRZn1Zjr3cwg/exec';
 
 export const MAX_FILE_MB = 5;
 
@@ -24,7 +24,7 @@ const readAsBase64 = (file) =>
   });
 
 /**
- * @param {string} form    Which form this is, e.g. "Staff request".
+ * @param {string} form    Which form this is, e.g. "New enquiry".
  * @param {Array<[string, string]>} fields  Label/value pairs, in display order.
  * @param {File} [file]    Optional résumé.
  * @param {string} [trap]  Honeypot value; real people leave it empty.

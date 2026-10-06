@@ -7,7 +7,9 @@ The general setup guide is in `README.md` in this folder.
 
 - **All four forms are wired to the Apps Script:** Contact (staff request, job enquiry, general enquiry) and the Careers application with its résumé.
   - Client code: `src/lib/submitForm.js` (`useFormSubmit`) and `src/components/ui/FormStatus.jsx` (honeypot and error line).
-  - Form labels sent: `Staff request`, `Job enquiry`, `General enquiry`, `Job application`. These name the Sheet tabs and the email subjects.
+  - Form labels sent: `New enquiry` (the "I need staff" form on Contact) and `Job application`. These name the Sheet tabs.
+  - Email subjects: `New enquiry: <facility>: <person>` and `New application: <role>: <applicant>` (see `subject_` in `Code.gs`).
+  - The job enquiry and general enquiry forms were removed on 2026-10-07.
 - **Tested locally against a mock endpoint:** fields, the résumé (base64), the error state and the "Sending…" state all work.
 - **`apps-script/Code.gs`** emails the details with the résumé attached, logs a row per form tab, and saves the résumé to the Drive folder "PowerCare Résumés".
   - The sender name shows as "<Name> via PowerCare Website".
