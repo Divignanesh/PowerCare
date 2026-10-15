@@ -4,6 +4,7 @@ import { useEffect, useRef } from 'react'
 import { AnimatePresence, motion, useReducedMotion } from 'framer-motion'
 import Header from './components/layout/Header'
 import Footer from './components/layout/Footer'
+import { StandaloneHeader, StandaloneFooter } from './components/layout/Standalone'
 import Home from './pages/Home'
 import AboutUs from './pages/AboutUs'
 import WhyPowerCare from './pages/WhyPowerCare'
@@ -53,14 +54,20 @@ const NotFound = () => (
   </div>
 )
 
-const Layout = ({ children }) => (
-  <div className="flex flex-col min-h-screen">
-    <Header />
-    {/* Offset matches the fixed header height (h-20). */}
-    <div className="flex-1 pt-20">{children}</div>
-    <Footer />
-  </div>
-)
+// Pages that stand alone, with no links out to the rest of the site.
+const STANDALONE = ['/apply']
+
+const Layout = ({ children }) => {
+  const standalone = STANDALONE.includes(useLocation().pathname)
+  return (
+    <div className="flex flex-col min-h-screen">
+      {standalone ? <StandaloneHeader /> : <Header />}
+      {/* Offset matches the fixed header height (h-20). */}
+      <div className="flex-1 pt-20">{children}</div>
+      {standalone ? <StandaloneFooter /> : <Footer />}
+    </div>
+  )
+}
 
 // Routes cross-fade so navigation reads as one continuous surface rather
 // than a hard cut between documents.

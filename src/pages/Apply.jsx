@@ -14,7 +14,7 @@ const Apply = () => (
           Healthcare Jobs Across Ontario
         </h1>
         <div className="bg-white rounded-2xl border border-ink-200 p-7 sm:p-8">
-          <ApplicationForm />
+          <ApplicationForm standalone />
         </div>
       </div>
     </section>

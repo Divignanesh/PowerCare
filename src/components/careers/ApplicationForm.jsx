@@ -41,7 +41,7 @@ const ResumeUpload = ({ id, file, onFile }) => {
 // details go along with the application, so every row in the Sheet and every
 // email says which posting it answers. Both send the same fields in the same
 // order, so they share one "Job application" tab.
-const ApplicationForm = ({ job }) => {
+const ApplicationForm = ({ job, standalone = false }) => {
   const [form, setForm] = useState({
     name: '', phone: '', email: '', role: '', location: '', type: '',
     experience: '', message: ''
@@ -133,7 +133,11 @@ const ApplicationForm = ({ job }) => {
         />
         <span>
           I agree to PowerCare&rsquo;s{' '}
-          <Link to="/privacy" className="text-primary-700 font-medium underline underline-offset-2">Privacy Policy</Link>.
+          {standalone ? (
+            <span className="text-primary-700 font-medium">Privacy Policy</span>
+          ) : (
+            <Link to="/privacy" className="text-primary-700 font-medium underline underline-offset-2">Privacy Policy</Link>
+          )}.
           My information is kept confidential and never sold or shared without consent.{' '}
           <span className="font-semibold">(PIPEDA)</span>
         </span>
