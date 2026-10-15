@@ -11,7 +11,7 @@ const Apply = () => (
     <section className="section-padding">
       <div className="container-custom max-w-2xl">
         <h1 className="text-display-lg font-heading font-semibold text-primary-700 text-center text-balance mb-10">
-          Healthcare Jobs Across Ontario
+          Advance your Career
         </h1>
         <div className="bg-white rounded-2xl border border-ink-200 p-7 sm:p-8">
           <ApplicationForm standalone />
