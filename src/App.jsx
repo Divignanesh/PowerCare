@@ -11,6 +11,7 @@ import OurServices from './pages/OurServices'
 import Industries from './pages/Industries'
 import FindAJob from './pages/FindAJob'
 import JobDetail from './pages/JobDetail'
+import Apply from './pages/Apply'
 import Contact from './pages/Contact'
 
 const IS_SERVER = typeof window === 'undefined'
@@ -84,6 +85,7 @@ const AnimatedRoutes = () => {
         <Route path="/industries"    element={<Industries />} />
         <Route path="/careers"       element={<FindAJob />} />
         <Route path="/careers/:slug" element={<JobDetail />} />
+        <Route path="/apply"         element={<Apply />} />
         <Route path="/contact"       element={<Contact />} />
           <Route path="*"              element={<NotFound />} />
         </Routes>

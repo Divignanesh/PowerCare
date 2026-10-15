@@ -29,8 +29,25 @@ const readAsBase64 = (file) =>
  * @param {File} [file]    Optional résumé.
  * @param {string} [trap]  Honeypot value; real people leave it empty.
  */
+// Ad links carry utm_* tags and click IDs (gclid from Google, fbclid from
+// Meta). They're read from the landing URL and kept for the visit, so a
+// person who browses before applying is still credited to the ad.
+const AD_KEYS = ['utm_source', 'utm_medium', 'utm_campaign', 'utm_content', 'utm_term', 'gclid', 'fbclid'];
+const adSource = () => {
+  try {
+    const url = new URLSearchParams(window.location.search);
+    const found = AD_KEYS.filter((k) => url.get(k)).map((k) => `${k}=${url.get(k)}`).join('&');
+    if (found) sessionStorage.setItem('ad-source', found);
+    return found || sessionStorage.getItem('ad-source') || '';
+  } catch {
+    return '';
+  }
+};
+if (typeof window !== 'undefined') adSource(); // capture on landing
+
 export async function submitForm(form, fields, file, trap = '') {
-  const payload = { form, fields, website: trap };
+  const source = adSource();
+  const payload = { form, fields: source ? [...fields, ['Ad source', source]] : fields, website: trap };
   if (file) {
     if (file.size > MAX_FILE_MB * 1024 * 1024) throw new Error('file-too-large');
     payload.file = { name: file.name, type: file.type, data: await readAsBase64(file) };
@@ -56,6 +73,8 @@ export function useFormSubmit(form) {
     try {
       await submitForm(form, fields, file, trap);
       setStatus('sent');
+      // GA4's recommended lead event; import it as a conversion for Google Ads.
+      window.gtag?.('event', 'generate_lead', { form_name: form });
     } catch (err) {
       setError(
         err.message === 'file-too-large'

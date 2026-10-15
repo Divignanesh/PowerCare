@@ -186,6 +186,15 @@ export const PAGE_META = {
       'Staffing for long-term care, retirement residences, home and community care, group homes, rehabilitation and mental health services in Ontario.',
     path: '/industries',
   },
+  // The landing page for job ads. Pre-rendered like the others, but kept out
+  // of search (noindex) so it doesn't compete with /careers.
+  apply: {
+    title: 'Apply to Work with PowerCare | Healthcare Jobs in Ontario',
+    crumb: 'Apply',
+    description:
+      'Apply to work with PowerCare as a PSW, DSW, nurse or allied health professional in care homes across the GTA and rural Ontario.',
+    path: '/apply',
+  },
   careers: {
     title: 'Careers | PowerCare Health Services',
     crumb: 'Careers',

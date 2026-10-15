@@ -14,7 +14,7 @@ import {
  * ({ title, description, path, trail? }) for pages built from data, such as
  * a job posting.
  */
-const SEO = ({ page, meta: own, extraSchemas = [], ogType = 'website' }) => {
+const SEO = ({ page, meta: own, extraSchemas = [], ogType = 'website', noindex = false }) => {
   const meta = own || PAGE_META[page] || PAGE_META.home
   const url = `${BASE_URL}${meta.path}`
 
@@ -35,7 +35,7 @@ const SEO = ({ page, meta: own, extraSchemas = [], ogType = 'website' }) => {
       {/* Let Google use full-size images and untruncated snippets. */}
       <meta
         name="robots"
-        content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1"
+        content={noindex ? 'noindex, follow' : 'index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1'}
       />
 
       {/* Social previews. Every page is pre-rendered at build time
