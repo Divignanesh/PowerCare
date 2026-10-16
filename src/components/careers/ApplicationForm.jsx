@@ -102,22 +102,27 @@ const ApplicationForm = ({ job, standalone = false }) => {
           {jobCategories.flatMap((c) => c.roles).map((r) => <option key={r} value={r}>{r}</option>)}
         </select>
       )}
-      <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-        <select aria-label="Location Preference" value={form.location} onChange={(e) => setForm({ ...form, location: e.target.value })} className="input">
-          <option value="">Location Preference</option>
-          {locations.map((l) => <option key={l} value={l}>{l}</option>)}
-        </select>
-        <select aria-label="Employment Type" value={form.type} onChange={(e) => setForm({ ...form, type: e.target.value })} className="input">
-          <option value="">Employment Type</option>
-          {employmentTypes.map((t) => <option key={t.id} value={t.id}>{t.label}</option>)}
-        </select>
-      </div>
-      <select aria-label="Years of Experience" value={form.experience} onChange={(e) => setForm({ ...form, experience: e.target.value })} className="input">
-        <option value="">Years of Experience</option>
-        {['Less than 1 year', '1–2 years', '3–5 years', '5–10 years', '10+ years'].map((y) => (
-          <option key={y} value={y}>{y}</option>
-        ))}
-      </select>
+      {/* The /apply ad page keeps the form short: no location, type or experience. */}
+      {!standalone && (
+        <>
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+            <select aria-label="Location Preference" value={form.location} onChange={(e) => setForm({ ...form, location: e.target.value })} className="input">
+              <option value="">Location Preference</option>
+              {locations.map((l) => <option key={l} value={l}>{l}</option>)}
+            </select>
+            <select aria-label="Employment Type" value={form.type} onChange={(e) => setForm({ ...form, type: e.target.value })} className="input">
+              <option value="">Employment Type</option>
+              {employmentTypes.map((t) => <option key={t.id} value={t.id}>{t.label}</option>)}
+            </select>
+          </div>
+          <select aria-label="Years of Experience" value={form.experience} onChange={(e) => setForm({ ...form, experience: e.target.value })} className="input">
+            <option value="">Years of Experience</option>
+            {['Less than 1 year', '1–2 years', '3–5 years', '5–10 years', '10+ years'].map((y) => (
+              <option key={y} value={y}>{y}</option>
+            ))}
+          </select>
+        </>
+      )}
       <textarea aria-label="Tell us about yourself" value={form.message} onChange={(e) => setForm({ ...form, message: e.target.value })}
         placeholder="Tell us about yourself (optional)" rows={3} className="input resize-none" />
 
